@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.web.car98.dao.TalkDao;
@@ -18,25 +19,28 @@ import _00_init.util.HibernateUtils;
 @Repository
 public class TalkDaoImpl implements TalkDao  {
 	int onepage=5;
+	@Autowired
 	SessionFactory factory;
+	
+	
 	public TalkDaoImpl() {
-		factory = HibernateUtils.getSessionFactory();
+//		factory = HibernateUtils.getSessionFactory();
 	}
 	
 	@Override
 	public void persist(TalkBean tb) {
 		Session session = factory.getCurrentSession();
-		Transaction tx=null;
-		try {
-			tx=session.beginTransaction();
+//		Transaction tx=null;
+//		try {
+//			tx=session.beginTransaction();
 			session.persist(tb);
-			tx.commit();
-		} catch (Exception e) {
-			if(tx !=null) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		}
+//			tx.commit();
+//		} catch (Exception e) {
+//			if(tx !=null) {
+//				tx.rollback();
+//			}
+//			e.printStackTrace();
+//		}
 	}
 	
 	@Override
@@ -44,19 +48,19 @@ public class TalkDaoImpl implements TalkDao  {
 	public List<TalkBean> getAll(){
 		
 		List<TalkBean> li = new ArrayList<>();
-		Transaction tx = null;
+//		Transaction tx = null;
 		String hql = "FROM TalkBean";
 		Session session = factory.getCurrentSession();
-		try {
-			tx = session.beginTransaction();
+//		try {
+//			tx = session.beginTransaction();
 			li=session.createQuery(hql).list();
-			tx.commit();
-		} catch (Exception ex) {
-			if (tx != null)
-				tx.rollback();
-			ex.printStackTrace();
-			throw new RuntimeException(ex);
-		}
+//			tx.commit();
+//		} catch (Exception ex) {
+//			if (tx != null)
+//				tx.rollback();
+//			ex.printStackTrace();
+//			throw new RuntimeException(ex);
+//		}
 		Collections.reverse(li);
 		return li;
 	}
@@ -87,19 +91,19 @@ public class TalkDaoImpl implements TalkDao  {
 	public TalkBean selectOne(int postID) {
 
 		TalkBean tb = new TalkBean();
-		Transaction tx = null;
+//		Transaction tx = null;
 		String hql = "FROM TalkBean t where t.PostID=:postID";
 		Session session = factory.getCurrentSession();
-		try {
-			tx = session.beginTransaction();
+//		try {
+//			tx = session.beginTransaction();
 			tb=(TalkBean)session.createQuery(hql).setParameter("postID", postID).getSingleResult();
-			tx.commit();
-		} catch (Exception ex) {
-			if (tx != null)
-				tx.rollback();
-			ex.printStackTrace();
-			throw new RuntimeException(ex);
-		}
+//			tx.commit();
+//		} catch (Exception ex) {
+//			if (tx != null)
+//				tx.rollback();
+//			ex.printStackTrace();
+//			throw new RuntimeException(ex);
+//		}
 		return tb;
 		
 	}
