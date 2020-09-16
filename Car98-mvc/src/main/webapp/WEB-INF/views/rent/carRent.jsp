@@ -22,7 +22,7 @@
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
     integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../css/BSRent.css">
+  <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/BSRent.css">
   <script src="http://maps.google.com/maps/api/js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
   
@@ -52,7 +52,7 @@
     }
 
     body {
-      background-image: url(../image/Desktop.png);
+      background-image: url(${pageContext.servletContext.contextPath}/image/Desktop.png);
       background-position: center;
       background-attachment: fixed;
       background-repeat: no-repeat;
@@ -64,7 +64,7 @@
 
 <body>
   <!-- navbar -->
-  <jsp:include page="../fragment/topIndex.jsp" />
+  <jsp:include page="/fragment/topIndex.jsp" />
   <!-- RentCar Area -->
   <section class="my-5">
     <div class="container-fluid text-white">
@@ -208,7 +208,7 @@
       </p>
     </div>
   </div>
-  <script src="../javascript/BSRent.js"></script>
+  <script src="${pageContext.servletContext.contextPath}/javascript/BSRent.js"></script>
 </body>
 
 </html>

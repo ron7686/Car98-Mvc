@@ -13,11 +13,11 @@
     integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
     crossorigin="anonymous"
   />
-  <link rel="stylesheet" href="../css/shopCheckout.css">
+  <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/shopCheckout.css">
 </head>
 <body>
      <!-- navbar -->
-     <jsp:include page="../fragment/topIndex.jsp" />
+     <jsp:include page="/fragment/topIndex.jsp" />
 <!-- 結帳畫面 -->
     <section class="py-5">
         <div class="container">
@@ -162,6 +162,6 @@
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     ></script>
-  <script src="../javascript/addProduct.js"></script>
+  <script src="${pageContext.servletContext.contextPath}/javascript/addProduct.js"></script>
 </body>
 </html>

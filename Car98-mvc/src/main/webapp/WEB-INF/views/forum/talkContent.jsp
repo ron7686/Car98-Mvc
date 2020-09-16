@@ -15,7 +15,7 @@
 	href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
 	integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
 	crossorigin="anonymous" />
-<link rel="stylesheet" href="../css/talkContent.css">
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/talkContent.css">
 
 <style>
 #carouselExampleFade .carousel-inner .carousel-item img {
@@ -42,7 +42,7 @@
 }
 
 body {
-	background-image: url(../image/Desktop.png);
+	background-image: url(${pageContext.servletContext.contextPath}/image/Desktop.png);
 	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -52,7 +52,7 @@ body {
 </head>
 <body onload="startTime()">
 	<!-- navbar -->
-	<jsp:include page="../fragment/topIndex.jsp" />
+	<jsp:include page="/fragment/topIndex.jsp" />
 	<!--Main Area -->
 	<section class="my-5">
 
@@ -179,7 +179,7 @@ body {
 			</div>
 		</div>
 	</section>
-	<jsp:include page="../fragment/footer.jsp"></jsp:include>
+	<jsp:include page="/fragment/footer.jsp"></jsp:include>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>
@@ -192,6 +192,6 @@ body {
 	integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
 	crossorigin="anonymous"></script>
 	<script src="http://maps.google.com/maps/api/js"></script>
-<script src="../javascript/talkContent.js"></script>
+<script src="${pageContext.servletContext.contextPath}/javascript/talkContent.js"></script>
 </body>
 </html>

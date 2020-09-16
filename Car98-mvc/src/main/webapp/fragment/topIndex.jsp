@@ -5,8 +5,8 @@
 
 <nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
 	<a class="navbar-brand"
-		href="${pageContext.request.contextPath}/index.jsp"><img
-		src="${pageContext.request.contextPath}/image/car98logo.png"
+		href="${pageContext.servletContext.contextPath}/index.jsp"><img
+		src="${pageContext.servletContext.contextPath}/image/car98logo.png"
 		width="50" height="50" alt=""></a>
 	<button class="navbar-toggler navbar-toggler-right" type="button"
 		data-toggle="collapse" data-target="#navbarNavDropdown"

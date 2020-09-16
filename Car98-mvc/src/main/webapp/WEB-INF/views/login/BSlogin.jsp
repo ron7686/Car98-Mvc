@@ -31,7 +31,7 @@
 }
 
 body {
-	background-image: url(../image/Desktop.png);
+	background-image: url(${pageContext.servletContext.contextPath}/image/Desktop.png);
 	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -63,7 +63,7 @@ body {
 </head>
 <body>
 	<!-- navbar -->
-	<jsp:include page="../fragment/topIndex.jsp" />
+	<jsp:include page="/fragment/topIndex.jsp" />
 	<!-- form-->
 	<!-- <section class="my-5"> -->
 	<div class="container d-flex text-white container-height">

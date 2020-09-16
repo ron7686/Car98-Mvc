@@ -27,24 +27,24 @@
 	href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
 	integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
 	crossorigin="anonymous" />
-<link rel="stylesheet" href="./css/all.css">
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/all.css">
 </head>
 <body>
-	<jsp:include page="fragment/topIndex.jsp" />
+	<jsp:include page="/fragment/topIndex.jsp" />
 	<!-- carousel -->
 	<div id="carouselExampleFade" class="carousel slide carousel-fade"
 		data-ride="carousel">
 		<div class="carousel-inner">
 			<div class="carousel-item header-carousel-item bg-cover active">
-				<img src="${pageContext.request.contextPath}/image/CAR1.jpg"
+				<img src="${pageContext.servletContext.contextPath}/image/CAR1.jpg"
 					class="d-block w-100" alt="...">
 			</div>
 			<div class="carousel-item header-carousel-item bg-cover">
-				<img src="${pageContext.request.contextPath}/image/CAR2.jpg"
+				<img src="${pageContext.servletContext.contextPath}/image/CAR2.jpg"
 					class="d-block w-100" alt="...">
 			</div>
 			<div class="carousel-item header-carousel-item bg-cover">
-				<img src="${pageContext.request.contextPath}/image/CAR3.jpg"
+				<img src="${pageContext.servletContext.contextPath}/image/CAR3.jpg"
 					class="d-block w-100" alt="...">
 			</div>
 		</div>
@@ -118,7 +118,7 @@
 		</div>
 	</section>
 	<!-- footer -->
-	<jsp:include page="fragment/footer.jsp"></jsp:include>
+	<jsp:include page="/fragment/footer.jsp"></jsp:include>
 	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 	<script>
     AOS.init();

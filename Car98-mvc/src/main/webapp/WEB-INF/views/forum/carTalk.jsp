@@ -19,7 +19,7 @@
       integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../css/BSTalk.css">
+    <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/BSTalk.css">
     
     <style>
       #carouselExampleFade .carousel-inner .carousel-item img{
@@ -43,7 +43,7 @@
       background-size: cover;
     }
     body{
-      background-image: url(../image/Desktop.png);
+      background-image: url(${pageContext.servletContext.contextPath}/image/Desktop.png);
       background-position: center;
       background-attachment: fixed;
       background-repeat:no-repeat;
@@ -53,7 +53,7 @@
   </head>
   <body>
     <!-- navbar -->
-    <jsp:include page="../fragment/topIndex.jsp" />
+    <jsp:include page="/fragment/topIndex.jsp" />
       <!-- mainCar Area -->
       <section class="my-5">
         
@@ -202,6 +202,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="http://maps.google.com/maps/api/js"></script>
-    <script src="BSTalk.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/javascript/BSTalk.js"></script>
       </body>
     </html>

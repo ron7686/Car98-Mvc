@@ -17,12 +17,12 @@
 	href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
 	integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
 	crossorigin="anonymous" />
-<link rel="stylesheet" href="../css/shopAdd.css">
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/shopAdd.css">
 </head>
 
 <body>
 	<!-- navbar -->
-	<jsp:include page="../fragment/topIndex.jsp" />
+	<jsp:include page="/fragment/topIndex.jsp" />
 
 	<!-- shopping product -->
 	<div class="container">
@@ -42,8 +42,8 @@
 			<div class="col-md-3 col-sm-6">
 				<div class="product-grid">
 					<div class="product-image">
-						<a href="#"> <img class="pic-1" src="../image/shp1.jpg" /> <img
-							class="pic-2" src="../image/shp2.jpg" />
+						<a href="#"> <img class="pic-1" src="${pageContext.servletContext.contextPath}/image/shp1.jpg" /> <img
+							class="pic-2" src="${pageContext.servletContext.contextPath}/image/shp2.jpg" />
 						</a>
 					</div>
 					<div class="product-content">
@@ -62,8 +62,8 @@
 			<div class="col-md-3 col-sm-6">
 				<div class="product-grid">
 					<div class="product-image">
-						<a href="#"> <img class="pic-1" src="../image/shp3.jpg" /> <img
-							class="pic-2" src="../image/shp4.jpg" />
+						<a href="#"> <img class="pic-1" src="${pageContext.servletContext.contextPath}/image/shp3.jpg" /> <img
+							class="pic-2" src="${pageContext.servletContext.contextPath}/image/shp4.jpg" />
 						</a>
 					</div>
 					<div class="product-content">
@@ -82,8 +82,8 @@
 			<div class="col-md-3 col-sm-6">
 				<div class="product-grid">
 					<div class="product-image">
-						<a href="#"> <img class="pic-1" src="../image/shp5.jpg" /> <img
-							class="pic-2" src="../image/shp6.jpg" />
+						<a href="#"> <img class="pic-1" src="${pageContext.servletContext.contextPath}/image/shp5.jpg" /> <img
+							class="pic-2" src="${pageContext.servletContext.contextPath}/image/shp6.jpg" />
 						</a>
 					</div>
 					<div class="product-content">
@@ -102,8 +102,8 @@
 			<div class="col-md-3 col-sm-6">
 				<div class="product-grid">
 					<div class="product-image">
-						<a href="#"> <img class="pic-1" src="../image/shp7.jpg" /> <img
-							class="pic-2" src="../image/shp8.jpg" />
+						<a href="#"> <img class="pic-1" src="${pageContext.servletContext.contextPath}/image/shp7.jpg" /> <img
+							class="pic-2" src="${pageContext.servletContext.contextPath}/image/shp8.jpg" />
 						</a>
 					</div>
 					<div class="product-content">
@@ -124,7 +124,7 @@
 			<div class="col-md-3 col-sm-6">
 				<div class="product-grid">
 					<div class="product-image">
-						<a href="#"> <img class="pic-1" src="../image/shp9.jpeg" /> <img
+						<a href="#"> <img class="pic-1" src="${pageContext.servletContext.contextPath}/image/shp9.jpeg" /> <img
 							class="pic-2" src="../image/shp10.jpeg" />
 						</a>
 					</div>
@@ -249,7 +249,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
-					<a href="./shopCheckout.jsp" type="button" class="btn btn-primary">Order now</a>
+					<a href="/shopCheckout.jsp" type="button" class="btn btn-primary">Order now</a>
 				</div>
 			</div>
 		</div>
@@ -277,7 +277,7 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
 		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
 		crossorigin="anonymous"></script>
-	<script src="../javascript/shopAdd.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/javascript/shopAdd.js"></script>
 </body>
 
 </html>

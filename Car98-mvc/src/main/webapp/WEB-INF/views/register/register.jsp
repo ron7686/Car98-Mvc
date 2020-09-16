@@ -15,8 +15,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="../css/all.css">
-<script src="../javascript/showRegisterImage.js"></script>
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/all.css">
+<script src="${pageContext.servletContext.contextPath}/javascript/showRegisterImage.js"></script>
 <style>
 input[type="submit"]:disabled {
 	background-color: red;
@@ -50,7 +50,7 @@ input[type="submit"]:disabled {
 </head>
 
 <body class="bg-dark">
-	<jsp:include page="../fragment/topIndex.jsp"></jsp:include>
+	<jsp:include page="/fragment/topIndex.jsp"></jsp:include>
 	<form class="needs-validation mx-5 text-white" novalidate method="post"
 		action="<c:url value='/_01_register/register.do'/>"
 		enctype="multipart/form-data">
@@ -157,7 +157,7 @@ input[type="submit"]:disabled {
 		<button class="btn btn-secondary" id ="button" type="submit">確認送出</button>
 	</form>
 	<!-- footer -->
-	<jsp:include page="../fragment/footer.jsp"></jsp:include>
+	<jsp:include page="/fragment/footer.jsp"></jsp:include>
 
 	<script
 		src="${pageContext.request.contextPath}/javascript/registerForm.js"></script>

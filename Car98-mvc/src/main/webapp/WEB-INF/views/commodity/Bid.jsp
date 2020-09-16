@@ -35,13 +35,13 @@
 						<td>${aBean.bidSelled}</td>
 						<td>${aBean.bidTime}</td>
 						<td><img height='100' width='80'
-							src='${pageContext.servletContext.contextPath}/_00_init/getBidImage?id=${aBean.bidId}'></td>
+							src='/_00_init/getBidImage?id=${aBean.bidId}'></td>
 					</tr>
 				</c:forEach>
 			</table>
 
 		</c:otherwise>
 	</c:choose>
-	<jsp:include page="../fragment/footer.jsp" />
+	<jsp:include page="/fragment/footer.jsp" />
 </body>
 </html>

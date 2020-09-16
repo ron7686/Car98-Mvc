@@ -54,7 +54,7 @@ body {
 </head>
 <body>
 	<!-- navbar -->
-	<jsp:include page="../fragment/topIndex.jsp" />
+	<jsp:include page="/fragment/topIndex.jsp" />
 	<!-- page bar -->
 	<br>
 	<nav class="">

@@ -120,7 +120,7 @@ to {
 </head>
 
 <body class="bg-dark">
-	<jsp:include page="../fragment/topIndex.jsp"></jsp:include>
+	<jsp:include page="/fragment/topIndex.jsp"></jsp:include>
 	<form class="needs-validation mx-5 text-white" novalidate method="POST"
 		action="<c:url value='/_01_register/update.do'/>"
 		enctype="multipart/form-data">
@@ -263,7 +263,7 @@ to {
 		</div>
 	</div>
 	<!-- footer -->
-	<jsp:include page="../fragment/footer.jsp"></jsp:include>
+	<jsp:include page="/fragment/footer.jsp"></jsp:include>
 
 	<script
 		src="${pageContext.request.contextPath}/javascript/registerForm.js"></script>

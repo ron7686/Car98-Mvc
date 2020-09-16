@@ -32,10 +32,10 @@
 	crossorigin="anonymous" />
 <script
 	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<link rel="stylesheet" href="../css/SearchResource.css">
+<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/SearchResource.css">
 
 <script src="http://maps.google.com/maps/api/js"></script>
-<script src="../javascript/SearchResource.js"></script>
+<script src="${pageContext.servletContext.contextPath}/javascript/SearchResource.js"></script>
 <style>
 #carouselExampleFade .carousel-inner .carousel-item img {
 	height: 720px;
@@ -61,7 +61,7 @@
 }
 
 body {
-	background-image: url(../image/Desktop.png);
+	background-image: url(${pageContext.servletContext.contextPath}/image/Desktop.png);
 	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -71,7 +71,7 @@ body {
 </head>
 <body>
 	<!-- navbar -->
-	<jsp:include page="../fragment/topIndex.jsp" />
+	<jsp:include page="/fragment/topIndex.jsp" />
 	<!-- Search Area -->
 	<section class="my-5">
 		<div class="container text-white mainarea">
@@ -117,7 +117,7 @@ body {
 			</div>
 		</div>
 	</section>
-	<jsp:include page="../fragment/footer.jsp"></jsp:include>
+	<jsp:include page="/fragment/footer.jsp"></jsp:include>
 
 </body>
 </html>
