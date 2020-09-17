@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="mem")
@@ -22,6 +25,8 @@ public class MemberBean implements Serializable {
 	
 	private String email;
 	private String password;
+	@Transient
+	private String password1;
 	private String name;
 	private String id;
 	private String phone;
@@ -32,6 +37,9 @@ public class MemberBean implements Serializable {
 	private Integer levels;
 	private Date meCreate;
 	private Timestamp loginTime;
+	
+	@Transient
+	MultipartFile memberMultipartFile;
 
 	
 	public MemberBean() {
@@ -56,12 +64,13 @@ public class MemberBean implements Serializable {
 		this.loginTime = loginTime;
 	}
 	
-	public MemberBean(Integer memId, String email, String password, String name, String id, String phone, Date birth,
+	public MemberBean(Integer memId, String email, String password, String password1, String name, String id, String phone, Date birth,
 			String sex, Blob headPic, String fileName,Integer levels,Timestamp loginTime) {
 		super();
 		this.memId = memId;
 		this.email = email;
 		this.password = password;
+		this.password1 = password1;
 		this.name = name;
 		this.id = id;
 		this.phone = phone;
@@ -72,6 +81,10 @@ public class MemberBean implements Serializable {
 		this.levels = levels;
 		this.loginTime = loginTime;
 	}
+	
+	
+	
+	
 
 	public Integer getMemId() {
 		return memId;
@@ -95,6 +108,14 @@ public class MemberBean implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getPassword1() {
+		return password1;
+	}
+
+	public void setPassword1(String password1) {
+		this.password1 = password1;
 	}
 
 	public String getName() {
@@ -175,6 +196,16 @@ public class MemberBean implements Serializable {
 
 	public void setLoginTime(Timestamp loginTime) {
 		this.loginTime = loginTime;
+	}
+	
+	
+
+	public MultipartFile getMemberMultipartFile() {
+		return memberMultipartFile;
+	}
+
+	public void setMemberMultipartFile(MultipartFile memberMultipartFile) {
+		this.memberMultipartFile = memberMultipartFile;
 	}
 
 	@Override
