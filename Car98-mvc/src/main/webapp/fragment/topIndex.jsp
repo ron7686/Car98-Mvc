@@ -46,7 +46,7 @@
 			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/forum/talktop.do">Car論壇</a></li>
 			<c:if test="${empty LoginOK}">
 				<li class="nav-item active"><a class="nav-link"
-					href="${pageContext.request.contextPath}/login/BSlogin.jsp">登入
+					href="login">登入
 						<span class="sr-only">(current)</span>
 
 				</a></li>

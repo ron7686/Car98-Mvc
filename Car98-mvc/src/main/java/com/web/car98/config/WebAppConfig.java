@@ -3,6 +3,7 @@ package com.web.car98.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -33,23 +34,15 @@ public class WebAppConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/image/**")
 				.addResourceLocations("/WEB-INF/views/image/");
 		registry.addResourceHandler("/javascript/**")
-				.addResourceLocations("/WEB-INF/views/javascript/");
-		registry.addResourceHandler("/commodity/**")
-		.addResourceLocations("/WEB-INF/views/commodity/");
-		registry.addResourceHandler("/forum/**")
-		.addResourceLocations("/WEB-INF/views/forum/");
-		registry.addResourceHandler("/login/**")
-		.addResourceLocations("/WEB-INF/views/login/");
-		registry.addResourceHandler("/management/**")
-		.addResourceLocations("/WEB-INF/views/management/");
-		registry.addResourceHandler("/register/**")
-		.addResourceLocations("/WEB-INF/views/register/");
-		registry.addResourceHandler("/rent/**")
-		.addResourceLocations("/WEB-INF/views/rent/");
-		registry.addResourceHandler("/searchresource/**")
-		.addResourceLocations("/WEB-INF/views/searchresource/");
-		
-		
+				.addResourceLocations("/WEB-INF/views/javascript/");		
+	}
+	
+	@Bean
+	public CommonsMultipartResolver multipartResolver() {
+		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+		resolver.setDefaultEncoding("UTF-8");
+		resolver.setMaxInMemorySize(81920000);
+		return resolver;
 	}
 
 }

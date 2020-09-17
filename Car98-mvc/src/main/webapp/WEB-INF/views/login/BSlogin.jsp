@@ -107,7 +107,7 @@ body {
 						</label>
 					</div>
 					<div class="my-3 text-center">
-						<a href="${pageContext.request.contextPath}/register/register.jsp"
+						<a href="register"
 							class="text-light">註冊帳號</a> <a href="#" class="text-light ml-2">忘記密碼</a>
 					</div>
 
