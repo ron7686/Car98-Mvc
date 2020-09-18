@@ -62,10 +62,9 @@
 	<div class="jumbotron-fluid bg-dark">
 		<div data-aos="flip-left" data-aos-easing="ease-out-cubic"
 			data-aos-duration="2000">
-			<h3 class="display-5 text-light pt-2 pl-2">About</h3>
-			<p class="lead text-light pl-2">This is a simple hero unit, a
-				simple jumbotron-style component for calling extra attention to
-				featured content or information.</p>
+			<h3 class="display-5 text-light pt-2 pl-2">Car98</h3>
+			<p class="lead text-light pl-2"><b><i>還在煩惱出遊交通要怎麼解決嗎？？</i></b></p>
+			<p class="lead text-light pl-2"><b><i>交給Car98,讓你出遊輕鬆沒煩惱</i></b></p>
 		</div>
 		<a class="btn btn-primary mb-2 ml-2 btn-sm" href="#" role="button">Learn
 			more</a>
@@ -83,7 +82,7 @@
 						<div class="information-card-info text-center">
 							<img src="./image/fuel_PNG28.png" alt=""
 								class="information-card-img">
-							<h4 class="information-card-name">Car好康</h4>
+							<h4 class="information-card-name">Car方便</h4>
 							<div class="information-card-position">今日油價</div>
 						</div>
 					</div>
