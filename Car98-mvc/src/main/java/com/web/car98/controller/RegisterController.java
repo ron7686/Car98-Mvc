@@ -4,19 +4,25 @@ import java.io.File;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.web.car98.model.MemberBean;
@@ -26,6 +32,7 @@ import com.web.car98.validator.MemberBeanValidator;
 import _00_init.util.GlobalService;
 
 @Controller
+@SessionAttributes("LoginOK")
 public class RegisterController {
 	final static private Integer LEVELS = 2;
 	
@@ -35,7 +42,7 @@ public class RegisterController {
 	ServletContext context;
 	
 	@Autowired
-	MemberBeanValidator validator;
+	MemberBeanValidator memberBeanValidator;
 
 	String registerForm = "/register/register";
 	
@@ -50,7 +57,7 @@ public class RegisterController {
 	public String processAddNewMemberForm(@ModelAttribute("memberBean") MemberBean mb,
 			BindingResult result,Model model,
 			HttpServletRequest request) {
-		validator.validate(mb, result);
+		memberBeanValidator.validate(mb, result);
 		
 		// 有錯誤訊息返回 register.jsp
 		if(result.hasErrors()) {
@@ -79,7 +86,7 @@ public class RegisterController {
 		}
 		
 		// 註冊日期
-		Date currentDate = new Date(System.currentTimeMillis());
+		Timestamp currentDate = new Timestamp(System.currentTimeMillis());
 		mb.setMeCreate(currentDate);
 		
 		// 登入時間
@@ -128,6 +135,80 @@ public class RegisterController {
 	
 	@RequestMapping("/login")
 	public String login(Model model) {
-		return "/login/BSlogin";
+		return "/login/login";
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(Model model) {
+		return "/login/logout";
+	}
+	
+	@GetMapping("/management")
+	public String management(
+			Model model) {
+		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
+		model.addAttribute(memberBean);
+		return "/management/user";
+	}
+	
+	@PostMapping("/management")
+	public String updateUserData(
+			Model model,
+			@ModelAttribute("memberBean")MemberBean memberBean) {
+		MemberBean mb = (MemberBean) model.getAttribute("LoginOK");
+//		validator.validate(memberBean, result);
+//		
+//		// 有錯誤訊息返回 register.jsp
+//		if(result.hasErrors()) {
+//			return "/management";
+//		}
+		
+		mb.setId(memberBean.getId());
+		mb.setName(memberBean.getName());
+		mb.setPhone(memberBean.getPhone());
+		mb.setSex(memberBean.getSex());
+		
+		MultipartFile memberImage = memberBean.getMemberMultipartFile();
+		String originalFilename = memberImage.getOriginalFilename();
+		mb.setFileName(originalFilename);
+		if(memberImage!=null && !memberImage.isEmpty()) {
+			try {
+				byte []b = memberImage.getBytes();
+				Blob blob = new SerialBlob(b);
+				mb.setHeadPic(blob);
+			}catch(Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}
+		
+		memberService.updateUserData(mb);
+		return "redirect:/";
+	}
+	
+	@PostMapping("/changePassword")
+	public String changePassword(
+			Model model,
+			@ModelAttribute("memberBean")MemberBean memberBean) {
+		MemberBean mb = (MemberBean) model.getAttribute("LoginOK");
+//		validator.validate(memberBean, result);
+//		
+//		// 有錯誤訊息返回 register.jsp
+//		if(result.hasErrors()) {
+//			return "/management";
+//		}
+		
+		mb.setPassword(GlobalService.getMD5Endocing(
+				GlobalService.encryptString(memberBean.getPassword())));
+		
+		memberService.updateUserData(mb);
+		return "redirect:/management";
+	}
+	
+	
+	@InitBinder     
+	public void initBinder(WebDataBinder binder){
+	     binder.registerCustomEditor(Date.class,     
+	                         new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true, 10));   
 	}
 }

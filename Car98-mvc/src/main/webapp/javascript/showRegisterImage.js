@@ -1,10 +1,10 @@
 function doFirst(){
-   document.getElementById('exampleFormControlFile1').onchange = fileChange;
+   document.getElementById('memberMultipartFile').onchange = fileChange;
 }
 
 function fileChange(){
     //只有一個檔案
-    let file = document.getElementById('exampleFormControlFile1').files[0];
+    let file = document.getElementById('memberMultipartFile').files[0];
 
     //======================================
     let readFile = new FileReader();
@@ -18,8 +18,8 @@ function fileChange(){
         let image = document.getElementById('image');
         image.src = this.result;
         //設定CSS屬性裡面的max，讓寬高最高限制在你設定的數值。
-        image.style.maxWidth = '400px';
-        image.style.maxHeight = '400px';
+        image.style.maxWidth = '300px';
+        image.style.maxHeight = '300px';
     });
 }
 
