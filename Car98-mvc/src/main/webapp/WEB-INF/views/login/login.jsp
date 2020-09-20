@@ -195,7 +195,6 @@ input {
 					</div>
 					<div class="my-3 text-center">
 						<input type="submit" value="登入" class="btn btn-secondary ml-2 signin">
-						<!-- 						<button type="button" class="btn btn-secondary ml-3">取消</button> -->
 					</div>
 					<div class="my-3 text-center">
 						<form:checkbox path="rememberMe" class="" />

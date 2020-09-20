@@ -19,8 +19,10 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="../css/all.css">
+<link rel="stylesheet" href="<c:url value='/css/all.css'/>">
+
 <style>
+
 input[type="submit"]:disabled {
 	background-color: red;
 }
@@ -123,6 +125,17 @@ to {
 	height: 25px;
 	vertical-align:middle;
 }
+
+fieldset {
+	border: 1px solid #000000;
+	width: 600px;
+	margin: auto;
+}
+
+.input-w{
+	width: 40%;
+}
+
 </style>
 
 <title>會員資料</title>
@@ -142,28 +155,27 @@ to {
 		<form:form method='POST' modelAttribute="memberBean"
 			class='form-horizontal mx-auto' align="center"
 			enctype="multipart/form-data">
-			<fieldset>
-
-				<div class="form-group">
-
-					<label for="exampleFormControlFile1s"> <form:input
-							type="file" path="memberMultipartFile" id="image_file"
-							style="display: none;" /> <form:errors
-							path="memberMultipartFile" /> <img
-						style="width: 350px; height: 350px; border-radius: 50%;"
-						src='${pageContext.request.contextPath}/init/getMemberImage?id=${LoginOK.memId}'
-						id="show_image">
-					</label>
-					<p class="mt-2">
-						<img id="image">
-					</p>
+			<fieldset class="mx-auto">
+					<div class="d-flex justify-content-center align-items-center mt-3 mb-3">
+						<label for="exampleFormControlFile1s" class="control-label"> 
+						<form:input type="file" path="memberMultipartFile" id="image_file"
+								style="display: none;" /> <form:errors
+								path="memberMultipartFile" /> <img
+							style="width: 350px; height: 350px; border-radius: 50%;"
+							src='${pageContext.request.contextPath}/init/getMemberImage?id=${LoginOK.memId}'
+							id="show_image">
+						</label>
+						<p class="mt-2">
+							<img id="image">
+						</p>
 				</div>
 
 				<div class="form-group">
 
-					<div class="col-md-4 mt-1 mb-2">
-						<label for="validationCustom01">姓名: </label>
-						<form:input type="text" path="name" class="form-control"
+						<label for="validationCustom01" class="control-label col-lg-2 col-lg-2">
+						姓名: </label>
+						<div class="d-flex justify-content-center align-items-center">
+						<form:input type="text" path="name" class="form-control input-w"
 							name="name" id="validationCustom01" placeholder="姓名"
 							required="required" />
 						<form:errors path="name" />
@@ -171,9 +183,10 @@ to {
 				</div>
 
 				<div class="form-group">
-					<div class="col-md-4 mt-1 mb-2">
-						<label for="validationCustom02">暱稱: </label>
-						<form:input type="text" path="id" class="form-control w-auto"
+						<label for="validationCustom02" class="control-label col-lg-2 col-lg-2">
+						暱稱: </label>
+					<div class="d-flex justify-content-center align-items-center">
+						<form:input type="text" path="id" class="form-control input-w"
 							name="memberId" id="validationCustom02" placeholder="暱稱"
 							required="required" />
 						<form:errors path="id" />
@@ -181,9 +194,10 @@ to {
 				</div>
 
 				<div class="form-group">
-					<div class="col-md-4 mt-1 mb-2">
-						<label for="validationCustom02">手機號碼: </label>
-						<form:input type="tel" class="form-control w-auto" path="phone"
+						<label for="validationCustom02" class="control-label col-lg-2 col-lg-2">
+						手機號碼: </label>
+					<div class="d-flex justify-content-center align-items-center">
+						<form:input type="tel" class="form-control input-w" path="phone"
 							name="phone" id="validationCustom02" placeholder="手機號碼"
 							pattern="[0-9]{4}[0-9]{3}[0-9]{3}" required="required" />
 						<form:errors path="phone" />
@@ -191,27 +205,27 @@ to {
 				</div>
 
 				<div class="form-group">
-					<div class="col-md-4 mt-1 mb-2">
-						<label for="exampleInputEmail1">Email address: </label>
-						<form:input type="email" class="form-control"
+						<label for="exampleInputEmail1" class="control-label col-lg-2 col-lg-2">
+						Email address: </label>
+					<div class="d-flex justify-content-center align-items-center">
+						<form:input type="email" class="form-control input-w"
 							id="exampleInputEmail1" path="email" name="email"
 							aria-describedby="emailHelp" placeholder="Enter email"
 							pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
 							disabled="true"/>
-						<small id="emailHelp" class="form-text text-muted">We'll
-							never share your email with anyone else.</small>
 						<form:errors path="email" />
 					</div>
 				</div>
 
 				<div class="form-group">
-					<div class="col-md-6 mb-2">
-						<label for="validationCustom03">生日: </label>
+						<label for="validationCustom03" class="control-label col-lg-2 col-lg-2">
+						生日: </label>
+						<div class="d-flex justify-content-center align-items-center">
 <%-- 						<input type="date" class="form-control" value="${LoginOK.birth}" name="birth" disabled="disabled"/> --%>
-						<form:input type="date" class="form-control" 
+						<form:input type="date" class="form-control input-w" 
 						value="${memberBean.birth}" path="birth" name="birth" disabled="true"/>
 						<form:errors path="birth" />
-					</div>
+						</div>
 				</div>
 
 				<div class="form-group">
