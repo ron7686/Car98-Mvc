@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="footer-bottom  bg-dark text-light">
 	<div class="container-fluid">
-		<p class="pull-left">Copyright@ 2020 by Car98 Group</p>
+		<p class="pull-left"><a href="" class="text-light">隱私權政策</a>｜Copyright@ 2020 by Car98 Group</p>
 	</div>
 </div>
