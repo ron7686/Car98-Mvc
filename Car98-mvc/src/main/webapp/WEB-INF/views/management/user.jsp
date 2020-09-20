@@ -254,36 +254,30 @@ to {
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<form:form action="<c:url value='/changePassword' />"
-					modelAttribute="memberBean" method="POST" />
+				<form:form action="changePassword"
+					modelAttribute="memberBean" method="POST" >
 					<div class="modal-body">
 						<div class="form-group w-50 mx-auto">
 							<p class="text-secondary">新密碼</p>
-							<input type="password" id="pwdId" class="form-control"
-								name="password" required>
-							<div class="valid-feedback">符合規則</div>
-							<div class="invalid-feedback">需包含大小字母、數字、特殊符號、8個字符</div>
-							<font color="red" size="-1">${ErrorMsg.passwordError}</font>
+							<form:input path="password" type="password" id="pwdId" class="form-control"
+								name="password" />
+							<form:errors path="password" />
 						</div>
 						<div class="form-group w-50 mx-auto">
 							<p class="text-secondary">確認密碼</p>
-							<input type="password" id="cPwdId"
-								class="form-control myCpwdClass" value="${param.memberPassword}"
-								name="password1" required>
-							<!-- 								pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" -->
-							<div id="cPwdValid" class="valid-feedback">密碼相符</div>
-							<div id="cPwdInvalid" class="invalid-feedback">密碼不相同</div>
-							<font color="red" size="-1">${MsgMap.passwordError}${MsgMap.errorPassword1Empty}</font>
+							<form:input path="password1" type="password" id="pwdId" class="form-control"
+								name="password1" />
+							<form:errors path="password1" />
 						</div>
 					</div>
 					<div class="modal-footer justify-content-center">
 						<button type="submit" class="btn btn-secondary"
 							onclick="myFunction()">送出</button>
-						<c:if test="${empty MsgMap}">
+						<c:if test="${empty errors}">
 							<div id="snackbar">修改成功</div>
 						</c:if>
 					</div>
-				</form>
+				</form:form>
 			</div>
 		</div>
 	</div>

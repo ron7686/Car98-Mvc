@@ -42,7 +42,7 @@ public class RegisterController {
 	ServletContext context;
 	
 	@Autowired
-	MemberBeanValidator validator;
+	MemberBeanValidator memberBeanValidator;
 
 	String registerForm = "/register/register";
 	
@@ -57,7 +57,7 @@ public class RegisterController {
 	public String processAddNewMemberForm(@ModelAttribute("memberBean") MemberBean mb,
 			BindingResult result,Model model,
 			HttpServletRequest request) {
-		validator.validate(mb, result);
+		memberBeanValidator.validate(mb, result);
 		
 		// 有錯誤訊息返回 register.jsp
 		if(result.hasErrors()) {
@@ -156,6 +156,13 @@ public class RegisterController {
 			Model model,
 			@ModelAttribute("memberBean")MemberBean memberBean) {
 		MemberBean mb = (MemberBean) model.getAttribute("LoginOK");
+//		validator.validate(memberBean, result);
+//		
+//		// 有錯誤訊息返回 register.jsp
+//		if(result.hasErrors()) {
+//			return "/management";
+//		}
+		
 		mb.setId(memberBean.getId());
 		mb.setName(memberBean.getName());
 		mb.setPhone(memberBean.getPhone());
@@ -179,15 +186,24 @@ public class RegisterController {
 		return "redirect:/";
 	}
 	
-//	@PostMapping("/changePassword")
-//	public String changePassword(
-//			Model model,
-//			@ModelAttribute("memberBean")MemberBean memberBean) {
-//		MemberBean mb = (MemberBean) model.getAttribute("LoginOK");
-//		mb.setPassword(memberBean.getPassword());
-//		memberService.updateUserData(mb);
-//		return "redirect:/management";
-//	}
+	@PostMapping("/changePassword")
+	public String changePassword(
+			Model model,
+			@ModelAttribute("memberBean")MemberBean memberBean) {
+		MemberBean mb = (MemberBean) model.getAttribute("LoginOK");
+//		validator.validate(memberBean, result);
+//		
+//		// 有錯誤訊息返回 register.jsp
+//		if(result.hasErrors()) {
+//			return "/management";
+//		}
+		
+		mb.setPassword(GlobalService.getMD5Endocing(
+				GlobalService.encryptString(memberBean.getPassword())));
+		
+		memberService.updateUserData(mb);
+		return "redirect:/management";
+	}
 	
 	
 	@InitBinder     

@@ -120,7 +120,8 @@ fieldset {
 						密碼 </label>
 					<div class='col-lg-10 mx-auto'>
 						<form:input id="password" path="password" type='password'
-							class='form:input-large form-control' />
+							class='form:input-large form-control' 
+							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" />
 						<form:errors path="password" />
 					</div>
 				</div>
@@ -130,7 +131,8 @@ fieldset {
 						確認密碼 </label>
 					<div class='col-lg-10 mx-auto'>
 						<form:input id="password1" path="password1" type='password'
-							class='form:input-large form-control' />
+							class='form:input-large form-control' 
+							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}"/>
 						<form:errors path="password1" />
 					</div>
 				</div>
