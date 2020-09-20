@@ -3,6 +3,9 @@
 	pageEncoding="UTF-8"%>
 <!doctype html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
 <html lang="en">
 
 <head>
@@ -114,102 +117,124 @@ to {
 	opacity: 0;
 }
 }
+
+.radio-size {
+	width: 25px;
+	height: 25px;
+	vertical-align:middle;
+}
 </style>
 
 <title>會員資料</title>
 </head>
 
-<body class="bg-dark">
+<body class="">
 	<jsp:include page="/fragment/topIndex.jsp"></jsp:include>
-	<form class="needs-validation mx-5 text-white" novalidate method="POST"
-		action="<c:url value='/_01_register/update.do'/>"
-		enctype="multipart/form-data">
-		<div class="col-md-3 mt-5 p-1">
-			<div class="form-group">
-
-				<label for="exampleFormControlFile1s"> <input type="file"
-					name="image" id="image_file" style="display: none;" /> <img
-					style="width: 350px; height: 350px; border-radius: 50%;"
-					src='${pageContext.request.contextPath}/_00_init/getMemberImage?id=${LoginOK.memId}'
-					id="show_image">
-				</label>
-				<p class="mt-2">
-					<img id="image">
-				</p>
-			</div>
+	<section>
+		<div class="container">
+			<h1 style="text-align: center">會員資料</h1>
 		</div>
-		<div class="form-row my-5 w-50">
-			<div class="col-md-4 mt-1 mb-2">
-				<label for="validationCustom01">姓名: </label> <input type="text"
-					class="form-control" value="${memberBean.name}" name="name"
-					id="validationCustom01" placeholder="姓名" required>
-				<div class="invalid-feedback">請輸入姓名</div>
-				<font color="red" size="-1">${MsgMap.errorName}</font>
+	</section>
+	<hr
+		style="height: 1px; border: none; color: #000000; background-color: #000000;">
+	<section class="container registerbg">
+		<!--    modelAttribute  三個地方要完全一樣  -->
+		<form:form method='POST' modelAttribute="memberBean"
+			class='form-horizontal mx-auto' align="center"
+			enctype="multipart/form-data">
+			<fieldset>
 
-			</div>
-			<div class="col-md-4 mt-1 mb-2">
-				<label for="validationCustom02">暱稱: </label> <input type="text"
-					class="form-control w-auto" value="${memberBean.id}"
-					name="memberId" id="validationCustom02" placeholder="暱稱" required>
-				<div class="invalid-feedback">請輸入暱稱</div>
-				<font color="red" size="-1">${MsgMap.errorIdEmpty}</font>
-			</div>
+				<div class="form-group">
 
-		</div>
-		<div class="form-group w-50 mb-5">
-			<label for="validationCustom02">手機號碼: </label> <input type="tel"
-				class="form-control w-auto" value="${memberBean.phone}" name="phone"
-				id="validationCustom02" placeholder="手機號碼"
-				pattern="[0-9]{4}[0-9]{3}[0-9]{3}" required>
-			<div class="invalid-feedback">請輸入正確的號碼</div>
-			<font color="red" size="-1">${MsgMap.errorPhone}</font>
-		</div>
-		<div class="form-group w-50">
-			<label for="exampleInputEmail1">Email address: </label> <input
-				type="email" class="form-control" id="exampleInputEmail1"
-				value="${memberBean.email}" name="email"
-				aria-describedby="emailHelp" placeholder="Enter email"
-				pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
-				disabled="disabled" required> <small id="emailHelp"
-				class="form-text text-muted">We'll never share your email
-				with anyone else.</small>
-			<div class="invalid-feedback">請輸入正確的email</div>
-			<font color="red" size="-1">${MsgMap.errorIdDup}</font>
-		</div>
-
-		<div class="form-row d-inline">
-			<div class="col-md-6 mb-2">
-				<label for="validationCustom03">生日: </label> <input type="date"
-					class="form-control" id="validationCustom03" name="birth"
-					value="${memberBean.birth}" placeholder="YYYY-MM-DD"
-					pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" disabled="disabled" required>
-				<div class="invalid-feedback">請選擇日期</div>
-				<font color="red" size="-1">${ErrorMsg.errorBirth}</font>
-			</div>
-			<div class="col-md-3 mt-3">
-				<label for="validationCustom04">性別: </label>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="gridRadios"
-						id="gridRadios1" value="M"
-						${memberBean.sex =="M" ? "checked='checked'" : ""}> <label
-						class="form-check-label text-primary" for="gridRadios1"> 男
+					<label for="exampleFormControlFile1s"> <form:input
+							type="file" path="memberMultipartFile" id="image_file"
+							style="display: none;" /> <form:errors
+							path="memberMultipartFile" /> <img
+						style="width: 350px; height: 350px; border-radius: 50%;"
+						src='${pageContext.request.contextPath}/init/getMemberImage?id=${LoginOK.memId}'
+						id="show_image">
 					</label>
+					<p class="mt-2">
+						<img id="image">
+					</p>
 				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="gridRadios"
-						id="gridRadios2" value="F"
-						${memberBean.sex =="F" ? "checked='checked'" : ""}> <label
-						class="form-check-label text-danger" for="gridRadios2"> 女
-					</label>
-				</div>
-				<font color="red" size="-1">${MsgMap.errorSex}</font>
 
-			</div>
-		</div>
-		<div class="mb-3">
-			<button class="btn btn-secondary" id="button" type="submit">確認送出</button>
-		</div>
-	</form>
+				<div class="form-group">
+
+					<div class="col-md-4 mt-1 mb-2">
+						<label for="validationCustom01">姓名: </label>
+						<form:input type="text" path="name" class="form-control"
+							name="name" id="validationCustom01" placeholder="姓名"
+							required="required" />
+						<form:errors path="name" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-4 mt-1 mb-2">
+						<label for="validationCustom02">暱稱: </label>
+						<form:input type="text" path="id" class="form-control w-auto"
+							name="memberId" id="validationCustom02" placeholder="暱稱"
+							required="required" />
+						<form:errors path="id" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-4 mt-1 mb-2">
+						<label for="validationCustom02">手機號碼: </label>
+						<form:input type="tel" class="form-control w-auto" path="phone"
+							name="phone" id="validationCustom02" placeholder="手機號碼"
+							pattern="[0-9]{4}[0-9]{3}[0-9]{3}" required="required" />
+						<form:errors path="phone" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-4 mt-1 mb-2">
+						<label for="exampleInputEmail1">Email address: </label>
+						<form:input type="email" class="form-control"
+							id="exampleInputEmail1" path="email" name="email"
+							aria-describedby="emailHelp" placeholder="Enter email"
+							pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+							disabled="true"/>
+						<small id="emailHelp" class="form-text text-muted">We'll
+							never share your email with anyone else.</small>
+						<form:errors path="email" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-6 mb-2">
+						<label for="validationCustom03">生日: </label>
+<%-- 						<input type="date" class="form-control" value="${LoginOK.birth}" name="birth" disabled="disabled"/> --%>
+						<form:input type="date" class="form-control" 
+						value="${memberBean.birth}" path="birth" name="birth" disabled="true"/>
+						<form:errors path="birth" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class='control-label col-lg-2 col-lg-2' for="sex">
+						性別 </label>
+					<div class="mx-auto row">
+						<div class="col-10 mx-auto">
+							<form:radiobutton path="sex" class='radio-size mx-3' value="M"
+								label="男" id="gender"/>
+							<form:radiobutton path="sex" class='radio-size mx-3' value="F"
+								label="女" id="gender" />
+							<form:errors path="sex" />
+						</div>
+
+					</div>
+				</div>
+
+				<div class="mb-3">
+					<button class="btn btn-secondary" id="button" type="submit">確認送出</button>
+				</div>
+			</fieldset>
+		</form:form>
+	</section>
 
 	<!-- Button trigger modal -->
 	<div class="mt-2 mb-2 needs-validation mx-5 text-white">
@@ -229,8 +254,8 @@ to {
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<form action="<c:url value='/_01_reguster/change.do'/>"
-					method="POST">
+				<form:form action="<c:url value='/changePassword' />"
+					modelAttribute="memberBean" method="POST" />
 					<div class="modal-body">
 						<div class="form-group w-50 mx-auto">
 							<p class="text-secondary">新密碼</p>
@@ -301,14 +326,14 @@ to {
 	</script>
 	<c:if test="${empty MsgMap}">
 		<script>
-		function myFunction() {
-			var x = document.getElementById("snackbar");
-			x.className = "show";
-			setTimeout(function() {
-				x.className = x.className.replace("show", "");
-			}, 3000);
-		}
-	</script>
+			function myFunction() {
+				var x = document.getElementById("snackbar");
+				x.className = "show";
+				setTimeout(function() {
+					x.className = x.className.replace("show", "");
+				}, 3000);
+			}
+		</script>
 	</c:if>
 	<c:if test="${!empty MsgMap}">
 		<script>

@@ -35,7 +35,7 @@ public class MemberBean implements Serializable {
 	private Blob headPic;
 	private String fileName;
 	private Integer levels;
-	private Date meCreate;
+	private Timestamp meCreate;
 	private Timestamp loginTime;
 	
 	@Transient
@@ -47,7 +47,7 @@ public class MemberBean implements Serializable {
 	}
 	
 	public MemberBean(Integer memId, String email, String password, String name, String id, String phone, Date birth,
-			String sex, Blob headPic, String fileName,Integer levels,Date meCreate,Timestamp loginTime) {
+			String sex, Blob headPic, String fileName,Integer levels,Timestamp meCreate,Timestamp loginTime) {
 		super();
 		this.memId = memId;
 		this.email = email;
@@ -182,11 +182,11 @@ public class MemberBean implements Serializable {
 		this.levels = levels;
 	}
 
-	public Date getMeCreate() {
+	public Timestamp getMeCreate() {
 		return meCreate;
 	}
 
-	public void setMeCreate(Date meCreate) {
+	public void setMeCreate(Timestamp meCreate) {
 		this.meCreate = meCreate;
 	}
 

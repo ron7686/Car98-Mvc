@@ -5,7 +5,7 @@
 
 <nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
 	<a class="navbar-brand"
-		href="${pageContext.servletContext.contextPath}/index.jsp"><img
+		href="<c:url value='/' />"><img
 		src="${pageContext.servletContext.contextPath}/image/car98logo.png"
 		width="50" height="50" alt=""></a>
 	<button class="navbar-toggler navbar-toggler-right" type="button"
@@ -46,14 +46,14 @@
 			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/forum/talktop.do">Car論壇</a></li>
 			<c:if test="${empty LoginOK}">
 				<li class="nav-item active"><a class="nav-link"
-					href="login">登入
+					href="<c:url value='/login' />">登入
 						<span class="sr-only">(current)</span>
 
 				</a></li>
 			</c:if>
 			<c:if test="${ ! empty LoginOK }">
 				<li class="nav-item active"><a class="nav-link"
-					href="${pageContext.request.contextPath}/login/logout.jsp">登出 <span
+					href="<c:url value='/logout' />">登出 <span
 						class="sr-only">(current)</span>
 				</a></li>
 
@@ -62,9 +62,9 @@
 	</div>
 
 	<c:if test="${! empty LoginOK }">
-		<a class="navbar-brand" href="${pageContext.request.contextPath}/_01_register/management.do"><img
+		<a class="navbar-brand" href="<c:url value='/management' />"><img
 			style="width: 50px; height: 50px; border-radius: 50%;"
-			src='${pageContext.request.contextPath}/_00_init/getMemberImage?id=${LoginOK.memId}'>
+			src='${pageContext.request.contextPath}/init/getMemberImage?id=${LoginOK.memId}'>
 		</a>
 
 	</c:if>
