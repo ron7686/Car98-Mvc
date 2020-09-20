@@ -36,6 +36,11 @@ public class InitController {
 	public String index(Model model) {
 		return "index";
 	}
+	@RequestMapping("/privacy")
+	public String privacy(Model model) {
+		return "privacy";
+	}
+	
 	
 	@GetMapping("/init/getMemberImage")
 	public ResponseEntity<byte[]>  getMemberImage(@RequestParam("id") Integer id) {

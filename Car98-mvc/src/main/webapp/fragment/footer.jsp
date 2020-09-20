@@ -6,6 +6,6 @@
 
 <div class="footer-bottom  bg-dark text-light">
 	<div class="container-fluid">
-		<p class="pull-left"><a href="" class="text-light">隱私權政策</a>｜Copyright@ 2020 by Car98 Group</p>
+		<p class="pull-left"><a href="<c:url value='/privacy' />" class="text-light">隱私權政策</a>｜Copyright@ 2020 by Car98 Group</p>
 	</div>
 </div>
