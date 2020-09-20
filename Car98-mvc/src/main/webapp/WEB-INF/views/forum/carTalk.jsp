@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,6 +64,7 @@
             <div class="col-12 head">
                 汽車交流論壇
             </div>
+            
             <div class="col-2 border">
                 <a href="">
                 <img src="https://picsum.photos/id/231/180/90" class="img-fluid"  alt="Responsive image" style="width:100%; height:auto;"></a>
