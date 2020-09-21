@@ -1,54 +1,97 @@
 ﻿package com.web.car98.commodity.model;
 
-import java.io.Serializable;
 import java.sql.Blob;
-import java.sql.Date;
+import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.web.car98.member.model.MemberBean;
+
+
+@Entity
+@Table(name="bid")
 // 本類別封裝單筆商品資料
-public class BidBean implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class BidBean {
+	//商品只能有一個種類，種類可以對應多個商品
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private Integer bidId;//商品ID
-	private Integer memId;//會員ID
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="memId") 	
+    private MemberBean memberBean;
+	
 	private String bidItemName;//品名
-	private String bidDetail;//種類描述
+	private String	bidFormat;//商品描述
 	private Integer bidPrice;//價格
-	private Integer bidSelled;//數量
-	private Date bidTime;//上架時間
+	private Integer bidStock;//庫存
+	private Timestamp bidTime;//上架時間
 	private Integer bidScore;//買家評價
 	private Blob bidPic;//商品照片
 	private String fileName;//照片名稱
 	
-	public BidBean(Integer bidId, Integer memId, String bidItemName,String bidDetail ,Integer bidPrice,
-			Date bidTime, Integer bidSelled, Integer bidScore, Blob bidPic,String fileName) {
-		this.bidId = bidId;
-		this.memId = memId;
-		this.bidItemName = bidItemName;
-		this.bidDetail = bidDetail;
-		this.bidPrice = bidPrice;
-		this.bidTime = bidTime;
-		this.bidSelled = bidSelled;
-		this.bidScore = bidScore;
-		this.bidPic = bidPic;
-		this.fileName = fileName;
-	}
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="bidItemId", nullable = false) 	
+	private BidItemBean bidItemBean;
 
+	@Transient
+	private MultipartFile productImage;
+
+	
 	public BidBean() {
 	}
 
-	public int getBidId() {
+	public BidBean(Integer bidId, MemberBean memberBean, String bidItemName, String bidFormat, Integer bidPrice,
+			Integer bidStock, Timestamp bidTime, Integer bidScore, Blob bidPic, String fileName,
+			BidItemBean bidItemBean, MultipartFile productImage) {
+		super();
+		this.bidId = bidId;
+		this.memberBean = memberBean;
+		this.bidItemName = bidItemName;
+		this.bidFormat = bidFormat;
+		this.bidPrice = bidPrice;
+		this.bidStock = bidStock;
+		this.bidTime = bidTime;
+		this.bidScore = bidScore;
+		this.bidPic = bidPic;
+		this.fileName = fileName;
+		this.bidItemBean = bidItemBean;
+		this.productImage = productImage;
+	}
+
+	public MultipartFile getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(MultipartFile productImage) {
+		this.productImage = productImage;
+	}
+
+	public Integer getBidId() {
 		return bidId;
 	}
 
-	public void setBidId(int bidId) {
+	public void setBidId(Integer bidId) {
 		this.bidId = bidId;
 	}
 
-	public Integer getMemId() {
-		return memId;
+	public MemberBean getMemberBean() {
+		return memberBean;
 	}
-	
-	public void setMemId(Integer memId) {
-		this.memId = memId;
+
+	public void setMemberBean(MemberBean memberBean) {
+		this.memberBean = memberBean;
 	}
 
 	public String getBidItemName() {
@@ -59,12 +102,12 @@ public class BidBean implements Serializable {
 		this.bidItemName = bidItemName;
 	}
 
-	public String getBidDetail() {
-		return bidDetail;
+	public String getBidFormat() {
+		return bidFormat;
 	}
 
-	public void setBidDetail(String bidDetail) {
-		this.bidDetail = bidDetail;
+	public void setBidFormat(String bidFormat) {
+		this.bidFormat = bidFormat;
 	}
 
 	public Integer getBidPrice() {
@@ -75,19 +118,19 @@ public class BidBean implements Serializable {
 		this.bidPrice = bidPrice;
 	}
 
-	public Integer getBidSelled() {
-		return bidSelled;
+	public Integer getBidStock() {
+		return bidStock;
 	}
 
-	public void setBidSelled(Integer bidSelled) {
-		this.bidSelled = bidSelled;
+	public void setBidStock(Integer bidStock) {
+		this.bidStock = bidStock;
 	}
 
-	public Date getBidTime() {
+	public Timestamp getBidTime() {
 		return bidTime;
 	}
 
-	public void setBidTime(Date bidTime) {
+	public void setBidTime(Timestamp bidTime) {
 		this.bidTime = bidTime;
 	}
 
@@ -115,14 +158,22 @@ public class BidBean implements Serializable {
 		this.fileName = fileName;
 	}
 
+	public BidItemBean getBidItemBean() {
+		return bidItemBean;
+	}
+
+	public void setBidItemBean(BidItemBean bidItemBean) {
+		this.bidItemBean = bidItemBean;
+	}
+
 	@Override
 	public String toString() {
-		return "BidBean [bidId=" + bidId + ", memId=" + memId + ", bidItemName=" + bidItemName + ", bidDetail="
-				+ bidDetail + ", bidPrice=" + bidPrice + ", bidSelled=" + bidSelled + ", bidTime=" + bidTime
-				+ ", bidScore=" + bidScore + ", bidPic=" + bidPic + ", fileName=" + fileName + "]";
+		return "BidBean [bidId=" + bidId + ", memberBean=" + memberBean + ", bidItemName=" + bidItemName
+				+ ", bidFormat=" + bidFormat + ", bidPrice=" + bidPrice + ", bidStock=" + bidStock + ", bidTime="
+				+ bidTime + ", bidScore=" + bidScore + ", bidPic=" + bidPic + ", fileName=" + fileName
+				+ ", bidItemBean=" + bidItemBean + ", productImage=" + productImage + "]";
 	}
-	
-	
+
 }
 	
 
