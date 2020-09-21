@@ -52,13 +52,13 @@ public class CommentServiceImpl implements CommentService {
 
 	@Transactional
 	@Override
-	public List<CommentBean> selectCom() {
+	public List<CommentBean> selectCom(Integer postId) {
 		List<CommentBean> list = null;
 //		Session session = factory.getCurrentSession();
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
-			list = dao.selectCom();
+			list = dao.selectCom(postId);
 //			tx.commit();
 //		} catch (Exception e) {
 //			if (tx != null) {

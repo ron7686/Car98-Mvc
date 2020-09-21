@@ -11,7 +11,7 @@ public interface CommentService {
 
 	int insertCom(CommentBean commentBean);
 
-	List<CommentBean> selectCom();
+	List<CommentBean> selectCom(Integer postId);
 
 	int updateMemCom(String comText, Date comTime, Integer memId, Integer postId, Integer comId);
 
