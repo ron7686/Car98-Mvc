@@ -43,7 +43,7 @@
 						href="https://parkingfee.pma.gov.taipei/" target="_blank">停車費查詢</a>
 				</div></li>
 			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/commodity/shop.jsp">Car好買</a></li>
-			<li class="nav-item"><a class="nav-link" href="<c:url value='/carTalk' />">Car論壇</a></li>
+			<li class="nav-item"><a class="nav-link" href="<c:url value='/forum/talktop.do' />">Car論壇</a></li>
 			<c:if test="${empty LoginOK}">
 				<li class="nav-item active"><a class="nav-link"
 					href="<c:url value='/login' />">登入
