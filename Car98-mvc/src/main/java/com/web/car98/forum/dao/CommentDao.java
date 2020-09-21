@@ -20,12 +20,9 @@ public interface CommentDao {
     int updateComByPk(CommentBean commentBean);
     
     int deleteComByPk(Integer comId);
-    
+
+	CommentBean selectComByPk(Integer comId);
     
 	
-
-	
-
-
 }
 

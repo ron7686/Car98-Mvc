@@ -86,5 +86,13 @@ public class CommentDaoImpl implements CommentDao {
 		return n;
 		
 	}
+	@Override
+	public CommentBean selectComByPk(Integer comId) {
+		CommentBean commentbean = null;
+		Session session = factory.getCurrentSession();
+	    commentbean = session.get(CommentBean.class, comId);
+		return commentbean;
+	}
+	
 
 }

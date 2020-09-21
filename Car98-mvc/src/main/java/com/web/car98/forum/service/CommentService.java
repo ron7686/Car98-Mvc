@@ -5,9 +5,9 @@ import java.util.List;
 
 import com.web.car98.forum.model.CommentBean;
 
-public interface CommentServicee {
+public interface CommentService {
 
-	void persist(CommentBean cb);
+	void persist(CommentBean commentBean);
 
 	int insertCom(CommentBean commentBean);
 
@@ -18,4 +18,6 @@ public interface CommentServicee {
 	int updateComByPk(CommentBean commentBean);
 
 	int deleteComByPk(Integer comId);
+
+	CommentBean selectComByPk(Integer comId);
 }

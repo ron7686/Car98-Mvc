@@ -5,37 +5,37 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.web.car98.forum.dao.CommentDao;
-import com.web.car98.forum.dao.impl.CommentDaoImpl;
 import com.web.car98.forum.model.CommentBean;
-import com.web.car98.forum.service.CommentServicee;
+import com.web.car98.forum.service.CommentService;
 
-import _00_init.util.HibernateUtils;
+
 @Service
-public class CommentServiceImpl implements CommentServicee {
+public class CommentServiceImpl implements CommentService {
+	
 	@Autowired
 	CommentDao dao;
-	@Autowired
-	SessionFactory factory;
+//	SessionFactory factory;
 
 	public CommentServiceImpl() {
 //		dao = new CommentDaoImpl();
 //		factory = HibernateUtils.getSessionFactory();
 	}
-@Transactional
-	public void persist(CommentBean cb) {
-		dao.persist(cb);
+
+	@Transactional
+	@Override
+	public void persist(CommentBean commentBean) {
+		dao.persist(commentBean);
 	}
-@Transactional
+
+	@Transactional
+	@Override
 	public int insertCom(CommentBean commentBean) {
 		int n = 0;
-		Session session = factory.getCurrentSession();
+//		Session session = factory.getCurrentSession();
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
@@ -49,10 +49,12 @@ public class CommentServiceImpl implements CommentServicee {
 //		}
 		return n;
 	}
-@Transactional
+
+	@Transactional
+	@Override
 	public List<CommentBean> selectCom() {
 		List<CommentBean> list = null;
-		Session session = factory.getCurrentSession();
+//		Session session = factory.getCurrentSession();
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
@@ -66,11 +68,12 @@ public class CommentServiceImpl implements CommentServicee {
 //		}
 		return list;
 	}
-@Transactional
+
+	@Transactional
 	@Override
 	public int updateMemCom(String comText, Date comTime, Integer memId, Integer postId, Integer comId) {
 		int n = 0;
-		Session session = factory.getCurrentSession();
+//		Session session = factory.getCurrentSession();
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
@@ -85,11 +88,12 @@ public class CommentServiceImpl implements CommentServicee {
 //		}
 		return n;
 	}
-@Transactional
+
+	@Transactional
 	@Override
 	public int updateComByPk(CommentBean commentBean) {
 		int n = 0;
-		Session session = factory.getCurrentSession();
+//		Session session = factory.getCurrentSession();
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
@@ -104,11 +108,12 @@ public class CommentServiceImpl implements CommentServicee {
 //		}
 		return n;
 	}
-@Transactional
+
+	@Transactional
 	@Override
 	public int deleteComByPk(Integer comId) {
 		int n = 0;
-		Session session = factory.getCurrentSession();
+//		Session session = factory.getCurrentSession();
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
@@ -123,7 +128,25 @@ public class CommentServiceImpl implements CommentServicee {
 //		}
 		return n;
 	}
-	
-	
+
+	@Transactional
+	@Override
+	public CommentBean selectComByPk(Integer comId) {
+		CommentBean commentbean = null;
+//		Session session = factory.getCurrentSession();
+//		Transaction tx = null;
+//		try {
+//			tx = session.beginTransaction();
+			commentbean = dao.selectComByPk(comId);
+//			tx.commit();
+//		} catch (Exception e) {
+//			if (tx != null) {
+//				tx.rollback();
+//			}
+//			e.printStackTrace();
+//		}
+		return commentbean;
+	}
+
 
 }
