@@ -24,7 +24,7 @@ import com.web.car98.member.model.MemberBean;
 public class TalkController {
 	@Autowired
 	TalkService talkservice;
-	int page = 1;
+	
 	int postID = 1;
 	
 
@@ -40,7 +40,7 @@ public class TalkController {
 		List<TalkBean> list = talkservice.select(pageNo);
 		
 		
-		//talkservice.selectOne(lastpage);
+		
 		model.addAttribute("abean", list);
 		model.addAttribute("pageNo",pageNo);
 		model.addAttribute("lastPage", talkservice.lastpage());
@@ -49,32 +49,9 @@ public class TalkController {
 
 	}
 	
-	@PostMapping("/talk.do")
-	public String talkContent() {
-		
-		
-		return "/forum/talkContent";
-	}
+	
+	
+	
 	
 
-//	public int  getpage(Model model) {
-//		int lastpage=talkservice.lastpage();
-//		model.addAttribute("pageNo", lastpage);
-//	
-//		return lastpage;
-//	}
-//
-////@RequestMapping("carTalk")
-//public TalkBean selectone(Model model) {
-//	   TalkBean tb=talkservice.selectOne(postID);
-//	   
-//	model.addAttribute("aBean",tb);
-//	return tb;
-//}
-
-//@RequestMapping("/carTalk")
-//	public int lastpage(){
-//	
-//		return 0;
-//	}
 }

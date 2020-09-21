@@ -96,7 +96,7 @@
             </form>
             
             <div class="col-12 publish ">
-                     <button class="btn text-white bg-primary  " onclick="window.location.href='talkContent.jsp'">發帖</a></button>
+                     <button class="btn text-white bg-primary  " onclick="window.location.href='<c:url value='/talkContent' />' ">發帖</a></button>
                 <nav aria-label="Page navigation" class="publishitem">
                     <ul class="pagination justify-content-end ">
 

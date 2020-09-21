@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.web.car98.commodity.Dao.ProductDao;
+import com.web.car98.commodity.dao.ProductDao;
 import com.web.car98.commodity.model.BidBean;
 import com.web.car98.commodity.model.BidItemBean;
 import com.web.car98.commodity.service.ProductService;

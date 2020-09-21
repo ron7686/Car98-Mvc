@@ -1,4 +1,4 @@
-package com.web.car98.commodity.Dao;
+package com.web.car98.commodity.dao;
 
 import java.util.List;
 

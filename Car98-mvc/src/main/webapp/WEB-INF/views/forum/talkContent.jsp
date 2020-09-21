@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,16 +112,16 @@ body {
 				</div>
 				<!-- 內文輸入 -->
 				<div class="col-9">
-					<form class="mt-3" action="talk.do" method="Post">
-						<input class="title" type="text" name="title" style="width: 100%"
-							placeholder="請輸入文章標題......." value="${param.title}"> <span
-							class="errormsg"><b>${ErrorMsgKey.TitleEmptyError}</b></span>
-						<textarea class="mt-2" name="text" id="article"
+					<form:form class="mt-3" modelAttribute="talkBean"  method="Post" enctype="multipart/form-data">
+						<form:input class="title" path="PostTitle" type="text" name="title" style="width: 100%"
+							placeholder="請輸入文章標題......." value="${param.title}" />
+							<form:errors class="errormsg" path="PostTitle" > </form:errors>
+						<form:textarea class="mt-2"   path="PostText"
 							style="width: 100%" cols="100" rows="20"
-							placeholder="請輸入內容......">${param.text}</textarea>
-						<span class="errormsg"><b>${ErrorMsgKey.TextEmptyError}</b></span>
+							placeholder="請輸入內容......"></form:textarea>
+						<form:errors class="errormsg" path="PostText" > </form:errors>
 						<input type="submit" value="發佈文章" class="publish">
-					</form>
+					</form:form>
 				</div>
 				<!-- 插入附件 -->
 				<div class="col-3">
@@ -127,7 +129,7 @@ body {
 						<li>
 							<form>
 								<div class="form-group ">
-									<img src="../image/view.jpeg" width="50" height="50"> <label
+									<img src="${pageContext.servletContext.contextPath}/image/view.jpeg" width="50" height="50"> <label
 										for="exampleFormControlFile1">插入圖片</label> <input type="file"
 										class="form-control-file mt-2" id="exampleFormControlFile1"
 										value="插入圖片">
@@ -136,7 +138,7 @@ body {
 						</li>
 						<li>
 							<div>
-								<img src="../image/film.jpg" alt="" width="50" height="50">插入影片<br>
+								<img src="${pageContext.servletContext.contextPath}/image/film.jpg" alt="" width="50" height="50">插入影片<br>
 								<button type="button" class="btn btn-light mt-2"
 									data-toggle="modal" data-target="#exampleModal"
 									data-whatever="@mdo">選擇影片</button>

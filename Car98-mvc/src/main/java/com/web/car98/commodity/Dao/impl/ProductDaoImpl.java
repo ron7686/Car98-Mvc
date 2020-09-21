@@ -1,4 +1,4 @@
-package com.web.car98.commodity.Dao.impl;
+package com.web.car98.commodity.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.web.car98.commodity.Dao.ProductDao;
+import com.web.car98.commodity.dao.ProductDao;
 import com.web.car98.commodity.model.BidBean;
 import com.web.car98.commodity.model.BidItemBean;
 
