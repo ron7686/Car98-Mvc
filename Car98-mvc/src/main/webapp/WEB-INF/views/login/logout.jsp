@@ -23,7 +23,7 @@
 訪客${ memberName }，感謝您使用本系統。<BR>
 您已經登出<BR>
 </font>
-<jsp:useBean id='logoutBean' class='com.web.car98.model.LogoutBean' scope='page' />
+<jsp:useBean id='logoutBean' class='com.web.car98.member.model.LogoutBean' scope='page' />
     
 <c:set target='${logoutBean}' 
    property='session'    value='${pageContext.session}'/>

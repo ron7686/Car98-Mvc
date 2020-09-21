@@ -39,7 +39,7 @@ public class RootAppConfig {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
 		factory.setDataSource(dataSource());
-		factory.setPackagesToScan(new String[] { "com.web.car98.model" });
+		factory.setPackagesToScan(new String[] { "com.web.car98" });
 		factory.setHibernateProperties(additionalProperties());
 		return factory;
 	}

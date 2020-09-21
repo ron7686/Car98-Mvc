@@ -5,7 +5,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.web.car98.model.MemberBean;
+import com.web.car98.member.model.MemberBean;
 
 @Component
 public class MemberBeanValidator implements Validator {
