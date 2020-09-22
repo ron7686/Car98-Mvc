@@ -7,8 +7,10 @@ import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -17,21 +19,44 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
 @EnableTransactionManagement
+@PropertySource("classpath:db.properties")
 public class RootAppConfig {
+	
+	@Value("${jdbc.maxPoolSize}")
+	Integer maxPoolsize;
+	
+	@Value("${jdbc.initPoolSize}")
+	Integer initPoolsize;
+
+	@Value("${jdbc.driverClass}")
+	String driverClass;
+
+	@Value("${jdbc.user}")
+	String user;
+	
+	@Value("${jdbc.jdbcUrl}")
+	String jdncUrl;
+	
+	@Value("${jdbc.password}")
+	
+	String pswd;
+	
+	
 	@Bean
 	public DataSource dataSource() {
 		ComboPooledDataSource ds = new ComboPooledDataSource();
-		ds.setUser("root");
-		ds.setPassword("Do!ng123");
+		ds.setUser(user);
+		ds.setPassword(pswd);
 		try {
-			ds.setDriverClass("com.mysql.cj.jdbc.Driver");
+			ds.setDriverClass(driverClass);
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
-		ds.setJdbcUrl(
-				"jdbc:mysql://localhost:3306/Car98?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Taipei&allowPublicKeyRetrieval=true");
-		ds.setInitialPoolSize(4);
-		ds.setMaxPoolSize(8);
+
+		ds.setJdbcUrl(jdncUrl);
+		ds.setInitialPoolSize(initPoolsize);
+		ds.setMaxPoolSize(maxPoolsize);
+
 		return ds;
 	}
 

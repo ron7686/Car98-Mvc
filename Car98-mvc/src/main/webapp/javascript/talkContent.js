@@ -28,11 +28,23 @@ $("#Boldbtn").click(function(){
     //  let strend='</b>';
     //  alert(strend);
   
-    $("textarea").addClass("bold");
+    $("textarea").toggleClass("bold");
     // =strstart+$("textarea").val()+strend;
     
 })
 
+  //斜體
+  $("#Ibtn").click(function () {
+    let text = $("textarea").val();
+    $("textarea").val(text);
+
+    $("textarea").toggleClass("italic");
+  });
+  
+  //底線
+  $("#Ubtn").click(function () {
+    $("textarea").toggleClass("ubtn");
+  });
 
 
 

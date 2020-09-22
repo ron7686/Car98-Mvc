@@ -64,7 +64,7 @@
             <div class="col-12 head">
                 汽車交流論壇
             </div>
-            
+            <form action="" class="d-flex m-auto">
             <div class="col-2 border">
                 <a href="">
                 <img src="https://picsum.photos/id/231/180/90" class="img-fluid"  alt="Responsive image" style="width:100%; height:auto;"></a>
@@ -92,10 +92,11 @@
             <div class="col-2 border">
                 <a href="">
                 <img src="https://picsum.photos/id/233/180/90" class="img-fluid"  alt="Responsive image" style="width:100%; height:auto;"></a>
-
             </div>
+            </form>
+            
             <div class="col-12 publish ">
-                     <button class="btn text-white bg-primary  " onclick="window.location.href='talkContent.jsp'">發帖</a></button>
+                     <button class="btn text-white bg-primary  " onclick="window.location.href='<c:url value='/talkContent' />' ">發帖</a></button>
                 <nav aria-label="Page navigation" class="publishitem">
                     <ul class="pagination justify-content-end ">
 
@@ -118,7 +119,7 @@
                       </c:if>
                       <c:if test="${pageNo+2 < lastPage}">
                       <li class="page-item mt-2"><a href=""><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i></a></li>
-                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/forum/talktop.do?pageNo=${lastpage}">${lastPage}</a></li>
+                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/forum/talktop.do?pageNo=${lastPage}">${lastPage}</a></li>
                    	  </c:if>
                     </ul>
                   </nav>
@@ -182,13 +183,7 @@
 
     
 
-    <div class="footer-bottom  bg-dark text-light">
-        <div class="container-fluid">
-          <p class="pull-left">
-            Copyright@ 2020 by Car98 Group
-          </p>
-        </div>
-      </div>
+    <jsp:include page="/fragment/footer.jsp"></jsp:include>
       <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
