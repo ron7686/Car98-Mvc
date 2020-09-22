@@ -29,7 +29,7 @@ public class RootAppConfig {
 			e.printStackTrace();
 		}
 		ds.setJdbcUrl(
-				"jdbc:mysql://localhost:3306/Car98?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Taipei&allowPublicKeyRetrieval=true");
+				"jdbc:mysql://localhost:3306/car98?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Taipei&allowPublicKeyRetrieval=true");
 		ds.setInitialPoolSize(4);
 		ds.setMaxPoolSize(8);
 		return ds;
