@@ -33,13 +33,14 @@ public class TalkContentController {
 	}
 	
 	@PostMapping("/talkContent")
-	public String addContentForm(@ModelAttribute("talkBean") TalkBean tb,BindingResult bindingResult) {
+	public String addContentForm(Model model,@ModelAttribute("talkBean") TalkBean tb,BindingResult bindingResult) {
 		String[] suppressedFields=bindingResult.getSuppressedFields();
 		talkContentValidator.validate(tb, bindingResult);
 		if(bindingResult.hasErrors()) {
 			return "forum/talkContent";
 		}
 		talkservice.persist(tb);
+		model.addAttribute("TalkBean", tb);
 		return "/forum/talktalk";
 		
 	}
