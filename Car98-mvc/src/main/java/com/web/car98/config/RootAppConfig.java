@@ -52,9 +52,11 @@ public class RootAppConfig {
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
+
 		ds.setJdbcUrl(jdncUrl);
 		ds.setInitialPoolSize(initPoolsize);
 		ds.setMaxPoolSize(maxPoolsize);
+
 		return ds;
 	}
 

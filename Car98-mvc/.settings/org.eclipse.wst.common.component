@@ -4,8 +4,12 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
+<<<<<<< HEAD
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <property name="context-root" value="Car98-mvc"/>
+=======
+>>>>>>> bcb18746b9d8f89a004c830420e14c792997ccad
         <property name="java-output-path" value="/Car98-mvc/target/classes"/>
+        <property name="context-root" value="Car98-mvc"/>
     </wb-module>
 </project-modules>
