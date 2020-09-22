@@ -101,6 +101,6 @@ public class CommentController {
 
 		CommentServiceImpl service = new CommentServiceImpl();
 		service.deleteComByPk(comId);
-		return "/forum/talktalk.jsp";
+		return "/forum/talktalk";
 	}
 }
