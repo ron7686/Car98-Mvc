@@ -205,20 +205,20 @@ fieldset {
 				</div>
 
 				<div class="form-group">
-						<label for="exampleInputEmail1" class="control-label col-lg-2 col-lg-2">
+						<label for="exampleInputEmail1" class="control-label col-lg-6 col-sm-12">
 						Email address: </label>
 					<div class="d-flex justify-content-center align-items-center">
 						<form:input type="email" class="form-control input-w"
 							id="exampleInputEmail1" path="email" name="email"
 							aria-describedby="emailHelp" placeholder="Enter email"
 							pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
-							disabled="true"/>
+							disabled="true" />
 						<form:errors path="email" />
 					</div>
 				</div>
 
 				<div class="form-group">
-						<label for="validationCustom03" class="control-label col-lg-2 col-lg-2">
+						<label for="validationCustom03" class="control-label col-lg-6 col-sm-12">
 						生日: </label>
 						<div class="d-flex justify-content-center align-items-center">
 <%-- 						<input type="date" class="form-control" value="${LoginOK.birth}" name="birth" disabled="disabled"/> --%>
@@ -273,14 +273,16 @@ fieldset {
 					<div class="modal-body">
 						<div class="form-group w-50 mx-auto">
 							<p class="text-secondary">新密碼</p>
-							<form:input path="password" type="password" id="pwdId" class="form-control"
-								name="password" />
+							<form:input path="password" type="password" id="pwdId" class="form-control" value=""
+								name="password" required="required" 
+								pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" />
 							<form:errors path="password" />
 						</div>
 						<div class="form-group w-50 mx-auto">
 							<p class="text-secondary">確認密碼</p>
 							<form:input path="password1" type="password" id="pwdId" class="form-control"
-								name="password1" />
+								name="password1" required="required" 
+								pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}"/>
 							<form:errors path="password1" />
 						</div>
 					</div>
@@ -332,7 +334,7 @@ fieldset {
 			});
 		});
 	</script>
-	<c:if test="${empty MsgMap}">
+	<c:if test="${empty errors}">
 		<script>
 			function myFunction() {
 				var x = document.getElementById("snackbar");
@@ -343,7 +345,7 @@ fieldset {
 			}
 		</script>
 	</c:if>
-	<c:if test="${!empty MsgMap}">
+	<c:if test="${!empty erros}">
 		<script>
 			$('#staticBackdrop').modal('show')
 		</script>

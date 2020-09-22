@@ -12,7 +12,6 @@ import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.web.car98.member.model.MemberBean;
 import com.web.car98.member.service.MemberService;
+import com.web.car98.validator.ChangePasswordValidator;
 import com.web.car98.validator.MemberBeanValidator;
 
 import _00_init.util.GlobalService;
@@ -43,6 +43,9 @@ public class RegisterController {
 	
 	@Autowired
 	MemberBeanValidator memberBeanValidator;
+	
+	@Autowired
+	ChangePasswordValidator changePasswordValidator;
 
 	String registerForm = "/register/register";
 	
@@ -61,6 +64,9 @@ public class RegisterController {
 		
 		// 有錯誤訊息返回 register.jsp
 		if(result.hasErrors()) {
+			// 清空密碼
+			mb.setPassword("");
+			mb.setPassword1("");
 			return registerForm;
 		}
 		
@@ -96,14 +102,17 @@ public class RegisterController {
 		// 會員等級設定
 		mb.setLevels(LEVELS);
 		
+		if(memberService.idExists(mb.getEmail())) {
+			result.rejectValue("email", "", "email已存在，請重新輸入");
+			// 清空密碼
+			mb.setPassword("");
+			mb.setPassword1("");
+			return registerForm;
+		}
+		
 		// 處理密碼加密
 		mb.setPassword(GlobalService.getMD5Endocing
 				(GlobalService.encryptString(mb.getPassword())));
-		
-		if(memberService.idExists(mb.getEmail())) {
-			result.rejectValue("email", "", "email已存在，請重新輸入");
-			return registerForm;
-		}
 		
 		// ------------------- 驗證沒問題，存進去資料庫 -----------------
 		try {
@@ -112,6 +121,9 @@ public class RegisterController {
 		catch(Exception e) {
 			System.out.println(e.getClass().getName() + ", ErrorMessage =" + e.getMessage());
 			result.rejectValue("email", "", "發生異常，請通知系統人員..." + e.getMessage());
+			// 清空密碼
+			mb.setPassword("");
+			mb.setPassword1("");
 			return registerForm;
 		}
 		
@@ -147,6 +159,8 @@ public class RegisterController {
 	public String management(
 			Model model) {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
+		// 清除密碼 停在表單
+		memberBean.setPassword("");
 		model.addAttribute(memberBean);
 		return "/management/user";
 	}
@@ -156,12 +170,6 @@ public class RegisterController {
 			Model model,
 			@ModelAttribute("memberBean")MemberBean memberBean) {
 		MemberBean mb = (MemberBean) model.getAttribute("LoginOK");
-//		validator.validate(memberBean, result);
-//		
-//		// 有錯誤訊息返回 register.jsp
-//		if(result.hasErrors()) {
-//			return "/management";
-//		}
 		
 		mb.setId(memberBean.getId());
 		mb.setName(memberBean.getName());
@@ -170,11 +178,11 @@ public class RegisterController {
 		
 		MultipartFile memberImage = memberBean.getMemberMultipartFile();
 		String originalFilename = memberImage.getOriginalFilename();
-		mb.setFileName(originalFilename);
 		if(memberImage!=null && !memberImage.isEmpty()) {
 			try {
 				byte []b = memberImage.getBytes();
 				Blob blob = new SerialBlob(b);
+				mb.setFileName(originalFilename);
 				mb.setHeadPic(blob);
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -188,15 +196,14 @@ public class RegisterController {
 	
 	@PostMapping("/changePassword")
 	public String changePassword(
-			Model model,
-			@ModelAttribute("memberBean")MemberBean memberBean) {
+			@ModelAttribute("memberBean")MemberBean memberBean,
+			Model model,BindingResult result) {
+		changePasswordValidator.validate(memberBean, result);
+		if(result.hasErrors()) {
+			return "/management/user";
+		}
+		
 		MemberBean mb = (MemberBean) model.getAttribute("LoginOK");
-//		validator.validate(memberBean, result);
-//		
-//		// 有錯誤訊息返回 register.jsp
-//		if(result.hasErrors()) {
-//			return "/management";
-//		}
 		
 		mb.setPassword(GlobalService.getMD5Endocing(
 				GlobalService.encryptString(memberBean.getPassword())));
