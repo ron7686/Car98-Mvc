@@ -23,7 +23,10 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
     integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous" />
   <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/BSRent.css">
-  <script src="http://maps.google.com/maps/api/js"></script>
+<!--   <script src="http://maps.google.com/maps/api/js"></script> -->
+  <script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQYmuo5h9pGY0c83EpRPJKTSUoLsk64FA&callback=initMap"
+	async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
   
   <style>
@@ -58,6 +61,11 @@
       background-repeat: no-repeat;
       background-size: cover;
     }
+    
+#map {
+	height: 500px;
+	width: 100%;
+}
   </style>
   
 </head>
@@ -72,27 +80,27 @@
       <div class="row">
         <div class="col-md-4">
           <form action="">地區：
-            <select name="area" id="areaitem" style="width: 250px">
+            <select name="area" id="areaitem" style="width: 250px" onchange="">
               <option value="selectarea">選擇地區</option>
               <optgroup label="台北市">
-                <option value="100">中正</option>
-                <option value="103">大同</option>
-                <option value="104">中山</option>
-                <option value="105">松山</option>
-                <option value="106">大安</option>
-                <option value="108">萬華</option>
-                <option value="110">信義</option>
-                <option value="111">士林</option>
-                <option value="112">北投</option>
-                <option value="114">內湖</option>
-                <option value="115">南港</option>
-                <option value="116">文山</option>
+                <option value="100">中正區</option>
+                <option value="103">大同區</option>
+                <option value="104">中山區</option>
+                <option value="105">松山區</option>
+                <option value="106">大安區</option>
+                <option value="108">萬華區</option>
+                <option value="110">信義區</option>
+                <option value="111">士林區</option>
+                <option value="112">北投區</option>
+                <option value="114">內湖區</option>
+                <option value="115">南港區</option>
+                <option value="116">文山區</option>
               </optgroup>
               <optgroup label="新北市">
-                <option value="dist5">樹林</option>
-                <option value="dist6">板橋</option>
-                <option value="dist7">中和</option>
-                <option value="dist8">汐止</option>
+                <option value="dist5">樹林區</option>
+                <option value="dist6">板橋區</option>
+                <option value="dist7">中和區</option>
+                <option value="dist8">汐止區</option>
               </optgroup>
             </select>
           </form>
@@ -150,11 +158,32 @@
             </select>
           </form>
         </div>
-        <div class="col-md-12 text-white">
-          <iframe src="https://maps.google.com?output=embed&q=北科大" width="100%" height="460">
-          </iframe>
-          <!-- <div  class="col-12" id="map" style="width: 800px;height: 600px;"> -->
-        </div>
+<!--         <div class="col-md-12 text-white"> -->
+<!--           <iframe src="https://maps.google.com?output=embed&q=北科大" width="100%" height="460"> -->
+<!--           </iframe> -->
+<!--           <div  class="col-12" id="map" style="width: 800px;height: 600px;"> -->
+<!--         </div> -->
+        
+        <div id="map"></div>
+				<script>
+					function initMap() {
+						var uluru = {
+							lat : 25.042464,
+							lng : 121.533795
+						};
+						var map = new google.maps.Map(document
+								.getElementById('map'), {
+							zoom : 17,
+							center : uluru
+						});
+						var marker = new google.maps.Marker({
+							position : uluru,
+							map : map
+						});
+					}
+				</script>
+
+			</div>
 
       </div>
 
@@ -201,7 +230,13 @@
     </div>
   </div> -->
   <!-- footer -->
-  <jsp:include page="/fragment/footer.jsp"></jsp:include>
+  <div class="footer-bottom  bg-dark text-light">
+    <div class="container-fluid">
+      <p class="pull-left">
+        Copyright@ 2020 by Car98 Group
+      </p>
+    </div>
+  </div>
   <script src="${pageContext.servletContext.contextPath}/javascript/BSRent.js"></script>
 </body>
 

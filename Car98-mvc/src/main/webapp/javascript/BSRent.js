@@ -1,16 +1,32 @@
 $(document).ready(function() {
 	getCarDataOptions();
-	format1();
-	format2();
-	format3();
+	$("#areaitem").select2({
+     templateSelection: format1,
+     escapeMarkup: function (a) {
+       return a;
+     }
+   });
+   $("#priceitem").select2({
+    templateSelection: format2,
+    escapeMarkup: function (b) {
+      return b;
+    }
+  });
+  $("#caritem").select2({
+    templateSelection: format3,
+    escapeMarkup: function (c) {
+      return c;
+   }
+});
 });
 	
 	function getCarDataOptions() {
 		$.ajax({
 			method : "GET",
-			url : "/java014_01_Car98/rentcar/RentCarData",
+			url : "/Car98-mvc/cartype",
+			contentType: "application/json",
 			success : function(res) {
-				// 	console.log(res);
+				//console.log(res);
 				var last_brand = "";
 				// 先設一個變數last_brand
 				for (i = 0; i < res.length; i++) {
@@ -42,12 +58,7 @@ $(document).ready(function() {
      return (og1 ? og1 + " - " : "") + item1.text;
    }
 
-    $("#areaitem").select2({
-     templateSelection: format1,
-     escapeMarkup: function (a) {
-       return a;
-     }
-   });
+
 
     function format2(item2) {
     opt2 = $("#priceitem").find(":selected");
@@ -56,12 +67,7 @@ $(document).ready(function() {
     return (og2 ? og2 + " - " : "") + item2.text;
   }
   
-  $("#priceitem").select2({
-    templateSelection: format2,
-    escapeMarkup: function (b) {
-      return b;
-    }
-  });
+  
   
   function format3(item3) {
     opt3 = $("#caritem").find(":selected");
@@ -69,9 +75,4 @@ $(document).ready(function() {
     og3 = opt3.closest("optgroup").attr("label");
     return (og3 ? og3 + " - " : "") + item3.text;
   }
-  $("#caritem").select2({
-    templateSelection: format3,
-    escapeMarkup: function (c) {
-      return c;
-   }
-});
+  

@@ -27,10 +27,10 @@ public class RentCarBean implements Serializable{
 	private Set<CarTypeBean> cars = new LinkedHashSet<>();
 	
 	public RentCarBean() {
-		super();
 	}
 
-	public RentCarBean(Integer rentId, String store, String city, String district, String street
+	public RentCarBean(Integer rentId, String store, String city, 
+			String district, String street
 			) {
 		super();
 		this.rentId = rentId;
@@ -80,19 +80,19 @@ public class RentCarBean implements Serializable{
 		this.street = street;
 	}
 
-	public Set<CarTypeBean> getCars() {
-		return cars;
-	}
-
-	public void setCars(Set<CarTypeBean> cars) {
-		this.cars = cars;
-	}
-
-	public Set<CarTypeBean> getCarTypeBean() {
-		return cars;
-	}
+//	public Set<CarTypeBean> getCars() {
+//		return cars;
+//	}
+//
+//	public void setCars(Set<CarTypeBean> cars) {
+//		this.cars = cars;
+//	}
+//
+//	public Set<CarTypeBean> getCarTypeBean() {
+//		return cars;
+//	}
 	
-	public void setCarTypeBean(Set<CarTypeBean> cars) {
-		this.cars = cars;
-	}
+//	public void setCarTypeBean(Set<CarTypeBean> cars) {
+//		this.cars = cars;
+//	}
 }
