@@ -21,8 +21,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,15 +28,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.web.car98.commodity.model.BidBean;
 import com.web.car98.commodity.model.BidItemBean;
 import com.web.car98.commodity.service.ProductService;
 import com.web.car98.commodity.validators.BidValidator;
+import com.web.car98.member.model.MemberBean;
 
 @Controller
 @RequestMapping("/comm")
+@SessionAttributes("LoginOK")
 public class ProductController {
 	@Autowired
 	ProductService service;
@@ -52,6 +53,10 @@ public class ProductController {
 	// 顯示所有商品資料
 	@RequestMapping("/products")
 	public String list(Model model) {
+		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
+		if (memberBean == null) {
+			return "redirect:/login";
+		}
 		List<BidBean> list = service.getAllProducts();
 		model.addAttribute("products", list);
 		return "comm/products";
@@ -94,20 +99,26 @@ public class ProductController {
 	}
 
 	// 傳空白新增表單
-	@RequestMapping(value = "/products/add", method = RequestMethod.GET)
+	@GetMapping("/products/add")
 	public String getAddNewProductForm(Model model) {
+		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
+		if (memberBean == null) {
+			return "redirect:/login";
+		}		
 		BidBean bb = new BidBean();
 		model.addAttribute("bid", bb);
 		return "comm/addProduct";
 	}
-
-	@RequestMapping(value = "/products/add", method = RequestMethod.POST)
-	public String processAddNewProductForm(@ModelAttribute("bid") BidBean bb, BindingResult result) {
+	
+	@PostMapping("/products/add")
+	public String processAddNewProductForm(@ModelAttribute("bid") BidBean bb, BindingResult result,Model model) {
 		bidValidator.validate(bb, result);
 		if (result.hasErrors()) {
 			return "comm/addProduct";
 		}
-
+		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
+		bb.setMemberBean(memberBean);
+		
 		if (bb.getBidStock() == null) {
 			bb.setBidStock(0);
 		}
@@ -133,85 +144,12 @@ public class ProductController {
 
 	
 		service.addByBidBean(bb);
-
-//		String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
-//		String rootDirectory = context.getRealPath("/");
-//		try {
-//			File imageFolder = new File(rootDirectory, "images");
-//			if (!imageFolder.exists())
-//				imageFolder.mkdirs();
-//			File file = new File(imageFolder, bb.getBidId() + ext);
-//			productImage.transferTo(file);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-//		}
-		return "redirect:comm/products";
+		return "redirect:/comm/products";
 	}
 
-	// 當使用者需要修改時，本方法送回含有會員資料的表單，讓使用者進行修改
-	// 由這個方法送回修改記錄的表單...
-	@GetMapping(value = "/products/add/{bidId}")
-	public String showDataForm(@PathVariable("bidId") Integer bidId, Model model) {
-		BidBean bid = service.getProductById(bidId);
-		model.addAttribute(bid);
-		return "/comm/updateProduct";
-	}
+	
 
-	// 當將瀏覽器送來修改過的會員資料時，由本方法負責檢核，若無誤則寫入資料庫
-	@PostMapping("/products/add/{bidId}")
-	// BindingResult 參數必須與@ModelAttribute修飾的參數連續編寫，中間不能夾其他參數
-	//
-	public String modify(@ModelAttribute("bid") BidBean bb, Model model, BindingResult result,
-			@PathVariable("bidId") Integer bidId) {
 
-		bidValidator.validate(bb, result);
-		if (result.hasErrors()) {
-			System.out.println("result hasErrors(), member=" + bb);
-			List<ObjectError> list = result.getAllErrors();
-			for (ObjectError error : list) {
-				System.out.println("有錯誤：" + error);
-			}	
-			return "comm/updateProduct";
-		}
-		Timestamp adminTime = new Timestamp(System.currentTimeMillis());
-		bb.setBidTime(adminTime);
-
-		MultipartFile picture = bb.getProductImage();
-		if (picture.getSize() == 0) {
-			// 表示使用者並未挑選圖片
-			BidBean original = service.getProductById(bidId);
-			bb.setBidPic(original.getBidPic());
-		} else {
-			String originalFilename = picture.getOriginalFilename();
-			if (originalFilename.length() > 0 && originalFilename.lastIndexOf(".") > -1) {
-				bb.setFileName(originalFilename);
-			}
-
-			// 建立Blob物件
-			if (picture != null && !picture.isEmpty()) {
-				try {
-					byte[] b = picture.getBytes();
-					Blob blob = new SerialBlob(b);
-					bb.setBidPic(blob);
-				} catch (Exception e) {
-					e.printStackTrace();
-					throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-				}
-			}
-		}
-
-		service.updateProducts(bb);
-		return "redirect:comm/showUpdate";
-	}
-
-	// 刪除一筆紀錄
-	// 由這個方法刪除記錄...
-	@DeleteMapping("/products/add/{bidId}")
-	public String delete(@PathVariable("bidId") Integer bibId) {
-		service.delete(bibId);
-		return "redirect:comm/showUpdate";
-	}
 
 	// 取得圖片
 	@RequestMapping(value = "/comm/picture/{bidId}", method = RequestMethod.GET)
