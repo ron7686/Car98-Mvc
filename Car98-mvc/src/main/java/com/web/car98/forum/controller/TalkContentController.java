@@ -1,7 +1,5 @@
 package com.web.car98.forum.controller;
 
-import javax.management.RuntimeErrorException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,13 +7,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.car98.forum.model.TalkBean;
 import com.web.car98.forum.service.TalkService;
+import com.web.car98.member.model.MemberBean;
 import com.web.car98.validator.TalkContentValidator;
 
 @Controller
+@SessionAttributes("LoginOK")
 public class TalkContentController {
 	@Autowired	
 	TalkService talkservice;
@@ -27,7 +27,10 @@ public class TalkContentController {
 	public String talkContent(Model model) {
 			TalkBean talkBean=new TalkBean();
 			model.addAttribute("talkBean",talkBean);
-		
+			MemberBean memberBean=(MemberBean) model.getAttribute("LoginOK");
+			if(memberBean==null) {
+				return "redirect:/login";
+			}
 		
 		return "/forum/talkContent";
 	}
