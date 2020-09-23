@@ -171,18 +171,15 @@ body {
 		<div class="container">
 			<div class="row">
 				<div class="col-12 mt-2">
-					<form:form class="comment"
-						modelAttribute="CommentBean"  method="Post" enctype="multipart/form-data"
+					<form class="comment"
+						action="${pageContext.request.contextPath}/forum/TalkTalkServlet"
 						method="post">
-						
-						<form:textarea id="comments" name="comments" class="" cols="68"
-							rows="5" placeholder="請輸入內容...."  path="Comtext"></form:textarea>
-							<form:errors class="errormsg" path="Comtext" > </form:errors>
+						<textarea id="comments" name="comments" class="" cols="68"
+							rows="5" placeholder="請輸入內容...."></textarea>
 						<input type="file" class="form-control-file"
-							id="exampleFormControlFile1"> 
-					    <input class="float-right"
+							id="exampleFormControlFile1"> <input class="float-right"
 							type="submit" value="送出">
-					</form:form>
+					</form>
 
 				</div>
 			</div>
@@ -208,6 +205,12 @@ body {
 			</ul>
 		</nav>
   <!-- footer -->
-    <jsp:include page="/fragment/footer.jsp"></jsp:include>
+    <div class="footer-bottom  bg-dark text-light">
+     <div class="container-fluid">
+       <p class="pull-left">
+          Copyright@ 2020 by Car98 Group
+      </p>
+    </div>
+  </div>
   </body>
 </html>

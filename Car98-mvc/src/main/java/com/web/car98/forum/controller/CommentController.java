@@ -1,15 +1,7 @@
 package com.web.car98.forum.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,12 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.car98.forum.model.CommentBean;
+import com.web.car98.forum.model.TalkBean;
 import com.web.car98.forum.service.CommentService;
-import com.web.car98.forum.service.impl.CommentServiceImpl;
 import com.web.car98.member.model.MemberBean;
 import com.web.car98.validator.CommentValidator;
 
@@ -38,25 +30,33 @@ public class CommentController {
 	@Autowired
 	CommentValidator commentValidator;
 	
-	@GetMapping("/forum/comment.do")
+	@GetMapping("/talktalk")
 	public String spaceCom(Model model) {
 		CommentBean commentBean=new CommentBean();
-			model.addAttribute("CommentBean",commentBean);
+		    TalkBean talkBean = new TalkBean();
+		    if(commentBean == null) {
+		    	return "redirect:/talktalk";
+		    }
+			model.addAttribute("cbean",commentBean);
+			model.addAttribute("talkBean",talkBean);
 			MemberBean memberbean = (MemberBean)model.getAttribute("LoginOK");
 			if(memberbean==null) {
 				return "redirect:/login";
 			}
 		return "/forum/talktalk";
 	}
-	
 
-	@PostMapping("/forum/comment.do")
+	@PostMapping("/talktalk")
 	public String insertCom(Model model,
 			@ModelAttribute("CommentBean") CommentBean commentBean,
+			@ModelAttribute("talkBean") TalkBean tb,
+			@RequestParam(value="postId",required=false) Integer postId,
+			@RequestParam(value="CommentBean",required=false) 
 			BindingResult bindingResult)
 			 {
-	
-		    Integer postId = null;
+		     int floor = 2;
+	         postId = 1;
+		   
 		    
 		    String[] suppressedFields=bindingResult.getSuppressedFields();
 		    commentValidator.validate(commentBean, bindingResult);
@@ -67,7 +67,9 @@ public class CommentController {
 			commentservice.insertCom(commentBean);
 			List<CommentBean> resultList = new ArrayList<>();
 			resultList = commentservice.selectCom(postId);
+			model.addAttribute("TalkBean",tb);
 			model.addAttribute("CommentBean", resultList);
+			model.addAttribute("floor",floor);
 			return "/forum/talktalk";
 
 	}		

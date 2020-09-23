@@ -35,7 +35,7 @@ public class TalkContentController {
 		return "/forum/talkContent";
 	}
 	
-	@PostMapping("/talkContent")
+	@PostMapping("/talkContent/talktalk")
 	public String addContentForm(Model model,@ModelAttribute("talkBean") TalkBean tb,BindingResult bindingResult) {
 		String[] suppressedFields=bindingResult.getSuppressedFields();
 		talkContentValidator.validate(tb, bindingResult);
