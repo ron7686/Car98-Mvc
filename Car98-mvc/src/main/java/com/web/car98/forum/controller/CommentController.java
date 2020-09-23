@@ -2,12 +2,10 @@ package com.web.car98.forum.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,91 +14,100 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.service.CommentService;
 import com.web.car98.forum.service.impl.CommentServiceImpl;
-import com.web.car98.member.model.LoginBean;
+import com.web.car98.member.model.MemberBean;
+import com.web.car98.validator.CommentValidator;
 
 @Controller
+@SessionAttributes("LoginOK")
 public class CommentController {
-
-	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	CommentService commentservice;
+	
+	@Autowired
+	CommentValidator commentValidator;
+	
+	@GetMapping("/forum/comment.do")
+	public String spaceCom(Model model) {
+		CommentBean commentBean=new CommentBean();
+			model.addAttribute("CommentBean",commentBean);
+			MemberBean memberbean = (MemberBean)model.getAttribute("LoginOK");
+			if(memberbean==null) {
+				return "redirect:/login";
+			}
+		return "/forum/talktalk";
+	}
+	
 
-	@RequestMapping(value = "/forum/comment.do", method = RequestMethod.POST)
-	public String insertCom(Model model, HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		Map<String, String> errorMessage = new HashMap<>();
-		model.addAttribute("ErrorMsgKey", errorMessage);
-		request.setCharacterEncoding("UTF-8");
-		LoginBean loginBean = new LoginBean();
-		loginBean = (LoginBean) model.getAttribute("loginBean");
-		Integer comId = null;
-		String comText = request.getParameter("comments");
-		Integer postId = Integer.parseInt(request.getParameter("postId"));
-		Integer memId = Integer.parseInt(request.getParameter("memId"));
-		Integer comLike = 0;
-		if (comText == null || comText.trim().length() == 0) {
-			errorMessage.put("TextEmptyError", "請輸入內文");
-		}
-		if (errorMessage.isEmpty()) {
-			CommentBean cb = new CommentBean(postId, memId, comText, new Date(), comLike);
-
-			CommentServiceImpl service = new CommentServiceImpl();
-			service.insertCom(cb);
+	@PostMapping("/forum/comment.do")
+	public String insertCom(Model model,
+			@ModelAttribute("CommentBean") CommentBean commentBean,
+			BindingResult bindingResult)
+			 {
+	
+		    Integer postId = null;
+		    
+		    String[] suppressedFields=bindingResult.getSuppressedFields();
+		    commentValidator.validate(commentBean, bindingResult);
+			if(bindingResult.hasErrors()) {
+				return "/forum/talktalk";
+			}
+		
+			commentservice.insertCom(commentBean);
 			List<CommentBean> resultList = new ArrayList<>();
-			resultList = service.selectCom(postId);
+			resultList = commentservice.selectCom(postId);
 			model.addAttribute("CommentBean", resultList);
 			return "/forum/talktalk";
 
-		} else {
+	}		
 
-			return "/forum/talktalk";
-		}
-	}
-
-	@RequestMapping(value = "/forum/updateCom.do", method = RequestMethod.POST)
-	public String updateCom(Model model, HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Map<String, String> errorMessage = new HashMap<>();
-		model.addAttribute("ErrorMsgKey", errorMessage);
-		request.setCharacterEncoding("UTF-8");
-		String comIdStr = request.getParameter("comId");
-		System.out.println(comIdStr);
-		Integer comId = Integer.valueOf(comIdStr);
-		CommentBean commentBean = null;
-		CommentServiceImpl service = new CommentServiceImpl();
-		
-		int n = 0;
-		n = service.updateComByPk(commentBean);
-		if(n != 0) {
-			return "/forum/talktalk";
-		}else {
-			
-		}
-		return "/forum/talktalk";
-
-	}
-
-	@RequestMapping(value = "/forum/deleteCom.do", method = RequestMethod.POST)
-	public String deleteCom(Model model, HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Map<String, String> errorMessage = new HashMap<>();
-		model.addAttribute("ErrorMsgKey", errorMessage);
-		request.setCharacterEncoding("UTF-8");
-		String comIdStr = request.getParameter("comId");
-		Integer comId = Integer.valueOf(comIdStr);
-
-		CommentServiceImpl service = new CommentServiceImpl();
-		service.deleteComByPk(comId);
-		return "/forum/talktalk";
-	}
+//	@RequestMapping(value = "/forum/updateCom.do", method = RequestMethod.POST)
+//	public String updateCom(Model model, HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//		HttpSession session = request.getSession();
+//		Map<String, String> errorMessage = new HashMap<>();
+//		model.addAttribute("ErrorMsgKey", errorMessage);
+//		request.setCharacterEncoding("UTF-8");
+//		String comIdStr = request.getParameter("comId");
+//		System.out.println(comIdStr);
+//		Integer comId = Integer.valueOf(comIdStr);
+//		CommentBean commentBean = null;
+//		CommentServiceImpl service = new CommentServiceImpl();
+//		
+//		int n = 0;
+//		n = service.updateComByPk(commentBean);
+//		if(n != 0) {
+//			return "/forum/talktalk";
+//		}else {
+//			
+//		}
+//		return "/forum/talktalk";
+//
+//	}
+//
+//	@RequestMapping(value = "/forum/deleteCom.do", method = RequestMethod.POST)
+//	public String deleteCom(Model model, HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//		HttpSession session = request.getSession();
+//		Map<String, String> errorMessage = new HashMap<>();
+//		model.addAttribute("ErrorMsgKey", errorMessage);
+//		request.setCharacterEncoding("UTF-8");
+//		String comIdStr = request.getParameter("comId");
+//		Integer comId = Integer.valueOf(comIdStr);
+//
+//		CommentServiceImpl service = new CommentServiceImpl();
+//		service.deleteComByPk(comId);
+//		return "/forum/talktalk";
+//	}
 }

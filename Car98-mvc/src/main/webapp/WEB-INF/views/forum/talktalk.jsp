@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <% String path=request.getContextPath(); %>
 <!DOCTYPE html>
 <html lang="en">
@@ -170,15 +171,18 @@ body {
 		<div class="container">
 			<div class="row">
 				<div class="col-12 mt-2">
-					<form class="comment"
-						action="${pageContext.request.contextPath}/forum/TalkTalkServlet"
+					<form:form class="comment"
+						modelAttribute="CommentBean"  method="Post" enctype="multipart/form-data"
 						method="post">
-						<textarea id="comments" name="comments" class="" cols="68"
-							rows="5" placeholder="請輸入內容...."></textarea>
+						
+						<form:textarea id="comments" name="comments" class="" cols="68"
+							rows="5" placeholder="請輸入內容...."  path="Comtext"></form:textarea>
+							<form:errors class="errormsg" path="Comtext" > </form:errors>
 						<input type="file" class="form-control-file"
-							id="exampleFormControlFile1"> <input class="float-right"
+							id="exampleFormControlFile1"> 
+					    <input class="float-right"
 							type="submit" value="送出">
-					</form>
+					</form:form>
 
 				</div>
 			</div>

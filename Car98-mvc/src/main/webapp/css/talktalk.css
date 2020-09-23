@@ -90,3 +90,6 @@
 textarea{
     max-width:100%;
 }
+.errormsg{
+	color:red;
+}
