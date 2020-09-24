@@ -71,6 +71,7 @@ public class ProductDaoImpl implements ProductDao {
 		BidBean bid = session.get(BidBean.class, bidId);
 		if (bid != null) {
 			bid.setBidItemBean(null);
+			bid.setMemberBean(null);
 			session.delete(bid);
 		}
 	}

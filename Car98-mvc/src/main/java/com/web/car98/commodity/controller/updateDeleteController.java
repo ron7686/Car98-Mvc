@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.web.car98.commodity.model.BidBean;
@@ -29,6 +30,7 @@ import com.web.car98.commodity.validators.BidValidator;
 
 @Controller
 @RequestMapping("/comm")
+@SessionAttributes("LoginOK")
 public class updateDeleteController {
 	@Autowired
 	ProductService service;
@@ -86,6 +88,7 @@ public class updateDeleteController {
 			}
 			return "comm/updateProduct";
 		}
+
 		Timestamp adminTime = new Timestamp(System.currentTimeMillis());
 		bb.setBidTime(adminTime);
 

@@ -62,9 +62,13 @@ public class ProductController {
 		return "comm/products";
 	}
 
-	// 顯示所有商品資料新增用
+	// 顯示所有商品資料修改刪除用
 	@GetMapping("/showUpdate")
 	public String list1(Model model) {
+		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
+		if (memberBean == null) {
+			return "redirect:/login";
+		}
 		model.addAttribute("bids", service.getAllProducts());
 		return "comm/bids/bids";
 	}
