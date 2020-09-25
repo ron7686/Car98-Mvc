@@ -3,6 +3,9 @@ package com.web.car98.member.dao.impl;
 import java.sql.Connection;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,10 @@ import org.springframework.stereotype.Repository;
 
 import com.web.car98.member.dao.MemberDao;
 import com.web.car98.member.model.MemberBean;
+import com.web.car98.member.ude.MemberNotFoundException;
+import com.web.car98.order.model.OrderBean;
+
+
 
 // 本類別使用為標準的JDBC技術來存取資料庫。
 @Repository
@@ -105,5 +112,35 @@ public class MemberDaoImpl_Spring implements MemberDao {
 	@Override
 	public void setConnection(Connection conn) {
 		throw new RuntimeException("MemberDaoImpl_Hibernate 類別不支援setConnection()方法");
+	}
+	//功能：更新客戶的未付款訂購金額。
+	@Override
+	public void updateUnpaidOrderAmount(OrderBean ob) {
+		double currentAmount = ob.getTotalPrice(); // 取出該訂單的總金額
+		Double unpaidAmount = 0.0;
+		MemberBean mb = null;
+		// 讀取Member表格中，該客戶的未付款金額(unpaid_amount)
+		String hql = "FROM MemberBean m WHERE m.memId = :mid";
+		Session session = factory.getCurrentSession();
+		
+		try {
+			mb = (MemberBean)session.createQuery(hql)
+								.setParameter("mid", ob.getMemId())
+								.getSingleResult();
+		} catch(NoResultException ex) {
+			
+			throw new MemberNotFoundException("會員:" + ob.getMemId() + "找不到");
+		} catch(NonUniqueResultException ex) {
+			;
+		} 	
+		unpaidAmount = mb.getUnpaid_amount();
+		
+		// 更新Member表格之未付款餘額欄位 unpaid_amount
+		String hql2 = "UPDATE MemberBean m SET m.unpaid_amount = m.unpaid_amount + :amt " 
+		            + " WHERE memId = :mid";
+		session.createQuery(hql2)
+				.setParameter("amt", currentAmount)
+				.setParameter("mid", ob.getMemId())
+				.executeUpdate();
 	}
 }

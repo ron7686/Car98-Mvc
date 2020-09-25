@@ -41,6 +41,17 @@ public class OrderItemBean {
 		this.orderBean = orderBean;
 	}
 
+	public OrderItemBean(Integer orderItemId, Integer quantity, Integer unitPrice, Integer bidId, String bidName,
+			String sellMan) {
+		super();
+		this.orderItemId = orderItemId;
+		this.quantity = quantity;
+		this.unitPrice = unitPrice;
+		this.bidId = bidId;
+		this.bidName = bidName;
+		this.sellMan = sellMan;
+	}
+
 
 
 	public Integer getOrderItemId() {

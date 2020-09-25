@@ -37,7 +37,7 @@ public class MemberBean implements Serializable {
 	private Integer levels;
 	private Timestamp meCreate;
 	private Timestamp loginTime;
-	
+	Double unpaid_amount;
 	@Transient
 	MultipartFile memberMultipartFile;
 
@@ -64,6 +64,28 @@ public class MemberBean implements Serializable {
 		this.loginTime = loginTime;
 	}
 	
+	public MemberBean(Integer memId, String email, String password, String password1, String name, String id,
+			String phone, Date birth, String sex, Blob headPic, String fileName, Integer levels, Timestamp meCreate,
+			Timestamp loginTime, Double unpaid_amount, MultipartFile memberMultipartFile) {
+		super();
+		this.memId = memId;
+		this.email = email;
+		this.password = password;
+		this.password1 = password1;
+		this.name = name;
+		this.id = id;
+		this.phone = phone;
+		this.birth = birth;
+		this.sex = sex;
+		this.headPic = headPic;
+		this.fileName = fileName;
+		this.levels = levels;
+		this.meCreate = meCreate;
+		this.loginTime = loginTime;
+		this.unpaid_amount = unpaid_amount;
+		this.memberMultipartFile = memberMultipartFile;
+	}
+
 	public MemberBean(Integer memId, String email, String password, String password1, String name, String id, String phone, Date birth,
 			String sex, Blob headPic, String fileName,Integer levels,Timestamp loginTime) {
 		super();
@@ -81,10 +103,14 @@ public class MemberBean implements Serializable {
 		this.levels = levels;
 		this.loginTime = loginTime;
 	}
-	
-	
-	
-	
+
+	public Double getUnpaid_amount() {
+		return unpaid_amount;
+	}
+
+	public void setUnpaid_amount(Double unpaid_amount) {
+		this.unpaid_amount = unpaid_amount;
+	}
 
 	public Integer getMemId() {
 		return memId;

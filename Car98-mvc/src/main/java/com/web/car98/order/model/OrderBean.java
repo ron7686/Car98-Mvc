@@ -18,7 +18,7 @@ public class OrderBean {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	Integer orderNo;
-	String 	membId;
+	String 	memId;
 	String  invoiceTitle;
 	String	Address; 
 	Date  buyDay;
@@ -32,11 +32,11 @@ public class OrderBean {
 		super();
 	}
 
-	public OrderBean(Integer orderNo, String membId, String invoiceTitle, String address, Date buyDay, String cancelTag,
+	public OrderBean(Integer orderNo, String memId, String invoiceTitle, String address, Date buyDay, String cancelTag,
 			Double totalPrice, Set<OrderItemBean> items) {
 		super();
 		this.orderNo = orderNo;
-		this.membId = membId;
+		this.memId = memId;
 		this.invoiceTitle = invoiceTitle;
 		Address = address;
 		this.buyDay = buyDay;
@@ -63,12 +63,12 @@ public class OrderBean {
 		Address = address;
 	}
 
-	public String getMembId() {
-		return membId;
+	public String getMemId() {
+		return memId;
 	}
 
-	public void setMembId(String membId) {
-		this.membId = membId;
+	public void setMemId(String memId) {
+		this.memId = memId;
 	}
 
 	public String getInvoiceTitle() {
@@ -113,7 +113,7 @@ public class OrderBean {
 
 	@Override
 	public String toString() {
-		return "OrderBean [orderNo=" + orderNo + ", membId=" + membId + ", invoiceTitle=" + invoiceTitle + ", Address="
+		return "OrderBean [orderNo=" + orderNo + ", memId=" + memId + ", invoiceTitle=" + invoiceTitle + ", Address="
 				+ Address + ", buyDay=" + buyDay + ", cancelTag=" + cancelTag + ", totalPrice=" + totalPrice
 				+ ", items=" + items + "]";
 	}

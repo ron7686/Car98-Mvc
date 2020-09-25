@@ -3,6 +3,9 @@ package com.web.car98.member.dao;
 import java.sql.Connection;
 
 import com.web.car98.member.model.MemberBean;
+import com.web.car98.order.model.OrderBean;
+
+
 
 public interface MemberDao {
 	
@@ -19,4 +22,6 @@ public interface MemberDao {
 	public int updateUserData(MemberBean mb);
 
 	public void setConnection(Connection con);
+	
+	void updateUnpaidOrderAmount(OrderBean ob);
 }
