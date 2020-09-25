@@ -48,6 +48,7 @@ public class CommentDaoImpl implements CommentDao {
 		return n;
 	}
 	
+	@Override
 	public TalkBean getTalkBeanById(int id) {
 		Session session = factory.getCurrentSession();
 		TalkBean tb =session.get(TalkBean.class,id);

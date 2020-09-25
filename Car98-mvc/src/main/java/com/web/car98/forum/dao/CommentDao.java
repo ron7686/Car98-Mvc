@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.web.car98.forum.model.CommentBean;
+import com.web.car98.forum.model.TalkBean;
 
 
 
@@ -23,6 +24,6 @@ public interface CommentDao {
 
 	CommentBean selectComByPk(Integer comId);
     
-	
+	TalkBean getTalkBeanById(int id);
 }
 

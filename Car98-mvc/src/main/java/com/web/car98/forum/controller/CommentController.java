@@ -40,12 +40,8 @@ public class CommentController {
 		CommentBean cb= new CommentBean();
 		model.addAttribute("commentBean",cb);
 		model.addAttribute("TalkBean",ts.selectOne(postId));
-		try {
-			model.addAttribute("CommentBean",commentservice.selectCom(postId));
-		} catch (Exception e) {
-			e.printStackTrace();
-			
-		}
+		model.addAttribute("CommentBean",commentservice.selectCom(postId));
+		
 		return "/forum/talktalk";
 	}
 
@@ -53,18 +49,12 @@ public class CommentController {
 	public String insertCom(Model model,
 			@ModelAttribute("commentBean") CommentBean cb)
 			{
-		
+			String pID=String.valueOf(cb.getPostId());
 			commentservice.insertCom(cb);
-			List<CommentBean> resultList = new ArrayList<>();
-			try {
-				resultList = commentservice.selectCom(cb.getPostId());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 			model.addAttribute("TalkBean",ts.selectOne(cb.getPostId()));
-			model.addAttribute("CommentBean", resultList);
+			model.addAttribute("CommentBean", commentservice.selectCom(cb.getPostId()));
 			//model.addAttribute("floor",floor);
-			return "/forum/talktalk";
+			return "redirect:/talktalk?postID="+pID;
 
 	}		
 
