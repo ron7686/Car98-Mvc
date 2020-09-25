@@ -173,7 +173,6 @@ body {
 				<div class="col-12 mt-2">
 					<form:form class="comment"
 						method="POST" modelAttribute="commentBean">
-						<form:input style="display:none" path="postId" value="${TalkBean.postID}"/>
 						<form:textarea id="comments" path="comText" class="" cols="68"
 							rows="5" placeholder="請輸入內容...."/> 
 						<input type="file" class="form-control-file"

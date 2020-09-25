@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.TalkBean;
@@ -36,10 +37,12 @@ public class CommentController {
 	@SuppressWarnings("unused")
 	@GetMapping("/talktalk")
 	public String spaceCom(Model model,
+			RedirectAttributes ra,
 		@RequestParam("postID") Integer postId) {
 		CommentBean cb= new CommentBean();
 		model.addAttribute("commentBean",cb);
 		model.addAttribute("TalkBean",ts.selectOne(postId));
+		//ra.addFlashAttribute("TalkBean",ts.selectOne(postId));
 		model.addAttribute("CommentBean",commentservice.selectCom(postId));
 		
 		return "/forum/talktalk";
@@ -47,12 +50,13 @@ public class CommentController {
 
 	@PostMapping("/talktalk")
 	public String insertCom(Model model,
+			@ModelAttribute("TalkBean") TalkBean tb,
 			@ModelAttribute("commentBean") CommentBean cb)
 			{
-			String pID=String.valueOf(cb.getPostId());
+			String pID=String.valueOf(tb.getPostID());
+			cb.setPostId(tb.getPostID());
 			commentservice.insertCom(cb);
-			model.addAttribute("TalkBean",ts.selectOne(cb.getPostId()));
-			model.addAttribute("CommentBean", commentservice.selectCom(cb.getPostId()));
+			model.addAttribute("CommentBean", commentservice.selectCom(tb.getPostID()));
 			//model.addAttribute("floor",floor);
 			return "redirect:/talktalk?postID="+pID;
 
