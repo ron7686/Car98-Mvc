@@ -60,7 +60,6 @@ body {
 
 		<div class="container text-white main">
 			<div class="row">
-				
 				<div class="col-12">
 					<ul class="texttitle">
 						<li class="mx-auto"><h2>發表新文章</h2></li>

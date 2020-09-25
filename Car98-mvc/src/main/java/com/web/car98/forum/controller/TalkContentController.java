@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.car98.forum.model.TalkBean;
@@ -46,7 +47,7 @@ public class TalkContentController {
 		}
 		talkservice.persist(tb);
 		model.addAttribute("TalkBean", tb);
-		return "/forum/talktalk";
+		return "redirect:/forum/talktop.do";
 		
 	}
 	
