@@ -89,7 +89,6 @@ public class TalkDaoImpl implements TalkDao  {
 	
 	@Override
 	public TalkBean selectOne(int postID) {
-
 		TalkBean tb = new TalkBean();
 //		Transaction tx = null;
 		String hql = "FROM TalkBean t where t.PostID=:postID";

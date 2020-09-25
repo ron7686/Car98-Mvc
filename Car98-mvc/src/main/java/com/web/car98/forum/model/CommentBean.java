@@ -3,15 +3,19 @@ package com.web.car98.forum.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name = "Comment")
+@Table(name = "comment")
 public class CommentBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -20,6 +24,7 @@ public class CommentBean implements Serializable{
     private Integer comId;
 	
 	@Column(name="PostID")
+	@Transient
     private Integer postId;
 	@Column(name="MemID")
     private Integer memId;
@@ -29,6 +34,9 @@ public class CommentBean implements Serializable{
     private Date comTime;
 	@Column(name="ComLike")
     private Integer comLike;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "PostID")
+	private TalkBean talkBean;
 	
 	public CommentBean() {
 		super();
@@ -41,7 +49,12 @@ public class CommentBean implements Serializable{
 		this.comLike = comLike;
 	} 
 	
-    
+	public TalkBean getTalkBean() {
+		return talkBean;
+	}
+	public void setTalkBean(TalkBean talkBean) {
+		this.talkBean = talkBean;
+	}
 	public Integer getComId() {
 		return comId;
 	}

@@ -2,12 +2,15 @@ package com.web.car98.forum.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name = "talk")
@@ -32,9 +35,10 @@ public class TalkBean implements Serializable {
 	private Integer PostHate;
 	@Column(name="PostCom")
 	private Integer PostCom;
-	
 	@Column(name="PostType")
 	private Integer PostType;
+	@OneToMany(mappedBy="talkBean")
+	private List<CommentBean> comment = new ArrayList<>();
 	
 	public TalkBean() {
 		super();
@@ -44,6 +48,19 @@ public class TalkBean implements Serializable {
 		PostID = postID;
 		PostTitle = postTitle;
 		PostText = postText;
+	}
+	
+	public Integer getPostType() {
+		return PostType;
+	}
+	public void setPostType(Integer postType) {
+		PostType = postType;
+	}
+	public List<CommentBean> getComment() {
+		return comment;
+	}
+	public void setComment(List<CommentBean> comment) {
+		this.comment = comment;
 	}
 	public Integer getPostID() {
 		return PostID;

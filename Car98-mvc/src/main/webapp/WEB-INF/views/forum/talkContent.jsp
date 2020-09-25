@@ -113,7 +113,7 @@ body {
 				<!-- 內文輸入 -->
 				<div class="col-9">
 
-					<form:form class="mt-3" modelAttribute="talkBean" action="talkContent/talktalk"  method="Post" enctype="multipart/form-data">
+					<form:form class="mt-3" modelAttribute="talkBean"  method="Post" enctype="multipart/form-data">
 
 						<form:input class="title" path="PostTitle" type="text" name="title" style="width: 100%"
 							placeholder="請輸入文章標題......." value="${param.title}" />

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.TalkBean;
 import com.web.car98.forum.service.CommentService;
+import com.web.car98.forum.service.TalkService;
 import com.web.car98.member.model.MemberBean;
 import com.web.car98.validator.CommentValidator;
 
@@ -29,47 +30,40 @@ public class CommentController {
 	
 	@Autowired
 	CommentValidator commentValidator;
+	@Autowired
+	TalkService ts;
 	
+	@SuppressWarnings("unused")
 	@GetMapping("/talktalk")
-	public String spaceCom(Model model) {
-		CommentBean commentBean=new CommentBean();
-		    TalkBean talkBean = new TalkBean();
-		    if(commentBean == null) {
-		    	return "redirect:/talktalk";
-		    }
-			model.addAttribute("cbean",commentBean);
-			model.addAttribute("talkBean",talkBean);
-			MemberBean memberbean = (MemberBean)model.getAttribute("LoginOK");
-			if(memberbean==null) {
-				return "redirect:/login";
-			}
+	public String spaceCom(Model model,
+		@RequestParam("postID") Integer postId) {
+		CommentBean cb= new CommentBean();
+		model.addAttribute("commentBean",cb);
+		model.addAttribute("TalkBean",ts.selectOne(postId));
+		try {
+			model.addAttribute("CommentBean",commentservice.selectCom(postId));
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
 		return "/forum/talktalk";
 	}
 
 	@PostMapping("/talktalk")
 	public String insertCom(Model model,
-			@ModelAttribute("CommentBean") CommentBean commentBean,
-			@ModelAttribute("talkBean") TalkBean tb,
-			@RequestParam(value="postId",required=false) Integer postId,
-			@RequestParam(value="CommentBean",required=false) 
-			BindingResult bindingResult)
-			 {
-		     int floor = 2;
-	         postId = 1;
-		   
-		    
-		    String[] suppressedFields=bindingResult.getSuppressedFields();
-		    commentValidator.validate(commentBean, bindingResult);
-			if(bindingResult.hasErrors()) {
-				return "/forum/talktalk";
-			}
+			@ModelAttribute("commentBean") CommentBean cb)
+			{
 		
-			commentservice.insertCom(commentBean);
+			commentservice.insertCom(cb);
 			List<CommentBean> resultList = new ArrayList<>();
-			resultList = commentservice.selectCom(postId);
-			model.addAttribute("TalkBean",tb);
+			try {
+				resultList = commentservice.selectCom(cb.getPostId());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			model.addAttribute("TalkBean",ts.selectOne(cb.getPostId()));
 			model.addAttribute("CommentBean", resultList);
-			model.addAttribute("floor",floor);
+			//model.addAttribute("floor",floor);
 			return "/forum/talktalk";
 
 	}		

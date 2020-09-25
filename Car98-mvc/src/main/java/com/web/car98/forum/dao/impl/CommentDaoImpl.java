@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.web.car98.forum.dao.CommentDao;
 import com.web.car98.forum.model.CommentBean;
+import com.web.car98.forum.model.TalkBean;
 @Repository
 public class CommentDaoImpl implements CommentDao {
 @Autowired
@@ -37,12 +38,20 @@ public class CommentDaoImpl implements CommentDao {
 	}
 
 	@Override
-	public int insertCom(CommentBean commentBean) {
+	public int insertCom(CommentBean cb) {
 		Session session = factory.getCurrentSession();
 		int n = 0;
-		session.save(commentBean);
+		TalkBean tb=getTalkBeanById(cb.getPostId());
+		cb.setTalkBean(tb);
+		session.save(cb);
 		n++;
 		return n;
+	}
+	
+	public TalkBean getTalkBeanById(int id) {
+		Session session = factory.getCurrentSession();
+		TalkBean tb =session.get(TalkBean.class,id);
+		return tb;
 	}
 
 	@Override
@@ -50,8 +59,10 @@ public class CommentDaoImpl implements CommentDao {
 	public List<CommentBean> selectCom(Integer postId) {
 		Session session = factory.getCurrentSession();
 		List<CommentBean> list = null;
-		String hql = "FROM CommentBean";
-		list = session.createQuery(hql).getResultList();
+		String hql = "FROM CommentBean c where c.talkBean.PostID=:p";
+		
+		list = session.createQuery(hql).setParameter("p", postId).getResultList();
+		
 		return list;
 	}
 
