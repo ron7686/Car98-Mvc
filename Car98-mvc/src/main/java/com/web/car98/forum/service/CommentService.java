@@ -20,4 +20,8 @@ public interface CommentService {
 	int deleteComByPk(Integer comId);
 
 	CommentBean selectComByPk(Integer comId);
+
+	List<CommentBean> getPageCom(Integer page, Integer posId);
+
+	int getLastpage(Integer postId);
 }

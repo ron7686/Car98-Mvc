@@ -124,6 +124,7 @@
                     </ul>
                   </nav>
             </div>
+            
             <div class="col-12 ">
                 <ul class="classification ">
                     <li class="classification-item "><a class="classification-item-a" href="#">全部</a></li>
@@ -168,7 +169,7 @@
 				  <tr>
                         <td class="sort "><a href=""><i class="fab fa-discourse"></i>討論</a></td>
                         <td class="pic"><img src="https://picsum.photos/id/231/100/50" alt=""></td>
-                        <th class="title itemtitle"><a class="subtitle" href="${pageContext.request.contextPath}/talktalk?postID=${aBean.postID}">${aBean.postTitle}</a></th>
+                        <th class="title itemtitle"><a class="subtitle" href="${pageContext.request.contextPath}/talktalk?postID=${aBean.postID}&pageNo=1">${aBean.postTitle}</a></th>
                         <td class="author"><a class="talkname" href="#">RonLee</a><br>2020/09/20 </td>
                         <td class="respon"><a class="subrespon" href="">131</a><br>15443</td>
                         <td class="lastupdate"><a class="talkname" href="">WayneChen</a><br><a  class="time" href="">昨天10:43pm</a></td>

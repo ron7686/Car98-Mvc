@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <% String path=request.getContextPath(); %>
@@ -70,25 +70,39 @@ body {
 	<jsp:include page="/fragment/topIndex.jsp" />
 	<!-- page bar -->
 	<br>
-	<nav class="">
-		<ul class="pagination pagination-sm justify-content-center mb-2">
-			<li class="page-item"><a class="page-link" href="#"
-				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-			</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">4</a></li>
-			<li class="page-item"><a class="page-link" href="#">5</a></li>
-			<li class="page-item"><a class="page-link" href="#"
-				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-			</a></li>
-		</ul>
-		<br>
-	</nav>
+	<div class="col-12 publish ">
+		<nav class="page">
+			<ul class="pagination justify-content-end ">
+	
+				<c:if test="${pageNo > 3}">
+					<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/talktalk?postID=${TalkBean.postID}&pageNo=1">1</a></li>
+					<li class="page-item mt-2"><a href=""><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i></a></li>
+				</c:if>
+				<c:if test="${pageNo > 2}">
+					<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/talktalk?postID=${TalkBean.postID}&pageNo=${pageNo-2}">${pageNo-2}</a></li>
+				</c:if>
+				<c:if test="${pageNo > 1}">
+					<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/talktalk?postID=${TalkBean.postID}&pageNo=${pageNo-1}">${pageNo-1}</a></li>
+				</c:if>
+				<li class="page-item active"><a class="page-link" href="#">${pageNo}</a></li>
+				<c:if test="${pageNo < lastPage}">
+					<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/talktalk?postID=${TalkBean.postID}&pageNo=${pageNo+1}">${pageNo+1}</a></li>
+				</c:if>
+				<c:if test="${pageNo+1 < lastPage}">
+					<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/talktalk?postID=${TalkBean.postID}&pageNo=${pageNo+2}">${pageNo+2}</a></li>
+				</c:if>
+				<c:if test="${pageNo+2 < lastPage}">
+					<li class="page-item mt-2"><a href=""><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i></a></li>
+					<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/talktalk?postID=${TalkBean.postID}&pageNo=${lastPage}">${lastPage}</a></li>
+				</c:if>
+			  </ul>
+		</nav>
+	</div>
+	
 	<!-- 文章標題 -->
 	<div class="container">
-		<div class="row">
+		<c:if test="${pageNo <2}" >
+	  	<div class="row">
 			<div class="col-12 text-white">${TalkBean.postTitle}</div>
 			<!-- 作者資訊 -->
 			<div class="col-2">
@@ -98,6 +112,7 @@ body {
 
 			</div>
 			<!-- 文章內容 -->
+			
 			<div class="col-10">
 				<ul class="article-information">
 					<li class="floor">樓主<br>
@@ -127,13 +142,13 @@ body {
 				</div>
 			</div>
 		</div>
+	</c:if>
 	</div>
 	<!-- 留言內容 -->
 	<c:forEach var="comment" items="${CommentBean}">
 		<div class="container">
 			<div class="row">
-<%-- 				<div class="col-12 text-white">${TalkBean.postTitle}</div> --%>
-			<!-- 作者資訊 -->
+     		<!-- 作者資訊 -->
 			<div class="col-2">
 				<br> <a href="#"><img class="photo" src="<%=path %>/image/喬巴1.jpg"></a>
 				<div class="author">多尼多尼喬巴</div>
@@ -158,7 +173,8 @@ body {
 						<li id="like1" button class="fas fa-thumbs-up fa-2x" type="button">12</li>
 						<li id="hate1" button class="fas fa-thumbs-down fa-2x"
 							type="button">1</li>
-						<button id="updateButton" >編輯</button>
+						<!-- <button id="updateButton" >編輯</button> -->
+						<a id="updateButton" href="${pageContext.request.contextPath}/forum/updateCom.do?comId=${comment.comId}">編輯</a>
 						<a id="deleteButton" href="${pageContext.request.contextPath}/forum/deleteCom.do?comId=${comment.comId}">刪除</a>
 					</ul>
 				</div>
@@ -188,7 +204,7 @@ body {
 
 
 	<!-- page bar -->
-		<nav class="">
+		<!-- <nav class="">
 			<ul class="pagination pagination-sm justify-content-center mb-2">
 				<li class="page-item"><a class="page-link" href="#"
 					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
@@ -202,7 +218,36 @@ body {
 					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 				</a></li>
 			</ul>
-		</nav>
+		</nav> -->
+		<div class="col-12 publish ">
+			<nav class="page">
+				<ul class="pagination justify-content-end ">
+		
+					<c:if test="${pageNo > 3}">
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/talktalk?postID=${TalkBean.postID}&pageNo=1">1</a></li>
+						<li class="page-item mt-2"><a href=""><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i></a></li>
+					</c:if>
+					<c:if test="${pageNo > 2}">
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/talktalk?postID=${TalkBean.postID}&pageNo=${pageNo-2}">${pageNo-2}</a></li>
+					</c:if>
+					<c:if test="${pageNo > 1}">
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/talktalk?postID=${TalkBean.postID}&pageNo=${pageNo-1}">${pageNo-1}</a></li>
+					</c:if>
+					<li class="page-item active"><a class="page-link" href="#">${pageNo}</a></li>
+					<c:if test="${pageNo < lastPage}">
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/talktalk?postID=${TalkBean.postID}&pageNo=${pageNo+1}">${pageNo+1}</a></li>
+					</c:if>
+					<c:if test="${pageNo+1 < lastPage}">
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/talktalk?postID=${TalkBean.postID}&pageNo=${pageNo+2}">${pageNo+2}</a></li>
+					</c:if>
+					<c:if test="${pageNo+2 < lastPage}">
+						<li class="page-item mt-2"><a href=""><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i></a></li>
+						<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/talktalk?postID=${TalkBean.postID}&pageNo=${lastPage}">${lastPage}</a></li>
+					</c:if>
+				  </ul>
+			</nav>
+		</div>
+		
   <!-- footer -->
     <div class="footer-bottom  bg-dark text-light">
      <div class="container-fluid">

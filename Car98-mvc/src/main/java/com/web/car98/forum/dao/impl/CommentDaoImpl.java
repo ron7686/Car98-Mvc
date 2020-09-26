@@ -1,5 +1,6 @@
 package com.web.car98.forum.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +14,11 @@ import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.TalkBean;
 @Repository
 public class CommentDaoImpl implements CommentDao {
-@Autowired
+	
+	private int pageNo = 1; // 存放目前顯示頁面的編號
+	private int onepage=5;  // 每頁顯示5則資料
+	
+    @Autowired
 	SessionFactory factory;
 
 	public CommentDaoImpl() {
@@ -106,5 +111,26 @@ public class CommentDaoImpl implements CommentDao {
 		return commentbean;
 	}
 	
+	@Override
+	public List<CommentBean> getPage(Integer page,Integer postId){
+		int getpage=(page-1)*onepage;
+		List<CommentBean> li = selectCom(postId);
+		List<CommentBean> lipage=new ArrayList<>();
+		for(int i=getpage;i<getpage+onepage&&i<li.size();i++) {
+			lipage.add(li.get(i));
+		}
+		return lipage;
+	}
+
+	@Override
+	public int getLastpage(Integer postId) {
+		int lastpage;
+		int page;
+		List<CommentBean> li = selectCom(postId);
+		lastpage=li.size()/onepage;
+		page=li.size()%onepage;
+		if(page>0)lastpage++;
+		return lastpage;
+	}
 
 }

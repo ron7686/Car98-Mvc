@@ -25,5 +25,9 @@ public interface CommentDao {
 	CommentBean selectComByPk(Integer comId);
     
 	TalkBean getTalkBeanById(int id);
+
+	List<CommentBean> getPage(Integer page, Integer postId);
+
+	int getLastpage(Integer postId);
 }
 
