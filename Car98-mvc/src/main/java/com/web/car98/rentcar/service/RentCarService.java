@@ -9,13 +9,11 @@ public interface RentCarService {
 
 	Collection<RentCarBean> queryStoreData();
 	
-	public List<RentCarBean> getAllRentCars();
+	public Collection<RentCarBean> getAllRentCars();
 
 	public RentCarBean getRentCar();
 	
-//	public RentCarBean queryRentCarData(Integer rentId, 
-//	String store, 
-//	String city, 
-//	String district,
-//	String street);
+	public List<RentCarBean> getRentCarsByDist(String city , String district);
+	
+	public List<RentCarBean> showCityDistMenu();
 }

@@ -1,5 +1,6 @@
 package com.web.car98.rentcar.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,11 +28,11 @@ public class RentCarDaoImpl implements RentCarDao {
 	}
 	
 	@Override
-	public List<RentCarBean> getAllRentCars() {		//取得所有租車資料
+	public Collection<RentCarBean> getAllRentCars() {		//取得所有租車資料
 		String hql = "FROM RentCarBean";
 		Session session = factory.getCurrentSession();
-		List<RentCarBean> rentCarBean = session.createQuery(hql).list();
-		return rentCarBean;	
+		Collection<RentCarBean> rentCarBean = session.createQuery(hql).getResultList();
+		return rentCarBean;
 	}
 	
 	@Override
@@ -42,17 +43,29 @@ public class RentCarDaoImpl implements RentCarDao {
 		return rentcarbean;
 	}
 
-//	@Override
-//	public List<RentCarBean> getRentCarByDistrict(String district) {	//取得符合地區的資料(經過使用者篩選)
-//		String hql = "FROM RentCarBean WHERE district = :district";
-//		Session session = factory.getCurrentSession();
-//		List<RentCarBean> rentcarbean = session.createQuery(hql).list();
-//		return rentcarbean;
-//	}
+	@Override
+	public List<RentCarBean> getRentCarsByDist(String city , String district) {	//取得符合地區的資料(經過使用者篩選)
+		String hql = "FROM RentCarBean WHERE city = :city AND district = :district";
+		Session session = factory.getCurrentSession();
+		List<RentCarBean> rentcarbean = session.createQuery(hql)
+											   .setParameter("city", city)
+				                               .setParameter("district", district)
+				                               .getResultList();
+		return rentcarbean;
+	}
 
+	@Override
+//	建立城市-區(第一個下拉式)選單
+	public List<RentCarBean> showCityDistMenu() {
+		String hql = "FROM RentCarBean GROUP BY city , district";
+		Session session = factory.getCurrentSession();
+		List<RentCarBean> rentcarbean = new ArrayList<>();
+		rentcarbean = session.createQuery(hql).getResultList();
+		return rentcarbean;
+	}	
+	
 	@Override
 	public RentCarBean getRentCar(Integer rentId) {
 		return null;
-	}	
-	
+	}
 }

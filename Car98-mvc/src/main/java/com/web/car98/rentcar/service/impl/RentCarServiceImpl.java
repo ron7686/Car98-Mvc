@@ -25,8 +25,8 @@ public class RentCarServiceImpl implements RentCarService{
 	
 	@Transactional
 	@Override
-	public List<RentCarBean> getAllRentCars() {	
-		List<RentCarBean> rentCarBean = null;
+	public Collection<RentCarBean> getAllRentCars() {	
+		Collection<RentCarBean> rentCarBean = null;
 		rentCarBean = dao.getAllRentCars();
 		return rentCarBean;
 	}
@@ -38,4 +38,18 @@ public class RentCarServiceImpl implements RentCarService{
 		rentcarbean = dao.getRentCar();
 		return rentcarbean;
 	}
+	
+	@Transactional
+	@Override
+	public List<RentCarBean> getRentCarsByDist(String city , String district) {	//取得符合地區的資料(經過使用者篩選)
+		List<RentCarBean> rentcarbean = null;
+		rentcarbean = dao.getRentCarsByDist(city, district);
+		return rentcarbean;
+	}
+	
+	@Transactional
+	@Override
+	public List<RentCarBean> showCityDistMenu(){
+		return dao.showCityDistMenu();
+	};
 }
