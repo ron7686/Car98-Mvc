@@ -1,0 +1,137 @@
+
+
+
+
+
+
+.nickname {
+  /* border: 1px solid red; */
+  margin-left: -15px;
+}
+.psw{
+    margin-left: -15px;
+}
+
+
+
+#tab-demo > ul {
+  display: block;
+  margin: 0;
+  
+  list-style-type:none;
+    margin:0px;
+}
+.tab-title {
+  list-style: none;
+}
+#tab-demo > ul > li {
+  display: inline-block;
+  /* vertical-align:top; */
+  text-align: center;
+  font-family: "微軟正黑體";
+  /* margin: 0 -1px -1px 0; */
+  margin: auto;
+  /* border:1px solid #BCBCBC;  */
+  height: 35px;
+  /* line-height: 25px; */
+  background: rgb(124, 123, 123);
+  padding: 0 15px;
+  list-style: none;
+  box-sizing: border-box;
+  border-radius:5px 5px 0px 0px;
+  
+}
+#tab-demo > ul > li a {
+   
+  color: rgb(15, 15, 15);
+  text-decoration: none;
+  font-size:20px;
+}
+
+.email{
+    width:100%;
+}
+
+#tab-demo > ul > li.active {
+  /* border-bottom: 1px solid #fff; */
+  background: #fff;
+}
+#tab-demo > .tab-inner {
+  clear: both;
+  color: #000;
+  border: 3px white solid;
+  /* height:700px; */
+}
+.tab-inner {
+  padding: 15px;
+  /* height: 50px; */
+}
+.email{
+    font-size: 20px;
+}
+.pswd{
+    font-size: 20px;
+}
+
+@media screen and (max-width: 991px){
+    .nickname{
+        margin-left:15px;
+    }
+    .email{
+        width:94%;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .nickname{
+        margin-left:15px;
+    }
+    .psw{
+        margin-left: 15px;
+    }
+    .email{
+        width:94%;
+    }
+    #tab-demo > ul > li a {
+   
+        color: rgb(15, 15, 15);
+        text-decoration: none;
+        font-size:14px;
+      }
+      .phone{
+          width:94%;
+      }
+
+      .birth{
+          width:94%;
+      }
+}
+
+@media screen and (max-width: 400px){
+    .nickname{
+        margin-left:15px;
+    }
+    .psw{
+        margin-left: 15px;
+    }
+    .email{
+        width:100%;
+        
+        padding-right: 5px;
+    }
+    #tab-demo > ul > li a {
+   
+        color: rgb(15, 15, 15);
+        text-decoration: none;
+        font-size:14px;
+      }
+      .phone{
+          width: 100%;
+          padding-right: 5px;
+      }
+      .birth{
+         
+          width: 100%;
+          padding-right: 5px;
+      }
+}

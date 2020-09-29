@@ -20,13 +20,14 @@ import com.web.car98.member.model.LoginBean;
 import com.web.car98.member.model.MemberBean;
 import com.web.car98.member.service.MemberService;
 import com.web.car98.validator.LoginBeanValidator;
+import com.web.car98.validator.MemberBeanValidator;
 
 import _00_init.util.GlobalService;
 
 @Controller
 @SessionAttributes("LoginOK")
 public class LoginController {
-	String loginForm = "/login/login";
+	String loginForm = "/login/testloginregister";
 	String loginOut = "/login/logout";
 	
 	@Autowired
@@ -39,6 +40,7 @@ public class LoginController {
 			@CookieValue(value="password", required = false) String password,
 			@CookieValue(value="rm", required = false) Boolean rm
 			) {
+		
 		if(user == null) {
 			user = "";
 		}
@@ -54,6 +56,8 @@ public class LoginController {
 		}
 		LoginBean loginBean = new LoginBean(user,password,rm);
 		model.addAttribute(loginBean);
+		MemberBean mb = new MemberBean();
+		model.addAttribute("memberBean",mb);
 		
 		return loginForm;
 	}
@@ -61,10 +65,15 @@ public class LoginController {
 	@PostMapping("/login")
 	public String loginAccountCheck(
 			@ModelAttribute("loginBean") LoginBean loginBean,
-			BindingResult result,Model model,
+			
+			BindingResult result,
+			Model model,
 			HttpServletRequest request,
 			HttpServletResponse response) {
 			LoginBeanValidator validator = new LoginBeanValidator();
+			
+			
+			
 			validator.validate(loginBean, result);
 			if(result.hasErrors()) {
 				return loginForm;
