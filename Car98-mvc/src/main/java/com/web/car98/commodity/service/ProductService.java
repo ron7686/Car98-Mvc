@@ -25,4 +25,6 @@ public interface ProductService {
 	Map<Integer, BidBean> getPageProducts(int pagePNo);
 	
 	public int getTotalPages();
+	
+	List<BidBean> getByIdProducts(int memId);
 }

@@ -73,4 +73,9 @@ public class ProductServiceImpl implements ProductService {
 	public Map<Integer, BidBean> getPageProducts(int pagePNo) {
 		return dao.getPageProducts(pagePNo);
 	}
+	@Transactional
+	@Override
+	public List<BidBean> getByIdProducts(int memId) {
+		return dao.getByIdProducts(memId);
+	}
 }

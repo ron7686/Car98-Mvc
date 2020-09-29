@@ -116,4 +116,15 @@ public class ProductDaoImpl implements ProductDao {
 		return map;
 
 	}
+
+	//只有上架商品的memId可做修改
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BidBean> getByIdProducts(int memId) {
+		List<BidBean> list = null;
+		Session session = factory.getCurrentSession();
+		String hql = "FROM BidBean ob WHERE ob.memberBean.memId = :mid";
+		list = session.createQuery(hql).setParameter("mid", memId).getResultList();
+		return list;
+	}
 }

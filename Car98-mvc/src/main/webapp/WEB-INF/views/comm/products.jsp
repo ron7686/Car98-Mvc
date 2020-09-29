@@ -25,8 +25,6 @@
 	<div class="container">
 		<div class="contorl  my-2 d-flex justify-content-end">
 			<FONT color='red' size='-1'>
-				購物車內有
-				<c:out value="${ShoppingCart.itemNumber}" default="0" />項商品
 				金額小計(OK):
 				<c:out value="${ShoppingCart.subtotal}" default="0" /> 元
 			</FONT>
@@ -34,7 +32,7 @@
 			<a href='showUpdate'>編輯刪除商品</a> -->
 			<button type="button" class="btn btn-outline-light letter-spacing" 
 				onclick="location.href='/Car98-mvc/comm/showCartContent'">
-				<i class="fa fa-shopping-cart"></i>
+				<i class="fa fa-shopping-cart"></i><c:out value="${ShoppingCart.itemNumber}" default="0" />
 			</button>
 			<button class="clear-cart btn btn-outline-danger ml-2"
 				onclick="location.href='/Car98-mvc/comm/removeShoppingCart'">

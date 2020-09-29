@@ -103,7 +103,7 @@ public class ProductController {
 		if (memberBean == null) {
 			return "redirect:/login";
 		}
-		model.addAttribute("bids", service.getAllProducts());
+		model.addAttribute("bids", service.getByIdProducts(memberBean.getMemId()));
 		return "comm/bids/bids";
 	}
 
