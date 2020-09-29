@@ -16,4 +16,6 @@ public interface TalkDao {
 
 	TalkBean selectOne(int postID);
 
+	
+	int PostType();
 }

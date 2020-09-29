@@ -33,7 +33,7 @@ public class TalkContentController {
 				return "redirect:/login";
 			}
 		
-		return "/forum/talkContent";
+		return "forum/talkContent";
 	}
 	
 	@PostMapping("/talkContent")

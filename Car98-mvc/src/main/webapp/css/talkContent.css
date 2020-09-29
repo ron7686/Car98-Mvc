@@ -85,4 +85,11 @@ textarea {
 .bold{
   font-weight:bold;
 }
+.italic{
+  font-style:italic;
+}
+
+.ubtn{
+  text-decoration: underline;
+}
 
