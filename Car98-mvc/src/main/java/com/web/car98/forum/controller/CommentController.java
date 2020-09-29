@@ -1,16 +1,22 @@
 package com.web.car98.forum.controller;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +30,11 @@ import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.TalkBean;
 import com.web.car98.forum.service.CommentService;
 import com.web.car98.forum.service.TalkService;
+
 import com.web.car98.member.model.MemberBean;
+
+import com.web.car98.forum.service.impl.CommentServiceImpl;
+
 import com.web.car98.validator.CommentValidator;
 
 @Controller
@@ -104,6 +114,7 @@ public class CommentController {
 //		return "/forum/talktalk";
 //
 //	}
+
 
 
 	@GetMapping("/forum/deleteCom")

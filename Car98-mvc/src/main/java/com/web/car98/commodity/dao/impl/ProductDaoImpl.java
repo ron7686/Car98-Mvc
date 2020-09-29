@@ -1,7 +1,9 @@
 package com.web.car98.commodity.dao.impl;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -27,7 +29,7 @@ public class ProductDaoImpl implements ProductDao {
 		list = session.createQuery(hql).getResultList();
 		return list;
 	}
-	
+
 	@Override
 	public BidBean getProductById(int bidId) {
 		return factory.getCurrentSession().get(BidBean.class, bidId);
@@ -43,7 +45,7 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public BidItemBean getItemById(Integer bidItemId) {
-		Session session = factory.getCurrentSession();	 
+		Session session = factory.getCurrentSession();
 		return session.get(BidItemBean.class, bidItemId);
 	}
 
@@ -57,7 +59,7 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public void updateProducts(BidBean bean) {
-		if (bean != null && bean.getBidId() != null) 	{
+		if (bean != null && bean.getBidId() != null) {
 			Session session = factory.getCurrentSession();
 			BidItemBean bib = getItemById(bean.getBidItemBean().getBidItemId());
 			bean.setBidItemBean(bib);
@@ -74,5 +76,18 @@ public class ProductDaoImpl implements ProductDao {
 			bid.setMemberBean(null);
 			session.delete(bid);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<Integer, BidBean> getMapProducts() {
+		String hql = "FROM BidBean";
+		Session session = factory.getCurrentSession();
+		Map<Integer, BidBean> map = new LinkedHashMap<>();
+		List<BidBean> list = session.createQuery(hql).getResultList();
+		for (BidBean bean : list) {
+			map.put(bean.getBidId(), bean);
+		}
+		return map;
 	}
 }

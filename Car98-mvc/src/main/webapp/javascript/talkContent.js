@@ -23,32 +23,24 @@ $(function () {
   //粗體
 $("#Boldbtn").click(function(){
   
-    //  let content=$("textarea").val();
-    //  let strstart='<b>';
-    //  let strend='</b>';
-    //  alert(strend);
-  
     $("textarea").toggleClass("bold");
-    // =strstart+$("textarea").val()+strend;
     
-})
+});
 
   //斜體
-  $("#Ibtn").click(function () {
-    let text = $("textarea").val();
-    $("textarea").val(text);
-
+$("#Ibtn").click(function () {
     $("textarea").toggleClass("italic");
-  });
+});
+  
   
   //底線
-  $("#Ubtn").click(function () {
+$("#Ubtn").click(function () {
     $("textarea").toggleClass("ubtn");
-  });
-
-
+});
 
 });
+
+
 
 function startTime() {
   var today = new Date(); //定義日期物件

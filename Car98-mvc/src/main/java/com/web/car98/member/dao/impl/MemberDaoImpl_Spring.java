@@ -143,4 +143,12 @@ public class MemberDaoImpl_Spring implements MemberDao {
 				.setParameter("mid", ob.getMemId())
 				.executeUpdate();
 	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MemberBean> findAllMembers() {
+		Session session = factory.getCurrentSession();
+		String hql = "From MemberBean";
+		List<MemberBean> mbl = session.createQuery(hql).getResultList();
+		return mbl;
+	}
 }

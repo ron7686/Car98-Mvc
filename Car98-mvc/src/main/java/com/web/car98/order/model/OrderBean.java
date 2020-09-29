@@ -19,8 +19,8 @@ public class OrderBean {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	Integer orderNo;
 	String 	memId;
-	String  invoiceTitle;
-	String	Address; 
+	String	address; 
+	String email;
 	Date  buyDay;
 	String	cancelTag;
 	Double	totalPrice;
@@ -32,20 +32,18 @@ public class OrderBean {
 		super();
 	}
 
-	public OrderBean(Integer orderNo, String memId, String invoiceTitle, String address, Date buyDay, String cancelTag,
+	public OrderBean(Integer orderNo, String memId, String address, String email, Date buyDay, String cancelTag,
 			Double totalPrice, Set<OrderItemBean> items) {
 		super();
 		this.orderNo = orderNo;
 		this.memId = memId;
-		this.invoiceTitle = invoiceTitle;
-		Address = address;
+		this.address = address;
+		this.email = email;
 		this.buyDay = buyDay;
 		this.cancelTag = cancelTag;
 		this.totalPrice = totalPrice;
 		this.items = items;
 	}
-
-
 
 	public Integer getOrderNo() {
 		return orderNo;
@@ -56,11 +54,19 @@ public class OrderBean {
 	}
 
 	public String getAddress() {
-		return Address;
+		return address;
 	}
-	
+
 	public void setAddress(String address) {
-		Address = address;
+		this.address = address;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getMemId() {
@@ -69,14 +75,6 @@ public class OrderBean {
 
 	public void setMemId(String memId) {
 		this.memId = memId;
-	}
-
-	public String getInvoiceTitle() {
-		return invoiceTitle;
-	}
-
-	public void setInvoiceTitle(String invoiceTitle) {
-		this.invoiceTitle = invoiceTitle;
 	}
 
 	public Date getBuyDay() {
@@ -113,9 +111,8 @@ public class OrderBean {
 
 	@Override
 	public String toString() {
-		return "OrderBean [orderNo=" + orderNo + ", memId=" + memId + ", invoiceTitle=" + invoiceTitle + ", Address="
-				+ Address + ", buyDay=" + buyDay + ", cancelTag=" + cancelTag + ", totalPrice=" + totalPrice
-				+ ", items=" + items + "]";
+		return "OrderBean [orderNo=" + orderNo + ", memId=" + memId + ", address=" + address + ", email=" + email
+				+ ", buyDay=" + buyDay + ", cancelTag=" + cancelTag + ", totalPrice=" + totalPrice + ", items=" + items
+				+ "]";
 	}
-
 }

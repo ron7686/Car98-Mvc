@@ -34,7 +34,7 @@ public class OrderItemDaoImpl implements OrderItemDao{
 		int n = 0;
 		Integer stock = 0;
 		Session session = factory.getCurrentSession();
-		String hql0 = "SELECT stock FROM BidBean WHERE bidId = :bidId";
+		String hql0 = "SELECT bidStock FROM BidBean WHERE bidId = :bidId";
 		String hql1 = "UPDATE BidBean SET bidStock = bidStock - :orderAmount WHERE bidId = :bidId";
 		stock = (Integer) session.createQuery(hql0)
 								 .setParameter("bidId", oib.getBidId())

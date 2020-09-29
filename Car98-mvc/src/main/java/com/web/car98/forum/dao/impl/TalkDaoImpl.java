@@ -106,4 +106,17 @@ public class TalkDaoImpl implements TalkDao  {
 		return tb;
 		
 	}
+
+	@Override
+	public int PostType() {
+		
+		
+		
+		
+		return 0;
+	}
+	
+	
+	
+	
 }
