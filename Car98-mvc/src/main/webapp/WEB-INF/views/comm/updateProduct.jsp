@@ -132,7 +132,8 @@
 						<label class='control-label col-lg-2 col-lg-2' for="bidFormat">
 							商品描述 </label>
 						<div class='col-lg-10'>
-							<form:input id="bidFormat" path="bidFormat" type='text' class='form:input-large' />
+							<form:textarea id="bidFormat" path="bidFormat" cols="45" class='form:input-large'
+							rows="5" placeholder="請輸入內容...."/>
 							<form:errors path="bidFormat" />
 						</div>
 					</div>

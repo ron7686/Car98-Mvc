@@ -70,11 +70,11 @@
 							<tr>
 								<th scope="col" width='56'>編號</th>
 								<th scope="col" width='140'>品名</th>
-								<th scope="col" width='180'>內容</th>
 								<th scope="col" width='130'>價格</th>
 								<th scope="col" width='64'>數量</th>
-								<th scope="col" width='56'>上架日期</th>
-								<th scope="col" width='56'>照片</th>
+								<th scope="col" width='200' align='center'>上架日期</th>
+								<th scope="col" width='200'>商品種類</th>
+								<th scope="col" width='100'>照片</th>
 								<th scope="col" colspan='3' width='72'>資料維護</th>
 							</tr>
 						</thead>
@@ -83,7 +83,6 @@
 								<tr>
 									<td style="text-align: center">${bid.bidId}</td>
 									<td style="text-align: center">${bid.bidItemName}</td>
-									<td style="text-align: right">${bid.bidFormat}</td>
 									<td style="text-align: center">${bid.bidPrice}</td>
 									<td style="text-align: center">${bid.bidStock}</td>
 									<td style="text-align: center">${bid.bidTime}</td>
