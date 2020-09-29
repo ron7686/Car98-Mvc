@@ -1,6 +1,7 @@
 package com.web.car98.commodity.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.web.car98.commodity.model.BidBean;
 import com.web.car98.commodity.model.BidItemBean;
@@ -20,4 +21,6 @@ public interface ProductService {
 	void updateProducts(BidBean bean); 
 	
 	void delete(Integer bidId);
+	
+	public Map<Integer, BidBean> getMapProducts();
 }
