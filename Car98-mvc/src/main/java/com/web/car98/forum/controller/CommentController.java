@@ -1,18 +1,22 @@
 package com.web.car98.forum.controller;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -22,6 +26,7 @@ import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.TalkBean;
 import com.web.car98.forum.service.CommentService;
 import com.web.car98.forum.service.TalkService;
+import com.web.car98.forum.service.impl.CommentServiceImpl;
 import com.web.car98.validator.CommentValidator;
 
 @Controller
@@ -99,8 +104,9 @@ public class CommentController {
 //
 //	}
 //
-//	@RequestMapping(value = "/forum/deleteCom.do", method = RequestMethod.POST)
-//	public String deleteCom(Model model, HttpServletRequest request, HttpServletResponse response)
+//	@RequestMapping(value = "/forum/deleteCom.do", method = RequestMethod.GET)
+//	public String deleteCom(Model model, HttpServletRequest request, HttpServletResponse response,
+//			@RequestParam("comId") Integer comId)
 //			throws ServletException, IOException {
 //		HttpSession session = request.getSession();
 //		Map<String, String> errorMessage = new HashMap<>();

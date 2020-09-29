@@ -1,5 +1,7 @@
 package com.web.car98.member.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,5 +77,11 @@ public class MemberServiceImpl_Spring implements MemberService {
 		dao.updateUserData(mb);
 		n++;
 		return n;
+	}
+	
+	@Transactional
+	@Override
+	public List<MemberBean> findAllMembers() {
+		return dao.findAllMembers();
 	}
 }
