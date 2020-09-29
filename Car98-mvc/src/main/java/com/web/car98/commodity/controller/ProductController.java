@@ -60,7 +60,7 @@ public class ProductController {
 		if (memberBean == null) {
 			return "redirect:/login";
 		}
-		String memberId = memberBean.getId();
+		String memberId = (memberBean.getMemId()).toString();
 		if (pagePNo == null) {
 			pagePNo = 1;
 			// 讀取瀏覽器送來的所有 Cookies
