@@ -45,9 +45,7 @@ public class CommentDaoImpl implements CommentDao {
 	@Override
 	public int insertCom(CommentBean cb) {
 		Session session = factory.getCurrentSession();
-		int n = 0;
-		TalkBean tb=getTalkBeanById(cb.getPostId());
-		cb.setTalkBean(tb);
+		int n = 0;		
 		session.save(cb);
 		n++;
 		return n;
@@ -97,8 +95,10 @@ public class CommentDaoImpl implements CommentDao {
 	public int deleteComByPk(Integer comId) {
 		Integer n = 0;
 		Session session = factory.getCurrentSession();
-		CommentBean commentbean = session.get(CommentBean.class, comId);
-		session.delete(commentbean);
+		String hql = "Delete FROM CommentBean where comId=:comId";
+//        CommentBean commentbean = session.get(CommentBean.class, comId);
+//        session.delete(comId);
+		session.createQuery(hql).setParameter("comId",comId).executeUpdate();
 		n++;
 		return n;
 		
