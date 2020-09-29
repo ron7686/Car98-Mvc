@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -39,7 +41,7 @@ import com.web.car98.member.model.MemberBean;
 
 @Controller
 @RequestMapping("/comm")
-@SessionAttributes({"LoginOK","products"})
+@SessionAttributes({ "LoginOK", "products", "pagePNo" })
 public class ProductController {
 	@Autowired
 	ProductService service;
@@ -52,14 +54,45 @@ public class ProductController {
 
 	// 顯示所有商品資料
 	@RequestMapping("/products")
-	public String list(Model model) {
+	public String list(Model model, HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "pagePNo", required = false) Integer pagePNo) {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {
 			return "redirect:/login";
 		}
-		Map<Integer, BidBean> map = service.getMapProducts();
+		String memberId = memberBean.getId();
+		if (pagePNo == null) {
+			pagePNo = 1;
+			// 讀取瀏覽器送來的所有 Cookies
+			Cookie[] cookies = request.getCookies();
+			if (cookies != null) {
+				// 逐筆檢視Cookie內的資料
+				for (Cookie c : cookies) {
+					if (c.getName().equals(memberId + "pagePNo")) {
+						try {
+							pagePNo = Integer.parseInt(c.getValue().trim());
+						} catch (NumberFormatException e) {
+							;
+						}
+						break;
+					}
+				}
+			}
+		}
+		Map<Integer, BidBean> map = service.getPageProducts(pagePNo);
+		model.addAttribute("pagePNo", String.valueOf(pagePNo));
+		model.addAttribute("totalPages", service.getTotalPages());
 //		List<BidBean> list = service.getAllProducts();
 		model.addAttribute("products", map);
+		// 使用Cookie來儲存目前讀取的網頁編號，Cookie的名稱為memberId + "pageNo"
+		// -----------------------
+		Cookie pnCookie = new Cookie(memberId + "pagePNo", String.valueOf(pagePNo));
+		// 設定Cookie的存活期為30天
+		pnCookie.setMaxAge(30 * 24 * 60 * 60);
+		// 設定Cookie的路徑為 Context Path
+		pnCookie.setPath(request.getContextPath());
+		// 將Cookie加入回應物件內
+		response.addCookie(pnCookie);
 		return "comm/products";
 	}
 
@@ -97,10 +130,10 @@ public class ProductController {
 		if (id != null) {
 			BidBean bb = service.getProductById(id);
 			model.addAttribute("bid", bb);
-		}else {
+		} else {
 			BidBean bb = new BidBean();
 			model.addAttribute("bid", bb);
-		}	
+		}
 	}
 
 	// 傳空白新增表單
@@ -109,21 +142,21 @@ public class ProductController {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {
 			return "redirect:/login";
-		}		
+		}
 		BidBean bb = new BidBean();
 		model.addAttribute("bid", bb);
 		return "comm/addProduct";
 	}
-	
+
 	@PostMapping("/products/add")
-	public String processAddNewProductForm(@ModelAttribute("bid") BidBean bb, BindingResult result,Model model) {
+	public String processAddNewProductForm(@ModelAttribute("bid") BidBean bb, BindingResult result, Model model) {
 		bidValidator.validate(bb, result);
 		if (result.hasErrors()) {
 			return "comm/addProduct";
 		}
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		bb.setMemberBean(memberBean);
-		
+
 		if (bb.getBidStock() == null) {
 			bb.setBidStock(0);
 		}
@@ -147,14 +180,9 @@ public class ProductController {
 		Timestamp adminTime = new Timestamp(System.currentTimeMillis());
 		bb.setBidTime(adminTime);
 
-	
 		service.addByBidBean(bb);
 		return "redirect:/comm/products";
 	}
-
-	
-
-
 
 	// 取得圖片
 	@RequestMapping(value = "/comm/picture/{bidId}", method = RequestMethod.GET)
@@ -205,6 +233,7 @@ public class ProductController {
 		}
 		return result;
 	}
+
 	public byte[] blobToByteArray(Blob blob) {
 		byte[] result = null;
 		try (InputStream is = blob.getBinaryStream(); ByteArrayOutputStream baos = new ByteArrayOutputStream();) {
