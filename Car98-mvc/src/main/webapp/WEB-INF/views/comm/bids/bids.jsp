@@ -91,17 +91,16 @@
 									<td style="text-align: center">${bid.bidItemBean.bidCategory}</td>
 									<td><img width='60' height='72' src="<c:url value='comm/picture/${bid.bidId}'/>" />
 									</td>
-									<td><a
-											href="${pageContext.request.contextPath}/comm/products/add/${bid.bidId}">編輯</a>
+									<td>
+										<a class="btn btn-primary"
+											href="${pageContext.request.contextPath}/comm/products/add/${bid.bidId}">
+											<i class="fa fa-cog"></i> 編輯</a>
 									</td>
 									<td>
-										<!-- <a class='deletelink'
-											href="${pageContext.request.contextPath}/comm/products/add/${bid.bidId}">刪除</a> -->
-										<button class="deletelink btn btn-outline-danger ml-2">
-											<a class='deletelink'
-												href="${pageContext.request.contextPath}/comm/products/add/${bid.bidId}">
-												<i class="far fa-trash-alt"></i></a>											
-										</button>
+										<a class="deletelink btn btn-danger"
+											href="${pageContext.request.contextPath}/comm/products/add/${bid.bidId}">
+											<i class="fa fa-trash-alt "></i>刪除</a>
+
 									</td>
 								</tr>
 							</c:forEach>
