@@ -1,6 +1,7 @@
 package com.web.car98.commodity.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,5 +58,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void delete(Integer bidId) {
 		dao.delete(bidId);
+	}
+	
+	@Transactional
+	@Override
+	public Map<Integer, BidBean> getMapProducts() {
+		return dao.getMapProducts();
 	}
 }

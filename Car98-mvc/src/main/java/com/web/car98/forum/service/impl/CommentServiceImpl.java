@@ -72,13 +72,12 @@ public class CommentServiceImpl implements CommentService {
 	@Transactional
 	@Override
 	public int updateMemCom(String comText, Date comTime, Integer memId, Integer postId, Integer comId) {
-		int n = 0;
+		
 //		Session session = factory.getCurrentSession();
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
-		n = dao.updateMemCom(comText, comTime, memId, postId, comId);
-		n++;
+		return dao.updateMemCom(comText, comTime, memId, postId, comId);
 //			tx.commit();
 //		} catch (Exception e) {
 //			if (tx != null) {
@@ -86,19 +85,16 @@ public class CommentServiceImpl implements CommentService {
 //			}
 //			e.printStackTrace();
 //		}
-		return n;
 	}
 
 	@Transactional
 	@Override
 	public int updateComByPk(CommentBean commentBean) {
-		int n = 0;
 //		Session session = factory.getCurrentSession();
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
-		n = dao.updateComByPk(commentBean);
-		n++;
+		return dao.updateComByPk(commentBean);
 //			tx.commit();
 //		} catch (Exception e) {
 //			if (tx != null) {
@@ -106,19 +102,16 @@ public class CommentServiceImpl implements CommentService {
 //			}
 //			e.printStackTrace();
 //		}
-		return n;
 	}
 
 	@Transactional
 	@Override
 	public int deleteComByPk(Integer comId) {
-		int n = 0;
 //		Session session = factory.getCurrentSession();
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
-		n = dao.deleteComByPk(comId);
-		n++;
+		return dao.deleteComByPk(comId);
 //			tx.commit();
 //		} catch (Exception e) {
 //			if (tx != null) {
@@ -126,7 +119,6 @@ public class CommentServiceImpl implements CommentService {
 //			}
 //			e.printStackTrace();
 //		}
-		return n;
 	}
 
 	@Transactional

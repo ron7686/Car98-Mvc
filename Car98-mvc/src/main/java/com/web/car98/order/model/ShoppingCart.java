@@ -30,9 +30,9 @@ public class ShoppingCart {
 		}
 	}
 
-	public boolean modifyQty(int bookId, int newQty) {
-		if ( cart.get(bookId) != null ) {
-		   OrderItemBean  bean = cart.get(bookId);
+	public boolean modifyQty(int bidId, int newQty) {
+		if ( cart.get(bidId) != null ) {
+		   OrderItemBean  bean = cart.get(bidId);
 		   bean.setQuantity(newQty);
 	       return true;
 		} else {
@@ -40,9 +40,9 @@ public class ShoppingCart {
 		}
 	}
 	// 刪除某項商品
-	public int deleteBook(int bookId) {
-		if ( cart.get(bookId) != null ) {
-	       cart.remove(bookId);  // Map介面的remove()方法
+	public int deleteBid(int bidId) {
+		if ( cart.get(bidId) != null ) {
+	       cart.remove(bidId);  // Map介面的remove()方法
 	       return 1;
 		} else {
 		   return 0;

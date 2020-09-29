@@ -1,6 +1,7 @@
 package com.web.car98.member.dao;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.web.car98.member.model.MemberBean;
 import com.web.car98.order.model.OrderBean;
@@ -14,6 +15,8 @@ public interface MemberDao {
 	public int saveMember(MemberBean mb) ;
 	
 	public MemberBean queryMember(Integer id);
+	
+	public List<MemberBean> findAllMembers();
 	
 	public MemberBean checkIdPassword(String userId, String password);	
 	

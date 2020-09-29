@@ -21,7 +21,7 @@ public interface CommentDao {
     int updateComByPk(CommentBean commentBean);
     
     int deleteComByPk(Integer comId);
-
+    
 	CommentBean selectComByPk(Integer comId);
     
 	TalkBean getTalkBeanById(int id);
@@ -29,5 +29,8 @@ public interface CommentDao {
 	List<CommentBean> getPage(Integer page, Integer postId);
 
 	int getLastpage(Integer postId);
+
+	
+
 }
 

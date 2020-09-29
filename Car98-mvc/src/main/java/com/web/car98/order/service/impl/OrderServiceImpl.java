@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void persistOrder(OrderBean ob) {
 		// 檢查並更新會員的未付款餘額
-		mdao.updateUnpaidOrderAmount(ob);
+//		mdao.updateUnpaidOrderAmount(ob);
 		// 檢查每筆訂單明細所訂購之商品的庫存數量是否足夠
 		checkStock(ob);
 		// 儲存該筆訂單

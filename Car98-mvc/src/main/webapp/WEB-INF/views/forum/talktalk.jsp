@@ -174,9 +174,11 @@ body {
 						<li id="hate1" button class="fas fa-thumbs-down fa-2x"
 							type="button">1</li>
 						<!-- <button id="updateButton" >編輯</button> -->
-						<a id="updateButton" href="${pageContext.request.contextPath}/forum/updateCom.do?comId=${comment.comId}">編輯</a>
-						<a id="deleteButton" href="${pageContext.request.contextPath}/forum/deleteCom.do?comId=${comment.comId}">刪除</a>
-					</ul>
+					
+						<a id="updateButton" href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
+						<a id="deleteButton" href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
+				
+					</ul>                             
 				</div>
 			</div>
 			</div>

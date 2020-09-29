@@ -39,7 +39,7 @@ import com.web.car98.member.model.MemberBean;
 
 @Controller
 @RequestMapping("/comm")
-@SessionAttributes("LoginOK")
+@SessionAttributes({"LoginOK","products"})
 public class ProductController {
 	@Autowired
 	ProductService service;
@@ -57,8 +57,9 @@ public class ProductController {
 		if (memberBean == null) {
 			return "redirect:/login";
 		}
-		List<BidBean> list = service.getAllProducts();
-		model.addAttribute("products", list);
+		Map<Integer, BidBean> map = service.getMapProducts();
+//		List<BidBean> list = service.getAllProducts();
+		model.addAttribute("products", map);
 		return "comm/products";
 	}
 

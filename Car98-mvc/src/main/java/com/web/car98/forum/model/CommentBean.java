@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.web.car98.member.model.MemberBean;
+
 @Entity
 @Table(name = "comment")
 public class CommentBean implements Serializable {
@@ -24,11 +26,10 @@ public class CommentBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer comId;
 
-	@Column(name = "PostID")
 	@Transient
-	private Integer postId;
-	@Column(name = "MemID")
-	private Integer memId;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "MemID")
+	private MemberBean memberBean;
 	@Column(name = "ComText")
 	private String comText;
 	@Column(name = "ComTime")
@@ -40,7 +41,7 @@ public class CommentBean implements Serializable {
 	@Column(name = "ComHate")
 	private Integer comHate;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PostID")
 	private TalkBean talkBean;
 
@@ -48,13 +49,17 @@ public class CommentBean implements Serializable {
 		super();
 	}
 
-	public CommentBean(Integer postId, String comText, Date comTime, Integer comLike, Blob comPic, Integer comHate) {
-		this.postId = postId;
+	public CommentBean(Integer comId, MemberBean memberBean, String comText, Date comTime, Integer comLike, Blob comPic,
+			Integer comHate, TalkBean talkBean) {
+		super();
+		this.comId = comId;
+		this.memberBean = memberBean;
 		this.comText = comText;
 		this.comTime = comTime;
 		this.comLike = comLike;
 		this.comPic = comPic;
 		this.comHate = comHate;
+		this.talkBean = talkBean;
 	}
 
 	public TalkBean getTalkBean() {
@@ -71,22 +76,6 @@ public class CommentBean implements Serializable {
 
 	public void setComId(Integer comId) {
 		this.comId = comId;
-	}
-
-	public Integer getPostId() {
-		return postId;
-	}
-
-	public void setPostId(Integer postId) {
-		this.postId = postId;
-	}
-
-	public Integer getMemId() {
-		return memId;
-	}
-
-	public void setMemId(Integer memId) {
-		this.memId = memId;
 	}
 
 	public String getComText() {
@@ -131,7 +120,9 @@ public class CommentBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CommentBean [comId=" + comId + ", postId=" + postId + ", memId=" + memId + ", comText=" + comText
-				+ ", comTime=" + comTime + ", comLike=" + comLike + ",comPic=" + comPic + ",comHate=" + comHate + "]";
+		return "CommentBean [comId=" + comId + ", memberBean=" + memberBean + ", comText=" + comText + ", comTime="
+				+ comTime + ", comLike=" + comLike + ", comPic=" + comPic + ", comHate=" + comHate + ", talkBean="
+				+ talkBean + "]";
 	}
+
 }
