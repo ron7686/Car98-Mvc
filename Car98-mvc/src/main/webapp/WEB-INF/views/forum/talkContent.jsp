@@ -60,7 +60,6 @@ body {
 
 		<div class="container text-white main">
 			<div class="row">
-				
 				<div class="col-12">
 					<ul class="texttitle">
 						<li class="mx-auto"><h2>發表新文章</h2></li>
@@ -68,7 +67,7 @@ body {
 					</ul>
 				</div>
 				<!-- 分類選項 -->
-				<div class="col-12 classification">
+			 	<div class="col-12 classification">
 					<select name="" id="" class="select mt-2">
 						<option value="discuss">討論</option>
 						<option value="share">分享＆心得</option>
@@ -100,12 +99,7 @@ body {
 						data-toggle="tooltip" data-placement="bottom" title="底線">
 						<b><u>U</u></b>
 					</button>
-					<button type="button" class=" btn-light font "
-						data-toggle="tooltip" data-placement="bottom" title="字型顏色">
-						<b><u>A</u></b> <input class="manycolor" type="color"
-							list="colors" data-toggle="tooltip" data-placement="bottom"
-							title="更多顏色">
-					</button>
+					
 
 
 
@@ -113,7 +107,7 @@ body {
 				<!-- 內文輸入 -->
 				<div class="col-9">
 
-					<form:form class="mt-3" modelAttribute="talkBean" action="talkContent/talktalk"  method="Post" enctype="multipart/form-data">
+					<form:form class="mt-3" modelAttribute="talkBean"  method="Post" enctype="multipart/form-data">
 
 						<form:input class="title" path="PostTitle" type="text" name="title" style="width: 100%"
 							placeholder="請輸入文章標題......." value="${param.title}" />

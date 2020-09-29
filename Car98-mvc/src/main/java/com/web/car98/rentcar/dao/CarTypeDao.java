@@ -1,13 +1,17 @@
 package com.web.car98.rentcar.dao;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.web.car98.rentcar.model.CarTypeBean;
 
 public interface CarTypeDao {
 //	1. 查詢
 	Collection<CarTypeBean> getCarTypeData();
-
+	
+//	建立第三個下拉式選單
+	List<CarTypeBean> showBrandTypeMenu();
+	
 //	2. 由 CarType 和  RentCar 表格中，挑選出某價格範圍內所有的租車資料
 //	List<String> getRentCarsByPrice();
 	

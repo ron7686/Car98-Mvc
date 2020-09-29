@@ -1,95 +1,93 @@
-.container{
-    
-    border:2px solid white; 
-    color:white;
-    
+.container {
+  border: 2px solid white;
+  color: white;
 }
-.col-12{
-/*     border:1px solid pink; */
-    font-size:35px;
+.col-12 {
+  /*     border:1px solid pink; */
+  font-size: 35px;
 }
-.col-2{
-    height: 600px;
-    border:2px solid white;
+.col-2 {
+  height: 600px;
+  border: 2px solid white;
 }
-.col-10{
-    height: 600px;
-    border:2px solid white;
-    
+.col-10 {
+  height: 600px;
+  border: 2px solid white;
 }
-.photo{
-    width: 140px;
-    height: 140px;
-    max-width:100%;
-    max-height:100%;
-    
+.photo {
+  width: 140px;
+  height: 140px;
+  max-width: 100%;
+  max-height: 100%;
 }
-.picture{
-    width: 400px;
-    height: 300px;
-    max-width:100%;
-    max-height:100%;
+.picture {
+  width: 400px;
+  height: 300px;
+  max-width: 100%;
+  max-height: 100%;
 }
-.article-information{
-    list-style: none;
-    display: flex;
-    padding-left: 0px;
-    font-size:19px;
+.article-information {
+  list-style: none;
+  display: flex;
+  padding-left: 0px;
+  font-size: 19px;
 }
-.floor{
-    width: 820px;
-    
-    
-/*     border:1px solid red; */
-    
+.floor {
+  width: 820px;
+
+  /*     border:1px solid red; */
 }
-.author{
-    font-size:1.1rem;
-    
-/*     border:2px solid white; */
+.author {
+  font-size: 1.1rem;
+
+  /*     border:2px solid white; */
 }
-.account{
-    font-size:0.8rem;
-   
-/*     border:1px solid olive; */
-   
+.account {
+  font-size: 0.8rem;
+
+  /*     border:1px solid olive; */
 }
-.gp{
-    width: 50px;
+.gp {
+  width: 50px;
+
+  color: orangered;
+  /*     border:1px solid palevioletred */
+}
+.bp {
+  width: 50px;
+
+  /*     border:1px solid salmon; */
+}
+.article-content {
+  height: 450px;
+  font-size: 23px;
+}
+.article-mood {
+  height: 60px;
+  font-size: 16px;
+}
+.response {
+  padding-right: 0px;
+}
+.like-or-hate {
+  list-style: none;
+  display: flex;
+}
+.fas {
+  width: 30px;
+}
+.fas {
+  width: 120px;
+}
+textarea {
+  max-width: 100%;
+}
+.errormsg {
+  color: red;
+}
+.page {
   
-    color: orangered;
-/*     border:1px solid palevioletred */
-}
-.bp{
-    width: 50px;
-   
-/*     border:1px solid salmon; */
-}
-.article-content{
-    height: 450px;
-    font-size:23px;
-}
-.article-mood{
-    height: 60px;
-    font-size:16px;
-}
-.response{
-    padding-right: 0px;
-}
-.like-or-hate{
-    list-style: none;
-    display: flex;
-    
-}
-.fas{
-   width: 30px;
-}
-.fas{
-    width: 120px;
-}
-textarea{
-    max-width:100%;
-}
-.errormsg{
-	color:red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

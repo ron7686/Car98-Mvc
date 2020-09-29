@@ -1,7 +1,7 @@
 package com.web.car98.rentcar.service.impl;
 
-import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,5 +22,11 @@ public class CarTypeServiceImpl implements CarTypeService{
 		Collection<CarTypeBean> carTypeBean = null;
 		carTypeBean = ctdao.getCarTypeData();
 		return carTypeBean;
+	}
+	
+	@Transactional
+	@Override
+	public List<CarTypeBean> showBrandTypeMenu() {
+		return ctdao.showBrandTypeMenu();
 	}
 }

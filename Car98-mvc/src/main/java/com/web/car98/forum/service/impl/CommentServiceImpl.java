@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.web.car98.forum.dao.CommentDao;
 import com.web.car98.forum.model.CommentBean;
+import com.web.car98.forum.model.TalkBean;
 import com.web.car98.forum.service.CommentService;
-
 
 @Service
 public class CommentServiceImpl implements CommentService {
-	
+
 	@Autowired
 	CommentDao dao;
 //	SessionFactory factory;
@@ -39,7 +39,7 @@ public class CommentServiceImpl implements CommentService {
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
-			n = dao.insertCom(commentBean);
+		n = dao.insertCom(commentBean);
 //			tx.commit();
 //		} catch (Exception e) {
 //			if (tx != null) {
@@ -58,7 +58,7 @@ public class CommentServiceImpl implements CommentService {
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
-			list = dao.selectCom(postId);
+		list = dao.selectCom(postId);
 //			tx.commit();
 //		} catch (Exception e) {
 //			if (tx != null) {
@@ -77,8 +77,8 @@ public class CommentServiceImpl implements CommentService {
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
-			n = dao.updateMemCom(comText,comTime,memId,postId,comId);
-			n++;
+		n = dao.updateMemCom(comText, comTime, memId, postId, comId);
+		n++;
 //			tx.commit();
 //		} catch (Exception e) {
 //			if (tx != null) {
@@ -97,8 +97,8 @@ public class CommentServiceImpl implements CommentService {
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
-			n = dao.updateComByPk(commentBean);
-			n++;
+		n = dao.updateComByPk(commentBean);
+		n++;
 //			tx.commit();
 //		} catch (Exception e) {
 //			if (tx != null) {
@@ -117,8 +117,8 @@ public class CommentServiceImpl implements CommentService {
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
-			n = dao.deleteComByPk(comId);
-			n++;
+		n = dao.deleteComByPk(comId);
+		n++;
 //			tx.commit();
 //		} catch (Exception e) {
 //			if (tx != null) {
@@ -137,7 +137,7 @@ public class CommentServiceImpl implements CommentService {
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
-			commentbean = dao.selectComByPk(comId);
+		commentbean = dao.selectComByPk(comId);
 //			tx.commit();
 //		} catch (Exception e) {
 //			if (tx != null) {
@@ -148,5 +148,18 @@ public class CommentServiceImpl implements CommentService {
 		return commentbean;
 	}
 
+	@Transactional
+	@Override
+	public List<CommentBean> getPageCom(Integer page, Integer postId) {
+		List<CommentBean> bean = null;
+		bean = dao.getPage(page, postId);
+		return bean;
+	}
+
+	@Transactional
+	@Override
+	public int getLastpage(Integer postId) {
+		return dao.getLastpage(postId);
+	}
 
 }

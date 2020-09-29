@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.car98.forum.model.TalkBean;
@@ -32,11 +33,13 @@ public class TalkContentController {
 				return "redirect:/login";
 			}
 		
-		return "/forum/talkContent";
+		return "forum/talkContent";
 	}
 	
-	@PostMapping("/talkContent/talktalk")
-	public String addContentForm(Model model,@ModelAttribute("talkBean") TalkBean tb,BindingResult bindingResult) {
+	@PostMapping("/talkContent")
+	public String addContentForm(Model model,
+			@ModelAttribute("talkBean") TalkBean tb,
+			BindingResult bindingResult) {
 		String[] suppressedFields=bindingResult.getSuppressedFields();
 		talkContentValidator.validate(tb, bindingResult);
 		if(bindingResult.hasErrors()) {
@@ -44,7 +47,7 @@ public class TalkContentController {
 		}
 		talkservice.persist(tb);
 		model.addAttribute("TalkBean", tb);
-		return "/forum/talktalk";
+		return "redirect:/forum/talktop.do";
 		
 	}
 	

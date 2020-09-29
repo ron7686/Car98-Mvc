@@ -1,13 +1,17 @@
 package com.web.car98.forum.model;
 
 import java.io.Serializable;
+import java.sql.Blob;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name = "talk")
@@ -32,18 +36,36 @@ public class TalkBean implements Serializable {
 	private Integer PostHate;
 	@Column(name="PostCom")
 	private Integer PostCom;
-	
 	@Column(name="PostType")
 	private Integer PostType;
+	@Column(name="PostPic")
+	private Blob PostPic;
+	@OneToMany(mappedBy="talkBean")
+	private List<CommentBean> comment = new ArrayList<>();
 	
 	public TalkBean() {
 		super();
 	}
-	public TalkBean(Integer postID, String postTitle, String postText) {
+	public TalkBean(Integer postID, String postTitle, String postText,Date PostTime,Integer PostType,Blob PostPic) {
 		super();
-		PostID = postID;
-		PostTitle = postTitle;
-		PostText = postText;
+		this.PostID = postID;
+		this.PostTitle = postTitle;
+		this.PostText = postText;
+		this.PostTime=PostTime;
+		this.PostPic=PostPic;
+	}
+	
+	public Integer getPostType() {
+		return PostType;
+	}
+	public void setPostType(Integer postType) {
+		this.PostType = postType;
+	}
+	public List<CommentBean> getComment() {
+		return comment;
+	}
+	public void setComment(List<CommentBean> comment) {
+		this.comment = comment;
 	}
 	public Integer getPostID() {
 		return PostID;
@@ -93,11 +115,17 @@ public class TalkBean implements Serializable {
 	public void setPostCom(Integer postCom) {
 		PostCom = postCom;
 	}
+	public Blob getPostPic() {
+		return PostPic;
+	}
+	public void setPostPic(Blob postPic) {
+		PostPic = postPic;
+	}
 	@Override
 	public String toString() {
 		return "TalkBean [PostID=" + PostID + ", MemID=" + MemID + ", PostTitle=" + PostTitle + ", PostText=" + PostText
 				+ ", PostTime=" + PostTime + ", PostLike=" + PostLike + ", PostHate=" + PostHate + ", PostCom="
-				+ PostCom + "]";
+				+ PostCom +", PostPic="+PostPic+ "]";
 	}
 	
 	

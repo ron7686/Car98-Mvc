@@ -14,6 +14,9 @@ import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="mem")
 public class MemberBean implements Serializable {
@@ -30,12 +33,16 @@ public class MemberBean implements Serializable {
 	private String name;
 	private String id;
 	private String phone;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Taipei")
 	private Date birth;
 	private String sex;
+	@JsonIgnore
 	private Blob headPic;
 	private String fileName;
 	private Integer levels;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
 	private Timestamp meCreate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
 	private Timestamp loginTime;
 	Double unpaid_amount;
 	@Transient

@@ -1,6 +1,8 @@
 package com.web.car98.rentcar.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -27,4 +29,14 @@ public class CarTypeDaoImpl implements CarTypeDao {
 		Collection<CarTypeBean> carTypeBean = session.createQuery(hql).list();
 		return carTypeBean;
     }
+	
+//	建立車牌-車型(第三個下拉式)選單
+	@Override
+	public List<CarTypeBean> showBrandTypeMenu() {
+		String hql = "FROM CarTypeBean GROUP BY carBrand , carType";
+		Session session = factory.getCurrentSession();
+		List<CarTypeBean> carTypeBean = new ArrayList<>();
+		carTypeBean = session.createQuery(hql).getResultList();
+		return carTypeBean;
+	}
 }
