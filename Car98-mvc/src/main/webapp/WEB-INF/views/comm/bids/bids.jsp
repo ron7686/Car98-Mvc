@@ -8,7 +8,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<script type='text/javascript' src='${pageContext.request.contextPath}/javascript/jquery-3.5.1.min.js'></script>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+		integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous" />
 	<style>
 		body {
 			background-color: rgba(236, 234, 234, 0.5);
@@ -19,7 +22,6 @@
 			margin-top: 1em;
 			padding-top: 10px;
 			padding-bottom: 5px;
-
 		}
 
 		.footer-bottom p.pull-left {
@@ -68,7 +70,7 @@
 					<table class="table table-striped" border=1 cellpadding="3" cellspacing="1">
 						<thead>
 							<tr>
-								<th scope="col" width='56'>編號</th>
+								<th scope="col" width='70'>編號</th>
 								<th scope="col" width='140'>品名</th>
 								<th scope="col" width='130'>價格</th>
 								<th scope="col" width='64'>數量</th>
@@ -92,8 +94,14 @@
 									<td><a
 											href="${pageContext.request.contextPath}/comm/products/add/${bid.bidId}">編輯</a>
 									</td>
-									<td><a class='deletelink'
-											href="${pageContext.request.contextPath}/comm/products/add/${bid.bidId}">刪除</a>
+									<td>
+										<!-- <a class='deletelink'
+											href="${pageContext.request.contextPath}/comm/products/add/${bid.bidId}">刪除</a> -->
+										<button class="deletelink btn btn-outline-danger ml-2">
+											<a class='deletelink'
+												href="${pageContext.request.contextPath}/comm/products/add/${bid.bidId}">
+												<i class="far fa-trash-alt"></i></a>											
+										</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -123,6 +131,15 @@
 	<jsp:include page="/fragment/footer.jsp" />
 
 
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+		crossorigin="anonymous"></script>
 </body>
 
 </html>
