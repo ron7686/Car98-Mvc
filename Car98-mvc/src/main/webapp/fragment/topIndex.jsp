@@ -13,7 +13,7 @@
 	</button>
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 		<ul class="navbar-nav ml-auto">
-<<<<<<< HEAD
+
 			<li class="nav-item dropdown"><a class="nav-link"
 					href="${pageContext.request.contextPath}/searchresource/SearchResource.jsp"
 					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -21,14 +21,14 @@
 			</li>
 			<li class="nav-item dropdown"><a class="nav-link" href="/carEasy.html" id="navbarDropdownMenuLink"
 					role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Car方便 </a>
-=======
+
 			<li class="nav-item"><a class="nav-link" href="<c:url value='searchresource' /> "> Car好康 </a>
 				</li>
 			<li class="nav-item dropdown"><a
 				class="nav-link" href="/carEasy.html"
 				id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false"> Car方便 </a>
->>>>>>> 657731c7797bd749bb03bec295752e2c0b9ee61f
+
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					<a class="dropdown-item" href="/carEasy.html">加油紀錄</a> <a class="dropdown-item" href="#">保養紀錄</a> <a
 						class="dropdown-item" href="#">保險紀錄</a>
