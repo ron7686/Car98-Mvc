@@ -14,102 +14,73 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 <html>
 
 <head>
-<style>
-.container-height {
-	height: 500px;
-}
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+		integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/shoplist.css" type="text/css">
+	<script type="text/javascript">
+		function confirmDelete(n) {
+			if (confirm("確定刪除此項商品 ? ")) {
+				document.forms[0].action = "<c:url value='UpdateItem.do?cmd=DEL&bidId=" + n + "' />";
+				document.forms[0].method = "POST";
+				document.forms[0].submit();
+			} else {
 
-.row-width {
-	width: 100%;
-}
+			}
+		}
+		function modify(key, qty, index) {
+			var x = "newQty" + index;
+			var newQty = document.getElementById(x).value;
+			if (newQty < 0) {
+				window.alert('數量不能小於 0');
+				return;
+			}
+			if (newQty == 0) {
+				window.alert("請執行刪除功能來刪除此項商品");
+				document.getElementById(x).value = qty;
+				return;
+			}
+			if (newQty == qty) {
+				window.alert("新、舊數量相同，不必修改");
+				return;
+			}
+			if (confirm("確定將此商品的數量由" + qty + " 改為 " + newQty + " ? ")) {
+				document.forms[0].action = "<c:url value='UpdateItem.do?cmd=MOD&bidId=" + key + "&newQty=" + newQty + "' />";
+				document.forms[0].method = "POST";
+				document.forms[0].submit();
+			} else {
+				document.getElementById(x).value = qty;
+			}
+		}
+		function isNumberKey(evt) {
+			var charCode = (evt.which) ? evt.which : event.keyCode
+			if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+				return false;
+			}
+			return true;
+		}
+		function Checkout(qty) {
+			if (qty == 0) {
+				alert("無購買任何商品，不需結帳");
+				return false;
+			}
+			if (confirm("再次確認訂單內容 ? ")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		function Abort() {
+			if (confirm("確定放棄購物 ? ")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	</script>
 
-body {
-	background-image: url(../image/Desktop.png);
-	background-position: center;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-
-.footer-bottom {
-	margin-top: 1em;
-	padding-top: 10px;
-	padding-bottom: 5px;
-}
-
-.footer-bottom p.pull-left {
-	padding-top: 6px;
-	font-size: 0.5em;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-</style>
-<script type="text/javascript">
-      function confirmDelete(n) {
-         if (confirm("確定刪除此項商品 ? ")) {
-            document.forms[0].action = "<c:url value='UpdateItem.do?cmd=DEL&bidId=" + n + "' />";
-            document.forms[0].method = "POST";
-            document.forms[0].submit();
-         } else {
-
-         }
-      }
-      function modify(key, qty, index) {
-         var x = "newQty" + index;
-         var newQty = document.getElementById(x).value;
-         if (newQty < 0) {
-            window.alert('數量不能小於 0');
-            return;
-         }
-         if (newQty == 0) {
-            window.alert("請執行刪除功能來刪除此項商品");
-            document.getElementById(x).value = qty;
-            return;
-         }
-         if (newQty == qty) {
-            window.alert("新、舊數量相同，不必修改");
-            return;
-         }
-         if (confirm("確定將此商品的數量由" + qty + " 改為 " + newQty + " ? ")) {
-            document.forms[0].action = "<c:url value='UpdateItem.do?cmd=MOD&bidId=" + key + "&newQty=" + newQty + "' />";
-            document.forms[0].method = "POST";
-            document.forms[0].submit();
-         } else {
-            document.getElementById(x).value = qty;
-         }
-      }
-      function isNumberKey(evt) {
-         var charCode = (evt.which) ? evt.which : event.keyCode
-         if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-            return false;
-         }
-         return true;
-      }
-      function Checkout(qty) {
-         if (qty == 0) {
-            alert("無購買任何商品，不需結帳");
-            return false;
-         }
-         if (confirm("再次確認訂單內容 ? ")) {
-            return true;
-         } else {
-            return false;
-         }
-      }
-      function Abort() {
-         if (confirm("確定放棄購物 ? ")) {
-            return true;
-         } else {
-            return false;
-         }
-      }
-   </script>
-
-<meta charset="UTF-8">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<title>購物清單</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<title>購物清單</title>
 </head>
 
 <body>
@@ -129,48 +100,69 @@ body {
 	</c:choose>
 
 
-	<table
-		style="margin: 0 auto; width: 820px; background: #EFEFFB; border: 2px solid black;">
-		<tr>
-			<td colspan='4'>
-				<!--          購物車的標題          -->
-				<table style="width: 820px">
-					<tr height='40'>
-						<td width="270">&nbsp;</td>
-						<td width="270" align='right'></td>
-					</tr>
-					<tr height='18'>
-						<td width="270">&nbsp;</td>
-						<td width="280" align='center'><FONT size='+2'>購 物 清 單</FONT>
-						</td>
-						<td width="270" align='right'></td>
-					</tr>
-				</table>
-			</td>
-		</tr>
+	<div class="shopping-cart">
+		<!-- Title -->
+		<div class="title">
+			購物清單
+		</div>
 
-		<tr>
-			<td>
-				<table border='1'>
-					<tr>
-						<th width="320">商品名稱</th>
-						<th width="70">賣家</th>
-						<th width="60">單價</th>
-						<th width="60">數量</th>
-						<th width="110">小計</th>
-						<th width="110">修改</th>
-					</tr>
-					<c:forEach varStatus="vs" var="anEntry"
-						items="${ShoppingCart.content}">
-						<tr height='16'>
+
+
+		<table border='0'>
+			<c:if test="${ShoppingCart.content == null}">
+				<div class="title">
+				購物車內沒有商品
+				</div>
+			</c:if>
+			<c:forEach varStatus="vs" var="anEntry" items="${ShoppingCart.content}">
+				<div class="item">
+					<div class="buttons">
+						<button class='delete-btn' name="delete" onclick="confirmDelete(${anEntry.key})">
+							<i class="fas fa-trash-alt"></i>
+						</button>
+						<button class='like-btn' name="update"
+							onclick="modify(${anEntry.key}, ${anEntry.value.quantity}, ${vs.index})">
+							<i class="fa fa-cog"></i>
+						</button>
+
+					</div>
+					<!-- PHOTO -->
+					<div class="image">
+						<img src="./image/item-1.png" alt="">
+					</div>
+					<!-- product -->
+					<div class="description">
+						<span>${anEntry.value.bidName}</span>
+						<span>賣家: ${anEntry.value.sellMan}</span>
+					</div>
+					<!-- product + - -->
+					<div class="quantity">
+						<!-- <button class="plus-btn" type="button" name="button">
+									<img src="${pageContext.servletContext.contextPath}/image/plus.svg" alt="">
+								</button> -->
+						<Input id="newQty${vs.index}" style="width: 60px; text-align: center" name="newQty"
+							type="number" value="<fmt:formatNumber value='${anEntry.value.quantity}' />" name="qty"
+							onkeypress="return isNumberKey(event)" />
+						<!-- <button class="minus-btn">
+									<img src="${pageContext.servletContext.contextPath}/image/minus.svg" alt="">
+								</button> -->
+					</div>
+					<div class="total-price">$
+						<fmt:formatNumber value="${anEntry.value.unitPrice * anEntry.value.quantity}"
+							pattern="#,###,###" />
+					</div>
+				</div>
+				<!-- <tr height='16'>
 							<td>${anEntry.value.bidName}</td>
 							<td style="text-align: center;">${anEntry.value.sellMan}</td>
 							<td style="text-align: right;"><fmt:formatNumber
 									value="${anEntry.value.unitPrice}" pattern="#,###" />元</td>
-							<td style="text-align: right;"><Input id="newQty${vs.index}"
+							<td style="text-align: right;">
+								<Input id="newQty${vs.index}"
 								style="width: 60px; text-align: center" name="newQty" type="number"
-								value="<fmt:formatNumber value="${anEntry.value.quantity}" />"
-								name="qty" onkeypress="return isNumberKey(event)" /></td>
+								value="<fmt:formatNumber value='${anEntry.value.quantity}' />"
+								name="qty" onkeypress="return isNumberKey(event)" />
+							</td>
 							<td style="text-align: right;"><fmt:formatNumber
 									value="${anEntry.value.unitPrice * anEntry.value.quantity}"
 									pattern="#,###,###" />元</td>
@@ -178,34 +170,39 @@ body {
 								onclick="modify(${anEntry.key}, ${anEntry.value.quantity}, ${vs.index})">
 								<Input type="button" name="delete" value="刪除"
 								onclick="confirmDelete(${anEntry.key})"></td>
-						</tr>
-					</c:forEach>
-					<tr height='16'>
-						<td colspan='5' align='right'>合計金額：</td>
-						<td align='right'><fmt:formatNumber value="${subtotal}"
-								pattern="#,###,###" />元</td>
-					</tr>
-				</table>
+						</tr> -->
+			</c:forEach>
 
-			</td>
-		</tr>
-		<tr height='80'>
-			<td>
-				<table border='1'>
-					<tr>
-						<td width="265" align='center'><a
-							href="<c:url value='/comm/products' />">繼續購物</a></td>
-						<td width="265" align='center'><a
-							href="<c:url value='checkout' />"
-							onClick="return Checkout(${subtotal});">再次確認</a></td>
-						<td width="265" align='center'><a
-							href="<c:url value='abort' />" onClick="return Abort();">放棄購物---</a>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
+			<table class='sel'>
+				<tr height='16'>
+					<td colspan='5' align='right'>合計金額：</td>
+					<td align='right' width='80'>
+						<fmt:formatNumber value="${subtotal}" pattern="#,###,###" />元</td>
+				</tr>
+				<tr height='80'>
+					<td>
+						<table>
+							<tr>
+								<td width="265" align='center'><a class="btn btn-primary"
+										aria-label="View 3 items in your shopping cart"
+										href="<c:url value='/comm/products' />"><i class="fa fa-shopping-cart fa-lg"
+											aria-hidden="true"></i>繼續購物</a></td>
+								<td width="265" align='center'><a class="btn btn-success"
+										href="<c:url value='checkout' />" onClick="return Checkout(${subtotal});"><i
+											class="fa fa-credit-card fa-lg"></i>再次確認</a></td>
+								<td width="265" align='center'><a class="btn btn-danger" href="<c:url value='abort' />"
+										onClick="return Abort();"><i class="fa fa-trash-alt fa-lg"></i>放棄購物</a>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+
+		</table>
+
+
+	</div>
 	<div style='text-align: center;'>
 		<c:if test='${not empty OrderErrorMessage}'>
 			<font color='red'>${OrderErrorMessage}</font>
