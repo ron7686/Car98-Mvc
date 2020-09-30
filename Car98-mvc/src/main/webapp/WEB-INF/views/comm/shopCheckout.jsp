@@ -37,8 +37,16 @@
                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
                                 data-parent="#accordionExample">
                                 <div class="card-body pt-0" id="product-table">
-                                    <p class="text-white" id="result"></p>
-                                    <p class="text-white" id="totalresult"></p>
+                                    <c:forEach varStatus="vs" var="anEntry" items="${ShoppingCart.content}">
+                                        <!-- <p class="text-white" id="result"></p>
+                                        <p class="text-white" id="totalresult"></p> -->
+                                        <div>
+                                            <span style="color:white">${anEntry.value.bidName}</span><br>
+                                            <span style="color:white">賣家: ${anEntry.value.sellMan}</span>
+                                            <span style="color:white; margin-left:500px">$: ${anEntry.value.unitPrice}</span>
+                                        </div>
+                                    </c:forEach>
+                                    
                                     <!-- 動態新增區域<table class="table"> -->
                                     <!-- <thead>
                                         <tr class="text-center">

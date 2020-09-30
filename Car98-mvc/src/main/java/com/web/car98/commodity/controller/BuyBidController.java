@@ -25,7 +25,7 @@ import com.web.car98.order.model.ShoppingCart;
 
 @Controller
 @RequestMapping("comm")
-@SessionAttributes({ "LoginOK","ShoppingCart","products"})
+@SessionAttributes({ "LoginOK","ShoppingCart","products","pagePNo"})
 public class BuyBidController {
 	
 	@Autowired
@@ -65,6 +65,13 @@ public class BuyBidController {
 		Map<Integer,BidBean> map =(Map<Integer,BidBean>) session.getAttribute("products");
 		BidBean bean = map.get(bidId);
 		
+		String pagePNo = request.getParameter("pagePNo");
+		if (pagePNo == null || pagePNo.trim().length() == 0){
+			pagePNo = (String) model.getAttribute("pagePNo") ;
+			if (pagePNo == null){
+			   pagePNo = "1";
+			} 
+		} 
 		// 將訂單資料(價格，數量與BidBean)封裝到OrderItemBean物件內
 		OrderItemBean oib = new  OrderItemBean(null, qty ,bean.getBidPrice(), 
 				bidId, bean.getBidItemName(), bean.getMemberBean().getName());

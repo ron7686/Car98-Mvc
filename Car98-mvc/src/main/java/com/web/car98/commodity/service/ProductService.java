@@ -22,5 +22,9 @@ public interface ProductService {
 	
 	void delete(Integer bidId);
 	
-	public Map<Integer, BidBean> getMapProducts();
+	Map<Integer, BidBean> getPageProducts(int pagePNo);
+	
+	public int getTotalPages();
+	
+	List<BidBean> getByIdProducts(int memId);
 }

@@ -25,8 +25,6 @@
 	<div class="container">
 		<div class="contorl  my-2 d-flex justify-content-end">
 			<FONT color='red' size='-1'>
-				購物車內有
-				<c:out value="${ShoppingCart.itemNumber}" default="0" />項商品
 				金額小計(OK):
 				<c:out value="${ShoppingCart.subtotal}" default="0" /> 元
 			</FONT>
@@ -34,7 +32,7 @@
 			<a href='showUpdate'>編輯刪除商品</a> -->
 			<button type="button" class="btn btn-outline-light letter-spacing" 
 				onclick="location.href='/Car98-mvc/comm/showCartContent'">
-				<i class="fa fa-shopping-cart"></i><span class="badge total-count "></span>
+				<i class="fa fa-shopping-cart"></i><c:out value="${ShoppingCart.itemNumber}" default="0" />
 			</button>
 			<button class="clear-cart btn btn-outline-danger ml-2"
 				onclick="location.href='/Car98-mvc/comm/removeShoppingCart'">
@@ -117,6 +115,33 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="col-12 publish ">
+		<nav class="page">
+			<ul class="pagination pagination-sm justify-content-center mb-2">
+				<c:if test="${pagePNo > 3}">
+					<li class="page-item"><a class="page-link" href="<c:url value='products?pagePNo=1' />">1</a></li>
+					<li class="page-item mt-2"><a href=""><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i></a></li>
+				</c:if>
+				<c:if test="${pagePNo > 2}">
+					<li class="page-item"><a class="page-link" href="<c:url value='products?pagePNo=${pagePNo-2}' />">${pagePNo-2}</a></li>
+				</c:if>
+				<c:if test="${pagePNo > 1}">
+					<li class="page-item"><a class="page-link" href="<c:url value='products?pagePNo=${pagePNo-1}' />">${pagePNo-1}</a></li>
+				</c:if>
+				<li class="page-item active"><a class="page-link" href="#">${pagePNo}</a></li>
+				<c:if test="${pagePNo < totalPages}">
+					<li class="page-item"><a class="page-link" href="<c:url value='products?pagePNo=${pagePNo+1}' />">${pagePNo+1}</a></li>
+				</c:if>
+				<c:if test="${pagePNo+1 < totalPages}">
+					<li class="page-item"><a class="page-link" href="<c:url value='products?pagePNo=${pagePNo+2}' />">${pagePNo+2}</a></li>
+				</c:if>
+				<c:if test="${pagePNo+2 < totalPages}">
+					<li class="page-item mt-2"><a href=""><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i></a></li>
+					<li class="page-item"><a class="page-link" href="<c:url value='products?pagePNo=${totalPages}' />">${totalPages}</a></li>
+				</c:if>
+			  </ul>
+		</nav>
 	</div>
 	<!-- modale_product window -->
 	<!-- <div class="modal fade bd-example-modal-lg" id="proModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -9,7 +9,9 @@ import com.web.car98.commodity.model.BidItemBean;
 public interface ProductDao {
 	List<BidBean> getAllProducts();
 	
-	Map<Integer, BidBean> getMapProducts();
+	List<BidBean> getByIdProducts(int memId);
+	
+	Map<Integer, BidBean> getPageProducts(int pagePNo);
 	
 	public BidBean getProductById(int bidId);
 	
@@ -23,4 +25,8 @@ public interface ProductDao {
 	void updateProducts(BidBean bean); 
 
 	void delete(Integer bidId);
+	
+	public int getTotalPages();
+
+	long getRecordCounts();
 }

@@ -60,9 +60,22 @@ public class ProductServiceImpl implements ProductService {
 		dao.delete(bidId);
 	}
 	
+
+	
+	
 	@Transactional
 	@Override
-	public Map<Integer, BidBean> getMapProducts() {
-		return dao.getMapProducts();
+	public int getTotalPages() {
+		return dao.getTotalPages();
+	}
+	@Transactional
+	@Override
+	public Map<Integer, BidBean> getPageProducts(int pagePNo) {
+		return dao.getPageProducts(pagePNo);
+	}
+	@Transactional
+	@Override
+	public List<BidBean> getByIdProducts(int memId) {
+		return dao.getByIdProducts(memId);
 	}
 }

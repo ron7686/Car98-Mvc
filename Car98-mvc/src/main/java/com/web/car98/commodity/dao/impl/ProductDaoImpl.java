@@ -14,11 +14,16 @@ import com.web.car98.commodity.dao.ProductDao;
 import com.web.car98.commodity.model.BidBean;
 import com.web.car98.commodity.model.BidItemBean;
 
+import _00_init.util.GlobalService;
+
 @Repository
 public class ProductDaoImpl implements ProductDao {
 	@Autowired
 	SessionFactory factory;
 
+	private int recordsPerPage = GlobalService.RECORDS_PER_PAGE; // 預設值：每頁8筆
+	private int totalPages = -1;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<BidBean> getAllProducts() {
@@ -78,16 +83,48 @@ public class ProductDaoImpl implements ProductDao {
 		}
 	}
 
+	@Override
+	public int getTotalPages() {
+		// 注意下一列敘述的每一個型態轉換
+		totalPages = (int) (Math.ceil(getRecordCounts() / (double) recordsPerPage));
+
+		return totalPages;
+	}
+	@Override
+	public long getRecordCounts() {
+		long count = 0; // 必須使用 long 型態
+		String hql = "SELECT count(*) FROM BidBean";
+		Session session = factory.getCurrentSession();
+		count = (Long)session.createQuery(hql).getSingleResult();
+		return count;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<Integer, BidBean> getMapProducts() {
-		String hql = "FROM BidBean";
-		Session session = factory.getCurrentSession();
+	public Map<Integer, BidBean> getPageProducts(int pagePNo) {
 		Map<Integer, BidBean> map = new LinkedHashMap<>();
-		List<BidBean> list = session.createQuery(hql).getResultList();
-		for (BidBean bean : list) {
+		String hql = "FROM BidBean";
+        Session session = factory.getCurrentSession();
+        int startRecordNo = (pagePNo - 1) * recordsPerPage;
+        List<BidBean> list = session.createQuery(hql)
+                      .setFirstResult(startRecordNo)
+                      .setMaxResults(recordsPerPage)
+                      .getResultList();
+		for(BidBean bean: list) {
 			map.put(bean.getBidId(), bean);
 		}
 		return map;
+
+	}
+
+	//只有上架商品的memId可做修改
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BidBean> getByIdProducts(int memId) {
+		List<BidBean> list = null;
+		Session session = factory.getCurrentSession();
+		String hql = "FROM BidBean ob WHERE ob.memberBean.memId = :mid";
+		list = session.createQuery(hql).setParameter("mid", memId).getResultList();
+		return list;
 	}
 }
