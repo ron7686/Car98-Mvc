@@ -46,13 +46,17 @@ public class TalkBean implements Serializable {
 	public TalkBean() {
 		super();
 	}
-	public TalkBean(Integer postID, String postTitle, String postText,Date PostTime,Integer PostType,Blob PostPic) {
+	public TalkBean(Integer memId,Integer postID, String postTitle, String postText,Date postTime,Integer postLike,Integer postHate,Integer postCom,Integer postType,Blob postPic) {
 		super();
+		this.MemID=memId;
 		this.PostID = postID;
 		this.PostTitle = postTitle;
 		this.PostText = postText;
-		this.PostTime=PostTime;
-		this.PostPic=PostPic;
+		this.PostLike=postLike;
+		this.PostHate=postHate;
+		this.PostCom=postCom;
+		this.PostTime=postTime;
+		this.PostPic=postPic;
 	}
 	
 	public Integer getPostType() {
