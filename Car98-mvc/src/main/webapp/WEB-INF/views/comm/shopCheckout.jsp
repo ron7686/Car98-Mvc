@@ -120,25 +120,6 @@
         </section>
     </FORM>
     <hr>
-    <section class="py-5">
-        <div class="container">
-            <div class="h1 text-center mb-3 text-white">結帳完成</div>
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <h3 class="text-center mb-3 text-white">購物記錄</h3>
-                    <!--動態新增區域 -->
-                    <table class="table">
-
-                    </table>
-                    <h3 class="text-center mb-3 text-white">個人資訊</h3>
-                    <!--動態新增區域 -->
-                    <table class="table">
-
-                    </table>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- footer -->
     <div class="footer-bottom  bg-dark text-light">
         <div class="container-fluid">
