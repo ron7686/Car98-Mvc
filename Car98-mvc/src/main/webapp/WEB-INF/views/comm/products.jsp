@@ -31,11 +31,11 @@
 			<!-- <a href='products/add'>新增商品</a>
 			<a href='showUpdate'>編輯刪除商品</a> -->
 			<button type="button" class="btn btn-outline-light letter-spacing" 
-				onclick="location.href='/Car98-mvc/comm/showCartContent'">
+				onclick="location.href='${pageContext.request.contextPath}/comm/showCartContent'">
 				<i class="fa fa-shopping-cart"></i><c:out value="${ShoppingCart.itemNumber}" default="0" />
 			</button>
 			<button class="clear-cart btn btn-outline-danger ml-2"
-				onclick="location.href='/Car98-mvc/comm/removeShoppingCart'">
+				onclick="location.href='${pageContext.request.contextPath}/comm/removeShoppingCart'">
 				<i class="far fa-trash-alt"></i>
 			</button>
 		</div>

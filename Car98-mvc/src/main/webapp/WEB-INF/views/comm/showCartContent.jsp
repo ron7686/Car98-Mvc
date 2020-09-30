@@ -128,7 +128,7 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 					</div>
 					<!-- PHOTO -->
 					<div class="image">
-						<img src="./image/item-1.png" alt="">
+						<img style='height: 80px; width: 80px;' src="<c:url value='comm/picture/${anEntry.value.bidId}' />">
 					</div>
 					<!-- product -->
 					<div class="description">

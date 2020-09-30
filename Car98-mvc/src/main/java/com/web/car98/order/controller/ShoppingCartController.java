@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.web.car98.commodity.model.BidBean;
 import com.web.car98.member.model.MemberBean;
 import com.web.car98.order.model.ShoppingCart;
 
 @Controller
 @RequestMapping("comm")
-@SessionAttributes({ "LoginOK", "ShoppingCart"})
+@SessionAttributes({ "LoginOK", "ShoppingCart","porducts"})
 public class ShoppingCartController {
 	@Autowired
 	ServletContext context;
@@ -31,6 +32,7 @@ public class ShoppingCartController {
 			status.setComplete();
 			return "redirect:/login";
 		}
+		BidBean bb = (BidBean) model.getAttribute("porducts");
 		return  "comm/showCartContent";
 	}
 	
