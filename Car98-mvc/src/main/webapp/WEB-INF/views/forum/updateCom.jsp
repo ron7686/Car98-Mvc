@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MemberTalk Page</title>
+<title>UpdateComment Page</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
@@ -151,8 +151,8 @@ body {
      		<!-- 作者資訊 -->
 			<div class="col-2">
 				<br> <a href="#"><img class="photo" src="<%=path %>/image/喬巴1.jpg"></a>
-				<div class="author">${LoginOK.id}</div>
-				<div class="account">${LoginOK.email}</div>
+				<div class="author">多尼多尼喬巴</div>
+				<div class="account">zzz94572</div>
 
 			</div>
 			<!-- 文章內容 -->
@@ -175,8 +175,8 @@ body {
 							type="button">1</li>
 						<!-- <button id="updateButton" >編輯</button> -->
 					
-						<a id="updateButton" class="updateButton" href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
-						<a id="" class="deleteButton" href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
+						<a id="updateButton" href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
+						<a id="deleteButton" href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
 				
 					</ul>                             
 				</div>
@@ -241,17 +241,5 @@ body {
       </p>
     </div>
   </div>
-  <script>
-	  $(document).ready(function() {
-	$(".deleteButton").on('click',function(e) {
-		if (confirm("確定刪除此則留言?")) {
-			return true;
-		} else {
-			return false;
-		}
-	});
-})
-  </script>
-
   </body>
 </html>

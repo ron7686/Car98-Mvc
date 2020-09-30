@@ -38,7 +38,7 @@ import com.web.car98.forum.service.impl.CommentServiceImpl;
 import com.web.car98.validator.CommentValidator;
 
 @Controller
-@SessionAttributes({"LoginOK","CommentBean","TalkBean","pageNo","lastPage"})
+@SessionAttributes({"LoginOK","CommentBean","TalkBean","pageNo"})
 public class CommentController {
 
 	@Autowired
@@ -83,7 +83,6 @@ public class CommentController {
 //		cb.setPostId(tb.getPostID());
 		CommentBean commentBean = cb;
 		commentBean.setTalkBean(tb);
-		System.out.println("bean = " + commentBean.toString());
 		commentservice.insertCom(commentBean);
 		model.addAttribute("CommentBean", commentservice.selectCom(tb.getPostID()));
 		// model.addAttribute("floor",floor);
@@ -117,10 +116,11 @@ public class CommentController {
 
 
 
-	@GetMapping("/forum/deleteCom")
+	@RequestMapping("/forum/deleteCom")
 	public String deleteCom(Model model,
-			@RequestParam("comId") Integer comId, 
-			@RequestParam("postID") Integer postID) {
+			@RequestParam("comId") Integer comId,
+			@RequestParam("postID") Integer postID
+			) {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {
 			return "redirect:/login";
@@ -130,7 +130,7 @@ public class CommentController {
 //		Integer comId = Integer.valueOf(comIdStr);
 //		CommentServiceImpl service = new CommentServiceImpl();
 		commentservice.deleteComByPk(comId);
-		return "redirect:/talktalk";
+		return "redirect:/talktalk?postID=" + postID;
 //		return "/forum/talktalk";
 	}
 }

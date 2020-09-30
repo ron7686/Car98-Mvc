@@ -95,10 +95,10 @@ public class CommentDaoImpl implements CommentDao {
 	public int deleteComByPk(Integer comId) {
 		Integer n = 0;
 		Session session = factory.getCurrentSession();
-		String hql = "Delete FROM CommentBean where comId=:comId";
-//        CommentBean commentbean = session.get(CommentBean.class, comId);
-//        session.delete(comId);
-		session.createQuery(hql).setParameter("comId",comId).executeUpdate();
+//		String hql = "Delete FROM CommentBean where comId=:comId";
+        CommentBean commentbean = session.get(CommentBean.class, comId);
+        session.delete(commentbean);
+//		session.createQuery(hql).setParameter("comId",comId).executeUpdate();
 		n++;
 		return n;
 		
