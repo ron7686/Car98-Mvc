@@ -83,7 +83,6 @@ public class CommentController {
 //		cb.setPostId(tb.getPostID());
 		CommentBean commentBean = cb;
 		commentBean.setTalkBean(tb);
-		System.out.println("bean = " + commentBean.toString());
 		commentservice.insertCom(commentBean);
 		model.addAttribute("CommentBean", commentservice.selectCom(tb.getPostID()));
 		// model.addAttribute("floor",floor);

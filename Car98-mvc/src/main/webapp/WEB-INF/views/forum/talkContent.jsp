@@ -112,6 +112,7 @@ body {
 						<form:input class="title" path="PostTitle" type="text" name="title" style="width: 100%"
 							placeholder="請輸入文章標題......." value="${param.title}" />
 							<form:errors class="errormsg" path="PostTitle" > </form:errors>
+							<form:input path="PostType" value="1" />
 						<form:textarea class="mt-2"   path="PostText"
 							style="width: 100%" cols="100" rows="20"
 							placeholder="請輸入內容......"></form:textarea>

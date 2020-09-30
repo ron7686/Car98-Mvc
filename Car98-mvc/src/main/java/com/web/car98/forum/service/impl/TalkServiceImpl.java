@@ -47,4 +47,9 @@ public class TalkServiceImpl implements TalkService  {
 	public TalkBean selectOne(int postID) {
 		return dao.selectOne(postID);
 	}
+@Override
+public List<TalkBean> getAll() {
+	
+	return dao.getAll();
+}
 }
