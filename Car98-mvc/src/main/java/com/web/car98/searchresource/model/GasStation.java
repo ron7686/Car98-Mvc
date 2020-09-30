@@ -63,4 +63,10 @@ public class GasStation implements Serializable {
 		this.street = street;
 	}
 
+	@Override
+	public String toString() {
+		return "GasStation [gasstation=" + gasstation + ", city=" + city + ", district=" + district + ", street="
+				+ street + "]";
+	}
+
 }

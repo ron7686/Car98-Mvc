@@ -26,6 +26,7 @@ public class CommentBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer comId;
 
+
 //    @Column(name = "PostID")
 //    @Transient
 //    private Integer postId;
@@ -34,6 +35,7 @@ public class CommentBean implements Serializable {
 //    private Integer memId;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "memId")
+
 	private MemberBean memberBean;
 	@Column(name = "ComText")
 	private String comText;
@@ -159,8 +161,7 @@ public class CommentBean implements Serializable {
 	@Override
 	public String toString() {
 		return "CommentBean [comId=" + comId + ", memberBean=" + memberBean + ", comText=" + comText + ", comTime="
-				+ comTime + ", comLike=" + comLike + ", comPic=" + comPic + ", comHate=" + comHate + ", talkBean="
-				+ talkBean + "]";
+				+ comTime + ", comLike=" + comLike + ", comPic=" + comPic + ", comHate=" + comHate+ "]";
 	}
 
 }

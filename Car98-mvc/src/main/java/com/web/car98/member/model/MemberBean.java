@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -16,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.web.car98.forum.model.TalkBean;
 
 @Entity
 @Table(name="mem")
@@ -47,6 +51,9 @@ public class MemberBean implements Serializable {
 	Double unpaid_amount;
 	@Transient
 	MultipartFile memberMultipartFile;
+	
+	@OneToMany(mappedBy="memberBean")
+	private List<TalkBean> talkBean = new ArrayList<>();
 
 	
 	public MemberBean() {

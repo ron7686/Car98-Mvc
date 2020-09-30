@@ -6,13 +6,19 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.web.car98.member.model.MemberBean;
 @Entity
 @Table(name = "talk")
 public class TalkBean implements Serializable {
@@ -21,9 +27,14 @@ public class TalkBean implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer PostID;
-	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="MemID")
+	private MemberBean memberBean;
 	@Column(name="MemID")
+	@Transient
 	private Integer MemID;
+	
+	
 	@Column(name="PostTitle")
 	private String PostTitle;
 	@Column(name="PostText")
@@ -36,6 +47,10 @@ public class TalkBean implements Serializable {
 	private Integer PostHate;
 	@Column(name="PostCom")
 	private Integer PostCom;
+	@Column(name="PostView")
+	private Integer PostView;
+	@Transient
+	private String Postmember;
 	@Column(name="PostType")
 	private Integer PostType;
 	@Column(name="PostPic")
@@ -46,19 +61,111 @@ public class TalkBean implements Serializable {
 	public TalkBean() {
 		super();
 	}
-	public TalkBean(Integer memId,Integer postID, String postTitle, String postText,Date postTime,Integer postLike,Integer postHate,Integer postCom,Integer postType,Blob postPic) {
-		super();
-		this.MemID=memId;
-		this.PostID = postID;
-		this.PostTitle = postTitle;
-		this.PostText = postText;
-		this.PostLike=postLike;
-		this.PostHate=postHate;
-		this.PostCom=postCom;
-		this.PostTime=postTime;
-		this.PostPic=postPic;
-	}
 	
+	
+	
+	
+
+
+	public TalkBean(Integer postID, MemberBean memberBean, Integer memID, String postTitle,
+			String postText, Date postTime, Integer postLike, Integer postHate, Integer postCom, Integer postView,
+			String postmember, Integer postType, Blob postPic, List<CommentBean> comment) {
+		super();
+		PostID = postID;
+		this.memberBean = memberBean;
+		MemID = memID;
+		
+		PostTitle = postTitle;
+		PostText = postText;
+		PostTime = postTime;
+		PostLike = postLike;
+		PostHate = postHate;
+		PostCom = postCom;
+		PostView = postView;
+		Postmember = postmember;
+		PostType = postType;
+		PostPic = postPic;
+		this.comment = comment;
+	}
+
+
+
+
+
+
+	public MemberBean getMemberBean() {
+		return memberBean;
+	}
+
+
+
+	public void setMemberBean(MemberBean memberBean) {
+		this.memberBean = memberBean;
+	}
+
+
+
+	public Integer getMemID() {
+		return MemID;
+	}
+
+
+
+
+
+
+	public void setMemID(Integer memID) {
+		MemID = memID;
+	}
+
+
+
+
+
+
+	
+
+
+
+
+
+
+	public Integer getPostView() {
+		return PostView;
+	}
+
+
+
+
+
+
+	public void setPostView(Integer postView) {
+		PostView = postView;
+	}
+
+
+
+
+
+
+	public String getPostmember() {
+		return Postmember;
+	}
+
+
+
+
+
+
+	public void setPostmember(String postmember) {
+		Postmember = postmember;
+	}
+
+
+
+
+
+
 	public Integer getPostType() {
 		return PostType;
 	}
@@ -77,12 +184,7 @@ public class TalkBean implements Serializable {
 	public void setPostID(Integer postID) {
 		PostID = postID;
 	}
-	public Integer getMemID() {
-		return MemID;
-	}
-	public void setMemID(Integer memID) {
-		MemID = memID;
-	}
+	
 	public String getPostTitle() {
 		return PostTitle;
 	}
@@ -125,12 +227,17 @@ public class TalkBean implements Serializable {
 	public void setPostPic(Blob postPic) {
 		PostPic = postPic;
 	}
+
+
+
 	@Override
 	public String toString() {
-		return "TalkBean [PostID=" + PostID + ", MemID=" + MemID + ", PostTitle=" + PostTitle + ", PostText=" + PostText
-				+ ", PostTime=" + PostTime + ", PostLike=" + PostLike + ", PostHate=" + PostHate + ", PostCom="
-				+ PostCom +", PostPic="+PostPic+ "]";
+		return "TalkBean [PostID=" + PostID + ", memberBean=" + memberBean + ", PostTitle=" + PostTitle + ", PostText="
+				+ PostText + ", PostTime=" + PostTime + ", PostLike=" + PostLike + ", PostHate=" + PostHate
+				+ ", PostCom=" + PostCom + ", PostType=" + PostType + ", PostPic=" + PostPic
+				+ "]";
 	}
+	
 	
 	
 	

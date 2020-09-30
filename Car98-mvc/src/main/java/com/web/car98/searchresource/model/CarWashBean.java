@@ -65,4 +65,10 @@ public class CarWashBean implements Serializable {
 		this.street = street;
 	}
 
+	@Override
+	public String toString() {
+		return "CarWashBean [carwash=" + carwash + ", city=" + city + ", district=" + district + ", street=" + street
+				+ "]";
+	}
+
 }

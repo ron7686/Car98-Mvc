@@ -33,7 +33,7 @@ public class TalkDaoImpl implements TalkDao  {
 //		Transaction tx=null;
 //		try {
 //			tx=session.beginTransaction();
-			session.persist(tb);
+			session.save(tb);
 //			tx.commit();
 //		} catch (Exception e) {
 //			if(tx !=null) {
