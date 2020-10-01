@@ -41,7 +41,7 @@ public class TalkController {
 		
 		
 		
-//		model.addAttribute("postTime", )
+
 		model.addAttribute("abean", list);
 		model.addAttribute("pageNo",pageNo);
 		model.addAttribute("lastPage", talkservice.lastpage());

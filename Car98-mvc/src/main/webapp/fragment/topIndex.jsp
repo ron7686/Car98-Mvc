@@ -14,14 +14,6 @@
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 		<ul class="navbar-nav ml-auto">
 
-			<li class="nav-item dropdown"><a class="nav-link"
-					href="${pageContext.request.contextPath}/searchresource/SearchResource.jsp"
-					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Car好康 </a>
-			</li>
-			<li class="nav-item dropdown"><a class="nav-link" href="/carEasy.html" id="navbarDropdownMenuLink"
-					role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Car方便 </a>
-
 			<li class="nav-item"><a class="nav-link" href="<c:url value='searchresource' /> "> Car好康 </a>
 				</li>
 			<li class="nav-item dropdown"><a
