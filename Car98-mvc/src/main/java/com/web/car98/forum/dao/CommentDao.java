@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.TalkBean;
+import com.web.car98.member.model.MemberBean;
 
 
 
@@ -30,7 +31,7 @@ public interface CommentDao {
 
 	int getLastpage(Integer postId);
 
-	
+	MemberBean queryMemberByComId(Integer comId);
 
 }
 

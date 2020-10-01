@@ -150,7 +150,7 @@ body {
 			<div class="row">
      		<!-- 作者資訊 -->
 			<div class="col-2">
-				<br> <a href="#"><img class="photo" src="<%=path %>/image/喬巴1.jpg"></a>
+				<br> <a href="#"><img class="photo" src='${pageContext.request.contextPath}/getComMemberImage?id=${LoginOK.memId}&comId=${comment.comId}'></a>
 				<div class="author">${LoginOK.id}</div>
 				<div class="account">${LoginOK.email}</div>
 
@@ -173,12 +173,14 @@ body {
 						<li id="like1" button class="fas fa-thumbs-up fa-2x" type="button">12</li>
 						<li id="hate1" button class="fas fa-thumbs-down fa-2x"
 							type="button">1</li>
-						<!-- <button id="updateButton" >編輯</button> -->
-					
-						<a id="updateButton" class="updateButton" href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
-						<a id="" class="deleteButton" href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
-				
-					</ul>                             
+
+<%-- 							<c:if test="${CommentBean.memId}==${LoginOK.memId}"> --%>
+								<a id="updateButton" class="updateButton"
+									href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
+								<a id="" class="deleteButton"
+									href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
+<%-- 							</c:if> --%>
+						</ul>                             
 				</div>
 			</div>
 			</div>

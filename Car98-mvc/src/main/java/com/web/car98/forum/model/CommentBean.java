@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.web.car98.member.model.MemberBean;
 
@@ -25,18 +24,6 @@ public class CommentBean implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer comId;
-
-
-//    @Column(name = "PostID")
-//    @Transient
-//    private Integer postId;
-//    @Column(name = "MemID")
-//    @Transient
-//    private Integer memId;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "memId")
-
-	private MemberBean memberBean;
 	@Column(name = "ComText")
 	private String comText;
 	@Column(name = "ComTime")
@@ -49,6 +36,10 @@ public class CommentBean implements Serializable {
 	private Integer comHate;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "memId")
+	private MemberBean memberBean;
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PostID")
 	private TalkBean talkBean;
 
@@ -56,7 +47,6 @@ public class CommentBean implements Serializable {
 		super();
 	}
 
-  
 	public CommentBean(Integer comId, MemberBean memberBean, String comText, Date comTime, Integer comLike, Blob comPic,
 			Integer comHate, TalkBean talkBean) {
 		super();
@@ -70,37 +60,13 @@ public class CommentBean implements Serializable {
 		this.talkBean = talkBean;
 	}
 
-	
-	
-//	public Integer getPostId() {
-//		return postId;
-//	}
-//
-//
-//	public void setPostId(Integer postId) {
-//		this.postId = postId;
-//	}
-//
-//
-//	public Integer getMemId() {
-//		return memId;
-//	}
-//
-//
-//	public void setMemId(Integer memId) {
-//		this.memId = memId;
-//	}
-
-
 	public MemberBean getMemberBean() {
 		return memberBean;
 	}
 
-
 	public void setMemberBean(MemberBean memberBean) {
 		this.memberBean = memberBean;
 	}
-
 
 	public TalkBean getTalkBean() {
 		return talkBean;
@@ -161,7 +127,7 @@ public class CommentBean implements Serializable {
 	@Override
 	public String toString() {
 		return "CommentBean [comId=" + comId + ", memberBean=" + memberBean + ", comText=" + comText + ", comTime="
-				+ comTime + ", comLike=" + comLike + ", comPic=" + comPic + ", comHate=" + comHate+ "]";
+				+ comTime + ", comLike=" + comLike + ", comPic=" + comPic + ", comHate=" + comHate + "]";
 	}
 
 }
