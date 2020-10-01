@@ -72,6 +72,7 @@ public class TalkDaoImpl implements TalkDao  {
 		List<TalkBean> lipage=new ArrayList<>();
 		for(int i=getpage;i<getpage+onepage&&i<li.size();i++) {
 			lipage.add(li.get(i));
+			lipage.get(i-getpage).setPostCom(li.get(i).getComment().size());
 		}
 		return lipage;
 	}

@@ -59,6 +59,7 @@ body {
 	<section class="my-5">
 
 		<div class="container text-white main">
+		<form:form modelAttribute="talkBean"  method="Post" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-12">
 					<ul class="texttitle">
@@ -67,13 +68,16 @@ body {
 					</ul>
 				</div>
 				<!-- 分類選項 -->
+			 	
 			 	<div class="col-12 classification">
-					<select name="" id="" class="select mt-2">
-						<option value="discuss">討論</option>
-						<option value="share">分享＆心得</option>
-						<option value="help">求助＆問題</option>
-						<option value="announcement">公告</option>
-					</select>
+					<form:select path="PostType" id="" class="select mt-2">
+						<form:option value="討論">討論</form:option>
+						<form:option value="分享＆心得">分享＆心得</form:option>
+						<form:option value="求助＆問題">求助＆問題</form:option>
+						<form:option value="公告">公告</form:option>
+					</form:select>
+						
+					
 				</div>
 				<!-- 編輯列表 -->
 				<div class="col-12  editor-list">
@@ -107,25 +111,25 @@ body {
 				<!-- 內文輸入 -->
 				<div class="col-9">
 
-					<form:form class="mt-3" modelAttribute="talkBean"  method="Post" enctype="multipart/form-data">
+				
 
 						<form:input class="title" path="PostTitle" type="text" name="title" style="width: 100%"
 							placeholder="請輸入文章標題......." value="${param.title}" />
 							<form:errors class="errormsg" path="PostTitle" > </form:errors>
-							<form:input path="PostType" value="1" />
+							
 						<form:textarea class="mt-2"   path="PostText"
 							style="width: 100%" cols="100" rows="20"
 							placeholder="請輸入內容......"></form:textarea>
 						<form:errors class="errormsg" path="PostText" > </form:errors>
 						<input type="submit" value="發佈文章" class="publish">
 						
-					</form:form>
+					
 				</div>
 				<!-- 插入附件 -->
 				<div class="col-3">
 					<ul class="annex ">
 						<li>
-							<form:form class="mt-3" modelAttribute="talkBean"  method="Post" enctype="multipart/form-data">
+							
 								<div class="form-group ">
 									<img src="${pageContext.servletContext.contextPath}/image/view.jpeg" width="50" height="50"> <label
 										for="exampleFormControlFile1">插入圖片</label>
@@ -133,7 +137,7 @@ body {
 										class="form-control-file mt-2" id="btnImage"
 										value="插入圖片">
 								</div>
-							</form:form>
+							
 						</li>
 						<li>
 							<img id="image" src="">
@@ -141,7 +145,9 @@ body {
 					</ul>
 				</div>
 			</div>
+			</form:form>
 		</div>
+		
 	</section>
 	<jsp:include page="/fragment/footer.jsp"></jsp:include>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
