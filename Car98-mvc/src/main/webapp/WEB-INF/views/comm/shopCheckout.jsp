@@ -110,9 +110,9 @@
                             </div>
                         </div>
                         <div class="text-right">
-                            <!-- <a class="btn btn-secondary" href="<c:url value='/comm/ProcessOrder' />">繼續選購</a> -->
+                            <a class="btn btn-secondary" href="<c:url value='/comm/products' />">繼續選購</a>
                             <input type="hidden" name="finalDecision"  value="">   
-                            <input type="button"  name="OrderBtn" value="確認" onclick="reconfirmOrder()">
+                            <input class="btn btn-secondary" type="button"  name="OrderBtn" value="確認" onclick="reconfirmOrder()">
                         </div>
                     </div>
                 </div>

@@ -141,7 +141,7 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 									<img src="${pageContext.servletContext.contextPath}/image/plus.svg" alt="">
 								</button> -->
 						<Input id="newQty${vs.index}" style="width: 60px; text-align: center" name="newQty"
-							type="number" value="<fmt:formatNumber value='${anEntry.value.quantity}' />" name="qty"
+							type="number" min='1' max='10' value="<fmt:formatNumber value='${anEntry.value.quantity}' />" name="qty"
 							onkeypress="return isNumberKey(event)" />
 						<!-- <button class="minus-btn">
 									<img src="${pageContext.servletContext.contextPath}/image/minus.svg" alt="">

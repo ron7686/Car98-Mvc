@@ -2,7 +2,9 @@ package com.web.car98.order.service;
 
 import java.util.List;
 
+import com.web.car98.commodity.model.BidBean;
 import com.web.car98.order.model.OrderBean;
+import com.web.car98.order.model.OrderItemBean;
 
 // 本介面處理訂單。一張訂單的所有資訊是存放在OrderBean內，而訂單明細是存放在  
 // Set<OrderItemBean> items 屬性內。
@@ -23,4 +25,10 @@ public interface OrderService {
 	List<OrderBean> getAllOrders();
 
 	List<OrderBean> getMemberOrders(String memId);
+	
+	public void updateOrder(OrderBean bean);
+	
+	public List<OrderItemBean> getAllItems(Integer orderNO);
+
+	void delete(Integer orderNo);
 }

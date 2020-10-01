@@ -72,5 +72,20 @@ public class OrderServiceImpl implements OrderService {
 			oidao.updateProductStock(oib);
 		}
 	}
+	@Transactional
+	@Override
+	public void updateOrder(OrderBean bean) {
+		odao.updateOrder(bean);
+	}
+	@Transactional
+	@Override
+	public List<OrderItemBean> getAllItems(Integer orderNO) {
+		return oidao.getAllItems(orderNO);
+	}
+	@Transactional
+	@Override
+	public void delete(Integer orderNo) {
+		odao.delete(orderNo);	
+	}
 
 }
