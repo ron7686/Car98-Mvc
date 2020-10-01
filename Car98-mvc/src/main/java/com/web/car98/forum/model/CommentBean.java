@@ -26,9 +26,16 @@ public class CommentBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer comId;
 
-	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "MemID")
+
+//    @Column(name = "PostID")
+//    @Transient
+//    private Integer postId;
+//    @Column(name = "MemID")
+//    @Transient
+//    private Integer memId;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "memId")
+
 	private MemberBean memberBean;
 	@Column(name = "ComText")
 	private String comText;
@@ -49,6 +56,7 @@ public class CommentBean implements Serializable {
 		super();
 	}
 
+  
 	public CommentBean(Integer comId, MemberBean memberBean, String comText, Date comTime, Integer comLike, Blob comPic,
 			Integer comHate, TalkBean talkBean) {
 		super();
@@ -61,6 +69,38 @@ public class CommentBean implements Serializable {
 		this.comHate = comHate;
 		this.talkBean = talkBean;
 	}
+
+	
+	
+//	public Integer getPostId() {
+//		return postId;
+//	}
+//
+//
+//	public void setPostId(Integer postId) {
+//		this.postId = postId;
+//	}
+//
+//
+//	public Integer getMemId() {
+//		return memId;
+//	}
+//
+//
+//	public void setMemId(Integer memId) {
+//		this.memId = memId;
+//	}
+
+
+	public MemberBean getMemberBean() {
+		return memberBean;
+	}
+
+
+	public void setMemberBean(MemberBean memberBean) {
+		this.memberBean = memberBean;
+	}
+
 
 	public TalkBean getTalkBean() {
 		return talkBean;

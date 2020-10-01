@@ -16,4 +16,8 @@ public interface OrderDao {
 	List<OrderBean> getAllOrders();
 
 	List<OrderBean> getMemberOrders(String memId);
+	
+	public void updateOrder(OrderBean bean);
+
+	void delete(Integer orderNo);
 }
