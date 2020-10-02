@@ -146,5 +146,16 @@ public class CommentDaoImpl implements CommentDao {
 		MemberBean memberBean = commentbean.getMemberBean();
 		return memberBean;
 	}
+	
+	// 查出這則PO文是哪個會員留的
+	@Override
+	public MemberBean queryMemberByPostId(Integer postId) {
+		TalkBean talkBean = null;
+		Session session = factory.getCurrentSession();
+		talkBean = session.get(TalkBean.class, postId);
+		MemberBean memberBean = talkBean.getMemberBean();
+		return memberBean;
+	}
+		
 
 }

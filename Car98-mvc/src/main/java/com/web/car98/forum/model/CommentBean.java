@@ -13,7 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.web.car98.member.model.MemberBean;
 
 @Entity
@@ -31,9 +35,14 @@ public class CommentBean implements Serializable {
 	@Column(name = "ComLike")
 	private Integer comLike;
 	@Column(name = "ComPic")
+	@JsonIgnore
 	private Blob comPic;
+	private String fileName;	
 	@Column(name = "ComHate")
 	private Integer comHate;
+	
+	@Transient
+	MultipartFile commentMultipartFile;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "memId")
@@ -46,17 +55,33 @@ public class CommentBean implements Serializable {
 	public CommentBean() {
 		super();
 	}
-
-	public CommentBean(Integer comId, MemberBean memberBean, String comText, Date comTime, Integer comLike, Blob comPic,
-			Integer comHate, TalkBean talkBean) {
+	
+	public CommentBean(Integer comId, String comText, Date comTime, Integer comLike, Blob comPic, String fileName,
+			Integer comHate, MemberBean memberBean, TalkBean talkBean) {
 		super();
 		this.comId = comId;
-		this.memberBean = memberBean;
 		this.comText = comText;
 		this.comTime = comTime;
 		this.comLike = comLike;
 		this.comPic = comPic;
+		this.fileName = fileName;
 		this.comHate = comHate;
+		this.memberBean = memberBean;
+		this.talkBean = talkBean;
+	}
+	
+	public CommentBean(Integer comId, String comText, Date comTime, Integer comLike, Blob comPic, String fileName,
+			Integer comHate, MultipartFile commentMultipartFile, MemberBean memberBean, TalkBean talkBean) {
+		super();
+		this.comId = comId;
+		this.comText = comText;
+		this.comTime = comTime;
+		this.comLike = comLike;
+		this.comPic = comPic;
+		this.fileName = fileName;
+		this.comHate = comHate;
+		this.commentMultipartFile = commentMultipartFile;
+		this.memberBean = memberBean;
 		this.talkBean = talkBean;
 	}
 
@@ -123,11 +148,29 @@ public class CommentBean implements Serializable {
 	public void setComHate(Integer comHate) {
 		this.comHate = comHate;
 	}
+	
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public MultipartFile getCommentMultipartFile() {
+		return commentMultipartFile;
+	}
+
+	public void setCommentMultipartFile(MultipartFile commentMultipartFile) {
+		this.commentMultipartFile = commentMultipartFile;
+	}
 
 	@Override
 	public String toString() {
-		return "CommentBean [comId=" + comId + ", memberBean=" + memberBean + ", comText=" + comText + ", comTime="
-				+ comTime + ", comLike=" + comLike + ", comPic=" + comPic + ", comHate=" + comHate + "]";
+		return "CommentBean [comId=" + comId + ", comText=" + comText + ", comTime=" + comTime + ", comLike=" + comLike
+				+ ", comPic=" + comPic + ", fileName=" + fileName + ", comHate=" + comHate + ", commentMultipartFile="
+				+ commentMultipartFile + ", memberBean=" + memberBean + ", talkBean=" + talkBean + "]";
 	}
 
 }

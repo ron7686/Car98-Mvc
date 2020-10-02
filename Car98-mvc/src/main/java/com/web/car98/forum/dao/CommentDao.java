@@ -33,5 +33,7 @@ public interface CommentDao {
 
 	MemberBean queryMemberByComId(Integer comId);
 
+	MemberBean queryMemberByPostId(Integer postId);
+
 }
 

@@ -159,5 +159,14 @@ public class CommentServiceImpl implements CommentService {
 	public MemberBean queryMemberByComId(Integer comId) {		
 		return dao.queryMemberByComId(comId);
 	}
+	
+	@Transactional
+	@Override
+	public MemberBean queryMemberByPostId(Integer postId) {		
+		return dao.queryMemberByPostId(postId);
+	}
+	
+	
+
 
 }

@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.car98.forum.model.CommentBean;
@@ -81,13 +84,29 @@ public class CommentController {
 		if (memberBean == null) {
 			return "redirect:/login";
 		}
+		
+		// ------------------------- 檔案上傳處理 ------------------------
+		MultipartFile commentImage = cb.getCommentMultipartFile();
+		String originalFilename = commentImage.getOriginalFilename();
+		if (commentImage != null && !commentImage.isEmpty()) {
+			try {
+				byte[] b = commentImage.getBytes();
+				Blob blob = new SerialBlob(b);
+				cb.setFileName(originalFilename);
+				cb.setComPic(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}		
 
 		String pID = String.valueOf(tb.getPostID());
 //		cb.setPostId(tb.getPostID());
-		CommentBean commentBean = cb;
-		commentBean.setTalkBean(tb);
-		commentBean.setMemberBean(memberBean);
-		commentservice.insertCom(commentBean);
+		cb.setTalkBean(tb);
+		cb.setMemberBean(memberBean);
+		Date comTime = new Date(System.currentTimeMillis());
+		cb.setComTime(comTime);		
+		commentservice.insertCom(cb);
 		model.addAttribute("CommentBean", commentservice.selectCom(tb.getPostID()));
 		// model.addAttribute("floor",floor);
 		return "redirect:/talktalk?postID=" + pID;
@@ -197,4 +216,130 @@ public class CommentController {
 		}
 		return responseEntity;
 	}
+	// 取出此文章的發文者為哪個會員 進而取出該會員頭像
+	@GetMapping("/getPostMemberImage")
+	public ResponseEntity<byte[]> getPostMemberImage(@RequestParam("postID") Integer postID) {
+		InputStream is = null;
+		OutputStream os = null;
+		String fileName = null;
+		String mimeType = null;
+		byte[] media = null;
+		ResponseEntity<byte[]> responseEntity = null;
+		HttpHeaders headers = new HttpHeaders();
+		MediaType mediaType = null;
+		Blob blob = null;
+		try {
+			// 取出此文章的發文者為哪個會員 進而取出該會員頭像
+			MemberBean bean = commentservice.queryMemberByPostId(postID);
+
+			if (bean != null) {
+				blob = bean.getHeadPic();
+				if (blob != null) {
+					is = blob.getBinaryStream();
+				}
+				fileName = bean.getFileName();
+			}
+			// 如果圖片的來源有問題，就送回預設圖片(/images/NoImage.png)
+			if (is == null) {
+				fileName = "NoImage.png";
+				is = servletContext.getResourceAsStream("/image/" + fileName);
+			}
+			// 由圖片檔的檔名來得到檔案的MIME型態
+			mimeType = servletContext.getMimeType(fileName);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			// 由InputStream讀取位元組，然後由OutputStream寫出
+			int len = 0;
+			byte[] bytes = new byte[81920];
+
+			while ((len = is.read(bytes)) != -1) {
+				baos.write(bytes, 0, len);
+			}
+			media = baos.toByteArray();
+			mediaType = MediaType.valueOf(mimeType);
+			// 連線不要Cache在裡面
+			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+			headers.setContentType(mediaType);
+			responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("getPostMemberImage 發生Exception: " + e.getMessage());
+		} finally {
+			try {
+				if (is != null)
+					is.close();
+			} catch (IOException e) {
+				;
+			}
+			try {
+				if (os != null)
+					os.close();
+			} catch (IOException e) {
+				;
+			}
+		}
+		return responseEntity;
+	}
+
+	// 取出此留言的圖片
+	@GetMapping("/getComImage")
+	public ResponseEntity<byte[]> getComImage(@RequestParam("comId") Integer comId) {
+		InputStream is = null;
+		OutputStream os = null;
+		String fileName = null;
+		String mimeType = null;
+		byte[] media = null;
+		ResponseEntity<byte[]> responseEntity = null;
+		HttpHeaders headers = new HttpHeaders();
+		MediaType mediaType = null;
+		Blob blob = null;
+		try {
+			// 取出此留言 進而取出該留言的圖片
+			CommentBean bean = commentservice.selectComByPk(comId);
+
+			if (bean != null) {
+				blob = bean.getComPic();
+				if (blob != null) {
+					is = blob.getBinaryStream();
+				}
+				fileName = bean.getFileName();
+			}
+			// 如果圖片的來源有問題，就送回預設圖片(/images/NoImage.png)
+			if (is == null) {
+				return null;
+			}
+			// 由圖片檔的檔名來得到檔案的MIME型態
+			mimeType = servletContext.getMimeType(fileName);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			// 由InputStream讀取位元組，然後由OutputStream寫出
+			int len = 0;
+			byte[] bytes = new byte[81920];
+
+			while ((len = is.read(bytes)) != -1) {
+				baos.write(bytes, 0, len);
+			}
+			media = baos.toByteArray();
+			mediaType = MediaType.valueOf(mimeType);
+			// 連線不要Cache在裡面
+			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+			headers.setContentType(mediaType);
+			responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("getComImage 發生Exception: " + e.getMessage());
+		} finally {
+			try {
+				if (is != null)
+					is.close();
+			} catch (IOException e) {
+				;
+			}
+			try {
+				if (os != null)
+					os.close();
+			} catch (IOException e) {
+				;
+			}
+		}
+		return responseEntity;
+	}	
 }

@@ -27,4 +27,6 @@ public interface CommentService {
 	int getLastpage(Integer postId);
 	
 	MemberBean queryMemberByComId(Integer comId);
+
+	MemberBean queryMemberByPostId(Integer postId);
 }
