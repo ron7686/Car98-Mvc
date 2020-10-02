@@ -110,6 +110,7 @@
 						<label for="password" class="pswd">密碼</label> 
 						<form:input class="form-control text" type="password" path="password"  />
              			<form:errors  path="password" cssClass="error" /><br>
+             			<form:errors  path="invalidCredentials" cssClass="error" /><br>             			
 						<div class="invalid-feedback">請輸入密碼</div>
 
 					</div>

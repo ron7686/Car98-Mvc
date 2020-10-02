@@ -74,7 +74,7 @@ public class InitController {
 			if (is == null) {
 				fileName = "NoImage.png" ; 
 				is = servletContext.getResourceAsStream(
-						"/images/" + fileName);
+						"/image/" + fileName);
 			}
 			// 由圖片檔的檔名來得到檔案的MIME型態
 			mimeType = servletContext.getMimeType(fileName);

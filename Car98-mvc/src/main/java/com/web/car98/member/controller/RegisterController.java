@@ -32,93 +32,89 @@ import com.web.car98.validator.MemberBeanValidator;
 import _00_init.util.GlobalService;
 
 @Controller
-@SessionAttributes("LoginOK")
+@SessionAttributes({ "LoginOK", "memberBean", "loginBean" })
 public class RegisterController {
 	final static private Integer LEVELS = 2;
-	
+
 	@Autowired
 	MemberService memberService;
 	@Autowired
 	ServletContext context;
-	
+
 	@Autowired
 	MemberBeanValidator memberBeanValidator;
-	
+
 	@Autowired
 	ChangePasswordValidator changePasswordValidator;
 
-	String registerForm = "/register/register";
-	
+	String registerForm = "/login/testloginregister";
+
 	@GetMapping("/register")
 	public String getAddNewMemberForm(Model model) {
 		MemberBean mb = new MemberBean();
-		model.addAttribute("memberBean",mb);
+		model.addAttribute("memberBean", mb);
 		return "/register/register";
 	}
-	
+
 	@PostMapping("/register")
-	public String processAddNewMemberForm(@ModelAttribute("memberBean") MemberBean mb,
-			BindingResult result,Model model,
-			HttpServletRequest request) {
+	public String processAddNewMemberForm(@ModelAttribute("memberBean") MemberBean mb, BindingResult result,
+			Model model, HttpServletRequest request) {
 		memberBeanValidator.validate(mb, result);
-		
+
 		// 有錯誤訊息返回 register.jsp
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			// 清空密碼
 			mb.setPassword("");
 			mb.setPassword1("");
 			return registerForm;
 		}
-		
-		
+
 //		if(memberService.idExists(mb.getEmail())) {
 //			memberService.rejectValue("email", "" , "E-mail已存在，請重新輸入");
 //			return inputDataForm;
 //		}
-		
+
 		// ------------------------- 檔案上傳處理 ------------------------
 		MultipartFile memberImage = mb.getMemberMultipartFile();
 		String originalFilename = memberImage.getOriginalFilename();
-		mb.setFileName(originalFilename);
-		if(memberImage!=null && !memberImage.isEmpty()) {
+		if (memberImage != null && !memberImage.isEmpty()) {
 			try {
-				byte []b = memberImage.getBytes();
+				byte[] b = memberImage.getBytes();
 				Blob blob = new SerialBlob(b);
+				mb.setFileName(originalFilename);
 				mb.setHeadPic(blob);
-			}catch(Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
 		}
-		
+
 		// 註冊日期
 		Timestamp currentDate = new Timestamp(System.currentTimeMillis());
 		mb.setMeCreate(currentDate);
-		
+
 		// 登入時間
 		Timestamp loginTime = new Timestamp(System.currentTimeMillis());
 		mb.setLoginTime(loginTime);
-		
+
 		// 會員等級設定
 		mb.setLevels(LEVELS);
-		
-		if(memberService.idExists(mb.getEmail())) {
+
+		if (memberService.idExists(mb.getEmail())) {
 			result.rejectValue("email", "", "email已存在，請重新輸入");
 			// 清空密碼
 			mb.setPassword("");
 			mb.setPassword1("");
 			return registerForm;
 		}
-		
+
 		// 處理密碼加密
-		mb.setPassword(GlobalService.getMD5Endocing
-				(GlobalService.encryptString(mb.getPassword())));
-		
+		mb.setPassword(GlobalService.getMD5Endocing(GlobalService.encryptString(mb.getPassword())));
+
 		// ------------------- 驗證沒問題，存進去資料庫 -----------------
 		try {
 			memberService.saveMember(mb);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ", ErrorMessage =" + e.getMessage());
 			result.rejectValue("email", "", "發生異常，請通知系統人員..." + e.getMessage());
 			// 清空密碼
@@ -126,96 +122,90 @@ public class RegisterController {
 			mb.setPassword1("");
 			return registerForm;
 		}
-		
-		String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
-		String rootDirectory = context.getRealPath("/");
-		try {
-			File imageFolder = new File(rootDirectory, "images");
-			if(!imageFolder.exists()) {
-				imageFolder.mkdirs();
+
+		if (originalFilename != null && originalFilename.length() > 0) {
+			String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
+			String rootDirectory = context.getRealPath("/");
+			try {
+				File imageFolder = new File(rootDirectory, "headPic");
+				if (!imageFolder.exists()) {
+					imageFolder.mkdirs();
+				}
+				File file = new File(imageFolder, mb.getMemId() + ext);
+				memberImage.transferTo(file);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
-			File file = new File(imageFolder,mb.getMemId() + ext);
-			memberImage.transferTo(file);
-		}catch(Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("檔案上傳發生異常: "+e.getMessage());
 		}
-		
+
 		return "redirect:/";
 	}
-	
-	
+
 	@RequestMapping("/login")
 	public String login(Model model) {
 		return "/login/login";
 	}
-	
+
 	@RequestMapping("/logout")
 	public String logout(Model model) {
 		return "/login/logout";
 	}
-	
+
 	@GetMapping("/management")
-	public String management(
-			Model model) {
+	public String management(Model model) {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		// 清除密碼 停在表單
 		memberBean.setPassword("");
 		model.addAttribute(memberBean);
 		return "/management/user";
 	}
-	
+
 	@PostMapping("/management")
-	public String updateUserData(
-			Model model,
-			@ModelAttribute("memberBean")MemberBean memberBean) {
+	public String updateUserData(Model model, @ModelAttribute("memberBean") MemberBean memberBean) {
 		MemberBean mb = (MemberBean) model.getAttribute("LoginOK");
-		
+
 		mb.setId(memberBean.getId());
 		mb.setName(memberBean.getName());
 		mb.setPhone(memberBean.getPhone());
 		mb.setSex(memberBean.getSex());
-		
+
 		MultipartFile memberImage = memberBean.getMemberMultipartFile();
 		String originalFilename = memberImage.getOriginalFilename();
-		if(memberImage!=null && !memberImage.isEmpty()) {
+		if (memberImage != null && !memberImage.isEmpty()) {
 			try {
-				byte []b = memberImage.getBytes();
+				byte[] b = memberImage.getBytes();
 				Blob blob = new SerialBlob(b);
 				mb.setFileName(originalFilename);
 				mb.setHeadPic(blob);
-			}catch(Exception e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
 		}
-		
+
 		memberService.updateUserData(mb);
 		return "redirect:/";
 	}
-	
+
 	@PostMapping("/changePassword")
-	public String changePassword(
-			@ModelAttribute("memberBean")MemberBean memberBean,
-			Model model,BindingResult result) {
+	public String changePassword(@ModelAttribute("memberBean") MemberBean memberBean, Model model,
+			BindingResult result) {
 		changePasswordValidator.validate(memberBean, result);
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return "/management/user";
 		}
-		
+
 		MemberBean mb = (MemberBean) model.getAttribute("LoginOK");
-		
-		mb.setPassword(GlobalService.getMD5Endocing(
-				GlobalService.encryptString(memberBean.getPassword())));
-		
+
+		mb.setPassword(GlobalService.getMD5Endocing(GlobalService.encryptString(memberBean.getPassword())));
+
 		memberService.updateUserData(mb);
 		return "redirect:/management";
 	}
-	
-	
-	@InitBinder     
-	public void initBinder(WebDataBinder binder){
-	     binder.registerCustomEditor(Date.class,     
-	                         new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true, 10));   
+
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true, 10));
 	}
 }

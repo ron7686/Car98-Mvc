@@ -25,7 +25,7 @@ import com.web.car98.validator.MemberBeanValidator;
 import _00_init.util.GlobalService;
 
 @Controller
-@SessionAttributes("LoginOK")
+@SessionAttributes({"LoginOK","memberBean","loginBean"})
 public class LoginController {
 	String loginForm = "/login/testloginregister";
 	String loginOut = "/login/logout";
@@ -55,7 +55,7 @@ public class LoginController {
 			rm = false;
 		}
 		LoginBean loginBean = new LoginBean(user,password,rm);
-		model.addAttribute(loginBean);
+		model.addAttribute("loginBean",loginBean);
 		MemberBean mb = new MemberBean();
 		model.addAttribute("memberBean",mb);
 		
