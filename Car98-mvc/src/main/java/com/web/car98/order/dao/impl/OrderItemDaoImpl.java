@@ -1,6 +1,7 @@
 package com.web.car98.order.dao.impl;
 
 import java.sql.Connection;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -58,6 +59,16 @@ public class OrderItemDaoImpl implements OrderItemDao{
 	@Override
 	public void setConnection(Connection conn) {
 		throw new RuntimeException("本類別未實作此方法");
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<OrderItemBean> getAllItems(Integer orderNO) {
+		List<OrderItemBean> list = null;
+		Session session = factory.getCurrentSession();
+		String hql = "FROM OrderItemBean ob WHERE ob.orderBean.orderNo = :oid";
+		list = session.createQuery(hql).setParameter("oid", orderNO).getResultList();
+		return list;
 	}
 
 }

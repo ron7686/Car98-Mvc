@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.web.car98.forum.model.CommentBean;
+import com.web.car98.member.model.MemberBean;
 
 public interface CommentService {
 
@@ -24,4 +25,6 @@ public interface CommentService {
 	List<CommentBean> getPageCom(Integer page, Integer posId);
 
 	int getLastpage(Integer postId);
+	
+	MemberBean queryMemberByComId(Integer comId);
 }

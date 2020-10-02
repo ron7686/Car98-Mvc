@@ -12,13 +12,15 @@ import org.springframework.stereotype.Repository;
 import com.web.car98.forum.dao.CommentDao;
 import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.TalkBean;
+import com.web.car98.member.model.MemberBean;
+
 @Repository
 public class CommentDaoImpl implements CommentDao {
-	
+
 	private int pageNo = 1; // 存放目前顯示頁面的編號
-	private int onepage=5;  // 每頁顯示5則資料
-	
-    @Autowired
+	private int onepage = 5; // 每頁顯示5則資料
+
+	@Autowired
 	SessionFactory factory;
 
 	public CommentDaoImpl() {
@@ -31,7 +33,7 @@ public class CommentDaoImpl implements CommentDao {
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
-			session.persist(commentBean);
+		session.persist(commentBean);
 //			tx.commit();
 //		} catch (Exception e) {
 //			if (tx != null) {
@@ -45,16 +47,16 @@ public class CommentDaoImpl implements CommentDao {
 	@Override
 	public int insertCom(CommentBean cb) {
 		Session session = factory.getCurrentSession();
-		int n = 0;		
+		int n = 0;
 		session.save(cb);
 		n++;
 		return n;
 	}
-	
+
 	@Override
 	public TalkBean getTalkBeanById(int id) {
 		Session session = factory.getCurrentSession();
-		TalkBean tb =session.get(TalkBean.class,id);
+		TalkBean tb = session.get(TalkBean.class, id);
 		return tb;
 	}
 
@@ -64,9 +66,9 @@ public class CommentDaoImpl implements CommentDao {
 		Session session = factory.getCurrentSession();
 		List<CommentBean> list = null;
 		String hql = "FROM CommentBean c where c.talkBean.PostID=:p";
-		
+
 		list = session.createQuery(hql).setParameter("p", postId).getResultList();
-		
+
 		return list;
 	}
 
@@ -87,7 +89,7 @@ public class CommentDaoImpl implements CommentDao {
 		Integer n = 0;
 		Session session = factory.getCurrentSession();
 		session.saveOrUpdate(commentBean);
-	    n++;
+		n++;
 		return n;
 	}
 
@@ -95,28 +97,29 @@ public class CommentDaoImpl implements CommentDao {
 	public int deleteComByPk(Integer comId) {
 		Integer n = 0;
 		Session session = factory.getCurrentSession();
-		String hql = "Delete FROM CommentBean where comId=:comId";
-//        CommentBean commentbean = session.get(CommentBean.class, comId);
-//        session.delete(comId);
-		session.createQuery(hql).setParameter("comId",comId).executeUpdate();
+//		String hql = "Delete FROM CommentBean where comId=:comId";
+		CommentBean commentbean = session.get(CommentBean.class, comId);
+		session.delete(commentbean);
+//		session.createQuery(hql).setParameter("comId",comId).executeUpdate();
 		n++;
 		return n;
-		
+
 	}
+
 	@Override
 	public CommentBean selectComByPk(Integer comId) {
 		CommentBean commentbean = null;
 		Session session = factory.getCurrentSession();
-	    commentbean = session.get(CommentBean.class, comId);
+		commentbean = session.get(CommentBean.class, comId);
 		return commentbean;
 	}
-	
+
 	@Override
-	public List<CommentBean> getPage(Integer page,Integer postId){
-		int getpage=(page-1)*onepage;
+	public List<CommentBean> getPage(Integer page, Integer postId) {
+		int getpage = (page - 1) * onepage;
 		List<CommentBean> li = selectCom(postId);
-		List<CommentBean> lipage=new ArrayList<>();
-		for(int i=getpage;i<getpage+onepage&&i<li.size();i++) {
+		List<CommentBean> lipage = new ArrayList<>();
+		for (int i = getpage; i < getpage + onepage && i < li.size(); i++) {
 			lipage.add(li.get(i));
 		}
 		return lipage;
@@ -127,10 +130,21 @@ public class CommentDaoImpl implements CommentDao {
 		int lastpage;
 		int page;
 		List<CommentBean> li = selectCom(postId);
-		lastpage=li.size()/onepage;
-		page=li.size()%onepage;
-		if(page>0)lastpage++;
+		lastpage = li.size() / onepage;
+		page = li.size() % onepage;
+		if (page > 0)
+			lastpage++;
 		return lastpage;
+	}
+
+	// 查出這則留言是哪個會員留的
+	@Override
+	public MemberBean queryMemberByComId(Integer comId) {
+		CommentBean commentbean = null;
+		Session session = factory.getCurrentSession();
+		commentbean = session.get(CommentBean.class, comId);
+		MemberBean memberBean = commentbean.getMemberBean();
+		return memberBean;
 	}
 
 }

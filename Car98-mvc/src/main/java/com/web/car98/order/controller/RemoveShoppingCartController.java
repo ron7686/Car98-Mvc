@@ -26,6 +26,6 @@ public class RemoveShoppingCartController {
 	public String removeOrderCart(Model model, WebRequest webRequest, SessionStatus status) {
 		status.setComplete();
 		webRequest.removeAttribute("ShoppingCart", WebRequest.SCOPE_SESSION);
-		return "redirect:/comm/checkout";
+		return "comm/thanksForOrdering";
 	}
 }

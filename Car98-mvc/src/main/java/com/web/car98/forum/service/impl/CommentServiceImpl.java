@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.web.car98.forum.dao.CommentDao;
 import com.web.car98.forum.model.CommentBean;
-import com.web.car98.forum.model.TalkBean;
 import com.web.car98.forum.service.CommentService;
+import com.web.car98.member.model.MemberBean;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -152,6 +152,12 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public int getLastpage(Integer postId) {
 		return dao.getLastpage(postId);
+	}
+
+	@Transactional
+	@Override
+	public MemberBean queryMemberByComId(Integer comId) {		
+		return dao.queryMemberByComId(comId);
 	}
 
 }

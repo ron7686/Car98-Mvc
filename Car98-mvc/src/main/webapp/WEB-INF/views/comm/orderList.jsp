@@ -38,7 +38,7 @@
 	<jsp:include page="/fragment/topIndex.jsp" />
 	<div align='center'>
 		<h3>訂單清單</h3>
-		
+
 		<form method='POST'>
 			<input type='hidden' name='_method' value='DELETE'>
 		</form>
@@ -52,11 +52,11 @@
 					<table class="table table-striped" border=1 cellpadding="3" cellspacing="1">
 						<thead>
 							<tr>
-								<th scope="col" width='56'>訂單編號</th>
-								<th scope="col" width='140'>訂購日期</th>
+								<th scope="col" width='200'>訂單編號</th>
+								<th scope="col" width='320'>訂購日期</th>
 								<th scope="col" width='180'>總金額</th>
-								<th scope="col" width='130'>送貨地址</th>
-<!-- 								<th scope="col" colspan='3' width='72'>資料維護</th> -->
+								<th scope="col" width='360'>送貨地址</th>
+								<th scope="col" colspan='3' width='72'>資料維護</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -66,13 +66,17 @@
 									<td style="text-align: center">${memOrders.buyDay}</td>
 									<td style="text-align: right">${memOrders.totalPrice}</td>
 									<td style="text-align: center">${memOrders.address}</td>
+									<td>
+										<a class="btn btn-primary"
+											href="${pageContext.request.contextPath}/comm/ProcessOrder/${memOrders.orderNo}">
+											<i class="fa fa-cog"></i>明細</a>
+									</td>
+									<td>
+										<a class="deletelink btn btn-danger"
+											href="${pageContext.request.contextPath}/comm/ProcessOrder/${memOrders.orderNo}">
+											<i class="fa fa-trash-alt "></i>刪除</a>
 
-<!-- 									<td><a -->
-<%-- 											href="${pageContext.request.contextPath}/comm/products/add/${bid.bidId}">編輯</a> --%>
-<!-- 									</td> -->
-<!-- 									<td><a class='deletelink' -->
-<%-- 											href="${pageContext.request.contextPath}/comm/products/add/${bid.bidId}">刪除</a> --%>
-<!-- 									</td> -->
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>

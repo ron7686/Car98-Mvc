@@ -71,4 +71,18 @@ public class OrderDaoImpl implements OrderDao {
 		this.memId = memId;
 	}
 
+	@Override
+	public void updateOrder(OrderBean bean) {
+		if (bean != null && bean.getOrderNo() != null) {
+			Session session = factory.getCurrentSession();
+			session.saveOrUpdate(bean);
+		}
+	}
+
+	@Override
+	public void delete(Integer orderNo) {
+		Session session = factory.getCurrentSession();
+		session.delete(session.get(OrderBean.class, orderNo));
+	}
+
 }

@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MemberTalk Page</title>
+<title>UpdateComment Page</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
@@ -150,9 +150,9 @@ body {
 			<div class="row">
      		<!-- 作者資訊 -->
 			<div class="col-2">
-				<br> <a href="#"><img class="photo" src='${pageContext.request.contextPath}/getComMemberImage?id=${LoginOK.memId}&comId=${comment.comId}'></a>
-				<div class="author">${LoginOK.id}</div>
-				<div class="account">${LoginOK.email}</div>
+				<br> <a href="#"><img class="photo" src="<%=path %>/image/喬巴1.jpg"></a>
+				<div class="author">多尼多尼喬巴</div>
+				<div class="account">zzz94572</div>
 
 			</div>
 			<!-- 文章內容 -->
@@ -173,14 +173,12 @@ body {
 						<li id="like1" button class="fas fa-thumbs-up fa-2x" type="button">12</li>
 						<li id="hate1" button class="fas fa-thumbs-down fa-2x"
 							type="button">1</li>
-
-<%-- 							<c:if test="${CommentBean.memId}==${LoginOK.memId}"> --%>
-								<a id="updateButton" class="updateButton"
-									href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
-								<a id="" class="deleteButton"
-									href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
-<%-- 							</c:if> --%>
-						</ul>                             
+						<!-- <button id="updateButton" >編輯</button> -->
+					
+						<a id="updateButton" href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
+						<a id="deleteButton" href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
+				
+					</ul>                             
 				</div>
 			</div>
 			</div>
@@ -243,17 +241,5 @@ body {
       </p>
     </div>
   </div>
-  <script>
-	  $(document).ready(function() {
-	$(".deleteButton").on('click',function(e) {
-		if (confirm("確定刪除此則留言?")) {
-			return true;
-		} else {
-			return false;
-		}
-	});
-})
-  </script>
-
   </body>
 </html>

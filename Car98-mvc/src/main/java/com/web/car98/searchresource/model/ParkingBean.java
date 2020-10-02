@@ -64,4 +64,10 @@ public class ParkingBean implements Serializable {
 		this.street = street;
 	}
 
+	@Override
+	public String toString() {
+		return "ParkingBean [parking=" + parking + ", city=" + city + ", district=" + district + ", street=" + street
+				+ "]";
+	}
+
 }

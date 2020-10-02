@@ -14,4 +14,5 @@ public interface TalkService {
 
 	TalkBean selectOne(int postID);
 
+	List<TalkBean> getAll();
 }

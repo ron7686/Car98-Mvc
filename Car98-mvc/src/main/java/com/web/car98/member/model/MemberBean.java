@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -16,16 +19,18 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.web.car98.forum.model.CommentBean;
+import com.web.car98.forum.model.TalkBean;
 
 @Entity
-@Table(name="mem")
+@Table(name = "mem")
 public class MemberBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer memId;
-	
+
 	private String email;
 	private String password;
 	@Transient
@@ -33,28 +38,33 @@ public class MemberBean implements Serializable {
 	private String name;
 	private String id;
 	private String phone;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="Asia/Taipei")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Taipei")
 	private Date birth;
 	private String sex;
 	@JsonIgnore
 	private Blob headPic;
 	private String fileName;
 	private Integer levels;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Taipei")
 	private Timestamp meCreate;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="Asia/Taipei")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Taipei")
 	private Timestamp loginTime;
 	Double unpaid_amount;
 	@Transient
 	MultipartFile memberMultipartFile;
 
-	
+	@OneToMany(mappedBy = "memberBean")
+	private List<TalkBean> talkBean = new ArrayList<>();
+
+	@OneToMany(mappedBy = "memberBean")
+	private List<CommentBean> commentbean = new ArrayList<>();
+
 	public MemberBean() {
-		
+
 	}
-	
+
 	public MemberBean(Integer memId, String email, String password, String name, String id, String phone, Date birth,
-			String sex, Blob headPic, String fileName,Integer levels,Timestamp meCreate,Timestamp loginTime) {
+			String sex, Blob headPic, String fileName, Integer levels, Timestamp meCreate, Timestamp loginTime) {
 		super();
 		this.memId = memId;
 		this.email = email;
@@ -70,7 +80,7 @@ public class MemberBean implements Serializable {
 		this.meCreate = meCreate;
 		this.loginTime = loginTime;
 	}
-	
+
 	public MemberBean(Integer memId, String email, String password, String password1, String name, String id,
 			String phone, Date birth, String sex, Blob headPic, String fileName, Integer levels, Timestamp meCreate,
 			Timestamp loginTime, Double unpaid_amount, MultipartFile memberMultipartFile) {
@@ -93,8 +103,8 @@ public class MemberBean implements Serializable {
 		this.memberMultipartFile = memberMultipartFile;
 	}
 
-	public MemberBean(Integer memId, String email, String password, String password1, String name, String id, String phone, Date birth,
-			String sex, Blob headPic, String fileName,Integer levels,Timestamp loginTime) {
+	public MemberBean(Integer memId, String email, String password, String password1, String name, String id,
+			String phone, Date birth, String sex, Blob headPic, String fileName, Integer levels, Timestamp loginTime) {
 		super();
 		this.memId = memId;
 		this.email = email;
@@ -230,8 +240,6 @@ public class MemberBean implements Serializable {
 	public void setLoginTime(Timestamp loginTime) {
 		this.loginTime = loginTime;
 	}
-	
-	
 
 	public MultipartFile getMemberMultipartFile() {
 		return memberMultipartFile;

@@ -13,7 +13,7 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
         integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous" />
-    <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/shopCheckout.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/shopCheck.css" type="text/css">
 </head>
 
 <body>
@@ -37,8 +37,16 @@
                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
                                 data-parent="#accordionExample">
                                 <div class="card-body pt-0" id="product-table">
-                                    <p class="text-white" id="result"></p>
-                                    <p class="text-white" id="totalresult"></p>
+                                    <c:forEach varStatus="vs" var="anEntry" items="${ShoppingCart.content}">
+                                        <!-- <p class="text-white" id="result"></p>
+                                        <p class="text-white" id="totalresult"></p> -->
+                                        <div>
+                                            <span style="color:white">${anEntry.value.bidName}</span><br>
+                                            <span style="color:white">賣家: ${anEntry.value.sellMan}</span>
+                                            <span style="color:white; margin-left:500px">$: ${anEntry.value.unitPrice}</span>
+                                        </div>
+                                    </c:forEach>
+                                    
                                     <!-- 動態新增區域<table class="table"> -->
                                     <!-- <thead>
                                         <tr class="text-center">
@@ -102,43 +110,19 @@
                             </div>
                         </div>
                         <div class="text-right">
-                            <!-- <a class="btn btn-secondary" href="<c:url value='/comm/ProcessOrder' />">繼續選購</a> -->
+                            <a class="btn btn-secondary" href="<c:url value='/comm/products' />">繼續選購</a>
                             <input type="hidden" name="finalDecision"  value="">   
-                            <input type="button"  name="OrderBtn" value="確認" onclick="reconfirmOrder()">
+                            <input class="btn btn-secondary" type="button"  name="OrderBtn" value="確認" onclick="reconfirmOrder()">
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </FORM>
-    <hr>
-    <section class="py-5">
-        <div class="container">
-            <div class="h1 text-center mb-3 text-white">結帳完成</div>
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <h3 class="text-center mb-3 text-white">購物記錄</h3>
-                    <!--動態新增區域 -->
-                    <table class="table">
-
-                    </table>
-                    <h3 class="text-center mb-3 text-white">個人資訊</h3>
-                    <!--動態新增區域 -->
-                    <table class="table">
-
-                    </table>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- footer -->
-    <div class="footer-bottom  bg-dark text-light">
-        <div class="container-fluid">
-            <p class="pull-left">
-                Copyright@ 2020 by Car98 Group
-            </p>
-        </div>
-    </div>
+	<!-- footer -->
+	<jsp:include page="/fragment/footer.jsp" />
+	
+	
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>

@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.web.car98.member.model.MemberBean;
 
@@ -25,11 +24,6 @@ public class CommentBean implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer comId;
-
-	@Transient
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "MemID")
-	private MemberBean memberBean;
 	@Column(name = "ComText")
 	private String comText;
 	@Column(name = "ComTime")
@@ -40,6 +34,10 @@ public class CommentBean implements Serializable {
 	private Blob comPic;
 	@Column(name = "ComHate")
 	private Integer comHate;
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "memId")
+	private MemberBean memberBean;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PostID")
@@ -60,6 +58,14 @@ public class CommentBean implements Serializable {
 		this.comPic = comPic;
 		this.comHate = comHate;
 		this.talkBean = talkBean;
+	}
+
+	public MemberBean getMemberBean() {
+		return memberBean;
+	}
+
+	public void setMemberBean(MemberBean memberBean) {
+		this.memberBean = memberBean;
 	}
 
 	public TalkBean getTalkBean() {
@@ -121,8 +127,7 @@ public class CommentBean implements Serializable {
 	@Override
 	public String toString() {
 		return "CommentBean [comId=" + comId + ", memberBean=" + memberBean + ", comText=" + comText + ", comTime="
-				+ comTime + ", comLike=" + comLike + ", comPic=" + comPic + ", comHate=" + comHate + ", talkBean="
-				+ talkBean + "]";
+				+ comTime + ", comLike=" + comLike + ", comPic=" + comPic + ", comHate=" + comHate + "]";
 	}
 
 }

@@ -59,6 +59,7 @@ body {
 	<section class="my-5">
 
 		<div class="container text-white main">
+		<form:form modelAttribute="talkBean"  method="Post" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-12">
 					<ul class="texttitle">
@@ -67,13 +68,16 @@ body {
 					</ul>
 				</div>
 				<!-- 分類選項 -->
+			 	
 			 	<div class="col-12 classification">
-					<select name="" id="" class="select mt-2">
-						<option value="discuss">討論</option>
-						<option value="share">分享＆心得</option>
-						<option value="help">求助＆問題</option>
-						<option value="announcement">公告</option>
-					</select>
+					<form:select path="PostType" id="" class="select mt-2">
+						<form:option value="討論">討論</form:option>
+						<form:option value="分享＆心得">分享＆心得</form:option>
+						<form:option value="求助＆問題">求助＆問題</form:option>
+						<form:option value="公告">公告</form:option>
+					</form:select>
+						
+					
 				</div>
 				<!-- 編輯列表 -->
 				<div class="col-12  editor-list">
@@ -107,80 +111,49 @@ body {
 				<!-- 內文輸入 -->
 				<div class="col-9">
 
-					<form:form class="mt-3" modelAttribute="talkBean"  method="Post" enctype="multipart/form-data">
+				
 
 						<form:input class="title" path="PostTitle" type="text" name="title" style="width: 100%"
 							placeholder="請輸入文章標題......." value="${param.title}" />
 							<form:errors class="errormsg" path="PostTitle" > </form:errors>
+							
 						<form:textarea class="mt-2"   path="PostText"
 							style="width: 100%" cols="100" rows="20"
 							placeholder="請輸入內容......"></form:textarea>
 						<form:errors class="errormsg" path="PostText" > </form:errors>
 						<input type="submit" value="發佈文章" class="publish">
-					</form:form>
+						
+					
 				</div>
 				<!-- 插入附件 -->
 				<div class="col-3">
 					<ul class="annex ">
 						<li>
-							<form>
+							
 								<div class="form-group ">
 									<img src="${pageContext.servletContext.contextPath}/image/view.jpeg" width="50" height="50"> <label
-										for="exampleFormControlFile1">插入圖片</label> <input type="file"
-										class="form-control-file mt-2" id="exampleFormControlFile1"
+										for="exampleFormControlFile1">插入圖片</label>
+										 <input type="file" 
+										class="form-control-file mt-2" id="btnImage"
 										value="插入圖片">
 								</div>
-							</form>
+							
 						</li>
 						<li>
-							<div>
-								<img src="${pageContext.servletContext.contextPath}/image/film.jpg" alt="" width="50" height="50">插入影片<br>
-								<button type="button" class="btn btn-light mt-2"
-									data-toggle="modal" data-target="#exampleModal"
-									data-whatever="@mdo">選擇影片</button>
-								<div class="modal fade " id="exampleModal" tabindex="-1"
-									role="dialog" aria-labelledby="exampleModalLabel"
-									aria-hidden="true">
-									<div class="modal-dialog " role="document">
-										<div class="modal-content bg-dark">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">
-													<i class="fas fa-angle-double-right"></i>嵌入影片
-												</h5>
-												<button type="button" class="close" data-dismiss="modal"
-													aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body bg-dark">
-												<form>
-													<div class="form-group bg-dark">
-														<label for="recipient-name" class="col-form-label bg-dark"></label>
-														<input type="text" class="form-control"
-															id="recipient-name" placeholder="影片網址或嵌入碼">
-													</div>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary"
-													data-dismiss="modal">關閉</button>
-												<button type="button" class="btn btn-primary">插入影片</button>
-											</div>
-											</form>
-										</div>
-									</div>
-								</div>
-
-							</div>
+							<img id="image" src="">
 						</li>
 					</ul>
 				</div>
 			</div>
+			</form:form>
 		</div>
+		
 	</section>
 	<jsp:include page="/fragment/footer.jsp"></jsp:include>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>
+	<script src="${pageContext.servletContext.contextPath}/javascript/talkContent2.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
 	integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
