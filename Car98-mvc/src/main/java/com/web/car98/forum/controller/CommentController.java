@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -104,8 +105,9 @@ public class CommentController {
 //		cb.setPostId(tb.getPostID());
 		cb.setTalkBean(tb);
 		cb.setMemberBean(memberBean);
-		Date comTime = new Date(System.currentTimeMillis());
-		cb.setComTime(comTime);		
+	    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
+	    String comTime = sdf.format(new Date(System.currentTimeMillis()));
+	    cb.setComTime(comTime);			
 		commentservice.insertCom(cb);
 		model.addAttribute("CommentBean", commentservice.selectCom(tb.getPostID()));
 		// model.addAttribute("floor",floor);
@@ -303,7 +305,7 @@ public class CommentController {
 				}
 				fileName = bean.getFileName();
 			}
-			// 如果圖片的來源有問題，就送回預設圖片(/images/NoImage.png)
+			// 如果此留言沒有上傳圖片，就傳回null
 			if (is == null) {
 				return null;
 			}

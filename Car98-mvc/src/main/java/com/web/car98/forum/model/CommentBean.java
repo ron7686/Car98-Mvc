@@ -31,7 +31,7 @@ public class CommentBean implements Serializable {
 	@Column(name = "ComText")
 	private String comText;
 	@Column(name = "ComTime")
-	private Date comTime;
+	private String comTime;
 	@Column(name = "ComLike")
 	private Integer comLike;
 	@Column(name = "ComPic")
@@ -56,7 +56,7 @@ public class CommentBean implements Serializable {
 		super();
 	}
 	
-	public CommentBean(Integer comId, String comText, Date comTime, Integer comLike, Blob comPic, String fileName,
+	public CommentBean(Integer comId, String comText, String comTime, Integer comLike, Blob comPic, String fileName,
 			Integer comHate, MemberBean memberBean, TalkBean talkBean) {
 		super();
 		this.comId = comId;
@@ -70,7 +70,7 @@ public class CommentBean implements Serializable {
 		this.talkBean = talkBean;
 	}
 	
-	public CommentBean(Integer comId, String comText, Date comTime, Integer comLike, Blob comPic, String fileName,
+	public CommentBean(Integer comId, String comText, String comTime, Integer comLike, Blob comPic, String fileName,
 			Integer comHate, MultipartFile commentMultipartFile, MemberBean memberBean, TalkBean talkBean) {
 		super();
 		this.comId = comId;
@@ -117,11 +117,11 @@ public class CommentBean implements Serializable {
 		this.comText = comText;
 	}
 
-	public Date getComTime() {
+	public String getComTime() {
 		return comTime;
 	}
 
-	public void setComTime(Date comTime) {
+	public void setComTime(String comTime) {
 		this.comTime = comTime;
 	}
 
