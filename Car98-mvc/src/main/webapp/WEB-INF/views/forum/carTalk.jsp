@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% String path = request.getContextPath();  %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
@@ -21,7 +22,7 @@
       integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/BSTalk.css">
+    <link rel="stylesheet" href="<%=path%>/css/BSTalk.css">
     
     <style>
       #carouselExampleFade .carousel-inner .carousel-item img{
@@ -101,25 +102,25 @@
                     <ul class="pagination justify-content-end ">
 
                       <c:if test="${pageNo > 3}">
-                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/forum/talktop.do?pageNo=1">1</a></li>
+                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=1">1</a></li>
                       <li class="page-item mt-2"><a href=""><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i></a></li>
                       	</c:if>
                       	<c:if test="${pageNo > 2}">
-                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/forum/talktop.do?pageNo=${pageNo-2}">${pageNo-2}</a></li>
+                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=${pageNo-2}">${pageNo-2}</a></li>
                       	</c:if>
                       	<c:if test="${pageNo > 1}">
-                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/forum/talktop.do?pageNo=${pageNo-1}">${pageNo-1}</a></li>
+                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=${pageNo-1}">${pageNo-1}</a></li>
                      	</c:if>
                       <li class="page-item active"><a class="page-link" href="#">${pageNo}</a></li>
                       <c:if test="${pageNo < lastPage}">
-                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/forum/talktop.do?pageNo=${pageNo+1}">${pageNo+1}</a></li>
+                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=${pageNo+1}">${pageNo+1}</a></li>
                       </c:if>
                       <c:if test="${pageNo+1 < lastPage}">
-                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/forum/talktop.do?pageNo=${pageNo+2}">${pageNo+2}</a></li>
+                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=${pageNo+2}">${pageNo+2}</a></li>
                       </c:if>
                       <c:if test="${pageNo+2 < lastPage}">
                       <li class="page-item mt-2"><a href=""><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i></a></li>
-                      <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/forum/talktop.do?pageNo=${lastPage}">${lastPage}</a></li>
+                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=${lastPage}">${lastPage}</a></li>
                    	  </c:if>
                     </ul>
                   </nav>
@@ -127,11 +128,11 @@
             
             <div class="col-12 ">
                 <ul class="classification ">
-                    <li class="classification-item "><a class="classification-item-a" href="#">全部</a></li>
-                    <li class="classification-item"><a class="classification-item-a" href="#">討論</a></li>
-                    <li class="classification-item"><a class="classification-item-a" href="#">分享＆心得</a></li>
-                    <li class="classification-item"><a class="classification-item-a" href="#">求助＆問題</a></li>
-                    <li class="classification-item"><a class="classification-item-a" href="#">公告</a></li>
+                    <li class="classification-item"><a class="classification-item-a" href="<%=path%>/forum/talktop.do">全部</a></li>
+                    <li class="classification-item"><a class="classification-item-a" href="<%=path%>/forum/talktop.do?type=1">討論</a></li>
+                    <li class="classification-item"><a class="classification-item-a" href="<%=path%>/forum/talktop.do?type=2">分享＆心得</a></li>
+                    <li class="classification-item"><a class="classification-item-a" href="<%=path%>/forum/talktop.do?type=3">求助＆問題</a></li>
+                    <li class="classification-item"><a class="classification-item-a" href="<%=path%>/forum/talktop.do?type=4">公告</a></li>
                 </ul>
             </div>
             <div class="col-12 filter">
@@ -169,8 +170,8 @@
 				  <tr>
                         <td class="sort "><a href=""><i class="fab fa-discourse"></i>${aBean.postType}</a></td>
                         <td class="pic"><img src="https://picsum.photos/id/231/100/50" alt=""></td>
-                        <th class="title itemtitle"><a class="subtitle" href="${pageContext.request.contextPath}/talktalk?postID=${aBean.postID}&pageNo=1">${aBean.postTitle}</a></th>
-                        <td class="author"><a class="talkname" href="#">${aBean.memberBean.name}</a><br>${aBean.postTime} </td>
+                        <th class="title itemtitle"><a class="subtitle" href="<%=path%>/talktalk?postID=${aBean.postID}&pageNo=1">${aBean.postTitle}</a></th>
+                        <td class="author"><a class="talkname" href="#">${aBean.memberBean.id}</a><br>${aBean.postTime} </td>
                         <td class="respon">${aBean.postCom}<br>${aBen.postView}</td>
                         <td class="lastupdate"><a class="talkname" href="">WayneChen</a><br><a  class="time" href="">昨天10:43pm</a></td>
                   </tr>

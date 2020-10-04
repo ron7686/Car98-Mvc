@@ -8,7 +8,11 @@ public interface TalkService {
 
 	void persist(TalkBean tb);
 
-	List<TalkBean> select(int page);
+	List<TalkBean> getPage(int page);
+	
+	List<TalkBean> getPageByType(int page,String type);
+	
+	String intToType(String type);
 
 	int lastpage();
 

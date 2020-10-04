@@ -51,25 +51,10 @@ public class TalkContentController {
 		
 		tb.setMemberBean(mb);
 		
-		
-		
 		Date postTime = new Date(System.currentTimeMillis());
 		tb.setPostTime(postTime);		
-		String postType = tb.getPostType();
-		if(postType.equals("討論")) {
-			postType = "1";
-		}else if(postType.equals("分享&心得")) {
-			postType = "2";
-			
-		}else if(postType.equals("求助&問題")) {
-			postType = "3";
-			
-		}else if(postType.equals("公告")) {
-			postType = "4";
-		}
-		tb.setPostType(postType);
+		
 		talkservice.persist(tb);
-		System.out.println(tb.getMemberBean().getName());
 		model.addAttribute("TalkBean", tb);
 		return "redirect:/forum/talktop.do";
 		
