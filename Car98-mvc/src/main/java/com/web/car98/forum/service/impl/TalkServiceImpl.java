@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.web.car98.forum.dao.TalkDao;
 import com.web.car98.forum.dao.impl.TalkDaoImpl;
+import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.model.TalkBean;
 import com.web.car98.forum.service.TalkService;
 
@@ -42,7 +43,11 @@ public class TalkServiceImpl implements TalkService  {
 	}
 	@Override
 	public TalkBean selectOne(int postID) {
-		return dao.selectOne(postID);
+		TalkBean tb=dao.selectOne(postID);
+		List<LikeOrHateBean> loh=dao.getloh(postID);
+		tb.setPostLike(getLike(loh));
+		tb.setPostHate(getHate(loh));
+		return tb;
 	}
 	@Override
 	public List<TalkBean> getAll() {
@@ -77,5 +82,29 @@ public class TalkServiceImpl implements TalkService  {
 			break;
 		}
 		return type;
+	}
+	@Override
+	public int getLike(List<LikeOrHateBean> loh) {
+		int count=0;
+		for(LikeOrHateBean i:loh) {
+			if(i.getLikeOrHate()==1) {
+				count++;
+			}
+		}
+		return count;
+	}
+	@Override
+	public int getHate(List<LikeOrHateBean> loh) {
+		int count=0;
+		for(LikeOrHateBean i:loh) {
+			if(i.getLikeOrHate()==2) {
+				count++;
+			}
+		}
+		return count;
+	}
+	@Override
+	public LikeOrHateBean getOneLoh(int postId, int memId) {
+		return dao.getOneLoh(postId, memId);
 	}
 }

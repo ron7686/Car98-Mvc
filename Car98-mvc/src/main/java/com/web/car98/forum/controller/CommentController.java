@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.car98.forum.model.CommentBean;
+import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.model.TalkBean;
 import com.web.car98.forum.service.CommentService;
 import com.web.car98.forum.service.TalkService;
@@ -61,6 +62,7 @@ public class CommentController {
 	public String spaceCom(Model model, RedirectAttributes ra, @RequestParam("postID") Integer postId,
 			@RequestParam(value = "pageNo", required = false) Integer pageNo) {
 		CommentBean cb = new CommentBean();
+		LikeOrHateBean loh=new LikeOrHateBean();
 		model.addAttribute("commentBean", cb);
 		model.addAttribute("TalkBean", ts.selectOne(postId));
 		// ra.addFlashAttribute("TalkBean",ts.selectOne(postId));
@@ -72,6 +74,13 @@ public class CommentController {
 //		for(CommentBean com :resultList) {			
 //			System.out.println("postId = " + com.getPostId());
 //		}		
+		MemberBean memberBean=(MemberBean) model.getAttribute("LoginOK");
+		try {
+			loh=ts.getOneLoh(postId,memberBean.getMemId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("loh",loh);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("lastPage", commentservice.getLastpage(postId));
 		return "/forum/talktalk";
@@ -79,7 +88,8 @@ public class CommentController {
 
 	// 新增留言
 	@PostMapping("/talktalk")
-	public String insertCom(Model model, @ModelAttribute("TalkBean") TalkBean tb,
+	public String insertCom(Model model,
+			@ModelAttribute("TalkBean") TalkBean tb,
 			@ModelAttribute("commentBean") CommentBean cb) {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {
@@ -113,6 +123,27 @@ public class CommentController {
 		// model.addAttribute("floor",floor);
 		return "redirect:/talktalk?postID=" + pID;
 	}
+	
+	@RequestMapping("/like")
+	public String likeOrHate(Model model,
+			@RequestParam(value="tf") Integer tf,
+			@RequestParam(value = "postId", required = false) Integer postId,
+			@RequestParam(value = "loh",required = false) Integer lohid
+			) {
+		LikeOrHateBean loh=new LikeOrHateBean();
+		MemberBean memberBean=(MemberBean) model.getAttribute("LoginOK");
+		TalkBean talkBean=ts.selectOne(postId);
+		loh.setAa(lohid);
+		loh.setLikeOrHate(tf);
+		loh.setMemberBean(memberBean);
+		loh.setTalkBean(talkBean);
+		commentservice.saveLike(loh);
+		
+		return "redirect:/talktalk?postID=" + postId;
+		
+		
+	}
+	
 
 //	@RequestMapping(value = "/forum/updateCom.do", method = RequestMethod.POST)
 //	@PostMapping("/talktalk")

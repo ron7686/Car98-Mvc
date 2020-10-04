@@ -2,6 +2,7 @@ package com.web.car98.forum.dao;
 
 import java.util.List;
 
+import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.model.TalkBean;
 
 public interface TalkDao {
@@ -19,4 +20,8 @@ public interface TalkDao {
 	TalkBean selectOne(int postID);
 	
 	int PostType();
+	
+	List<LikeOrHateBean> getloh(int postId);
+	
+	LikeOrHateBean getOneLoh(int postId,int memId);
 }

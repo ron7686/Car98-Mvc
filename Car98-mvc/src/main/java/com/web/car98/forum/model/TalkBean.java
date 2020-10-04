@@ -41,11 +41,10 @@ public class TalkBean implements Serializable {
 	private String PostText;
 	@Column(name = "PostTime")
 	private Date PostTime;
-	@Column(name = "PostLike")
+	@Transient
 	private Integer PostLike;
-	@Column(name = "PostHate")
+	@Transient
 	private Integer PostHate;
-	@Column(name = "PostCom")
 	@Transient
 	private Integer PostCom;
 	@Column(name = "PostView")
@@ -58,6 +57,8 @@ public class TalkBean implements Serializable {
 	private Blob PostPic;
 	@OneToMany(mappedBy = "talkBean")
 	private List<CommentBean> comment = new ArrayList<>();
+	@OneToMany(mappedBy = "talkBean")
+	private List<LikeOrHateBean> likeOrHate = new ArrayList<>();
 
 	public TalkBean() {
 		super();
@@ -82,6 +83,14 @@ public class TalkBean implements Serializable {
 		PostType = postType;
 		PostPic = postPic;
 		this.comment = comment;
+	}
+
+	public List<LikeOrHateBean> getLikeOrHate() {
+		return likeOrHate;
+	}
+
+	public void setLikeOrHate(List<LikeOrHateBean> likeOrHate) {
+		this.likeOrHate = likeOrHate;
 	}
 
 	public MemberBean getMemberBean() {

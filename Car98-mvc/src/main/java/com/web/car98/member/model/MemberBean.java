@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.web.car98.forum.model.CommentBean;
+import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.model.TalkBean;
 
 @Entity
@@ -58,6 +59,11 @@ public class MemberBean implements Serializable {
 
 	@OneToMany(mappedBy = "memberBean")
 	private List<CommentBean> commentbean = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "memberBean")
+	private List<LikeOrHateBean> likeOrHate = new ArrayList<>();
+	
+	
 
 	public MemberBean() {
 

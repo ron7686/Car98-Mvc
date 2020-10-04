@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.web.car98.forum.dao.TalkDao;
+import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.model.TalkBean;
 
 import _00_init.util.HibernateUtils;
@@ -96,6 +97,30 @@ public class TalkDaoImpl implements TalkDao  {
 		
 		
 		return 0;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<LikeOrHateBean> getloh(int postId) {
+		List<LikeOrHateBean> loh=new ArrayList<>();
+		String hql = "FROM LikeOrHateBean l where l.talkBean.PostID=:postId";
+		Session session = factory.getCurrentSession();
+		loh=session.createQuery(hql).
+					setParameter("postId", postId).
+					list();
+		return loh;
+	}
+
+	@Override
+	public LikeOrHateBean getOneLoh(int postId, int memId) {
+		LikeOrHateBean loh=new LikeOrHateBean();
+		String hql = "FROM LikeOrHateBean l where l.talkBean.PostID=:postId and l.memberBean.memId=:memId";
+		Session session = factory.getCurrentSession();
+		loh=(LikeOrHateBean)session.createQuery(hql).
+					setParameter("postId", postId).
+					setParameter("memId", memId).
+					getSingleResult();
+		return loh;
 	}
 	
 	

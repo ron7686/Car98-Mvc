@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.web.car98.forum.dao.CommentDao;
 import com.web.car98.forum.model.CommentBean;
+import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.model.TalkBean;
 import com.web.car98.member.model.MemberBean;
 
@@ -155,6 +156,12 @@ public class CommentDaoImpl implements CommentDao {
 		talkBean = session.get(TalkBean.class, postId);
 		MemberBean memberBean = talkBean.getMemberBean();
 		return memberBean;
+	}
+
+	@Override
+	public void savelike(LikeOrHateBean loh) {
+		Session session = factory.getCurrentSession();
+		session.saveOrUpdate(loh);
 	}
 		
 

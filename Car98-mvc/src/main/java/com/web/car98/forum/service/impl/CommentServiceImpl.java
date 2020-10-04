@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.web.car98.forum.dao.CommentDao;
 import com.web.car98.forum.model.CommentBean;
+import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.service.CommentService;
 import com.web.car98.member.model.MemberBean;
 
@@ -164,6 +165,15 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public MemberBean queryMemberByPostId(Integer postId) {		
 		return dao.queryMemberByPostId(postId);
+	}
+
+	@Transactional
+	@Override
+	public void saveLike(LikeOrHateBean loh) {
+		
+		
+		
+		dao.savelike(loh);
 	}
 	
 	

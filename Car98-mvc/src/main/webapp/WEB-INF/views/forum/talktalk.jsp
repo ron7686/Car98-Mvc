@@ -2,9 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%
-	String path = request.getContextPath();
-%>
+<%String path = request.getContextPath();%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,7 +119,7 @@ body {
 				<!-- 作者資訊 -->
 				<div class="col-2">
 					<br> <a href="#"><img class="photo"
-						src='${pageContext.request.contextPath}/getPostMemberImage?id=${LoginOK.memId}&postID=${TalkBean.postID}'></a>
+						src='${pageContext.request.contextPath}/getPostMemberImage?postID=${TalkBean.postID}'></a>
 					<div class="author">${TalkBean.memberBean.id}</div>
 					<div class="account">${TalkBean.memberBean.email}</div>
 
@@ -141,14 +139,42 @@ body {
 							src="https://picsum.photos/id/222/500/600" alt=""><br>
 					</div>
 					<!-- 按讚功能 -->
+					<c:if test="${loh.likeOrHate==0 || empty loh.likeOrHate}">
 					<div class="col-12 article-mood">
 						<ul class="like-or-hate">
+							
 							<li id="like1" button class="fas fa-thumbs-up fa-2x"
-								type="button">12</li>
+								type="button"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1">${TalkBean.postLike}</a></li>
+							
 							<li id="hate1" button class="fas fa-thumbs-down fa-2x"
-								type="button">1</li>
+								type="button"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2">${TalkBean.postHate}</a></li>
 						</ul>
 					</div>
+					</c:if>
+					<c:if test="${loh.likeOrHate==1}">
+					<div class="col-12 article-mood">
+						<ul class="like-or-hate">
+							
+							<li id="like1" class="fas fa-thumbs-up fa-2x"
+								style="color:red"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0">${TalkBean.postLike}</a></li>
+							
+							<li id="hate1" class="fas fa-thumbs-down fa-2x"
+								><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2">${TalkBean.postHate}</a></li>
+						</ul>
+					</div>
+					</c:if>
+					<c:if test="${loh.likeOrHate==2}">
+					<div class="col-12 article-mood">
+						<ul class="like-or-hate">
+							
+							<li id="like1" button class="fas fa-thumbs-up fa-2x"
+								type="button"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1">${TalkBean.postLike}</a></li>
+							
+							<li id="hate1" button class="fas fa-thumbs-down fa-2x"
+								type="button" style="color:red"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0">${TalkBean.postHate}</a></li>
+						</ul>
+					</div>
+					</c:if>
 				</div>
 
 			</div>
