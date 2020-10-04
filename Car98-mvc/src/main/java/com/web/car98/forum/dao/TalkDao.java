@@ -10,12 +10,13 @@ public interface TalkDao {
 
 	List<TalkBean> getAll();
 
-	List<TalkBean> getPage(int page);
+	List<TalkBean> getPage(List<TalkBean> li,int page);
+	
+	List<TalkBean> getAllByType(String type);
 
 	int lastpage();
 
 	TalkBean selectOne(int postID);
-
 	
 	int PostType();
 }
