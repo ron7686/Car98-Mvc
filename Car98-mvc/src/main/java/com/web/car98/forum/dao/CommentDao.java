@@ -32,12 +32,8 @@ public interface CommentDao {
 
 	MemberBean queryMemberByPostId(Integer postId);  // 查出這則PO文是哪個會員留的
 
-<<<<<<< HEAD
-	MemberBean queryMemberByPostId(Integer postId);
-	
 	void savelike(LikeOrHateBean loh);
-=======
+	
 	int getLastPage(Integer postId, Integer page);
->>>>>>> 9f2f5d66b181437afbfa2dfc89d58458dfbcc79f
 
 }

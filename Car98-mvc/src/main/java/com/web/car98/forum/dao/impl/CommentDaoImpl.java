@@ -180,15 +180,10 @@ public class CommentDaoImpl implements CommentDao {
 		MemberBean memberBean = talkBean.getMemberBean();
 		return memberBean;
 	}
-<<<<<<< HEAD
-
 	@Override
 	public void savelike(LikeOrHateBean loh) {
 		Session session = factory.getCurrentSession();
 		session.saveOrUpdate(loh);
 	}
 		
-=======
->>>>>>> 9f2f5d66b181437afbfa2dfc89d58458dfbcc79f
-
 }

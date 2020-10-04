@@ -72,10 +72,7 @@ public class CommentController {
 		}
 		List<CommentBean> resultList = commentservice.getPageCom(pageNo, postId);
 		model.addAttribute("CommentBean", resultList);
-<<<<<<< HEAD
-//		for(CommentBean com :resultList) {			
-//			System.out.println("postId = " + com.getPostId());
-//		}		
+	
 		MemberBean memberBean=(MemberBean) model.getAttribute("LoginOK");
 		try {
 			loh=ts.getOneLoh(postId,memberBean.getMemId());
@@ -83,8 +80,7 @@ public class CommentController {
 			e.printStackTrace();
 		}
 		model.addAttribute("loh",loh);
-=======
->>>>>>> 9f2f5d66b181437afbfa2dfc89d58458dfbcc79f
+
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("lastPage", commentservice.getLastPage(postId, pageNo));
 		return "/forum/talktalk";

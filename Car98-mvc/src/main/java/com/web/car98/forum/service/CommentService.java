@@ -28,12 +28,8 @@ public interface CommentService {
 	MemberBean queryMemberByComId(Integer comId);
 
 	MemberBean queryMemberByPostId(Integer postId);
-<<<<<<< HEAD
-	
+
 	void saveLike(LikeOrHateBean loh);
-=======
 
 	int getLastPage(Integer postId, Integer page);
-
->>>>>>> 9f2f5d66b181437afbfa2dfc89d58458dfbcc79f
 }
