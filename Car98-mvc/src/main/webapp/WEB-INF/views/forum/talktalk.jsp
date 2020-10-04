@@ -130,8 +130,7 @@ body {
 
 				<div class="col-10">
 					<ul class="article-information">
-						<li class="floor">樓主<br> <a href="#">發表於 2020-09-01
-								09:21 PM</a></li>
+						<li class="floor">樓主<br> <a href="#">發表於${TalkBean.postTime}</a></li>
 
 						<li class="gp">讚12</li>
 						<li class="bp">噓18</li>
@@ -175,7 +174,7 @@ body {
 				<!-- 文章內容 -->
 				<div class="col-10">
 					<ul class="article-information">
-						<li class="floor">${comment.comId}樓<br> <a href="#">發表於
+						<li class="floor">${comment.floor}樓<br> <a href="#">發表於
 								${comment.comTime}</a></li>
 
 						<li class="gp">讚12</li>

@@ -12,7 +12,7 @@ public interface CommentService {
 
 	int insertCom(CommentBean commentBean);
 
-	List<CommentBean> selectCom(Integer postId);
+	List<CommentBean> getComsByFk(Integer postId);
 
 	int updateMemCom(String comText, Date comTime, Integer memId, Integer postId, Integer comId);
 
@@ -24,9 +24,10 @@ public interface CommentService {
 
 	List<CommentBean> getPageCom(Integer page, Integer posId);
 
-	int getLastpage(Integer postId);
-	
 	MemberBean queryMemberByComId(Integer comId);
 
 	MemberBean queryMemberByPostId(Integer postId);
+
+	int getLastPage(Integer postId, Integer page);
+
 }

@@ -59,7 +59,8 @@ public class CommentController {
 	@SuppressWarnings("unused")
 	@GetMapping("/talktalk")
 	public String spaceCom(Model model, RedirectAttributes ra, @RequestParam("postID") Integer postId,
-			@RequestParam(value = "pageNo", required = false) Integer pageNo) {
+			@RequestParam(value = "pageNo", required = false) Integer pageNo,
+			@RequestParam(value = "floorNo", required = false) Integer floorNo) {
 		CommentBean cb = new CommentBean();
 		model.addAttribute("commentBean", cb);
 		model.addAttribute("TalkBean", ts.selectOne(postId));
@@ -69,11 +70,8 @@ public class CommentController {
 		}
 		List<CommentBean> resultList = commentservice.getPageCom(pageNo, postId);
 		model.addAttribute("CommentBean", resultList);
-//		for(CommentBean com :resultList) {			
-//			System.out.println("postId = " + com.getPostId());
-//		}		
 		model.addAttribute("pageNo", pageNo);
-		model.addAttribute("lastPage", commentservice.getLastpage(postId));
+		model.addAttribute("lastPage", commentservice.getLastPage(postId, pageNo));
 		return "/forum/talktalk";
 	}
 
@@ -109,7 +107,7 @@ public class CommentController {
 	    String comTime = sdf.format(new Date(System.currentTimeMillis()));
 	    cb.setComTime(comTime);			
 		commentservice.insertCom(cb);
-		model.addAttribute("CommentBean", commentservice.selectCom(tb.getPostID()));
+		model.addAttribute("CommentBean", commentservice.getComsByFk(tb.getPostID()));
 		// model.addAttribute("floor",floor);
 		return "redirect:/talktalk?postID=" + pID;
 	}

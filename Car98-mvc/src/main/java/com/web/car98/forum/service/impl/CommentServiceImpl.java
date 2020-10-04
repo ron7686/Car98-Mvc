@@ -52,13 +52,13 @@ public class CommentServiceImpl implements CommentService {
 
 	@Transactional
 	@Override
-	public List<CommentBean> selectCom(Integer postId) {
+	public List<CommentBean> getComsByFk(Integer postId) {
 		List<CommentBean> list = null;
 //		Session session = factory.getCurrentSession();
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
-		list = dao.selectCom(postId);
+		list = dao.getComsByFk(postId);
 //			tx.commit();
 //		} catch (Exception e) {
 //			if (tx != null) {
@@ -144,15 +144,16 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public List<CommentBean> getPageCom(Integer page, Integer postId) {
 		List<CommentBean> bean = null;
-		bean = dao.getPage(page, postId);
+		bean = dao.getPageCom(page, postId);
 		return bean;
 	}
 
 	@Transactional
 	@Override
-	public int getLastpage(Integer postId) {
-		return dao.getLastpage(postId);
+	public int getLastPage(Integer postId, Integer page) {
+		return dao.getLastPage(postId, page);
 	}
+	
 
 	@Transactional
 	@Override

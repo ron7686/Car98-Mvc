@@ -2,8 +2,6 @@ package com.web.car98.forum.model;
 
 import java.io.Serializable;
 import java.sql.Blob;
-import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,6 +49,9 @@ public class CommentBean implements Serializable {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PostID")
 	private TalkBean talkBean;
+	
+	@Transient
+	private Integer floor;
 
 	public CommentBean() {
 		super();
@@ -164,6 +165,16 @@ public class CommentBean implements Serializable {
 
 	public void setCommentMultipartFile(MultipartFile commentMultipartFile) {
 		this.commentMultipartFile = commentMultipartFile;
+	}
+	
+	
+
+	public Integer getFloor() {
+		return floor;
+	}
+
+	public void setFloor(Integer floor) {
+		this.floor = floor;
 	}
 
 	@Override

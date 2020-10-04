@@ -62,7 +62,7 @@ public class CommentDaoImpl implements CommentDao {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<CommentBean> selectCom(Integer postId) {
+	public List<CommentBean> getComsByFk(Integer postId) {
 		Session session = factory.getCurrentSession();
 		List<CommentBean> list = null;
 		String hql = "FROM CommentBean c where c.talkBean.PostID=:p";
@@ -115,25 +115,48 @@ public class CommentDaoImpl implements CommentDao {
 	}
 
 	@Override
-	public List<CommentBean> getPage(Integer page, Integer postId) {
+	public List<CommentBean> getPageCom(Integer page, Integer postId) {
 		int getpage = (page - 1) * onepage;
-		List<CommentBean> li = selectCom(postId);
+		List<CommentBean> li = getComsByFk(postId);
+		List<CommentBean> list_floor = new ArrayList<>(); // new一個容器裝有floor的
+		Integer floor = 2; // 起始樓層
+		for (CommentBean cb : li) {
+			cb.setFloor(floor);
+			floor++;
+			list_floor.add(cb);
+		}
+
 		List<CommentBean> lipage = new ArrayList<>();
-		for (int i = getpage; i < getpage + onepage && i < li.size(); i++) {
-			lipage.add(li.get(i));
+		if (page == 1) {
+			for (int i = getpage; i < getpage + onepage - 1 && i < list_floor.size(); i++) {
+				lipage.add(list_floor.get(i));
+			}
+		} else {
+			for (int i = getpage - 1; i < getpage - 1 + onepage && i < list_floor.size(); i++) {
+				lipage.add(list_floor.get(i));
+			}
 		}
 		return lipage;
 	}
 
 	@Override
-	public int getLastpage(Integer postId) {
-		int lastpage;
-		int page;
-		List<CommentBean> li = selectCom(postId);
-		lastpage = li.size() / onepage;
-		page = li.size() % onepage;
-		if (page > 0)
-			lastpage++;
+	public int getLastPage(Integer postId, Integer page) {
+		int lastpage = 0;
+		int op = 0;
+		List<CommentBean> li = getComsByFk(postId);
+
+		if (page == 1) {
+			op = onepage - 1;
+			lastpage = li.size() / op;
+			page = li.size() % op;
+			if (page > 0) lastpage++;
+		} else {
+			lastpage = li.size() / onepage;
+			page = li.size() % onepage;
+			if(page == 0) {
+				lastpage++;
+			}
+		}
 		return lastpage;
 	}
 
@@ -146,7 +169,7 @@ public class CommentDaoImpl implements CommentDao {
 		MemberBean memberBean = commentbean.getMemberBean();
 		return memberBean;
 	}
-	
+
 	// 查出這則PO文是哪個會員留的
 	@Override
 	public MemberBean queryMemberByPostId(Integer postId) {
@@ -156,6 +179,5 @@ public class CommentDaoImpl implements CommentDao {
 		MemberBean memberBean = talkBean.getMemberBean();
 		return memberBean;
 	}
-		
 
 }
