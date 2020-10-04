@@ -60,7 +60,8 @@ public class CommentController {
 	@SuppressWarnings("unused")
 	@GetMapping("/talktalk")
 	public String spaceCom(Model model, RedirectAttributes ra, @RequestParam("postID") Integer postId,
-			@RequestParam(value = "pageNo", required = false) Integer pageNo) {
+			@RequestParam(value = "pageNo", required = false) Integer pageNo,
+			@RequestParam(value = "floorNo", required = false) Integer floorNo) {
 		CommentBean cb = new CommentBean();
 		LikeOrHateBean loh=new LikeOrHateBean();
 		model.addAttribute("commentBean", cb);
@@ -71,6 +72,7 @@ public class CommentController {
 		}
 		List<CommentBean> resultList = commentservice.getPageCom(pageNo, postId);
 		model.addAttribute("CommentBean", resultList);
+<<<<<<< HEAD
 //		for(CommentBean com :resultList) {			
 //			System.out.println("postId = " + com.getPostId());
 //		}		
@@ -81,8 +83,10 @@ public class CommentController {
 			e.printStackTrace();
 		}
 		model.addAttribute("loh",loh);
+=======
+>>>>>>> 9f2f5d66b181437afbfa2dfc89d58458dfbcc79f
 		model.addAttribute("pageNo", pageNo);
-		model.addAttribute("lastPage", commentservice.getLastpage(postId));
+		model.addAttribute("lastPage", commentservice.getLastPage(postId, pageNo));
 		return "/forum/talktalk";
 	}
 
@@ -119,7 +123,7 @@ public class CommentController {
 	    String comTime = sdf.format(new Date(System.currentTimeMillis()));
 	    cb.setComTime(comTime);			
 		commentservice.insertCom(cb);
-		model.addAttribute("CommentBean", commentservice.selectCom(tb.getPostID()));
+		model.addAttribute("CommentBean", commentservice.getComsByFk(tb.getPostID()));
 		// model.addAttribute("floor",floor);
 		return "redirect:/talktalk?postID=" + pID;
 	}

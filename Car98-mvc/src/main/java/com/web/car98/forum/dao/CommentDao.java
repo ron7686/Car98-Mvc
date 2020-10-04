@@ -8,35 +8,36 @@ import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.model.TalkBean;
 import com.web.car98.member.model.MemberBean;
 
-
-
 public interface CommentDao {
 
-	void persist(CommentBean commentBean);   
+	void persist(CommentBean commentBean);
 
-	int insertCom(CommentBean commentBean);  
+	int insertCom(CommentBean commentBean);
 
-	List<CommentBean> selectCom(Integer postId); 
-	
+	List<CommentBean> getComsByFk(Integer postId);   //查詢一篇文章的總留言
+
 	int updateMemCom(String comText, Date comTime, Integer memId, Integer postId, Integer comId);
-	
-    int updateComByPk(CommentBean commentBean);
-    
-    int deleteComByPk(Integer comId);
-    
+
+	int updateComByPk(CommentBean commentBean);
+
+	int deleteComByPk(Integer comId);
+
 	CommentBean selectComByPk(Integer comId);
-    
+
 	TalkBean getTalkBeanById(int id);
 
-	List<CommentBean> getPage(Integer page, Integer postId);
+	List<CommentBean> getPageCom(Integer page, Integer postId);  //得到當頁的留言
 
-	int getLastpage(Integer postId);
+	MemberBean queryMemberByComId(Integer comId);  // 查出這則留言是哪個會員留的
 
-	MemberBean queryMemberByComId(Integer comId);
+	MemberBean queryMemberByPostId(Integer postId);  // 查出這則PO文是哪個會員留的
 
+<<<<<<< HEAD
 	MemberBean queryMemberByPostId(Integer postId);
 	
 	void savelike(LikeOrHateBean loh);
+=======
+	int getLastPage(Integer postId, Integer page);
+>>>>>>> 9f2f5d66b181437afbfa2dfc89d58458dfbcc79f
 
 }
-
