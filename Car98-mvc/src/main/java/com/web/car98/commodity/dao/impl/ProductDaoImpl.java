@@ -78,7 +78,6 @@ public class ProductDaoImpl implements ProductDao {
 		BidBean bid = session.get(BidBean.class, bidId);
 		if (bid != null) {
 			bid.setBidItemBean(null);
-			bid.setMemberBean(null);
 			session.delete(bid);
 		}
 	}
@@ -123,7 +122,7 @@ public class ProductDaoImpl implements ProductDao {
 	public List<BidBean> getByIdProducts(int memId) {
 		List<BidBean> list = null;
 		Session session = factory.getCurrentSession();
-		String hql = "FROM BidBean ob WHERE ob.memberBean.memId = :mid";
+		String hql = "FROM BidBean ob WHERE ob.memId = :mid";
 		list = session.createQuery(hql).setParameter("mid", memId).getResultList();
 		return list;
 	}

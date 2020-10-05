@@ -1,6 +1,6 @@
 package com.web.car98.conven.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.web.car98.member.model.MemberBean;
-
 @Entity
 @Table(name="fuel")
 public class Fuel {
@@ -20,31 +18,31 @@ public class Fuel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Integer fuelId;
 	
-	private Timestamp time;
+	private Date time;
 	private Integer price;
-	private Integer gallon;
-	
+	private Double gallon;
+	private Integer mileage;
+
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="typeNo", nullable = false) 	
+	@JoinColumn(name="typeNo") 	
 	private FuelPriceBean fuelPriceBean;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="memId") 	
-    private MemberBean memberBean;
+    private Integer memId;
 
 	public Fuel() {
 		super();
 	}
 
-	public Fuel(Integer fuelId, Timestamp time, Integer price, Integer gallon, FuelPriceBean fuelPriceBean,
-			MemberBean memberBean) {
+	public Fuel(Integer fuelId, Date time, Integer price, Double gallon, Integer mileage, FuelPriceBean fuelPriceBean,
+			Integer memId) {
 		super();
 		this.fuelId = fuelId;
 		this.time = time;
 		this.price = price;
 		this.gallon = gallon;
+		this.mileage = mileage;
 		this.fuelPriceBean = fuelPriceBean;
-		this.memberBean = memberBean;
+		this.memId = memId;
 	}
 
 	public Integer getFuelId() {
@@ -55,12 +53,16 @@ public class Fuel {
 		this.fuelId = fuelId;
 	}
 
-	public Timestamp getTime() {
+	public Date getTime() {
 		return time;
 	}
 
-	public void setTime(Timestamp time) {
+	public void setTime(Date time) {
 		this.time = time;
+	}
+
+	public void setGallon(Double gallon) {
+		this.gallon = gallon;
 	}
 
 	public Integer getPrice() {
@@ -71,12 +73,8 @@ public class Fuel {
 		this.price = price;
 	}
 
-	public Integer getGallon() {
+	public Double getGallon() {
 		return gallon;
-	}
-
-	public void setGallon(Integer gallon) {
-		this.gallon = gallon;
 	}
 
 	public FuelPriceBean getFuelPriceBean() {
@@ -87,13 +85,20 @@ public class Fuel {
 		this.fuelPriceBean = fuelPriceBean;
 	}
 
-	public MemberBean getMemberBean() {
-		return memberBean;
+	public Integer getMemId() {
+		return memId;
 	}
 
-	public void setMemberBean(MemberBean memberBean) {
-		this.memberBean = memberBean;
+	public void setMemId(Integer memId) {
+		this.memId = memId;
+	}
+
+	public Integer getMileage() {
+		return mileage;
+	}
+
+	public void setMileage(Integer mileage) {
+		this.mileage = mileage;
 	} 
-	
 	
 }

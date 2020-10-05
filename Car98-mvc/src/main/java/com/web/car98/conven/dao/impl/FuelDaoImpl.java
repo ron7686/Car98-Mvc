@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.web.car98.commodity.model.BidBean;
 import com.web.car98.conven.dao.FuelDao;
 import com.web.car98.conven.model.Fuel;
 import com.web.car98.conven.model.FuelPriceBean;
@@ -20,7 +21,7 @@ public class FuelDaoImpl implements FuelDao {
 	public List<Fuel> getByMemId(Integer memId) {
 		List<Fuel> list = null;
 		Session session = factory.getCurrentSession();
-		String hql = "FROM Fuel ob WHERE ob.memberBean.memId = :mid";
+		String hql = "FROM Fuel ob WHERE ob.memId = :mid";
 		list = session.createQuery(hql).setParameter("mid", memId).getResultList();
 		return list;
 	}
@@ -47,6 +48,19 @@ public class FuelDaoImpl implements FuelDao {
 	public FuelPriceBean getTypeByNo(Integer typeNo) {
 		Session session = factory.getCurrentSession();
 		return session.get(FuelPriceBean.class, typeNo);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<FuelPriceBean> getTypeList() {
+		String hql = "FROM FuelPriceBean";
+		Session session = factory.getCurrentSession();
+		return session.createQuery(hql).getResultList();
+	}
+
+	@Override
+	public Fuel getFuelById(int fuelId) {
+		return  factory.getCurrentSession().get(Fuel.class, fuelId);
 	}
 	
 

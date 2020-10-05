@@ -72,9 +72,10 @@ public class BuyBidController {
 			   pagePNo = "1";
 			} 
 		} 
+		bean.getMemId();
 		// 將訂單資料(價格，數量與BidBean)封裝到OrderItemBean物件內
 		OrderItemBean oib = new  OrderItemBean(null, qty ,bean.getBidPrice(), 
-				bidId, bean.getBidItemName(), bean.getMemberBean().getName());
+				bidId, bean.getBidItemName(), bean.getMemName());
 		// 將OrderItem物件內加入ShoppingCart的物件內
 		
 		cart.addToCart(bidId, oib);
