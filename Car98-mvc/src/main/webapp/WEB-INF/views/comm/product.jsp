@@ -73,7 +73,7 @@
                         <input name='qty' type="hidden" value='1' />
                         <Input type='hidden' name='bidId' value='${product.bidId}'>
                      
-                        <Input  class='btn btn-warning btn-large' type='submit' value='加入購物車'>
+                        <Input class='btn btn-warning btn-large' type='submit' value='加入購物車'>
                        
                         
                     </FORM>
