@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.web.car98.forum.model.ComLikeOrHateBean;
 import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.model.TalkBean;
@@ -70,17 +72,24 @@ public class CommentController {
 		if (pageNo == null) {
 			pageNo = 1;
 		}
-		List<CommentBean> resultList = commentservice.getPageCom(pageNo, postId);
+
+		MemberBean memberBean=(MemberBean) model.getAttribute("LoginOK");
+		
+		List<CommentBean> resultList;
+		//try {
+			resultList = commentservice.getPageCom(pageNo, postId,memberBean.getMemId());
+		//} catch (Exception e1) {
+			
+		//	e1.printStackTrace();
+		//}
 		model.addAttribute("CommentBean", resultList);
 	
-		MemberBean memberBean=(MemberBean) model.getAttribute("LoginOK");
 		try {
 			loh=ts.getOneLoh(postId,memberBean.getMemId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		model.addAttribute("loh",loh);
-
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("lastPage", commentservice.getLastPage(postId, pageNo));
 		return "/forum/talktalk";
@@ -110,7 +119,7 @@ public class CommentController {
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
 		}		
-
+		
 		String pID = String.valueOf(tb.getPostID());
 //		cb.setPostId(tb.getPostID());
 		cb.setTalkBean(tb);
@@ -120,7 +129,8 @@ public class CommentController {
 	    cb.setComTime(comTime);			
 		commentservice.insertCom(cb);
 		model.addAttribute("CommentBean", commentservice.getComsByFk(tb.getPostID()));
-		// model.addAttribute("floor",floor);
+	
+		
 		return "redirect:/talktalk?postID=" + pID;
 	}
 	
@@ -141,9 +151,29 @@ public class CommentController {
 		
 		return "redirect:/talktalk?postID=" + postId;
 		
-		
 	}
 	
+	//留言點讚
+	@RequestMapping("/comlike")
+	public String ComLikeOrHate(Model model,
+			@RequestParam(value="tf") Integer tf,
+			@RequestParam(value = "postId", required = false) Integer postId,
+			@RequestParam(value = "comId", required = false) Integer comId,
+			@RequestParam(value = "comLohId",required = false) Integer comLohId
+			) {
+		ComLikeOrHateBean cloh=new ComLikeOrHateBean();
+		MemberBean memberBean=(MemberBean) model.getAttribute("LoginOK");
+		CommentBean commentBean=commentservice.selectComByPk(comId);
+		System.out.println(comLohId+"==========================");
+		cloh.setComLohId(comLohId);
+		cloh.setComLikeOrHate(tf);
+		cloh.setMemberBean(memberBean);
+		cloh.setCommentBean(commentBean);
+		commentservice.saveComLike(cloh);
+		
+		return "redirect:/talktalk?postID=" + postId;
+		
+	}
 
 //	@RequestMapping(value = "/forum/updateCom.do", method = RequestMethod.POST)
 //	@PostMapping("/talktalk")

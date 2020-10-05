@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.web.car98.forum.model.ComLikeOrHateBean;
 import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.model.TalkBean;
@@ -62,6 +63,9 @@ public class MemberBean implements Serializable {
 	
 	@OneToMany(mappedBy = "memberBean")
 	private List<LikeOrHateBean> likeOrHate = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "memberBean")
+	private List<ComLikeOrHateBean> comlikeOrHate = new ArrayList<>();
 	
 	
 
@@ -125,6 +129,15 @@ public class MemberBean implements Serializable {
 		this.fileName = fileName;
 		this.levels = levels;
 		this.loginTime = loginTime;
+	}
+
+	
+	public List<ComLikeOrHateBean> getComlikeOrHate() {
+		return comlikeOrHate;
+	}
+
+	public void setComlikeOrHate(List<ComLikeOrHateBean> comlikeOrHate) {
+		this.comlikeOrHate = comlikeOrHate;
 	}
 
 	public Double getUnpaid_amount() {

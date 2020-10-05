@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.web.car98.forum.dao.CommentDao;
+import com.web.car98.forum.model.ComLikeOrHateBean;
 import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.service.CommentService;
@@ -143,9 +145,23 @@ public class CommentServiceImpl implements CommentService {
 
 	@Transactional
 	@Override
-	public List<CommentBean> getPageCom(Integer page, Integer postId) {
+	public List<CommentBean> getPageCom(Integer page, Integer postId,Integer memId) {
 		List<CommentBean> bean = null;
-		bean = dao.getPageCom(page, postId);
+		List<CommentBean> li = getComsByFk(postId);
+		
+		bean = dao.getPageCom(page, li);
+		for (CommentBean cb : li) {
+			List<ComLikeOrHateBean> cloh=dao.getComLoh(cb.getComId());
+			cb.setComLike(getComLike(cloh));
+			cb.setComHate(getComHate(cloh));
+			try {
+				cb.setComLikeOrHateBean(getComOneLoh(cb.getComId(),memId));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 		return bean;
 	}
 
@@ -171,13 +187,44 @@ public class CommentServiceImpl implements CommentService {
 	@Transactional
 	@Override
 	public void saveLike(LikeOrHateBean loh) {
-		
-		
-		
 		dao.savelike(loh);
 	}
+	@Transactional
+	@Override
+	public void saveComLike(ComLikeOrHateBean cloh) {
+		dao.saveComLike(cloh);
+	}
 	
-	
-
+	@Override
+	public int getComLike(List<ComLikeOrHateBean> cloh) {
+		int count=0;
+		for(ComLikeOrHateBean i:cloh) {
+			if(i.getComLikeOrHate()==1) {
+				count++;
+			}
+		}
+		return count;
+	}
+	@Override
+	public int getComHate(List<ComLikeOrHateBean> cloh) {
+		int count=0;
+		for(ComLikeOrHateBean i:cloh) {
+			if(i.getComLikeOrHate()==2) {
+				count++;
+			}
+		}
+		return count;
+	}	
+	@Transactional
+	@Override
+	public ComLikeOrHateBean getComOneLoh(int comId, int memId) {
+		return dao.getComOneLoh(comId, memId);
+	}
+	@Transactional
+	@Override
+	public List<ComLikeOrHateBean> getComLoh(int comId) {
+		
+		return dao.getComLoh(comId);
+	}
 
 }

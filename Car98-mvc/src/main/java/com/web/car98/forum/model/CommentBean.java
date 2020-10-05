@@ -2,6 +2,9 @@ package com.web.car98.forum.model;
 
 import java.io.Serializable;
 import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -52,6 +56,12 @@ public class CommentBean implements Serializable {
 	
 	@Transient
 	private Integer floor;
+	
+	@Transient
+	private ComLikeOrHateBean ComLikeOrHateBean;
+	
+	@OneToMany(mappedBy = "commentBean")
+	private List<ComLikeOrHateBean> ComLikeOrHate = new ArrayList<>();
 
 	public CommentBean() {
 		super();
@@ -84,6 +94,24 @@ public class CommentBean implements Serializable {
 		this.commentMultipartFile = commentMultipartFile;
 		this.memberBean = memberBean;
 		this.talkBean = talkBean;
+	}
+
+	
+	
+	public ComLikeOrHateBean getComLikeOrHateBean() {
+		return ComLikeOrHateBean;
+	}
+
+	public void setComLikeOrHateBean(ComLikeOrHateBean comLikeOrHateBean) {
+		ComLikeOrHateBean = comLikeOrHateBean;
+	}
+
+	public List<ComLikeOrHateBean> getComLikeOrHate() {
+		return ComLikeOrHate;
+	}
+
+	public void setComLikeOrHate(List<ComLikeOrHateBean> comLikeOrHate) {
+		ComLikeOrHate = comLikeOrHate;
 	}
 
 	public MemberBean getMemberBean() {
@@ -166,7 +194,6 @@ public class CommentBean implements Serializable {
 	public void setCommentMultipartFile(MultipartFile commentMultipartFile) {
 		this.commentMultipartFile = commentMultipartFile;
 	}
-	
 	
 
 	public Integer getFloor() {

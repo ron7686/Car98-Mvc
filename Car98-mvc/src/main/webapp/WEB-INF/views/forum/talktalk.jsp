@@ -214,21 +214,48 @@ body {
 						</c:if>
 					</div>
 					<!-- 按讚功能 -->
+					<c:if test="${comment.comLikeOrHateBean.comLikeOrHate==0||empty comment.comLikeOrHateBean.comLikeOrHate}">
 					<div class="col-12 article-mood">
 						<ul class="like-or-hate">
+							
 							<li id="like1" button class="fas fa-thumbs-up fa-2x"
-								type="button">12</li>
+								type="button"><a href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1">${comment.comLike}</a></li>
+							
 							<li id="hate1" button class="fas fa-thumbs-down fa-2x"
-								type="button">1</li>
-
-							<%-- 							<c:if test="${CommentBean.memId}==${LoginOK.memId}"> --%>
+								type="button"><a href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2">${comment.comHate}</a></li>
+						</ul>
+					</div>
+					</c:if>
+					<c:if test="${comment.comLikeOrHateBean.comLikeOrHate==1}">
+					<div class="col-12 article-mood">
+						<ul class="like-or-hate">
+							
+							<li id="like1" class="fas fa-thumbs-up fa-2x"
+								style="color:red"><a href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0">${comment.comLike}</a></li>
+							
+							<li id="hate1" class="fas fa-thumbs-down fa-2x"
+								><a href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2">${comment.comHate}</a></li>
+						</ul>
+					</div>
+					</c:if>
+					<c:if test="${comment.comLikeOrHateBean.comLikeOrHate==2}">
+					<div class="col-12 article-mood">
+						<ul class="like-or-hate">
+							
+							<li id="like1" button class="fas fa-thumbs-up fa-2x"
+								type="button"><a href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1">${comment.comLike}</a></li>
+							
+							<li id="hate1" button class="fas fa-thumbs-down fa-2x"
+								type="button" style="color:red"><a href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0">${comment.comHate}</a></li>
+						</ul>
+					</div>
+					</c:if>
+				<%-- 							<c:if test="${CommentBean.memId}==${LoginOK.memId}"> --%>
 							<a id="" class="updateButton"
 								href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
 							<a id="" class="deleteButton"
 								href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
-							<%-- 							</c:if> --%>
-						</ul>
-					</div>
+							<%-- 							</c:if> --%>	
 				</div>
 			</div>
 		</div>
