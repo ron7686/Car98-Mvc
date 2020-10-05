@@ -1,6 +1,9 @@
 package com.web.car98.forum.controller;
 
+
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.web.car98.forum.model.TalkBean;
@@ -51,8 +53,13 @@ public class TalkContentController {
 		
 		tb.setMemberBean(mb);
 		
-		Date postTime = new Date(System.currentTimeMillis());
-		tb.setPostTime(postTime);		
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
+	    String PostTime = sdf.format(new Date(System.currentTimeMillis()));
+	    tb.setPostTime(PostTime);				
+		
+		
 		
 		talkservice.persist(tb);
 		model.addAttribute("TalkBean", tb);
