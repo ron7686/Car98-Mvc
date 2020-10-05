@@ -147,7 +147,7 @@
 					<div class="col-10  p-0 ">
 						<form:input id="name" path="name" type='text'
 							class='form:input-large form-control ml-3 ' />
-						<form:errors path="name" />
+						<form:errors class="error ml-3" path="name" />
                     </div>
                 </div>
                     <div class="form-group col-lg-6 ">
@@ -156,7 +156,7 @@
 					<div class="col-10  p-0  nickname">
 						<form:input id="id" path="id" type='text'
 							class='form:input-large form-control '  />
-						<form:errors path="id" />                
+						<form:errors class="error" path="id" />                
                 </div>
 				</div>
             </div>		
@@ -167,7 +167,7 @@
 					<div class="col-lg-11 email ">
 						<form:input id="email" path="email" type='text'
 							class='form:input-large form-control ' />
-						<form:errors path="email" />
+						<form:errors class="error" path="email" />
 					</div>
 				</div>
             </div>
@@ -178,7 +178,7 @@
 					<div class='col-lg-11 phone'>
 						<form:input id="phone" path="phone" type='text'
 							class='form:input-large form-control ' />
-						<form:errors path="phone" />
+						<form:errors class="error" path="phone" />
 					</div>
                 </div>
             </div>
@@ -190,7 +190,7 @@
 						<form:input id="password" path="password" type='password'
 							class='form:input-large form-control ml-3' 
 							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" />
-						<form:errors path="password" />
+						<form:errors class="error ml-3" path="password" />
                     </div>
                 </div>
 				<div class="form-group col-lg-6">
@@ -200,7 +200,7 @@
 						<form:input id="password1" path="password1" type='password'
 							class='form:input-large form-control psw' 
 							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}"/>
-						<form:errors path="password1" />
+						<form:errors class="error" path="password1" />
 					</div>
                 </div>
             
@@ -210,7 +210,7 @@
 					<div class='col-lg-11 birth'>
 						<form:input id="birth" path="birth" type='date'
 							class='form:input-large form-control ' />
-						<form:errors path="birth" />
+						<form:errors class="error" path="birth" />
 					</div>
 				</div>
             </div>
@@ -223,7 +223,7 @@
 								label="男" id="gender" />
 							<form:radiobutton path="sex" class='radio-size mx-3' value="F"
 								label="女" id="gender" />
-							<form:errors path="sex" />
+							<form:errors class="error" path="sex" />
 						</div>
 
 					</div>
