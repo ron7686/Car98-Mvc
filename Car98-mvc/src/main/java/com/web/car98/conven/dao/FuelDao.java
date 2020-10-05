@@ -15,4 +15,8 @@ public interface FuelDao {
 	public void delete(Integer fuelId);
 	
 	public FuelPriceBean getTypeByNo(Integer typeNo);
+	
+	List<FuelPriceBean> getTypeList();
+	
+	public Fuel getFuelById(int fuelId);
 }

@@ -17,12 +17,12 @@
 			<li class="nav-item"><a class="nav-link" href="<c:url value='searchresource' /> "> Car好康 </a>
 				</li>
 			<li class="nav-item dropdown"><a
-				class="nav-link" href="/carEasy.html"
+				class="nav-link" href="<c:url value='/config/fuels'/>"
 				id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false"> Car方便 </a>
 
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" href="<c:url value='/config/fuels'/>">加油紀錄</a> <a class="dropdown-item" href="#">保養紀錄</a> <a
+					<a class="dropdown-item" href="<c:url value='/config/fuels/add'/>">加油紀錄</a> <a class="dropdown-item" href="#">保養紀錄</a> <a
 						class="dropdown-item" href="#">保險紀錄</a>
 				</div>
 			</li>
