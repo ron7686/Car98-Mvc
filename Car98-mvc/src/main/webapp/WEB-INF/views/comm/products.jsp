@@ -65,7 +65,7 @@
 							<FORM action="<c:url value='BuyBid.do' />" method="POST">
 								<input name='qty' type="hidden" value='1' />
 								<Input type='hidden' name='bidId' value='${product.value.bidId}'>
-								<Input type='submit' value='加入購物車'>
+								<Input class='btn btn-warning btn-large' type='submit' value='加入購物車'>
 								<!-- <a data-name="${product.value.bidItemName}" data-price="${product.value.bidPrice}"
 									class="add-to-cart" href="">+ Add To Cart</a> -->
 							</FORM>

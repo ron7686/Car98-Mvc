@@ -65,20 +65,19 @@
                     </p>
                 </div>
                 <div>
-                    <p>
-                        <a href="<spring:url value='/comm/products' />" class="btn btn-default">
+                    
+                        <a href="<spring:url value='/comm/products' />" class="btn btn-secondary">
                             <span class="glyphicon-hand-left glyphicon text-white">返回</span>
                         </a>
                     <FORM action="<c:url value='BuyBid.do' />" method="POST">
                         <input name='qty' type="hidden" value='1' />
                         <Input type='hidden' name='bidId' value='${product.bidId}'>
-                        <Input type='submit' value='加入購物車'>
-                        <!-- <a href='#' class='btn btn-warning btn-large'>
-                            <span class='glyphicon-shopping-cart glyphicon'>
-                            </span>加入購物車
-                        </a> -->
+                     
+                        <Input  class='btn btn-warning btn-large' type='submit' value='加入購物車'>
+                       
+                        
                     </FORM>
-                    </p>
+                    
                 </div>
             </div>
         </div>
