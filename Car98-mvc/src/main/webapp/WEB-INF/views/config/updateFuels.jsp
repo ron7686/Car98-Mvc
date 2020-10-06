@@ -40,7 +40,8 @@
 }
 
 body {
-	background-image: url(${pageContext.request.contextPath}/image/Desktop.png);
+	background-image:
+		url(${pageContext.request.contextPath}/image/Desktop.png);
 	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -65,17 +66,21 @@ body {
 									<form:option value="-1" label="請挑選" />
 									<form:options items="${typeList}" />
 								</form:select>
+								<form:errors path="fuelPriceBean.typeNo" />
 							</div>
 							<div>
 								<label for="gallon">本次加油</label>
 								<form:input type="text" path="gallon" class="form-control"
 									id="liter" placeholder="公升" />
+								<form:errors path="gallon" />
 								<label for="mileage">行駛里程</label>
 								<form:input type="text" path="mileage" id="liter_total"
 									class="form-control" placeholder="里程數" />
+								<form:errors path="mileage" />
 								<label for="time">日期</label>
 								<form:input type="date" path="time" class="form-control"
 									placeholder="日期" />
+								<form:errors path="time" />
 							</div>
 							<div class="form-group">
 								<div class='col-lg-offset-2 col-sm-10'>
