@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%String path = request.getContextPath();%>
+<%
+	String path = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -200,9 +202,9 @@ body {
 		</c:if>
 	</div>
 	<!-- 	</div> -->
-	
-	
-	
+
+
+
 	<!-- 留言內容 -->
 	<c:forEach var="comment" items="${CommentBean}">
 		<div class="container">
@@ -228,17 +230,15 @@ body {
 						test="${comment.comLikeOrHateBean.comLikeOrHate==0||empty comment.comLikeOrHateBean.comLikeOrHate}">
 						<div class=" article-mood float-right">
 							<ul class="like-or-hate">
-								<li id="like1" ><a
+								<li id="like1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1"><i
-										class="fas fa-thumbs-up fa-2x" ">${comment.comLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x"">${comment.comLike}</i></a></li>
 
-								<li id="hate1" ><a
+								<li id="hate1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2"><i
-										class="fas fa-thumbs-down fa-2x" ">${comment.comHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x"">${comment.comHate}</i></a></li>
 
-								<%-- 							<c:if test="${CommentBean.memId}==${LoginOK.memId}"> --%>
 
-								<%-- 							</c:if> --%>
 							</ul>
 						</div>
 					</c:if>
@@ -247,13 +247,13 @@ body {
 						<div class="article-mood float-right">
 							<ul class="like-or-hate">
 
-								<li id="like1" ><a
+								<li id="like1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"><i
 										class="fas fa-thumbs-up fa-2x" style="color: red">${comment.comLike}</i></a></li>
 
-								<li id="hate1" ><a
+								<li id="hate1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2"><i
-										class="fas fa-thumbs-down fa-2x" ">${comment.comHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x"">${comment.comHate}</i></a></li>
 							</ul>
 						</div>
 					</c:if>
@@ -261,11 +261,11 @@ body {
 						<div class="article-mood float-right">
 							<ul class="like-or-hate">
 
-								<li id="like1" ><a
+								<li id="like1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1"><i
-										class="fas fa-thumbs-up fa-2x" ">${comment.comLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x"">${comment.comLike}</i></a></li>
 
-								<li id="hate1" ><a
+								<li id="hate1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"><i
 										class="fas fa-thumbs-down fa-2x" style="color: red">${comment.comHate}</i></a></li>
 							</ul>
@@ -273,27 +273,73 @@ body {
 					</c:if>
 
 
-
-
-
-
 					<div class="col-12 article-content">
-						${comment.comText}<br>
+						<div id="processUpdateDiv">${comment.comText}</div>
+						<br>
+						<!-- 						<div id="updateDiv" hidden="true"> -->
+						<%-- 						<textarea rows="20" cols="20">${comment.comText}</textarea>						 --%>
+						<!-- 						</div> -->
 						<c:if test="${!empty comment.fileName}">
 							<img class="commentPic"
 								src='${pageContext.request.contextPath}/getComImage?id=${LoginOK.memId}&comId=${comment.comId}'>
 						</c:if>
 					</div>
+					<!-- Button trigger modal -->
+					<%-- 					<c:if test="${comment.memberBean.id == LoginOK.memId}"> --%>
 					<div class="update  col-2 float-right ">
-						<a id="" class="updateButton m-2"
+						<!-- 記得加回編輯的<a> tag	data-toggle="modal" data-target="#staticBackdrop" -->
+						<a id="updateButton" class="updateButton m-2" data-toggle="modal" data-target="#staticBackdrop"
 							href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
+						<!-- <button id="updateButton" class="updateButton m-2" 
+							href="">編輯</button> -->
 						<a id="" class="deleteButton m-2"
 							href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
 					</div>
+					<%-- 					</c:if> --%>
+
 				</div>
 			</div>
 		</div>
 	</c:forEach>
+
+	<!-- Modal -->
+	<div class="modal fade" id="staticBackdrop" data-backdrop="static"
+		data-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">編輯留言</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<form:form action="updateComment" modelAttribute="commentBean"
+					method="POST">
+					<div class="modal-body">
+						<div class="form-group w-50 mx-auto">
+							<p class="text-secondary"></p>
+							<form:input path="comText" type="test" id="commentText"
+								class="form-control" value="" name="comText" required="required"
+								pattern="" />
+							<form:errors path="comText" />
+						</div>
+						<div class="modal-footer justify-content-center">
+							<button type="submit" class="btn btn-secondary"
+								onclick="myFunction()">送出</button>
+							<c:if test="${empty errors}">
+								<div id="snackbar">修改成功</div>
+							</c:if>
+						</div>
+					</div>
+				</form:form>
+			</div>
+		</div>
+	</div>
+
+
 
 	<!-- 留言輸入 -->
 	<div class="container">
@@ -371,8 +417,16 @@ body {
 					return false;
 				}
 			});
+
+			// 			$('#updateButton').click(function(){
+			// 				debugger;
+			// 				$('#processUpdateDiv').hide();
+			// 				// $('#updateDiv').show();
+			// 				document.getElementById('updateDiv').hidden = false;
+			// 			});
 		})
 	</script>
+
 	<script src="${pageContext.request.contextPath}/javascript/talktalk.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/javascript/talktalk2.js"></script>

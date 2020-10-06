@@ -175,30 +175,20 @@ public class CommentController {
 		
 	}
 
-//	@RequestMapping(value = "/forum/updateCom.do", method = RequestMethod.POST)
-//	@PostMapping("/talktalk")
-//	public String updateCom(Model model, HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//		HttpSession session = request.getSession();
-//		Map<String, String> errorMessage = new HashMap<>();
-//		model.addAttribute("ErrorMsgKey", errorMessage);
-//		request.setCharacterEncoding("UTF-8");
-//		String comIdStr = request.getParameter("comId");
-//		System.out.println(comIdStr);
-//		Integer comId = Integer.valueOf(comIdStr);
-//		CommentBean commentBean = null;
-//		CommentServiceImpl service = new CommentServiceImpl();
-//		
-//		int n = 0;
-//    	n = service.updateComByPk(commentBean);
-//		if(n != 0) {
-//			return "/forum/talktalk";
-//		}else {
-//			
-//		}
-//		return "/forum/talktalk";
-//
-//	}
+	@RequestMapping("/forum/updateCom")
+	
+	public String updateCom(Model model, @ModelAttribute("commentBean") CommentBean cb, 
+			@RequestParam("comId") Integer comId,
+			@RequestParam("postID") Integer postID) {
+		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
+		if (memberBean == null) {
+			return "redirect:/login";
+		}
+		CommentBean commentbean = commentservice.selectComByPk(comId);
+		commentservice.updateComByPk(commentbean);
+		return "redirect:/talktalk?postID=" + postID;
+
+	}
 
 	// 刪除留言
 	@RequestMapping("/forum/deleteCom")
