@@ -3,6 +3,7 @@ package com.web.car98.forum.model;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,12 +41,11 @@ public class TalkBean implements Serializable {
 	@Column(name = "PostText")
 	private String PostText;
 	@Column(name = "PostTime")
-	private Date PostTime;
-	@Column(name = "PostLike")
+	private String PostTime;
+	@Transient
 	private Integer PostLike;
-	@Column(name = "PostHate")
+	@Transient
 	private Integer PostHate;
-	@Column(name = "PostCom")
 	@Transient
 	private Integer PostCom;
 	@Column(name = "PostView")
@@ -58,13 +58,15 @@ public class TalkBean implements Serializable {
 	private Blob PostPic;
 	@OneToMany(mappedBy = "talkBean")
 	private List<CommentBean> comment = new ArrayList<>();
+	@OneToMany(mappedBy = "talkBean")
+	private List<LikeOrHateBean> likeOrHate = new ArrayList<>();
 
 	public TalkBean() {
 		super();
 	}
 
 	public TalkBean(Integer postID, MemberBean memberBean, Integer memID, String postTitle, String postText,
-			Date postTime, Integer postLike, Integer postHate, Integer postCom, Integer postView, String postmember,
+			String postTime, Integer postLike, Integer postHate, Integer postCom, Integer postView, String postmember,
 			String postType, Blob postPic, List<CommentBean> comment) {
 		super();
 		PostID = postID;
@@ -82,6 +84,14 @@ public class TalkBean implements Serializable {
 		PostType = postType;
 		PostPic = postPic;
 		this.comment = comment;
+	}
+
+	public List<LikeOrHateBean> getLikeOrHate() {
+		return likeOrHate;
+	}
+
+	public void setLikeOrHate(List<LikeOrHateBean> likeOrHate) {
+		this.likeOrHate = likeOrHate;
 	}
 
 	public MemberBean getMemberBean() {
@@ -156,11 +166,11 @@ public class TalkBean implements Serializable {
 		PostText = postText;
 	}
 
-	public Date getPostTime() {
+	public String getPostTime() {
 		return PostTime;
 	}
 
-	public void setPostTime(Date postTime) {
+	public void setPostTime(String postTime) {
 		PostTime = postTime;
 	}
 

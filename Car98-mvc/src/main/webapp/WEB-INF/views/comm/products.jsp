@@ -24,15 +24,15 @@
 	<!-- shopping product -->
 	<div class="container">
 		<div class="contorl  my-2 d-flex justify-content-end">
-			<FONT color='red' size='-1'>
-				金額小計(OK):
+			<FONT color='red' size='-1'> 金額小計(OK):
 				<c:out value="${ShoppingCart.subtotal}" default="0" /> 元
 			</FONT>
 			<!-- <a href='products/add'>新增商品</a>
 			<a href='showUpdate'>編輯刪除商品</a> -->
-			<button type="button" class="btn btn-outline-light letter-spacing" 
+			<button type="button" class="btn btn-outline-light letter-spacing"
 				onclick="location.href='${pageContext.request.contextPath}/comm/showCartContent'">
-				<i class="fa fa-shopping-cart"></i><c:out value="${ShoppingCart.itemNumber}" default="0" />
+				<i class="fa fa-shopping-cart"></i>
+				<c:out value="${ShoppingCart.itemNumber}" default="0" />
 			</button>
 			<button class="clear-cart btn btn-outline-danger ml-2"
 				onclick="location.href='${pageContext.request.contextPath}/comm/removeShoppingCart'">
@@ -47,28 +47,73 @@
 				<div class="col-md-3 col-sm-6">
 					<div class="product-grid">
 						<div class="product-image">
-							<a href="<spring:url value='/comm/product?id=${product.value.bidId}' />"> <img class="pic-1"
-									src="<c:url value='comm/picture/${product.value.bidId}' />" /> <img class="pic-2" />
+							<a href="<spring:url value='/comm/product?id=${product.value.bidId}' />">
+								<img class="pic-1" src="<c:url value='comm/picture/${product.value.bidId}' />" />
+								<img class="pic-2" />
 							</a>
 						</div>
 						<div class="product-content">
 							<h3 class="title">
 								<a href="#">${product.value.bidItemName}</a>
 							</h3>
-							<div class="price">
-								價格:${product.value.bidPrice}
-							</div>
+							<div class="price">價格:${product.value.bidPrice}</div>
 							<!-- <button type="button" class="btn btn-primary" data-toggle="modal"
 								data-target="#proModal">
 								more
 							</button> -->
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#proModal${product.value.bidId}">看更多</button>
 							<FORM action="<c:url value='BuyBid.do' />" method="POST">
-								<input name='qty' type="hidden" value='1' />
-								<Input type='hidden' name='bidId' value='${product.value.bidId}'>
-								<Input type='submit' value='加入購物車'>
-								<!-- <a data-name="${product.value.bidItemName}" data-price="${product.value.bidPrice}"
-									class="add-to-cart" href="">+ Add To Cart</a> -->
+								<input name='qty' type="hidden" value='1' /> <Input type='hidden' name='bidId'
+									value='${product.value.bidId}'>
+								<Input class='btn btn-warning btn-large' type='submit' value='加入購物車'>
 							</FORM>
+						</div>
+					</div>
+				</div>
+				<!-- modale_product window -->
+				<div class="modal fade bd-example-modal-lg" id="proModal${product.value.bidId}" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalLabel${product.value.bidId}" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel${product.value.bidId}">詳細資料</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="row justify-content-center align-items-center row-width mx-auto">
+									<div class="col-md-6">
+										<img width='300' height='300'
+											src="<c:url value='comm/picture/${product.value.bidId}'/>" />
+									</div>
+									<div class="col-md-6">
+										<div>
+											<h2>產品資料</h2>
+											<h3>${product.value.bidItemName}</h3>
+											<p>賣家ID: ${product.value.memName}</p>
+											<p>單價: ${product.value.bidPrice}</p>
+											<p>商品分類: ${product.value.bidItemBean.bidCategory}</p>
+											<p>上架時間: ${product.value.bidTime}</p>
+											<p>商品內容: ${product.value.bidFormat}</p>
+											<p>
+												<strong>商品編號: </strong> <span class='label label-warning'>
+													${product.value.bidId} </span>
+											</p>
+										</div>
+										<div></div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+								<FORM action="<c:url value='BuyBid.do' />" method="POST">
+									<input name='qty' type="hidden" value='1' /> <Input type='hidden' name='bidId'
+										value='${product.value.bidId}'>
+									<Input class='btn btn-warning btn-large' type='submit' value='加入購物車'>
+								</FORM>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -97,8 +142,7 @@
 								<div>${anEntry.value.bidName}</div>
 								<form action="<c:url value='BuyBid.do' />" method="POST">
 									<input name='qty' type="number" value='${anEntry.value.quantity}' min='1'
-										max="10" />
-									<Input type='hidden' name='bidId' value='${anEntry.value.bidId}'>
+										max="10" /> <Input type='hidden' name='bidId' value='${anEntry.value.bidId}'>
 									<Input type='submit' value='加入購物車'>
 								</form>
 							</div>
@@ -121,81 +165,39 @@
 			<ul class="pagination pagination-sm justify-content-center mb-2">
 				<c:if test="${pagePNo > 3}">
 					<li class="page-item"><a class="page-link" href="<c:url value='products?pagePNo=1' />">1</a></li>
-					<li class="page-item mt-2"><a href=""><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i></a></li>
+					<li class="page-item mt-2"><a href=""><i class="fas fa-caret-left"></i><i
+								class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i
+								class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i></a></li>
 				</c:if>
 				<c:if test="${pagePNo > 2}">
-					<li class="page-item"><a class="page-link" href="<c:url value='products?pagePNo=${pagePNo-2}' />">${pagePNo-2}</a></li>
+					<li class="page-item"><a class="page-link"
+							href="<c:url value='products?pagePNo=${pagePNo-2}' />">${pagePNo-2}</a></li>
 				</c:if>
 				<c:if test="${pagePNo > 1}">
-					<li class="page-item"><a class="page-link" href="<c:url value='products?pagePNo=${pagePNo-1}' />">${pagePNo-1}</a></li>
+					<li class="page-item"><a class="page-link"
+							href="<c:url value='products?pagePNo=${pagePNo-1}' />">${pagePNo-1}</a></li>
 				</c:if>
 				<li class="page-item active"><a class="page-link" href="#">${pagePNo}</a></li>
 				<c:if test="${pagePNo < totalPages}">
-					<li class="page-item"><a class="page-link" href="<c:url value='products?pagePNo=${pagePNo+1}' />">${pagePNo+1}</a></li>
+					<li class="page-item"><a class="page-link"
+							href="<c:url value='products?pagePNo=${pagePNo+1}' />">${pagePNo+1}</a></li>
 				</c:if>
 				<c:if test="${pagePNo+1 < totalPages}">
-					<li class="page-item"><a class="page-link" href="<c:url value='products?pagePNo=${pagePNo+2}' />">${pagePNo+2}</a></li>
+					<li class="page-item"><a class="page-link"
+							href="<c:url value='products?pagePNo=${pagePNo+2}' />">${pagePNo+2}</a></li>
 				</c:if>
 				<c:if test="${pagePNo+2 < totalPages}">
-					<li class="page-item mt-2"><a href=""><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i></a></li>
-					<li class="page-item"><a class="page-link" href="<c:url value='products?pagePNo=${totalPages}' />">${totalPages}</a></li>
+					<li class="page-item mt-2"><a href=""><i class="fas fa-caret-right"></i><i
+								class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i
+								class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i></a></li>
+					<li class="page-item"><a class="page-link"
+							href="<c:url value='products?pagePNo=${totalPages}' />">${totalPages}</a></li>
 				</c:if>
-			  </ul>
+			</ul>
 		</nav>
 	</div>
-	<!-- modale_product window -->
-	<!-- <div class="modal fade bd-example-modal-lg" id="proModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg"" role="document">
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			  </button>
-			</div>
-			<div class="modal-body">
-			    <div class="row justify-content-center align-items-center row-width mx-auto">
-					<div class="col-md-6">
-						<img width='300' height='300' src="<c:url value='comm/picture/${product.bidId}'/>" />
-					</div>
-					<div class="col-md-6">
-						<div>
-							<h2>產品資料</h2>
-							<h3>${product.bidItemName}</h3>
-							<p>賣家ID: ${product.memberBean.name}</p>
-							<p>單價: ${product.bidPrice}</p>
-							<p>商品分類: ${product.bidItemBean.bidCategory}</p>
-							<p>上架時間: ${product.bidTime}</p>
-							<p>商品內容: ${product.bidFormat}</p>
-							<p>
-								<strong>商品編號: </strong> <span class='label label-warning'>
-									${product.bidId} </span>
-							</p>
-						</div>
-						<div>
-							<p>
-							<FORM action="<c:url value='BuyBid.do' />" method="POST">
-								<input name='qty' type="hidden" value='1' />
-								<Input type='hidden' name='bidId' value='${product.bidId}'>
-								<Input type='submit' value='加入購物車'>
-								<a href='#' class='btn btn-warning btn-large'>
-									<span class='glyphicon-shopping-cart glyphicon'>
-									</span>加入購物車
-								</a> 
-							</FORM>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			  <button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		  </div>
-		</div>
-	  </div> -->
-	
+
+
 	<!-- footer -->
 	<jsp:include page="/fragment/footer.jsp" />
 

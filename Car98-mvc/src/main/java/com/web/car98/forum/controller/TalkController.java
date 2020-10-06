@@ -2,6 +2,7 @@ package com.web.car98.forum.controller;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,39 +23,36 @@ import com.web.car98.forum.service.TalkService;
 public class TalkController {
 	@Autowired
 	TalkService talkservice;
-	
+
 	int postID = 1;
-	
 
 	@RequestMapping("/forum/talktop.do")
 	public String list(Model model, HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value="lastPage",required=false) Integer lastpage,
+			@RequestParam(value = "lastPage", required = false) Integer lastpage,
 			@RequestParam(value = "pageNo", required = false) Integer pageNo,
-			@ModelAttribute("talkBean") TalkBean talkBean
-			) {
-		
-		if(pageNo==null) {
-			pageNo=1;
+			@RequestParam(value = "type", required = false) String type,
+			@ModelAttribute("talkBean") TalkBean talkBean) {
+
+		if (pageNo == null) {
+			pageNo = 1;
 		}
 		List<TalkBean> list = talkservice.select(pageNo);
 		
 		
 		
+		List<TalkBean> list = new ArrayList<>();
+
+		if (type != null) {
+			type=talkservice.intToType(type);
+		}
+		list = talkservice.getPageByType(pageNo, type);
 
 		model.addAttribute("abean", list);
-		model.addAttribute("pageNo",pageNo);
+		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("lastPage", talkservice.lastpage());
-		
-		
-		
 
 		return "/forum/carTalk";
 
 	}
-	
-	
-	
-	
-	
 
 }
