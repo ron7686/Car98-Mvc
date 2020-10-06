@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.web.car98.forum.dao.CommentDao;
+import com.web.car98.forum.model.ComLikeOrHateBean;
 import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.model.TalkBean;
@@ -31,18 +32,7 @@ public class CommentDaoImpl implements CommentDao {
 	@Override
 	public void persist(CommentBean commentBean) {
 		Session session = factory.getCurrentSession();
-//		Transaction tx = null;
-//		try {
-//			tx = session.beginTransaction();
 		session.persist(commentBean);
-//			tx.commit();
-//		} catch (Exception e) {
-//			if (tx != null) {
-//				tx.rollback();
-//			}
-//			e.printStackTrace();
-//		}
-
 	}
 
 	@Override
@@ -116,9 +106,9 @@ public class CommentDaoImpl implements CommentDao {
 	}
 
 	@Override
-	public List<CommentBean> getPageCom(Integer page, Integer postId) {
+	public List<CommentBean> getPageCom(Integer page, List<CommentBean> li) {
 		int getpage = (page - 1) * onepage;
-		List<CommentBean> li = getComsByFk(postId);
+		//List<CommentBean> li = getComsByFk(postId);
 		List<CommentBean> list_floor = new ArrayList<>(); // new一個容器裝有floor的
 		Integer floor = 2; // 起始樓層
 		for (CommentBean cb : li) {
@@ -180,10 +170,41 @@ public class CommentDaoImpl implements CommentDao {
 		MemberBean memberBean = talkBean.getMemberBean();
 		return memberBean;
 	}
+	
 	@Override
 	public void savelike(LikeOrHateBean loh) {
 		Session session = factory.getCurrentSession();
 		session.saveOrUpdate(loh);
+	}
+	
+	@Override
+	public void saveComLike(ComLikeOrHateBean cloh) {
+		Session session = factory.getCurrentSession();
+		session.saveOrUpdate(cloh);
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<ComLikeOrHateBean> getComLoh(int comId) {
+		List<ComLikeOrHateBean> cloh=new ArrayList<>();
+		String hql = "FROM ComLikeOrHateBean l where l.commentBean.comId=:comId";
+		Session session = factory.getCurrentSession();
+		cloh=session.createQuery(hql).
+					setParameter("comId", comId).
+					list();
+		return cloh;
+	}
+
+	@Override
+	public ComLikeOrHateBean getComOneLoh(int comId, int memId) {
+		ComLikeOrHateBean cloh=new ComLikeOrHateBean();
+		String hql = "FROM ComLikeOrHateBean l where l.commentBean.comId=:comId and l.memberBean.memId=:memId";
+		Session session = factory.getCurrentSession();
+		cloh=(ComLikeOrHateBean)session.createQuery(hql).
+					setParameter("comId", comId).
+					setParameter("memId", memId).
+					getSingleResult();
+		return cloh;
 	}
 		
 }

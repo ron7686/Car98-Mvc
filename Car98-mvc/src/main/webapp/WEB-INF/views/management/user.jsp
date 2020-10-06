@@ -22,7 +22,6 @@
 <link rel="stylesheet" href="<c:url value='/css/all.css'/>">
 
 <style>
-
 input[type="submit"]:disabled {
 	background-color: red;
 }
@@ -118,12 +117,12 @@ to {
 	bottom: 0;
 	opacity: 0;
 }
-}
 
+}
 .radio-size {
 	width: 25px;
 	height: 25px;
-	vertical-align:middle;
+	vertical-align: middle;
 }
 
 fieldset {
@@ -132,10 +131,9 @@ fieldset {
 	margin: auto;
 }
 
-.input-w{
+.input-w {
 	width: 40%;
 }
-
 </style>
 
 <title>會員資料</title>
@@ -156,25 +154,26 @@ fieldset {
 			class='form-horizontal mx-auto' align="center"
 			enctype="multipart/form-data">
 			<fieldset class="mx-auto">
-					<div class="d-flex justify-content-center align-items-center mt-3 mb-3">
-						<label for="exampleFormControlFile1s" class="control-label"> 
+				<div
+					class="d-flex justify-content-center align-items-center mt-3 mb-3">
+					<label for="exampleFormControlFile1s" class="control-label">
 						<form:input type="file" path="memberMultipartFile" id="image_file"
-								style="display: none;" /> <form:errors
-								path="memberMultipartFile" /> <img
-							style="width: 350px; height: 350px; border-radius: 50%;"
-							src='${pageContext.request.contextPath}/init/getMemberImage?id=${LoginOK.memId}'
-							id="show_image">
-						</label>
-						<p class="mt-2">
-							<img id="image">
-						</p>
+							style="display: none;" /> <form:errors
+							path="memberMultipartFile" /> <img
+						style="width: 350px; height: 350px; border-radius: 50%;"
+						src='${pageContext.request.contextPath}/init/getMemberImage?id=${LoginOK.memId}'
+						id="show_image">
+					</label>
+					<p class="mt-2">
+						<img id="image">
+					</p>
 				</div>
 
 				<div class="form-group">
 
-						<label for="validationCustom01" class="control-label col-lg-2 col-lg-2">
-						姓名: </label>
-						<div class="d-flex justify-content-center align-items-center">
+					<label for="validationCustom01"
+						class="control-label col-lg-2 col-lg-2"> 姓名: </label>
+					<div class="d-flex justify-content-center align-items-center">
 						<form:input type="text" path="name" class="form-control input-w"
 							name="name" id="validationCustom01" placeholder="姓名"
 							required="required" />
@@ -183,8 +182,8 @@ fieldset {
 				</div>
 
 				<div class="form-group">
-						<label for="validationCustom02" class="control-label col-lg-2 col-lg-2">
-						暱稱: </label>
+					<label for="validationCustom02"
+						class="control-label col-lg-2 col-lg-2"> 暱稱: </label>
 					<div class="d-flex justify-content-center align-items-center">
 						<form:input type="text" path="id" class="form-control input-w"
 							name="memberId" id="validationCustom02" placeholder="暱稱"
@@ -194,8 +193,8 @@ fieldset {
 				</div>
 
 				<div class="form-group">
-						<label for="validationCustom02" class="control-label col-lg-2 col-lg-2">
-						手機號碼: </label>
+					<label for="validationCustom02"
+						class="control-label col-lg-2 col-lg-2"> 手機號碼: </label>
 					<div class="d-flex justify-content-center align-items-center">
 						<form:input type="tel" class="form-control input-w" path="phone"
 							name="phone" id="validationCustom02" placeholder="手機號碼"
@@ -205,8 +204,8 @@ fieldset {
 				</div>
 
 				<div class="form-group">
-						<label for="exampleInputEmail1" class="control-label col-lg-6 col-sm-12">
-						Email address: </label>
+					<label for="exampleInputEmail1"
+						class="control-label col-lg-6 col-sm-12"> Email address: </label>
 					<div class="d-flex justify-content-center align-items-center">
 						<form:input type="email" class="form-control input-w"
 							id="exampleInputEmail1" path="email" name="email"
@@ -218,14 +217,15 @@ fieldset {
 				</div>
 
 				<div class="form-group">
-						<label for="validationCustom03" class="control-label col-lg-6 col-sm-12">
-						生日: </label>
-						<div class="d-flex justify-content-center align-items-center">
-<%-- 						<input type="date" class="form-control" value="${LoginOK.birth}" name="birth" disabled="disabled"/> --%>
-						<form:input type="date" class="form-control input-w" 
-						value="${memberBean.birth}" path="birth" name="birth" disabled="true"/>
+					<label for="validationCustom03"
+						class="control-label col-lg-6 col-sm-12"> 生日: </label>
+					<div class="d-flex justify-content-center align-items-center">
+						<%-- 						<input type="date" class="form-control" value="${LoginOK.birth}" name="birth" disabled="disabled"/> --%>
+						<form:input type="date" class="form-control input-w"
+							value="${memberBean.birth}" path="birth" name="birth"
+							disabled="true" />
 						<form:errors path="birth" />
-						</div>
+					</div>
 				</div>
 
 				<div class="form-group">
@@ -234,7 +234,7 @@ fieldset {
 					<div class="mx-auto row">
 						<div class="col-10 mx-auto">
 							<form:radiobutton path="sex" class='radio-size mx-3' value="M"
-								label="男" id="gender"/>
+								label="男" id="gender" />
 							<form:radiobutton path="sex" class='radio-size mx-3' value="F"
 								label="女" id="gender" />
 							<form:errors path="sex" />
@@ -247,14 +247,14 @@ fieldset {
 					<button class="btn btn-secondary" id="button" type="submit">確認送出</button>
 				</div>
 			</fieldset>
+			<!-- Button trigger modal -->
+			<div class="mt-2 mb-2 needs-validation mx-5 text-white">
+				<button type="button" class="btn btn-secondary" data-toggle="modal"
+					data-target="#staticBackdrop">修改密碼</button>
+			</div>
 		</form:form>
 	</section>
 
-	<!-- Button trigger modal -->
-	<div class="mt-2 mb-2 needs-validation mx-5 text-white">
-		<button type="button" class="btn btn-secondary" data-toggle="modal"
-			data-target="#staticBackdrop">修改密碼</button>
-	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="staticBackdrop" data-backdrop="static"
 		data-keyboard="false" tabindex="-1"
@@ -268,21 +268,23 @@ fieldset {
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<form:form action="changePassword"
-					modelAttribute="memberBean" method="POST" >
+
+				<form:form action="changePassword" modelAttribute="memberBean"
+					method="POST">
 					<div class="modal-body">
 						<div class="form-group w-50 mx-auto">
 							<p class="text-secondary">新密碼</p>
-							<form:input path="password" type="password" id="pwdId" class="form-control" value=""
-								name="password" required="required" 
+							<form:input path="password" type="password" id="pwdId"
+								class="form-control" value="" name="password"
+								required="required"
 								pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" />
 							<form:errors path="password" />
 						</div>
 						<div class="form-group w-50 mx-auto">
 							<p class="text-secondary">確認密碼</p>
-							<form:input path="password1" type="password" id="pwdId" class="form-control"
-								name="password1" required="required" 
-								pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}"/>
+							<form:input path="password1" type="password" id="pwdId"
+								class="form-control" name="password1" required="required"
+								pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" />
 							<form:errors path="password1" />
 						</div>
 					</div>

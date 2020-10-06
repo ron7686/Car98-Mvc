@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -17,7 +18,7 @@ import com.web.car98.member.model.MemberBean;
 import com.web.car98.member.service.MemberService;
 
 @Controller
-@SessionAttributes({"memberBean"})
+@SessionAttributes({ "LoginOK", "memberBean", "loginBean" })
 public class MemberJson {
 	
 	@Autowired
@@ -28,16 +29,23 @@ public class MemberJson {
 		return "/register/Json";
 	}
 	
-	@GetMapping("/User")
+	@GetMapping("/user")
 	@ResponseBody
 	public List<MemberBean> showUser(){
 		List<MemberBean> mbl = memberService.findAllMembers();
 		return mbl;
 	}
 	
+	@GetMapping(value = "/user/{memId}", produces= {"application/json"})
+	@ResponseBody
+	public MemberBean displayMember(@PathVariable Integer memId) {
+		MemberBean mb = memberService.queryMember(memId);
+		return mb;
+	}
+	
 	//即將抵達管理頁面
 	@GetMapping("/userManager")
-	public String showOneUser() {
+	public String showUsers() {
 		return "/management/JqAjax";
 	}
 	
@@ -46,23 +54,27 @@ public class MemberJson {
 	public String memberEdit(Model model,
 			@PathVariable("memId") Integer memId) {
 		MemberBean memberBean = memberService.queryMember(memId);
+		model.addAttribute("memId",memId);
 		model.addAttribute("memberBean",memberBean);
-		return "/management/user";
+		return "/management/managementUser";
 	}
 	
-	@PutMapping(value="/memberAx"
+	@PutMapping(value="/user/{memId}"
 			,consumes = {"application/json"} 
 			,produces = {"application/json"})
-	@ResponseBody
-	public Map<String,String> updateUser(
-			 MemberBean memberBean){
+	public @ResponseBody Map<String,String> updateUser(
+			@RequestBody MemberBean mb){
 		Map<String , String> map = new HashMap<>();
 		
 		try {
-			MemberBean mb = memberService.queryMember(memberBean.getMemId());
-			memberBean.setHeadPic(mb.getHeadPic());
-			memberBean.setLoginTime(mb.getLoginTime());
-			memberBean.setMeCreate(mb.getMeCreate());
+			MemberBean memberBean = memberService.queryMember(mb.getMemId());
+//			memberBean.setHeadPic(mb.getHeadPic());
+			memberBean.setName(mb.getName());
+			memberBean.setId(mb.getId());
+			memberBean.setPhone(mb.getPhone());
+			memberBean.setEmail(mb.getEmail());
+			memberBean.setBirth(mb.getBirth());
+			memberBean.setSex(mb.getSex());
 			memberService.updateUserData(memberBean);
 			map.put("success", "更新成功");
 			System.out.println("更新資料成功");

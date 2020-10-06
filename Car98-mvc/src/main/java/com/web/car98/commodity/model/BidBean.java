@@ -15,8 +15,6 @@ import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.web.car98.member.model.MemberBean;
-
 
 @Entity
 @Table(name="bid")
@@ -25,12 +23,10 @@ public class BidBean {
 	//商品只能有一個種類，種類可以對應多個商品
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	private Integer bidId;//商品ID
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="memId") 	
-    private MemberBean memberBean;
+    private Integer memId;
+    private String memName;
 	
 	private String bidItemName;//品名
 	private String	bidFormat;//商品描述
@@ -52,12 +48,13 @@ public class BidBean {
 	public BidBean() {
 	}
 
-	public BidBean(Integer bidId, MemberBean memberBean, String bidItemName, String bidFormat, Integer bidPrice,
+	public BidBean(Integer bidId, Integer memId, String memName, String bidItemName, String bidFormat, Integer bidPrice,
 			Integer bidStock, Timestamp bidTime, Integer bidScore, Blob bidPic, String fileName,
 			BidItemBean bidItemBean, MultipartFile productImage) {
 		super();
 		this.bidId = bidId;
-		this.memberBean = memberBean;
+		this.memId = memId;
+		this.memName = memName;
 		this.bidItemName = bidItemName;
 		this.bidFormat = bidFormat;
 		this.bidPrice = bidPrice;
@@ -86,12 +83,12 @@ public class BidBean {
 		this.bidId = bidId;
 	}
 
-	public MemberBean getMemberBean() {
-		return memberBean;
+	public Integer getMemId() {
+		return memId;
 	}
 
-	public void setMemberBean(MemberBean memberBean) {
-		this.memberBean = memberBean;
+	public void setMemId(Integer memId) {
+		this.memId = memId;
 	}
 
 	public String getBidItemName() {
@@ -166,12 +163,12 @@ public class BidBean {
 		this.bidItemBean = bidItemBean;
 	}
 
-	@Override
-	public String toString() {
-		return "BidBean [bidId=" + bidId + ", memberBean=" + memberBean + ", bidItemName=" + bidItemName
-				+ ", bidFormat=" + bidFormat + ", bidPrice=" + bidPrice + ", bidStock=" + bidStock + ", bidTime="
-				+ bidTime + ", bidScore=" + bidScore + ", bidPic=" + bidPic + ", fileName=" + fileName
-				+ ", bidItemBean=" + bidItemBean + ", productImage=" + productImage + "]";
+	public String getMemName() {
+		return memName;
+	}
+
+	public void setMemName(String memName) {
+		this.memName = memName;
 	}
 
 }

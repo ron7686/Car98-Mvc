@@ -154,8 +154,9 @@ public class ProductController {
 		if (result.hasErrors()) {
 			return "comm/addProduct";
 		}
-		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
-		bb.setMemberBean(memberBean);
+		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");		
+		bb.setMemId(memberBean.getMemId());
+		bb.setMemName(memberBean.getName());
 
 		if (bb.getBidStock() == null) {
 			bb.setBidStock(0);

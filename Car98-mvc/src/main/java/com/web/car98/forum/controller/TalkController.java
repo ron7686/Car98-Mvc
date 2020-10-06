@@ -1,7 +1,5 @@
 package com.web.car98.forum.controller;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,13 +34,17 @@ public class TalkController {
 		if (pageNo == null) {
 			pageNo = 1;
 		}
+//		List<TalkBean> list = talkservice.select(pageNo);
+//		
+//		
+//		
 		List<TalkBean> list = new ArrayList<>();
 
 		if (type != null) {
 			type=talkservice.intToType(type);
 		}
 		list = talkservice.getPageByType(pageNo, type);
-
+//
 		model.addAttribute("abean", list);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("lastPage", talkservice.lastpage());

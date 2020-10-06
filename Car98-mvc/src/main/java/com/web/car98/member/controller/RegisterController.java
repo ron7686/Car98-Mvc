@@ -163,7 +163,7 @@ public class RegisterController {
 
 	@PostMapping("/management")
 	public String updateUserData(Model model, @ModelAttribute("memberBean") MemberBean memberBean) {
-		MemberBean mb = (MemberBean) model.getAttribute("LoginOK");
+		MemberBean mb = memberService.queryMember(memberBean.getMemId());
 
 		mb.setId(memberBean.getId());
 		mb.setName(memberBean.getName());
@@ -195,12 +195,13 @@ public class RegisterController {
 		if (result.hasErrors()) {
 			return "/management/user";
 		}
+		if (memberBean.getPassword() != null && memberBean.getPassword().length() > 0) {
+			MemberBean mb = memberService.queryMember(memberBean.getMemId());
 
-		MemberBean mb = (MemberBean) model.getAttribute("LoginOK");
+			mb.setPassword(GlobalService.getMD5Endocing(GlobalService.encryptString(memberBean.getPassword())));
 
-		mb.setPassword(GlobalService.getMD5Endocing(GlobalService.encryptString(memberBean.getPassword())));
-
-		memberService.updateUserData(mb);
+			memberService.updateUserData(mb);
+		}
 		return "redirect:/management";
 	}
 

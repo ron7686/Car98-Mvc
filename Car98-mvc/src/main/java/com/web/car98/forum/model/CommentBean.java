@@ -2,6 +2,9 @@ package com.web.car98.forum.model;
 
 import java.io.Serializable;
 import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -25,33 +29,39 @@ public class CommentBean implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer comId;
+	private Integer comId;     //留言編號
 	@Column(name = "ComText")
-	private String comText;
+	private String comText;    //留言內容
 	@Column(name = "ComTime")
-	private String comTime;
+	private String comTime;    //留言時間
 	@Column(name = "ComLike")
-	private Integer comLike;
-	@Column(name = "ComPic")
+	private Integer comLike;   //留言讚數
+	@Column(name = "ComPic")    
 	@JsonIgnore
-	private Blob comPic;
-	private String fileName;	
-	@Column(name = "ComHate")
-	private Integer comHate;
+	private Blob comPic;        //留言附圖
+	private String fileName;	//留言附圖檔名
+	@Column(name = "ComHate")    
+	private Integer comHate;    //留言噓數
 	
 	@Transient
 	MultipartFile commentMultipartFile;
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "memId")
-	private MemberBean memberBean;
+	private MemberBean memberBean;  //會員編號
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PostID")
-	private TalkBean talkBean;
+	private TalkBean talkBean;   //文章編號
 	
 	@Transient
-	private Integer floor;
+	private Integer floor;   //留言樓層
+	
+	@Transient
+	private ComLikeOrHateBean ComLikeOrHateBean;  //留言的讚或噓
+	
+	@OneToMany(mappedBy = "commentBean")
+	private List<ComLikeOrHateBean> ComLikeOrHate = new ArrayList<>();
 
 	public CommentBean() {
 		super();
@@ -84,6 +94,24 @@ public class CommentBean implements Serializable {
 		this.commentMultipartFile = commentMultipartFile;
 		this.memberBean = memberBean;
 		this.talkBean = talkBean;
+	}
+
+	
+	
+	public ComLikeOrHateBean getComLikeOrHateBean() {
+		return ComLikeOrHateBean;
+	}
+
+	public void setComLikeOrHateBean(ComLikeOrHateBean comLikeOrHateBean) {
+		ComLikeOrHateBean = comLikeOrHateBean;
+	}
+
+	public List<ComLikeOrHateBean> getComLikeOrHate() {
+		return ComLikeOrHate;
+	}
+
+	public void setComLikeOrHate(List<ComLikeOrHateBean> comLikeOrHate) {
+		ComLikeOrHate = comLikeOrHate;
 	}
 
 	public MemberBean getMemberBean() {
@@ -166,7 +194,6 @@ public class CommentBean implements Serializable {
 	public void setCommentMultipartFile(MultipartFile commentMultipartFile) {
 		this.commentMultipartFile = commentMultipartFile;
 	}
-	
 	
 
 	public Integer getFloor() {

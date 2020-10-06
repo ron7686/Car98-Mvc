@@ -3,6 +3,7 @@ package com.web.car98.forum.dao;
 import java.util.Date;
 import java.util.List;
 
+import com.web.car98.forum.model.ComLikeOrHateBean;
 import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.model.TalkBean;
@@ -26,7 +27,9 @@ public interface CommentDao {
 
 	TalkBean getTalkBeanById(int id);
 
-	List<CommentBean> getPageCom(Integer page, Integer postId);  //得到當頁的留言
+	List<CommentBean> getPageCom(Integer page, List<CommentBean> li);  //得到當頁的留言
+
+	int getLastPage(Integer postId, Integer page);
 
 	MemberBean queryMemberByComId(Integer comId);  // 查出這則留言是哪個會員留的
 
@@ -34,6 +37,10 @@ public interface CommentDao {
 
 	void savelike(LikeOrHateBean loh);
 	
-	int getLastPage(Integer postId, Integer page);
+	void saveComLike(ComLikeOrHateBean cloh);
+
+	List<ComLikeOrHateBean> getComLoh(int comId);   //得到一篇留言的總likeorhate (getAll)
+
+	ComLikeOrHateBean getComOneLoh(int comId, int memId);  //得到一篇留言裡會員的likeorhate (getone)
 
 }
