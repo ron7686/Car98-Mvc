@@ -54,7 +54,7 @@
                 <div>
                     <h2>產品資料</h2>
                     <h3>${product.bidItemName}</h3>
-                    <p>賣家ID: ${product.memberBean.name}</p>
+                    <p>賣家ID: ${product.memName}</p>
                     <p>單價: ${product.bidPrice}</p>
                     <p>商品分類: ${product.bidItemBean.bidCategory}</p>
                     <p>上架時間: ${product.bidTime}</p>

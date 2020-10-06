@@ -74,7 +74,7 @@ public class FuelController {
 		}
 		Fuel fu = new Fuel();
 		model.addAttribute("fuel", fu);
-		return "config/showFuels";
+		return "config/updateFuels";
 	}
 
 	@PostMapping("/fuels/add")
@@ -87,6 +87,6 @@ public class FuelController {
 		
 		service.insert(fu);
 		
-		return "redirect:/comm/products";
+		return "redirect:/config/fuels";
 	}
 }
