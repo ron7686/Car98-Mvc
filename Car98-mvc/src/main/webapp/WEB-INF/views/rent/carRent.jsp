@@ -272,11 +272,7 @@
     </div>
   </div> -->
 	<!-- footer -->
-	<div class="footer-bottom  bg-dark text-light">
-		<div class="container-fluid">
-			<p class="pull-left">Copyright@ 2020 by Car98 Group</p>
-		</div>
-	</div>
+	<jsp:include page="/fragment/footer.jsp"></jsp:include>
 	<script src="${pageContext.servletContext.contextPath}/javascript/BSRent.js"></script>
 </body>
 

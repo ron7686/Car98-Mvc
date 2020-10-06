@@ -187,8 +187,10 @@ body {
 					</c:if>
 
 					<div class="col-12 article-content">${TalkBean.postText}</div>
-					<img class="picture" src="https://picsum.photos/id/222/500/400"
+					<c:if test="${!empty TalkBean.postFileName}">
+					<img class="picture" src="${pageContext.request.contextPath}/getpostPic?id=${LoginOK.memId}&postID=${TalkBean.postID}"
 						alt="">
+						</c:if>
 				</div>
 
 			</div>
@@ -229,12 +231,12 @@ body {
 						<div class=" article-mood float-right">
 							<ul class="like-or-hate">
 								<li id="like1" ><a
-									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1"><i
+									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1" data-toggle="tooltip" data-placement="bottom" title="Like"><i
 										class="fas fa-thumbs-up fa-2x" ">${comment.comLike}</i></a></li>
 
 								<li id="hate1" ><a
-									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2"><i
-										class="fas fa-thumbs-down fa-2x" ">${comment.comHate}</i></a></li>
+									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2" data-toggle="tooltip" data-placement="bottom" title="Hate"><i
+										class="fas fa-thumbs-down fa-2x" >${comment.comHate}</i></a></li>
 
 								<%-- 							<c:if test="${CommentBean.memId}==${LoginOK.memId}"> --%>
 
@@ -248,11 +250,11 @@ body {
 							<ul class="like-or-hate">
 
 								<li id="like1" ><a
-									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"><i
+									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0" data-toggle="tooltip" data-placement="bottom" title="Like"><i
 										class="fas fa-thumbs-up fa-2x" style="color: red">${comment.comLike}</i></a></li>
 
 								<li id="hate1" ><a
-									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2"><i
+									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2" data-toggle="tooltip" data-placement="bottom" title="Hate"><i
 										class="fas fa-thumbs-down fa-2x" ">${comment.comHate}</i></a></li>
 							</ul>
 						</div>
@@ -262,11 +264,11 @@ body {
 							<ul class="like-or-hate">
 
 								<li id="like1" ><a
-									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1"><i
+									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1" data-toggle="tooltip" data-placement="bottom" title="Like"><i
 										class="fas fa-thumbs-up fa-2x" ">${comment.comLike}</i></a></li>
 
 								<li id="hate1" ><a
-									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"><i
+									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0" data-toggle="tooltip" data-placement="bottom" title="Hate"><i
 										class="fas fa-thumbs-down fa-2x" style="color: red">${comment.comHate}</i></a></li>
 							</ul>
 						</div>
@@ -277,7 +279,7 @@ body {
 
 
 
-					<div class="col-12 article-content">
+					<div  id="commentcontent" class="col-12 article-content">
 						${comment.comText}<br>
 						<c:if test="${!empty comment.fileName}">
 							<img class="commentPic"
@@ -285,7 +287,7 @@ body {
 						</c:if>
 					</div>
 					<div class="update  col-2 float-right ">
-						<a id="" class="updateButton m-2"
+						<a id="updatecom" class="updateButton m-2"
 							href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
 						<a id="" class="deleteButton m-2"
 							href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
