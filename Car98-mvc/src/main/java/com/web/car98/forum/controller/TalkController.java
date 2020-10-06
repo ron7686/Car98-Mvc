@@ -38,14 +38,14 @@ public class TalkController {
 //		
 //		
 //		
-//		List<TalkBean> list = new ArrayList<>();
+		List<TalkBean> list = new ArrayList<>();
 
 		if (type != null) {
 			type=talkservice.intToType(type);
 		}
-//		list = talkservice.getPageByType(pageNo, type);
+		list = talkservice.getPageByType(pageNo, type);
 //
-//		model.addAttribute("abean", list);
+		model.addAttribute("abean", list);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("lastPage", talkservice.lastpage());
 
