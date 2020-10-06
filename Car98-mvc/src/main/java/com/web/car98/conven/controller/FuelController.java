@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,7 +54,8 @@ public class FuelController {
 		}
 		return typeMap; // model.addAttribute("",)
 	}
-	//顯示油耗紀錄
+
+	// 顯示油耗紀錄
 	@RequestMapping("/fuels")
 	public String list(Model model, HttpServletRequest request, HttpServletResponse response) {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
@@ -82,11 +84,25 @@ public class FuelController {
 
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		fu.setMemId(memberBean.getMemId());
-		
-		fu.setMileage(500);
-		
+		FuelPriceBean fuel = service.getFuelByPrice(fu.getFuelPriceBean().getTypeNo());
+
+		double total = fu.getGallon() * fuel.getTypePrice();
+		fu.setPrice((int) total);
+
+		double consumption = fu.getMileage() / fu.getGallon();
+
+		fu.setConsumption((int) (consumption * 100) / 100.0);
+
 		service.insert(fu);
-		
+
+		return "redirect:/config/fuels";
+	}
+
+	// 刪除一筆紀錄
+	// 由這個方法刪除記錄...
+	@DeleteMapping("/fuels/add/{fuelId}")
+	public String delete(@PathVariable("fuelId") Integer fuelId) {
+		service.delete(fuelId);
 		return "redirect:/config/fuels";
 	}
 }

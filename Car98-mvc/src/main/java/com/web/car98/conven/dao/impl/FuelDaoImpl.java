@@ -41,7 +41,12 @@ public class FuelDaoImpl implements FuelDao {
 
 	@Override
 	public void delete(Integer fuelId) {
-		
+		Session session = factory.getCurrentSession();
+		Fuel fu = session.get(Fuel.class, fuelId);
+		if (fu != null) {
+			fu.setFuelPriceBean(null);
+			session.delete(fu);
+		}
 	}
 
 	@Override
@@ -61,6 +66,11 @@ public class FuelDaoImpl implements FuelDao {
 	@Override
 	public Fuel getFuelById(int fuelId) {
 		return  factory.getCurrentSession().get(Fuel.class, fuelId);
+	}
+
+	@Override
+	public FuelPriceBean getFuelByPrice(int typeNo) {
+		return factory.getCurrentSession().get(FuelPriceBean.class, typeNo);
 	}
 	
 

@@ -70,9 +70,9 @@ body {
 								<label for="gallon">本次加油</label>
 								<form:input type="text" path="gallon" class="form-control"
 									id="liter" placeholder="公升" />
-								<label for="price">加油金額</label>
-								<form:input type="text" path="price" id="liter_total"
-									class="form-control" placeholder="總金額" />
+								<label for="mileage">行駛里程</label>
+								<form:input type="text" path="mileage" id="liter_total"
+									class="form-control" placeholder="里程數" />
 								<label for="time">日期</label>
 								<form:input type="date" path="time" class="form-control"
 									placeholder="日期" />

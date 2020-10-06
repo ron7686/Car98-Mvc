@@ -17,4 +17,6 @@ public interface FuelService {
 	public void delete(Integer fuelId);
 	
 	public Fuel getFuelById(int fuelId);
+	
+	public FuelPriceBean getFuelByPrice(int typeNo); 
 }

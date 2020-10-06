@@ -19,4 +19,6 @@ public interface FuelDao {
 	List<FuelPriceBean> getTypeList();
 	
 	public Fuel getFuelById(int fuelId);
+	
+	public FuelPriceBean getFuelByPrice(int typeNo); 
 }

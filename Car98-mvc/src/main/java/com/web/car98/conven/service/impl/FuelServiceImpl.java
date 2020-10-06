@@ -35,7 +35,7 @@ public class FuelServiceImpl implements FuelService {
 
 	@Override
 	public void delete(Integer fuelId) {
-
+		dao.delete(fuelId);
 	}
 
 	@Override
@@ -46,6 +46,11 @@ public class FuelServiceImpl implements FuelService {
 	@Override
 	public Fuel getFuelById(int fuelId) {
 		return dao.getFuelById(fuelId);
+	}
+
+	@Override
+	public FuelPriceBean getFuelByPrice(int typeNo) {
+		return dao.getFuelByPrice(typeNo);
 	}
 
 }
