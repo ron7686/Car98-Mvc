@@ -33,8 +33,6 @@
 
 
 <style>
-
-
 .footer-bottom {
 	margin-top: 1em;
 	/* border-top: 1px solid #DDDDDD; */
@@ -61,9 +59,10 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
-.publish{
-background-image: url(http://bit.ly/2gPLxZ4);
-background-position: center;
+
+.publish {
+	background-image: url(http://bit.ly/2gPLxZ4);
+	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -132,49 +131,64 @@ background-position: center;
 				<!-- 文章內容 -->
 
 				<div class="col-10">
-					
-						<div>樓主 </div><a href="#" style="color:white;">發表於${TalkBean.postTime}</a>
-						
-						
+
+					<div>樓主</div>
+					<a href="#" style="color: white;">發表於${TalkBean.postTime}</a>
+
+
 					<!-- 按讚功能 -->
 					<c:if test="${loh.likeOrHate==0 || empty loh.likeOrHate}">
-					<div class=" article-mood  float-right">
-						<ul class="like-or-hate ">
-							
-							<li id="like1" class="fas"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1" data-toggle="tooltip" data-placement="bottom" title="Like"><i class="fas fa-thumbs-up fa-2x">${TalkBean.postLike}</i></a></li>
-							
-							<li id="hate1" class="fas"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2" data-toggle="tooltip" data-placement="bottom" title="Hate"><i class="fas fa-thumbs-down fa-2x">${TalkBean.postHate}</i></a></li>
-						</ul>
-					</div>
+						<div class=" article-mood  float-right">
+							<ul class="like-or-hate ">
+
+								<li id="like1" class="fas"><a
+									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1"
+									data-toggle="tooltip" data-placement="bottom" title="Like"><i
+										class="fas fa-thumbs-up fa-2x">${TalkBean.postLike}</i></a></li>
+
+								<li id="hate1" class="fas"><a
+									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2"
+									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
+										class="fas fa-thumbs-down fa-2x">${TalkBean.postHate}</i></a></li>
+							</ul>
+						</div>
 					</c:if>
 					<c:if test="${loh.likeOrHate==1}">
-					<div class=" article-mood float-right">
-						<ul class="like-or-hate">
-							
-							<li id="like1" class="fas"
-								><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0" data-toggle="tooltip" data-placement="bottom" title="Like"><i class="fas fa-thumbs-up fa-2x" style="color:red">${TalkBean.postLike}</i></a></li>
-							
-							<li id="hate1" class="fas"
-								><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2" data-toggle="tooltip" data-placement="bottom" title="Hate"><i class="fas fa-thumbs-down fa-2x">${TalkBean.postHate}</i></a></li>
-						</ul>
-					</div>
+						<div class=" article-mood float-right">
+							<ul class="like-or-hate">
+
+								<li id="like1" class="fas"><a
+									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0"
+									data-toggle="tooltip" data-placement="bottom" title="Like"><i
+										class="fas fa-thumbs-up fa-2x" style="color: red">${TalkBean.postLike}</i></a></li>
+
+								<li id="hate1" class="fas"><a
+									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2"
+									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
+										class="fas fa-thumbs-down fa-2x">${TalkBean.postHate}</i></a></li>
+							</ul>
+						</div>
 					</c:if>
 					<c:if test="${loh.likeOrHate==2}">
-					<div class="article-mood float-right">
-						<ul class="like-or-hate">
-							
-							<li id="like1" class="fas"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1" data-toggle="tooltip" data-placement="bottom" title="Like"><i class="fas fa-thumbs-up fa-2x">${TalkBean.postLike}</i></a></li>
-							
-							<li id="hate1" class="fas"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0" data-toggle="tooltip" data-placement="bottom" title="Hate"><i class="fas fa-thumbs-down fa-2x" style="color:red">${TalkBean.postHate}</i></a></li>
-						</ul>
-					</div>
+						<div class="article-mood float-right">
+							<ul class="like-or-hate">
+
+								<li id="like1" class="fas"><a
+									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1"
+									data-toggle="tooltip" data-placement="bottom" title="Like"><i
+										class="fas fa-thumbs-up fa-2x">${TalkBean.postLike}</i></a></li>
+
+								<li id="hate1" class="fas"><a
+									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0"
+									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
+										class="fas fa-thumbs-down fa-2x" style="color: red">${TalkBean.postHate}</i></a></li>
+							</ul>
+						</div>
 					</c:if>
-					
-					<div class="col-12 article-content">
-						${TalkBean.postText} 
-					</div>
-						<img class="picture" 
-							src="https://picsum.photos/id/222/500/400" alt="">
+
+					<div class="col-12 article-content">${TalkBean.postText}</div>
+					<img class="picture" src="https://picsum.photos/id/222/500/400"
+						alt="">
 				</div>
 
 			</div>
@@ -183,9 +197,12 @@ background-position: center;
 				<div class="btn-group mr-2" role="group" aria-label="First group">
 				</div>
 			</div>
-	</c:if>
+		</c:if>
 	</div>
-<!-- 	</div> -->
+	<!-- 	</div> -->
+	
+	
+	
 	<!-- 留言內容 -->
 	<c:forEach var="comment" items="${CommentBean}">
 		<div class="container">
@@ -200,39 +217,79 @@ background-position: center;
 				</div>
 				<!-- 文章內容 -->
 				<div class="col-10">
-					
-						<div>${comment.floor}樓</div> 
-						<a href="#" style="color:white">發表於
-								${comment.comTime}</a>
 
-						
-					
+					<div>${comment.floor}樓</div>
+					<a href="#" style="color: white">發表於 ${comment.comTime}</a>
+
+
+
 					<!-- 按讚功能 -->
-					<div class=" article-mood float-right">
-						<ul class="like-or-hate">
-							<li id="like1" button class="fas fa-thumbs-up fa-2x"
-								type="button">12</li>
-							<li id="hate1" button class="fas fa-thumbs-down fa-2x"
-								type="button">1</li>
+					<c:if
+						test="${comment.comLikeOrHateBean.comLikeOrHate==0||empty comment.comLikeOrHateBean.comLikeOrHate}">
+						<div class=" article-mood float-right">
+							<ul class="like-or-hate">
+								<li id="like1" ><a
+									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1"><i
+										class="fas fa-thumbs-up fa-2x" ">${comment.comLike}</i></a></li>
 
-							<%-- 							<c:if test="${CommentBean.memId}==${LoginOK.memId}"> --%>
-							
-							<%-- 							</c:if> --%>
-						</ul>
-					</div>
+								<li id="hate1" ><a
+									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2"><i
+										class="fas fa-thumbs-down fa-2x" ">${comment.comHate}</i></a></li>
+
+								<%-- 							<c:if test="${CommentBean.memId}==${LoginOK.memId}"> --%>
+
+								<%-- 							</c:if> --%>
+							</ul>
+						</div>
+					</c:if>
+
+					<c:if test="${comment.comLikeOrHateBean.comLikeOrHate==1}">
+						<div class="article-mood float-right">
+							<ul class="like-or-hate">
+
+								<li id="like1" ><a
+									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"><i
+										class="fas fa-thumbs-up fa-2x" style="color: red">${comment.comLike}</i></a></li>
+
+								<li id="hate1" ><a
+									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2"><i
+										class="fas fa-thumbs-down fa-2x" ">${comment.comHate}</i></a></li>
+							</ul>
+						</div>
+					</c:if>
+					<c:if test="${comment.comLikeOrHateBean.comLikeOrHate==2}">
+						<div class="article-mood float-right">
+							<ul class="like-or-hate">
+
+								<li id="like1" ><a
+									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1"><i
+										class="fas fa-thumbs-up fa-2x" ">${comment.comLike}</i></a></li>
+
+								<li id="hate1" ><a
+									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"><i
+										class="fas fa-thumbs-down fa-2x" style="color: red">${comment.comHate}</i></a></li>
+							</ul>
+						</div>
+					</c:if>
+
+
+
+
+
+
 					<div class="col-12 article-content">
 						${comment.comText}<br>
 						<c:if test="${!empty comment.fileName}">
-						<img class="commentPic" 
-						     src='${pageContext.request.contextPath}/getComImage?id=${LoginOK.memId}&comId=${comment.comId}'>
+							<img class="commentPic"
+								src='${pageContext.request.contextPath}/getComImage?id=${LoginOK.memId}&comId=${comment.comId}'>
 						</c:if>
 					</div>
 					<div class="update  col-2 float-right ">
-					        <a id="" class="updateButton m-2"
-								href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
-							<a id="" class="deleteButton m-2"
-								href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
-				</div>
+						<a id="" class="updateButton m-2"
+							href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
+						<a id="" class="deleteButton m-2"
+							href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -317,6 +374,7 @@ background-position: center;
 		})
 	</script>
 	<script src="${pageContext.request.contextPath}/javascript/talktalk.js"></script>
-	<script src="${pageContext.request.contextPath}/javascript/talktalk2.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/javascript/talktalk2.js"></script>
 </body>
 </html>
