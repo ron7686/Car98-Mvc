@@ -208,12 +208,9 @@ public class CommentController {
 			return "redirect:/login";
 		}
 
-//    	String comIdStr = request.getParameter("comId");
-//		Integer comId = Integer.valueOf(comIdStr);
-//		CommentServiceImpl service = new CommentServiceImpl();
 		commentservice.deleteComByPk(comId);
 		return "redirect:/talktalk?postID=" + postID;
-//		return "/forum/talktalk";
+
 	}
 
 	// 取出此留言的留言者為哪個會員 進而取出該會員頭像

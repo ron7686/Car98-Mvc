@@ -250,12 +250,12 @@ body {
 						</ul>
 					</div>
 					</c:if>
-				<%-- 							<c:if test="${CommentBean.memId}==${LoginOK.memId}"> --%>
-							<a id="" class="updateButton"
-								href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
-							<a id="" class="deleteButton"
-								href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
-							<%-- 							</c:if> --%>	
+<%-- 					<c:if test="${comment.memberBean.id == LoginOK.memId}"> --%>
+						<a id="" class="updateButton"
+							href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
+						<a id="" class="deleteButton"
+							href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
+<%-- 					</c:if> --%>
 				</div>
 			</div>
 		</div>
