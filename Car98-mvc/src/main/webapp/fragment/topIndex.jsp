@@ -54,6 +54,11 @@
 
 					</a></li>
 			</c:if>
+			<c:if test="${LoginOK.levels == 1}">
+				<li class="nav-item active"><a class="nav-link" href="<c:url value='/userManager' />">管理員 <span
+							class="sr-only">(current)</span>
+					</a></li>
+			</c:if>
 			<c:if test="${ ! empty LoginOK }">
 				<li class="nav-item active"><a class="nav-link" href="<c:url value='/logout' />">登出 <span
 							class="sr-only">(current)</span>

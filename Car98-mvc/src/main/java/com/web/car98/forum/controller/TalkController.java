@@ -37,7 +37,6 @@ public class TalkController {
 			pageNo=1;
 		}
 		List<TalkBean> list = talkservice.select(pageNo);
-
 		
 		
 		
