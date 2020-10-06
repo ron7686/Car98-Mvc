@@ -12,8 +12,11 @@ public interface CarTypeDao {
 //	建立第三個下拉式選單
 	List<CarTypeBean> showBrandTypeMenu();
 	
-//	2. 由 CarType 和  RentCar 表格中，挑選出某價格範圍內所有的租車資料
-//	List<String> getRentCarsByPrice();
+//	由 RentCar 表格中，依照指定的車牌和車型，列出所有的租車資料
+	List<CarTypeBean> getRentCarsByType(String carBrand, String carType);
+	
+//	由  CarType 和  RentCar 表格中，挑選出某價格範圍內所有的租車資料
+	List<CarTypeBean> getRentCarsByPrice(Integer min, Integer max);
 	
 //	3. 由  CarType 表格中，挑選出(SELECT DISTINCT)某價格範圍內所有的車子型號
 //	List<String> getCarTypesByPrice();
