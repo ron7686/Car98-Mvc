@@ -19,6 +19,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.web.car98.member.model.MemberBean;
 
 @Entity
@@ -35,6 +38,9 @@ public class TalkBean implements Serializable {
 	@Column(name = "MemID")
 	@Transient
 	private Integer MemID;
+	
+	@Transient
+	MultipartFile PostMultipartFile;
 
 	@Column(name = "PostTitle")
 	private String PostTitle;
@@ -54,8 +60,11 @@ public class TalkBean implements Serializable {
 	private String Postmember;
 	@Column(name = "PostType")
 	private String PostType;
+	@JsonIgnore
 	@Column(name = "PostPic")
 	private Blob PostPic;
+	private String PostFileName;
+	
 	@OneToMany(mappedBy = "talkBean")
 	private List<CommentBean> comment = new ArrayList<>();
 	@OneToMany(mappedBy = "talkBean")
@@ -65,9 +74,9 @@ public class TalkBean implements Serializable {
 		super();
 	}
 
-	public TalkBean(Integer postID, MemberBean memberBean, Integer memID, String postTitle, String postText,
+	public TalkBean(Integer postID, MemberBean memberBean, Integer memID,MultipartFile postMultipartFile, String postTitle, String postText,
 			String postTime, Integer postLike, Integer postHate, Integer postCom, Integer postView, String postmember,
-			String postType, Blob postPic, List<CommentBean> comment) {
+			String postType, Blob postPic,String PostFileName, List<CommentBean> comment) {
 		super();
 		PostID = postID;
 		this.memberBean = memberBean;
@@ -108,6 +117,17 @@ public class TalkBean implements Serializable {
 
 	public void setMemID(Integer memID) {
 		MemID = memID;
+	}
+
+	
+	
+	
+	public MultipartFile getPostMultipartFile() {
+		return PostMultipartFile;
+	}
+
+	public void setPostMultipartFile(MultipartFile postMultipartFile) {
+		PostMultipartFile = postMultipartFile;
 	}
 
 	public Integer getPostView() {
@@ -204,6 +224,19 @@ public class TalkBean implements Serializable {
 
 	public void setPostPic(Blob postPic) {
 		PostPic = postPic;
+	}
+
+	
+	
+	
+	
+
+	public String getPostFileName() {
+		return PostFileName;
+	}
+
+	public void setPostFileName(String postFileName) {
+		PostFileName = postFileName;
 	}
 
 	@Override

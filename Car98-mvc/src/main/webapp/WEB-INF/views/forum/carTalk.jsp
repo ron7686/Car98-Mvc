@@ -169,7 +169,7 @@
                 <c:forEach var="aBean" items="${abean}">
 				  <tr>
                         <td class="sort "><a href=""><i class="fab fa-discourse"></i>${aBean.postType}</a></td>
-                        <td class="pic"><img src="https://picsum.photos/id/231/100/50" alt=""></td>
+                        <td class="pic"><img src="" class="contentimage" alt="">${aBean.postPic}</td>
                         <th class="title itemtitle"><a class="subtitle" href="<%=path%>/talktalk?postID=${aBean.postID}&pageNo=1">${aBean.postTitle}</a></th>
                         <td class="author"><a class="talkname" href="#">${aBean.memberBean.id}</a><br>${aBean.postTime} </td>
                         <td class="respon">${aBean.postCom}<br>${aBen.postView}</td>

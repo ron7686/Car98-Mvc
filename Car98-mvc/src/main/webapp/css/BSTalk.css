@@ -112,4 +112,8 @@ margin-top: 10px;
 	height:40px;
 	margin-top:10px;
 }
+.contentimage{
+	maxweight:100px;
+	maxheight:50px;
+}
 

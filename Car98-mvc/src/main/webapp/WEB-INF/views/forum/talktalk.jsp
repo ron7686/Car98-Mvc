@@ -30,12 +30,10 @@
 	crossorigin="anonymous" />
 <link rel="stylesheet" href="<%=path%>/css/talktalk.css">
 
-<script src="http://maps.google.com/maps/api/js"></script>
-<script src=""></script>
+
+
 <style>
-#carouselExampleFade .carousel-inner .carousel-item img {
-	height: 720px;
-}
+
 
 .footer-bottom {
 	margin-top: 1em;
@@ -63,6 +61,13 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+.publish{
+background-image: url(http://bit.ly/2gPLxZ4);
+background-position: center;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
 </style>
 </head>
 <body>
@@ -70,7 +75,7 @@ body {
 	<jsp:include page="/fragment/topIndex.jsp" />
 	<!-- page bar -->
 	<br>
-	<div class="col-12 publish ">
+	<div class="col-12  ">
 		<nav class="page">
 			<ul class="pagination justify-content-end ">
 
@@ -112,68 +117,64 @@ body {
 	</div>
 
 	<!-- 文章標題 -->
-	<div class="container">
+	<div class="container publish">
 		<c:if test="${pageNo <2}">
-			<div class="row">
+			<div class="row ">
 				<div class="col-12 text-white">${TalkBean.postTitle}</div>
 				<!-- 作者資訊 -->
-				<div class="col-2">
+				<div class="col-2 author">
 					<br> <a href="#"><img class="photo"
 						src='${pageContext.request.contextPath}/getPostMemberImage?postID=${TalkBean.postID}'></a>
-					<div class="author">${TalkBean.memberBean.id}</div>
+					<div class="">${TalkBean.memberBean.id}</div>
 					<div class="account">${TalkBean.memberBean.email}</div>
 
 				</div>
 				<!-- 文章內容 -->
 
 				<div class="col-10">
-					<ul class="article-information">
-						<li class="floor">樓主<br> <a href="#">發表於${TalkBean.postTime}</a></li>
-
-						<li class="gp">讚12</li>
-						<li class="bp">噓18</li>
-					</ul>
-					<div class="col-12 article-content">
-						${TalkBean.postText} <img class="picture" 
-							src="https://picsum.photos/id/222/500/600" alt=""><br>
-					</div>
+					
+						<div>樓主 </div><a href="#" style="color:white;">發表於${TalkBean.postTime}</a>
+						
+						
 					<!-- 按讚功能 -->
 					<c:if test="${loh.likeOrHate==0 || empty loh.likeOrHate}">
-					<div class="col-12 article-mood">
-						<ul class="like-or-hate">
+					<div class=" article-mood  float-right">
+						<ul class="like-or-hate ">
 							
-							<li id="like1" button class="fas fa-thumbs-up fa-2x"
-								type="button"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1">${TalkBean.postLike}</a></li>
+							<li id="like1" class="fas"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1" data-toggle="tooltip" data-placement="bottom" title="Like"><i class="fas fa-thumbs-up fa-2x">${TalkBean.postLike}</i></a></li>
 							
-							<li id="hate1" button class="fas fa-thumbs-down fa-2x"
-								type="button"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2">${TalkBean.postHate}</a></li>
+							<li id="hate1" class="fas"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2" data-toggle="tooltip" data-placement="bottom" title="Hate"><i class="fas fa-thumbs-down fa-2x">${TalkBean.postHate}</i></a></li>
 						</ul>
 					</div>
 					</c:if>
 					<c:if test="${loh.likeOrHate==1}">
-					<div class="col-12 article-mood">
+					<div class=" article-mood float-right">
 						<ul class="like-or-hate">
 							
-							<li id="like1" class="fas fa-thumbs-up fa-2x"
-								style="color:red"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0">${TalkBean.postLike}</a></li>
+							<li id="like1" class="fas"
+								><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0" data-toggle="tooltip" data-placement="bottom" title="Like"><i class="fas fa-thumbs-up fa-2x" style="color:red">${TalkBean.postLike}</i></a></li>
 							
-							<li id="hate1" class="fas fa-thumbs-down fa-2x"
-								><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2">${TalkBean.postHate}</a></li>
+							<li id="hate1" class="fas"
+								><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2" data-toggle="tooltip" data-placement="bottom" title="Hate"><i class="fas fa-thumbs-down fa-2x">${TalkBean.postHate}</i></a></li>
 						</ul>
 					</div>
 					</c:if>
 					<c:if test="${loh.likeOrHate==2}">
-					<div class="col-12 article-mood">
+					<div class="article-mood float-right">
 						<ul class="like-or-hate">
 							
-							<li id="like1" button class="fas fa-thumbs-up fa-2x"
-								type="button"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1">${TalkBean.postLike}</a></li>
+							<li id="like1" class="fas"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1" data-toggle="tooltip" data-placement="bottom" title="Like"><i class="fas fa-thumbs-up fa-2x">${TalkBean.postLike}</i></a></li>
 							
-							<li id="hate1" button class="fas fa-thumbs-down fa-2x"
-								type="button" style="color:red"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0">${TalkBean.postHate}</a></li>
+							<li id="hate1" class="fas"><a href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0" data-toggle="tooltip" data-placement="bottom" title="Hate"><i class="fas fa-thumbs-down fa-2x" style="color:red">${TalkBean.postHate}</i></a></li>
 						</ul>
 					</div>
 					</c:if>
+					
+					<div class="col-12 article-content">
+						${TalkBean.postText} 
+					</div>
+						<img class="picture" 
+							src="https://picsum.photos/id/222/500/400" alt="">
 				</div>
 
 			</div>
@@ -182,39 +183,32 @@ body {
 				<div class="btn-group mr-2" role="group" aria-label="First group">
 				</div>
 			</div>
-	</div>
 	</c:if>
 	</div>
+<!-- 	</div> -->
 	<!-- 留言內容 -->
 	<c:forEach var="comment" items="${CommentBean}">
 		<div class="container">
 			<div class="row">
 				<!-- 作者資訊 -->
-				<div class="col-2">
+				<div class="col-2 author">
 					<br> <a href="#"><img class="photo"
 						src='${pageContext.request.contextPath}/getComMemberImage?id=${LoginOK.memId}&comId=${comment.comId}'></a>
-					<div class="author">${comment.memberBean.id}</div>
+					<div class="">${comment.memberBean.id}</div>
 					<div class="account">${comment.memberBean.email}</div>
 
 				</div>
 				<!-- 文章內容 -->
 				<div class="col-10">
-					<ul class="article-information">
-						<li class="floor">${comment.floor}樓<br> <a href="#">發表於
-								${comment.comTime}</a></li>
+					
+						<div>${comment.floor}樓</div> 
+						<a href="#" style="color:white">發表於
+								${comment.comTime}</a>
 
-						<li class="gp">讚12</li>
-						<li class="bp">噓18</li>
-					</ul>
-					<div class="col-12 article-content">
-						${comment.comText}<br>
-						<c:if test="${!empty comment.fileName}">
-						<img class="commentPic" style="width:400px; height:300px; max-width: 100%; max-height: 100%;"
-						     src='${pageContext.request.contextPath}/getComImage?id=${LoginOK.memId}&comId=${comment.comId}'>
-						</c:if>
-					</div>
+						
+					
 					<!-- 按讚功能 -->
-					<div class="col-12 article-mood">
+					<div class=" article-mood float-right">
 						<ul class="like-or-hate">
 							<li id="like1" button class="fas fa-thumbs-up fa-2x"
 								type="button">12</li>
@@ -222,13 +216,23 @@ body {
 								type="button">1</li>
 
 							<%-- 							<c:if test="${CommentBean.memId}==${LoginOK.memId}"> --%>
-							<a id="" class="updateButton"
-								href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
-							<a id="" class="deleteButton"
-								href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
+							
 							<%-- 							</c:if> --%>
 						</ul>
 					</div>
+					<div class="col-12 article-content">
+						${comment.comText}<br>
+						<c:if test="${!empty comment.fileName}">
+						<img class="commentPic" 
+						     src='${pageContext.request.contextPath}/getComImage?id=${LoginOK.memId}&comId=${comment.comId}'>
+						</c:if>
+					</div>
+					<div class="update  col-2 float-right ">
+					        <a id="" class="updateButton m-2"
+								href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a>
+							<a id="" class="deleteButton m-2"
+								href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
+				</div>
 				</div>
 			</div>
 		</div>
@@ -258,7 +262,7 @@ body {
 
 	<hr>
 
-	<div class="col-12 publish ">
+	<div class="col-12  ">
 		<nav class="page">
 			<ul class="pagination justify-content-end ">
 
@@ -300,11 +304,7 @@ body {
 	</div>
 
 	<!-- footer -->
-	<div class="footer-bottom  bg-dark text-light">
-		<div class="container-fluid">
-			<p class="pull-left">Copyright@ 2020 by Car98 Group</p>
-		</div>
-	</div>
+	<jsp:include page="/fragment/footer.jsp"></jsp:include>
 	<script>
 		$(document).ready(function() {
 			$(".deleteButton").on('click', function(e) {
@@ -317,5 +317,6 @@ body {
 		})
 	</script>
 	<script src="${pageContext.request.contextPath}/javascript/talktalk.js"></script>
+	<script src="${pageContext.request.contextPath}/javascript/talktalk2.js"></script>
 </body>
 </html>
