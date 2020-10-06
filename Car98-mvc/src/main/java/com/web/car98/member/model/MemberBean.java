@@ -57,15 +57,19 @@ public class MemberBean implements Serializable {
 	@Transient
 	MultipartFile memberMultipartFile;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "memberBean")
 	private List<TalkBean> talkBean = new ArrayList<>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "memberBean")
 	private List<CommentBean> commentbean = new ArrayList<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "memberBean")
 	private List<LikeOrHateBean> likeOrHate = new ArrayList<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "memberBean")
 	private List<ComLikeOrHateBean> comlikeOrHate = new ArrayList<>();
 	
