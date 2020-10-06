@@ -8,9 +8,6 @@ import com.web.car98.rentcar.model.RentCarBean;
 
 public interface RentCarDao {
 	
-//	查詢店家
-	Collection<RentCarBean> queryStoreData();
-	
 //	查詢全部
 	Collection<RentCarBean> getAllRentCars();
 	

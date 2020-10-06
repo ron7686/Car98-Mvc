@@ -5,7 +5,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-<footer class="">
+
+<footer class="navbar-fixed-bottom">
 	<div class="footer-bottom  bg-dark text-light">
 		<div class="container-fluid">
 			<p class="pull-left">

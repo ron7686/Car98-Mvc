@@ -7,7 +7,6 @@ import org.springframework.validation.Validator;
 
 import com.web.car98.conven.model.Fuel;
 
-
 @Component
 public class ConValidator implements Validator {
 

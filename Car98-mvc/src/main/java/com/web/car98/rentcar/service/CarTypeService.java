@@ -10,6 +10,10 @@ public interface CarTypeService {
 	public Collection<CarTypeBean> getCarTypeData();
 	
 	public List<CarTypeBean> showBrandTypeMenu();
+	
+	public List<CarTypeBean> getRentCarsByPrice(Integer min, Integer max);
+	
+	public List<CarTypeBean> getRentCarsByType(String carBrand, String carType);
 
 //	public Collection<CarTypeBean> getCarTypeData(
 //			Integer typeId, 

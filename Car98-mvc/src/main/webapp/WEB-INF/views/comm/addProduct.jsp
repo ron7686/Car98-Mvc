@@ -7,37 +7,43 @@
 
 <head>
 
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<style type="text/css">
-		fieldset {
-			border: 5px outset rgb(152, 152, 150);
-			width: 400px;
-			margin: auto;
-			border-radius: 10px;
-			box-shadow: 12px 12px 7px rgba(0, 0, 0, 0.7);
-		}
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style type="text/css">
+.control-label {
+	color:white;
+	font-size:20px;
+}
 
-		body {
-			background-color: rgba(236, 234, 234, 0.5);
-		}
+fieldset {
+	border: 5px outset rgb(152, 152, 150);
+	width: 400px;
+	margin: auto;
+	border-radius: 10px;
+	box-shadow: 12px 12px 7px rgba(0, 0, 0, 0.7);
+}
 
-		.footer-bottom {
-			margin-top: 1em;
-			padding-top: 10px;
-			padding-bottom: 5px;
+body {
+	background-image: url(${pageContext.request.contextPath}/image/RS.jpg);
+	background-position: center;
+}
 
-		}
+.footer-bottom {
+	margin-top: 1em;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
 
-		.footer-bottom p.pull-left {
-			padding-top: 6px;
-			font-size: 0.5em;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-	</style>
-	<title>Products</title>
+.footer-bottom p.pull-left {
+	padding-top: 6px;
+	font-size: 0.5em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+</style>
+<title>Products</title>
 </head>
 
 <body>
@@ -60,20 +66,22 @@
 
 	<section>
 		<div class="container">
-			<h1 style="text-align: center">新增產品資料</h1>
+			<h1 style="text-align: center;color: white;">上架商品</h1>
 		</div>
 	</section>
 	<hr>
 	<section class="container">
 		<!--       三個地方要完全一樣 -->
-		<form:form method='POST' modelAttribute="bid" class='form-horizontal' enctype="multipart/form-data">
+		<form:form method='POST' modelAttribute="bid" class='form-horizontal'
+			enctype="multipart/form-data">
 			<fieldset>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2 col-sm-2" for='bidItemName'>
+					<label class="control-label col-lg-4 col-sm-6" for='bidItemName'>
 						品名 </label>
 					<div class="col-lg-10">
-						<form:input id="bidItemName" path="bidItemName" type='text' class='form:input-large' />
+						<form:input id="bidItemName" path="bidItemName" type='text'
+							class='form:input-large' />
 						<form:errors path="bidItemName" />
 					</div>
 				</div>
@@ -81,7 +89,7 @@
 
 
 				<div class="form-group">
-					<label class='control-label col-lg-2 col-sm-2' for="bidItemId">
+					<label class='control-label col-lg-4 col-sm-6' for="bidItemId">
 						類型 </label>
 					<div class='col-lg-10'>
 						<form:select path="bidItemBean.bidItemId">
@@ -93,46 +101,50 @@
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2 col-sm-2" for='bidPrice'>
+					<label class="control-label col-lg-4 col-sm-6" for='bidPrice'>
 						價格 </label>
 					<div class="col-lg-10">
-						<form:input id="bidPrice" path="bidPrice" type='text' class='form:input-large' />
+						<form:input id="bidPrice" path="bidPrice" type='text'
+							class='form:input-large' />
 						<form:errors path="bidPrice" />
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class='control-label col-lg-2 col-sm-2' for="bidStock">
+					<label class='control-label col-lg-4 col-sm-6' for="bidStock">
 						數量 </label>
 					<div class='col-lg-10'>
-						<form:input id="bidStock" path="bidStock" type='text' class='form:input-large' />
+						<form:input id="bidStock" path="bidStock" type='text'
+							class='form:input-large' />
 						<form:errors path="bidStock" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class='control-label col-lg-2 col-sm-2' for="bidScore">
+					<label class='control-label col-lg-4 col-sm-6' for="bidScore">
 						評價 </label>
 					<div class='col-lg-10'>
-						<form:input id="bidScore" path="bidScore" type='text' class='form:input-large' />
+						<form:input id="bidScore" path="bidScore" type='text'
+							class='form:input-large' />
 						<form:errors path="bidScore" />
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class='control-label col-lg-2 col-sm-2' for="bidFormat">
+					<label class='control-label col-lg-4 col-sm-6' for="bidFormat">
 						商品描述 </label>
 					<div class='col-lg-10'>
-						<form:textarea id="bidFormat" path="bidFormat" cols="45" class='form:input-large'
-							rows="5" placeholder="請輸入內容...."/>
+						<form:textarea id="bidFormat" path="bidFormat" cols="45"
+							class='form:input-large' rows="5" placeholder="請輸入內容...." />
 						<form:errors path="bidFormat" />
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class='control-label col-lg-2 col-sm-2' for="productImage">
+					<label class='control-label col-lg-4 col-sm-6' for="productImage">
 						圖片 </label>
 					<div class='col-lg-10'>
-						<form:input id="productImage" path="productImage" type='file' class='form:input-large' />
+						<form:input id="productImage" path="productImage" type='file'
+							class='form:input-large' />
 					</div>
 				</div>
 
@@ -144,8 +156,9 @@
 			</fieldset>
 		</form:form>
 
-		<a href="<spring:url value='/comm/products' />" class="btn btn-default"> <span
-				class="glyphicon-hand-left glyphicon"></span>返回
+		<a href="<spring:url value='/comm/products' />"
+			class="btn btn-info"> <span
+			class="glyphicon-hand-left glyphicon"></span>返回
 		</a>
 
 	</section>

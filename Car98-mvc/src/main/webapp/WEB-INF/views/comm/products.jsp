@@ -61,7 +61,7 @@
 								data-target="#proModal">
 								more
 							</button> -->
-							<button type="button" class="btn btn-primary" data-toggle="modal"
+							<button type="button" class="btn btn-info" data-toggle="modal"
 								data-target="#proModal${product.value.bidId}">看更多</button>
 							<FORM action="<c:url value='BuyBid.do' />" method="POST">
 								<input name='qty' type="hidden" value='1' /> <Input type='hidden' name='bidId'

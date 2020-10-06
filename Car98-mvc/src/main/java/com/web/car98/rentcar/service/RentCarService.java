@@ -7,7 +7,6 @@ import com.web.car98.rentcar.model.RentCarBean;
 
 public interface RentCarService {
 
-	Collection<RentCarBean> queryStoreData();
 	
 	public Collection<RentCarBean> getAllRentCars();
 
