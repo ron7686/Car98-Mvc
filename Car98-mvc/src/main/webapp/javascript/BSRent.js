@@ -116,9 +116,9 @@ function queryArea(){
 	 }
 	 console.log(qUrl);
 	 $.ajax({
-	 method: "GET",
-	 url: qUrl,
-	 sucess: function(res){
-	 }
+	    method: "GET",
+	    url: qUrl,
+	    sucess: function(res){
+	    }
 	 })
 }
