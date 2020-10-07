@@ -76,7 +76,9 @@ public class CommentController {
 		}
 
 		MemberBean memberBean=(MemberBean) model.getAttribute("LoginOK");
-		
+		if(memberBean==null) {
+			return "redirect:/login";
+		}
 		List<CommentBean> resultList;
 		//try {
 			resultList = commentservice.getPageCom(pageNo, postId,memberBean.getMemId());

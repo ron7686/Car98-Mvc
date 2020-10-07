@@ -108,18 +108,18 @@
 	<section class="my-5">
 		<div class="container-fluid text-white">
 			<div class="mainitem">汽 車</div>
+		<form action="">
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-3 ">
  					<!--<form action="<c:url value='/dist' />" method="POST">-->
-					<form>
-						地區： <select name="area" id="areaitem" style="width: 210px" onchange="queryArea()">
+						地區： <select name="area" id="areaitem" style="width: 200px" onchange="queryArea()">
 							<option value="selectarea" class="test123" selected>選擇地區</option>
 						</select>
-					</form>
+					
 				</div>
-				<div class="col-md-4">
-					<form action="">
-						價格： <select name="price" id="priceitem" style="width: 250px" onchange="queryArea()">
+				<div class="col-md-3">
+					
+						價格： <select name="price" id="priceitem" style="width: 200px" onchange="queryArea()">
 							<option value="min=0000&max=9999" selected>選擇價格</option>
 							<optgroup label="平日時租">
 								<option value="0-100">100以下</option>
@@ -146,14 +146,19 @@
 								<option value="min=4001&max=6000">4001以上</option>
 							</optgroup>
 						</select>
-					</form>
+					
 				</div>
-				<div class="col-md-4">
-					<form>
+				<div class="col-md-3 ">
+					
 						車型： <select name="car" id="caritem" style="width: 200px" onchange="queryArea()">
 							<option value="" selected>選擇車型</option>
 						</select>
-					</form>
+					
+				</div>
+				
+				<div class="col-md-3  ">
+					<input type="submit" value="開始搜尋" class="start">
+				
 				</div>
 <!-- 				<tr> -->
 <!-- 				    <td colspan="3" align="center"><input type="button" id="testButton" name="submit"  -->
@@ -165,6 +170,14 @@
 				<!--           <div  class="col-12" id="map" style="width: 800px;height: 600px;"> -->
 				<!--         </div> -->
 				<div id="map"></div>
+			</div>
+</form>
+		</div>
+
+		
+	</section>
+	<!-- footer -->
+	<jsp:include page="/fragment/footer.jsp"></jsp:include>
 				<script>
 				    function submitForms(){
 				       document.getElementById("areaitem").submit();
@@ -196,58 +209,6 @@
 					  });
 					}
 				</script>
-			</div>
-
-		</div>
-
-		</div>
-	</section>
-
-
-	<!-- About -->
-	<!-- <div class="jumbotron-fluid bg-dark">
-        <h1 class="display-5 text-light pt-2 pl-2">About</h1>
-        <p class="lead text-light pl-2">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-        <a class="btn btn-primary mb-2 ml-2 btn-sm" href="#" role="button">Learn more</a>
-      </div> -->
-	<!-- card -->
-	<!-- <div class="container mt-4 mb-5">
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-	<!-- footer -->
-	<div class="footer-bottom  bg-dark text-light">
-		<div class="container-fluid">
-			<p class="pull-left">Copyright@ 2020 by Car98 Group</p>
-		</div>
-	</div>
 	<script src="${pageContext.servletContext.contextPath}/javascript/BSRent.js"></script>
 </body>
 

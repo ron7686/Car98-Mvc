@@ -33,7 +33,7 @@ fieldset {
 }
 
 body {
-	background-image: url(${pageContext.request.contextPath}/image/Rss1.jpg);
+	background-image: url(${pageContext.request.contextPath}/image/ado.jpg);
 	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;

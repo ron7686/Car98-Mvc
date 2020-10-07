@@ -15,6 +15,9 @@
     text-align: center;
     
 }
+#areaitem{
+	margin-left:50px;
+}
 
 #caritem{
     height: 30px;
@@ -33,4 +36,7 @@
     /* border:1px solid yellow; */
     text-align: center;
     font-size:30px;
+}
+.start{
+	margin-left:62px;
 }
