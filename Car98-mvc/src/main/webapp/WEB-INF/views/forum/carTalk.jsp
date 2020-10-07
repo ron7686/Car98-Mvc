@@ -69,7 +69,7 @@
             <c:forEach var="aBean" items="${abean}">
             <div class="col-2 border">
                 <a href="">
-                <c:if test="${!empty TalkBean.postFileName}"><img src="${pageContext.request.contextPath}/getpostPic?postID=${aBean.postID}" class="img-fluid"  alt="Responsive image" style="width:100%; height:auto;"></c:if></a>
+                <c:if test="${!empty TalkBean.postFileName}"><img src="${pageContext.request.contextPath}/getpostPic?postID=${aBean.postID}" class="img-fluid topPic"  alt="" ></c:if></a>
             </div>
             </c:forEach>
             
@@ -114,19 +114,19 @@
                     <li class="classification-item"><a class="classification-item-a" href="<%=path%>/forum/talktop.do?type=4">公告</a></li>
                 </ul>
             </div>
-            <div class="col-12 filter">
-                <form class="mt-1">篩選：
-                    <select name="" id="searchtime">
-                    <option value="alltime">發佈時間</option>
-                    <option value="oday">一天</option>
-                    <option value="tday">兩天</option>
-                    <option value="oweek">一週</option>
-                    <option value="tweek">兩週</option>
-                    <option value="amonth">一個月</option>
-                    <option value="tday">兩個月</option>
-                    </select>
-                    </form>
-            </div>
+<!--             <div class="col-12 filter"> -->
+<%--                 <form class="mt-1">篩選： --%>
+<!--                     <select name="" id="searchtime"> -->
+<!--                     <option value="alltime">發佈時間</option> -->
+<!--                     <option value="oday">一天</option> -->
+<!--                     <option value="tday">兩天</option> -->
+<!--                     <option value="oweek">一週</option> -->
+<!--                     <option value="tweek">兩週</option> -->
+<!--                     <option value="amonth">一個月</option> -->
+<!--                     <option value="tday">兩個月</option> -->
+<!--                     </select> -->
+<%--                     </form> --%>
+<!--             </div> -->
             <div class="col-12 main ">
                 <table class="maintalk mt-1 ">
                     <tr>
@@ -148,9 +148,9 @@
                 <c:forEach var="aBean" items="${abean}">
 				  <tr>
                         <td class="sort "><a href=""><i class="fab fa-discourse"></i>${aBean.postType}</a></td>
-                        <td class="pic"><c:if test="${!empty TalkBean.postFileName}"><img src="${pageContext.request.contextPath}/getpostPic?postID=${aBean.postID}" class="contentimage" alt=""></c:if></td>
+                        <td class="pic "><c:if test="${!empty TalkBean.postFileName}"><img src="${pageContext.request.contextPath}/getpostPic?postID=${aBean.postID}" class="contentimage " alt=""></c:if></td>
                         <th class="title itemtitle"><a class="subtitle" href="<%=path%>/talktalk?postID=${aBean.postID}&pageNo=1">${aBean.postTitle}</a></th>
-                        <td class="author"><a class="talkname" href="#">${aBean.memberBean.id}</a><br>${aBean.postTime} </td>
+                        <td class="author"><a class="talkname" href="${pageContext.request.contextPath}/management?memId=${aBean.memberBean.id}">${aBean.memberBean.id}</a><br>${aBean.postTime} </td>
                         <td class="respon">${aBean.postCom}/<br>${aBean.postView}</td>
                         <td class="lastupdate"><a class="talkname" href="">WayneChen</a><br><a  class="time" href="">昨天10:43pm</a></td>
                   </tr>

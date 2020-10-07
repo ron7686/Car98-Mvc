@@ -5,10 +5,15 @@
 
 .col-2{
     /* border:2px solid white; */
-    /* overflow:hidden; */
-/*     height: 100px; */
+    overflow:hidden;
+    height: 100px;
     padding:0px;
 }
+.tpoPic{
+	max-width:100%;
+	max-height:100%;
+}
+
 .publish{
     /* height: 30px; */
     border-bottom:2px solid white;
@@ -113,7 +118,9 @@ margin-top: 10px;
 	margin-top:10px;
 }
 .contentimage{
-	maxweight:100px;
-	maxheight:50px;
+	max-width:100%;
+	max-height:50%;
+	overflow:hidden;
+	padding:0px;
 }
 
