@@ -133,9 +133,9 @@ body {
 								<div class="form-group ">
 									<img src="${pageContext.servletContext.contextPath}/image/view.jpeg" width="50" height="50"> <label
 										for="exampleFormControlFile1">插入圖片</label>
-										 <input type="file" 
-										class="form-control-file mt-2" id="btnImage"
-										value="插入圖片">
+										 <form:input type="file" 
+										class="form-control-file mt-2" id="btnImage" path="postMultipartFile"
+										value="插入圖片" />
 								</div>
 							
 						</li>

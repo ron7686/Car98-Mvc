@@ -122,7 +122,7 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 						</button>
 						<button class='like-btn' name="update"
 							onclick="modify(${anEntry.key}, ${anEntry.value.quantity}, ${vs.index})">
-							<i class="fa fa-cog"></i>
+							<i class="fa fa-check-square" aria-hidden="true"></i>
 						</button>
 
 					</div>

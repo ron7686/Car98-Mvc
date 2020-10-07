@@ -1,6 +1,7 @@
 .container{
 /*     height: 900px; */
     border:2px solid white;
+    
 }
 
 .col-2{
@@ -111,5 +112,9 @@ margin-top: 10px;
 	width:80px;
 	height:40px;
 	margin-top:10px;
+}
+.contentimage{
+	max-weight:100px;
+	max-height:50px;
 }
 

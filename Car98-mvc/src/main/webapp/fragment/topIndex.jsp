@@ -23,7 +23,7 @@
 				
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					<a class="dropdown-item" href="<c:url value='/config/fuels'/>">加油紀錄</a>
-					<a class="dropdown-item" href="<c:url value='/config/fuels/add'/>">加油紀錄</a>
+					<a class="dropdown-item" href="<c:url value='/config/fuels/add'/>">新增加油</a>
 					<a class="dropdown-item" href="#">保養紀錄</a>
 				</div>
 			</li>

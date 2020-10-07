@@ -169,7 +169,7 @@
                 <c:forEach var="aBean" items="${abean}">
 				  <tr>
                         <td class="sort "><a href=""><i class="fab fa-discourse"></i>${aBean.postType}</a></td>
-                        <td class="pic"><img src="https://picsum.photos/id/231/100/50" alt=""></td>
+                        <td class="pic"><c:if test="${!empty TalkBean.postFileName}"><img src="${pageContext.request.contextPath}/getpostPic?postID=${aBean.postID}" class="contentimage" alt=""></c:if></td>
                         <th class="title itemtitle"><a class="subtitle" href="<%=path%>/talktalk?postID=${aBean.postID}&pageNo=1">${aBean.postTitle}</a></th>
                         <td class="author"><a class="talkname" href="#">${aBean.memberBean.id}</a><br>${aBean.postTime} </td>
                         <td class="respon">${aBean.postCom}<br>${aBen.postView}</td>
@@ -186,6 +186,7 @@
     
 
     <jsp:include page="/fragment/footer.jsp"></jsp:include>
+   
       <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

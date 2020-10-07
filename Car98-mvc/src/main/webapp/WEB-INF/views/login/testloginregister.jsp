@@ -72,6 +72,97 @@
     }
 
 
+/*     .login-box { */
+/*   position: absolute; */
+/*   top: 50%; */
+/*   left: 50%; */
+/*   width: 400px; */
+/*   padding: 40px; */
+/*   transform: translate(-50%, -50%); */
+/*   background: rgba(0,0,0,.5); */
+/*   box-sizing: border-box; */
+/*   box-shadow: 0 15px 25px rgba(0,0,0,.6); */
+/*   border-radius: 10px; */
+/* } */
+
+/* .login-box h2 { */
+/*   margin: 0 0 30px; */
+/*   padding: 0; */
+/*   color: #fff; */
+/*   text-align: center; */
+/* } */
+
+/* .login-box .user-box { */
+/*   position: relative; */
+/* } */
+
+/* .login-box .user-box input { */
+/*   width: 100%; */
+/*   padding: 10px 0; */
+/*   font-size: 16px; */
+/*   color: #fff; */
+/*   margin-bottom: 30px; */
+/*   border: none; */
+/*   border-bottom: 1px solid #fff; */
+/*   outline: none; */
+/*   background: transparent; */
+/* } */
+/* .login-box .user-box label { */
+/*   position: absolute; */
+/*   top:0; */
+/*   left: 0; */
+/*   padding: 10px 0; */
+/*   font-size: 16px; */
+/*   color: #fff; */
+/*   pointer-events: none; */
+/*   transition: .5s; */
+/* } */
+
+/* .login-box .user-box input:focus ~ label, */
+/* .login-box .user-box input:valid ~ label { */
+/*   top: -20px; */
+/*   left: 0; */
+/*   color: #03e9f4; */
+/*   font-size: 12px; */
+/* } */
+
+/* .login-box form a { */
+/*   position: relative; */
+/*   display: inline-block; */
+/*   padding: 10px 20px; */
+/*   color: #03e9f4; */
+/*   font-size: 16px; */
+/*   text-decoration: none; */
+/*   text-transform: uppercase; */
+/*   overflow: hidden; */
+/*   transition: .5s; */
+/*   margin-top: 40px; */
+/*   letter-spacing: 4px */
+/* } */
+
+/* .login-box a:hover { */
+/*   background: #03e9f4; */
+/*   color: #fff; */
+/*   border-radius: 5px; */
+/*   box-shadow: 0 0 5px #03e9f4, */
+/*               0 0 25px #03e9f4, */
+/*               0 0 50px #03e9f4, */
+/*               0 0 100px #03e9f4; */
+/* } */
+
+/* .login-box a span { */
+/*   position: absolute; */
+/*   display: block; */
+/* } */
+
+/* .login-box a span:nth-child(1) { */
+/*   top: 0; */
+/*   left: -100%; */
+/*   width: 100%; */
+/*   height: 2px; */
+/*   background: linear-gradient(90deg, transparent, #03e9f4); */
+/*   animation: btn-anim1 1s linear infinite; */
+/* } */
 
    
     </style>
@@ -94,11 +185,11 @@
                         <li class="col-6"><a  class="memregister" href="#tab02"><b>註冊</b></a></li>
                         
                     </ul>
-                    <div id="tab01" class="tab-inner text-white ">
+                    <div id="tab01" class="tab-inner text-white login-box">
 
                  <!-- 會員登入 -->
                         <form:form method="POST" modelAttribute="loginBean">
-					<div class="form-group  mt-5 ">
+					<div class="form-group  mt-5 user-box">
 						<label for="email" class="email">Email</label> 
 						
 
@@ -106,7 +197,7 @@
     	         		<form:errors  path="user" cssClass="error" /><br>
 						<div class="invalid-feedback">請輸入Email</div>
 					</div>
-					<div class="form-group mt-5">
+					<div class="form-group mt-5 user-box">
 						<label for="password" class="pswd">密碼</label> 
 						<form:input class="form-control text" type="password" path="password"  />
              			<form:errors  path="password" cssClass="error" /><br>
