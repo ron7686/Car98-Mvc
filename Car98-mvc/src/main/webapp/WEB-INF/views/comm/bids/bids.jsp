@@ -15,7 +15,7 @@
 	<style>
 		body {
 			background-color: rgba(236, 234, 234, 0.5);
-			;
+			height: auto;
 		}
 
 		.footer-bottom {
