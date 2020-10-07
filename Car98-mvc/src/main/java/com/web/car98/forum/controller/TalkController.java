@@ -39,7 +39,6 @@ public class TalkController {
 
 	@RequestMapping("/forum/talktop.do")
 	public String list(Model model, HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value = "lastPage", required = false) Integer lastpage,
 			@RequestParam(value = "pageNo", required = false) Integer pageNo,
 			@RequestParam(value = "type", required = false) String type,
 			@ModelAttribute("talkBean") TalkBean talkBean) {
@@ -47,20 +46,19 @@ public class TalkController {
 		if (pageNo == null) {
 			pageNo = 1;
 		}
-//		List<TalkBean> list = talkservice.select(pageNo);
-//		
-//		
-//		
 		List<TalkBean> list = new ArrayList<>();
-
+		model.addAttribute("type",type);
 		if (type != null) {
 			type=talkservice.intToType(type);
 		}
+		int lastpage=talkservice.lastpage(type);
 		list = talkservice.getPageByType(pageNo, type);
-//
+		
+
+		
 		model.addAttribute("abean", list);
 		model.addAttribute("pageNo", pageNo);
-		model.addAttribute("lastPage", talkservice.lastpage());
+		model.addAttribute("lastPage", lastpage);
 
 		return "/forum/carTalk";
 

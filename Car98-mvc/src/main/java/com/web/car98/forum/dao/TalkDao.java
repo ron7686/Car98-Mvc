@@ -15,11 +15,7 @@ public interface TalkDao {
 	
 	List<TalkBean> getAllByType(String type);
 
-	int lastpage();
-
 	TalkBean selectOne(int postID);
-	
-	int PostType();
 	
 	List<LikeOrHateBean> getloh(int postId);
 	
