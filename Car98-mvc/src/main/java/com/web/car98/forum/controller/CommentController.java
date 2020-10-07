@@ -24,8 +24,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -40,7 +42,7 @@ import com.web.car98.member.model.MemberBean;
 import com.web.car98.member.service.MemberService;
 import com.web.car98.validator.CommentValidator;
 
-@Controller
+@Controller(value ="CommentController")
 @SessionAttributes({ "LoginOK", "CommentBean", "TalkBean", "pageNo" })
 public class CommentController {
 
@@ -175,9 +177,11 @@ public class CommentController {
 		
 	}
 
-	@RequestMapping("/forum/updateCom")
-	
-	public String updateCom(Model model, @ModelAttribute("commentBean") CommentBean cb, 
+//	@PostMapping("/forum/updateCom")
+	@PostMapping("/updateCom")
+	@ResponseBody
+	public String updateCom(Model model, @ModelAttribute("commentBean") CommentBean cb,
+			@RequestBody CommentBean commentBean,
 			@RequestParam("comId") Integer comId,
 			@RequestParam("postID") Integer postID) {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
