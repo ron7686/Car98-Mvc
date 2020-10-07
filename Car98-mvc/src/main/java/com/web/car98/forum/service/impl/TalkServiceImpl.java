@@ -22,6 +22,7 @@ import _00_init.util.HibernateUtils;
 public class TalkServiceImpl implements TalkService  {
 @Autowired
 	TalkDao dao;
+	int onepage=5;
 //	SessionFactory factory;
 	
 	public TalkServiceImpl() {
@@ -37,9 +38,18 @@ public class TalkServiceImpl implements TalkService  {
 		List<TalkBean> li = dao.getAll();
 		return dao.getPage(li,page);
 	}
+	
 	@Override
-	public int lastpage() {
-		return dao.lastpage();
+	public int lastpage(String type) {
+		List<TalkBean> li=new ArrayList<>();
+		if(type==null) {
+			li = dao.getAll();
+		}else {
+			li = dao.getAllByType(type);
+		}
+		int lastpage=li.size()/onepage;
+		if(li.size()%onepage>0)lastpage++;
+		return lastpage;
 	}
 	@Override
 	public TalkBean selectOne(int postID) {
@@ -106,5 +116,11 @@ public class TalkServiceImpl implements TalkService  {
 	@Override
 	public LikeOrHateBean getOneLoh(int postId, int memId) {
 		return dao.getOneLoh(postId, memId);
+	}
+	@Override
+	public void setView(int postId) {
+		TalkBean tb=dao.selectOne(postId);
+		tb.setPostView(tb.getPostView()+1);
+		dao.persist(tb);
 	}
 }

@@ -67,7 +67,7 @@ public class TalkContentController {
 			return "forum/talkContent";
 		}
 		MemberBean mb=(MemberBean) model.getAttribute("LoginOK");
-		
+		tb.setPostView(0);
 		tb.setMemberBean(mb);
 		
 		

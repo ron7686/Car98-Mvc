@@ -68,8 +68,10 @@ public class CommentController {
 			@RequestParam(value = "floorNo", required = false) Integer floorNo) {
 		CommentBean cb = new CommentBean();
 		LikeOrHateBean loh=new LikeOrHateBean();
+		ts.setView(postId);
+		TalkBean tb=ts.selectOne(postId);
 		model.addAttribute("commentBean", cb);
-		model.addAttribute("TalkBean", ts.selectOne(postId));
+		model.addAttribute("TalkBean", tb);
 		// ra.addFlashAttribute("TalkBean",ts.selectOne(postId));
 		if (pageNo == null) {
 			pageNo = 1;

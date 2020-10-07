@@ -31,7 +31,7 @@ public class TalkDaoImpl implements TalkDao  {
 	@Override
 	public void persist(TalkBean tb) {
 		Session session = factory.getCurrentSession();
-			session.save(tb);
+		session.saveOrUpdate(tb);
 	}
 	
 	@Override
@@ -67,16 +67,6 @@ public class TalkDaoImpl implements TalkDao  {
 		return li;
 	}
 
-	@Override
-	public int lastpage() {
-		int lastpage;
-		int page;
-		List<TalkBean> li = getAll();
-		lastpage=li.size()/onepage;
-		page=li.size()%onepage;
-		if(page>0)lastpage++;
-		return lastpage;
-	}
 	
 	@Override
 	public TalkBean selectOne(int postID) {
@@ -90,14 +80,6 @@ public class TalkDaoImpl implements TalkDao  {
 		
 	}
 
-	@Override
-	public int PostType() {
-		
-		
-		
-		
-		return 0;
-	}
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -122,10 +104,7 @@ public class TalkDaoImpl implements TalkDao  {
 					getSingleResult();
 		return loh;
 	}
-	
-	
-	
-	
+
 	
 	
 }

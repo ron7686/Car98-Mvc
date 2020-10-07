@@ -286,7 +286,7 @@ body {
 								<li id="hate1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x"">${comment.comHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x" style="color: red">${comment.comHate}</i></a></li>
 							</ul>
 						</div>
 					</c:if>

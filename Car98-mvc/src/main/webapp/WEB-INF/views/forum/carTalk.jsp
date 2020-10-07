@@ -102,25 +102,25 @@
                     <ul class="pagination justify-content-end ">
 
                       <c:if test="${pageNo > 3}">
-                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=1">1</a></li>
+                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=1&type=${type}">1</a></li>
                       <li class="page-item mt-2"><a href=""><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i><i class="fas fa-caret-left"></i></a></li>
                       	</c:if>
                       	<c:if test="${pageNo > 2}">
-                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=${pageNo-2}">${pageNo-2}</a></li>
+                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=${pageNo-2}&type=${type}">${pageNo-2}</a></li>
                       	</c:if>
                       	<c:if test="${pageNo > 1}">
-                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=${pageNo-1}">${pageNo-1}</a></li>
+                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=${pageNo-1}&type=${type}">${pageNo-1}</a></li>
                      	</c:if>
                       <li class="page-item active"><a class="page-link" href="#">${pageNo}</a></li>
                       <c:if test="${pageNo < lastPage}">
-                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=${pageNo+1}">${pageNo+1}</a></li>
+                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=${pageNo+1}&type=${type}">${pageNo+1}</a></li>
                       </c:if>
                       <c:if test="${pageNo+1 < lastPage}">
-                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=${pageNo+2}">${pageNo+2}</a></li>
+                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=${pageNo+2}&type=${type}">${pageNo+2}</a></li>
                       </c:if>
                       <c:if test="${pageNo+2 < lastPage}">
                       <li class="page-item mt-2"><a href=""><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i><i class="fas fa-caret-right"></i></a></li>
-                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=${lastPage}">${lastPage}</a></li>
+                      <li class="page-item"><a class="page-link" href="<%=path%>/forum/talktop.do?pageNo=${lastPage}&type=${type}">${lastPage}</a></li>
                    	  </c:if>
                     </ul>
                   </nav>
@@ -172,7 +172,7 @@
                         <td class="pic"><c:if test="${!empty TalkBean.postFileName}"><img src="${pageContext.request.contextPath}/getpostPic?postID=${aBean.postID}" class="contentimage" alt=""></c:if></td>
                         <th class="title itemtitle"><a class="subtitle" href="<%=path%>/talktalk?postID=${aBean.postID}&pageNo=1">${aBean.postTitle}</a></th>
                         <td class="author"><a class="talkname" href="#">${aBean.memberBean.id}</a><br>${aBean.postTime} </td>
-                        <td class="respon">${aBean.postCom}<br>${aBen.postView}</td>
+                        <td class="respon">${aBean.postCom}/<br>${aBean.postView}</td>
                         <td class="lastupdate"><a class="talkname" href="">WayneChen</a><br><a  class="time" href="">昨天10:43pm</a></td>
                   </tr>
 				 </c:forEach>
@@ -204,5 +204,6 @@
     ></script>
     <script src="http://maps.google.com/maps/api/js"></script>
     <script src="${pageContext.servletContext.contextPath}/javascript/BSTalk.js"></script>
+     
       </body>
     </html>
