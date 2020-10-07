@@ -34,7 +34,7 @@ public class CarTypeDaoImpl implements CarTypeDao {
 //	建立車牌-車型(第三個下拉式)選單
 	@Override
 	public List<CarTypeBean> showBrandTypeMenu() {
-		String hql = "FROM CarTypeBean GROUP BY carBrand , carType";
+		String hql = "FROM CarTypeBean GROUP BY carBrand , carType ORDER BY carBrand";
 		Session session = factory.getCurrentSession();
 		List<CarTypeBean> carTypeBean = new ArrayList<>();
 		carTypeBean = session.createQuery(hql).getResultList();

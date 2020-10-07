@@ -1,13 +1,16 @@
 package com.web.car98.config;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.hibernate5.support.OpenSessionInViewInterceptor;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -16,6 +19,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan("com.web.car98")
 public class WebAppConfig implements WebMvcConfigurer {
 
+	@Autowired
+	SessionFactory factory;
 	@Bean
 	public ViewResolver internalResourceViewResolver() {
 		InternalResourceViewResolver resolver = 
@@ -38,6 +43,18 @@ public class WebAppConfig implements WebMvcConfigurer {
 //				.addResourceLocations("/WEB-INF/views/javascript/");		
 //	}
 	
+	@Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new CheckLoginInterceptor());
+        DisableCacheInterceptor  disableCacheInterceptor = new DisableCacheInterceptor();
+        registry.addInterceptor(disableCacheInterceptor);
+
+        OpenSessionInViewInterceptor openSessionInViewInterceptor = new OpenSessionInViewInterceptor();
+        openSessionInViewInterceptor.setSessionFactory(factory);
+        registry.addWebRequestInterceptor(openSessionInViewInterceptor).addPathPatterns("/_05_orderProcess/orderDetail");
+
+
+    }
 	
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {

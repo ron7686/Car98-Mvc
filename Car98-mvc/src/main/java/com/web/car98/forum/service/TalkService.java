@@ -15,7 +15,7 @@ public interface TalkService {
 	
 	String intToType(String type);
 
-	int lastpage();
+	int lastpage(String type);
 
 	TalkBean selectOne(int postID);
 
@@ -26,4 +26,6 @@ public interface TalkService {
 	int getLike(List<LikeOrHateBean> loh);
 	
 	int getHate(List<LikeOrHateBean> loh);
+	
+	void setView(int postId);
 }

@@ -1,22 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"  %>
 
 <%
-	response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server 
+response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server 
 response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance 
 response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale" 
-response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
+response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility 
 %>
 <!DOCTYPE html>
 <html>
 
 <head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
 		integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/shoplist.css" type="text/css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/shoplists.css" type="text/css">
 	<script type="text/javascript">
 		function confirmDelete(n) {
 			if (confirm("確定刪除此項商品 ? ")) {
@@ -40,16 +40,16 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 				return;
 			}
 			if (newQty == qty) {
-				window.alert("新、舊數量相同，不必修改");
+				// 				window.alert("新、舊數量相同，不必修改");
 				return;
 			}
-			if (confirm("確定將此商品的數量由" + qty + " 改為 " + newQty + " ? ")) {
-				document.forms[0].action = "<c:url value='UpdateItem.do?cmd=MOD&bidId=" + key + "&newQty=" + newQty + "' />";
-				document.forms[0].method = "POST";
-				document.forms[0].submit();
-			} else {
-				document.getElementById(x).value = qty;
-			}
+			// 			if (confirm("確定將此商品的數量由" + qty + " 改為 " + newQty + " ? ")) {
+			document.forms[0].action = "<c:url value='UpdateItem.do?cmd=MOD&bidId=" + key + "&newQty=" + newQty + "' />";
+			document.forms[0].method = "POST";
+			document.forms[0].submit();
+			// 			} else {
+			// 				document.getElementById(x).value = qty;
+			// 			}
 		}
 		function isNumberKey(evt) {
 			var charCode = (evt.which) ? evt.which : event.keyCode
@@ -102,17 +102,13 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 
 	<div class="shopping-cart">
 		<!-- Title -->
-		<div class="title">
-			購物清單
-		</div>
+		<div class="title">購物清單</div>
 
 
 
 		<table>
 			<c:if test="${ShoppingCart.content == null}">
-				<div class="title">
-					購物車內沒有商品
-				</div>
+				<div class="title">購物車內沒有商品</div>
 			</c:if>
 			<c:forEach varStatus="vs" var="anEntry" items="${ShoppingCart.content}">
 				<div class="item">
@@ -120,67 +116,87 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 						<button class='delete-btn' name="delete" onclick="confirmDelete(${anEntry.key})">
 							<i class="fas fa-trash-alt"></i>
 						</button>
-						<button class='like-btn' name="update"
+						<!-- <button class='like-btn' name="update"
 							onclick="modify(${anEntry.key}, ${anEntry.value.quantity}, ${vs.index})">
-							<i class="fa fa-check-square" aria-hidden="true"></i>
-						</button>
+							<i class="fa fa-cog"></i>
+						</button> -->
 
 					</div>
 					<!-- PHOTO -->
 					<div class="image">
-						<img style='height: 80px; width: 80px;' src="<c:url value='comm/picture/${anEntry.value.bidId}' />">
+						<img style='height: 80px; width: 80px;'
+							src="<c:url value='comm/picture/${anEntry.value.bidId}' />">
 					</div>
 					<!-- product -->
 					<div class="description">
-						<span>${anEntry.value.bidName}</span>
-						<span>賣家: ${anEntry.value.sellMan}</span>
+						<span>${anEntry.value.bidName}</span> <span>賣家:
+							${anEntry.value.sellMan}</span>
 					</div>
 					<!-- product + - -->
 					<div class="quantity">
 						<!-- <button class="plus-btn" type="button" name="button">
 									<img src="${pageContext.servletContext.contextPath}/image/plus.svg" alt="">
 								</button> -->
-						<Input id="newQty${vs.index}" style="width: 60px; text-align: center" name="newQty"
-							type="number" min='1' max='10' value="<fmt:formatNumber value='${anEntry.value.quantity}' />" name="qty"
+						<input type="button" id="subs${vs.index}" value="-" class="Button" />
+						<Input id="newQty${vs.index}" style="width: 60px; text-align: center" name="newQty" type="text"
+							value="<fmt:formatNumber value= '${anEntry.value.quantity}' />" name="qty"
 							onkeypress="return isNumberKey(event)" />
+						<input type="button" id="adds${vs.index}" value="+" class="Button" />
 						<!-- <button class="minus-btn">
 									<img src="${pageContext.servletContext.contextPath}/image/minus.svg" alt="">
 								</button> -->
 					</div>
-					<div class="total-price">$
+					<div class="total-price">
+						$
 						<fmt:formatNumber value="${anEntry.value.unitPrice * anEntry.value.quantity}"
 							pattern="#,###,###" />
 					</div>
 				</div>
-				<!-- <tr height='16'>
-							<td>${anEntry.value.bidName}</td>
-							<td style="text-align: center;">${anEntry.value.sellMan}</td>
-							<td style="text-align: right;"><fmt:formatNumber
-									value="${anEntry.value.unitPrice}" pattern="#,###" />元</td>
-							<td style="text-align: right;">
-								<Input id="newQty${vs.index}"
-								style="width: 60px; text-align: center" name="newQty" type="number"
-								value="<fmt:formatNumber value='${anEntry.value.quantity}' />"
-								name="qty" onkeypress="return isNumberKey(event)" />
-							</td>
-							<td style="text-align: right;"><fmt:formatNumber
-									value="${anEntry.value.unitPrice * anEntry.value.quantity}"
-									pattern="#,###,###" />元</td>
-							<td><Input type="button" name="update" value="修改"
-								onclick="modify(${anEntry.key}, ${anEntry.value.quantity}, ${vs.index})">
-								<Input type="button" name="delete" value="刪除"
-								onclick="confirmDelete(${anEntry.key})"></td>
-						</tr> -->
+				<!--         動態JS開始 -->
+				<script>
+					$("#adds${vs.index}").click(function add() {
+						var $rooms = $("#newQty${vs.index}");
+						var a = $rooms.val();
+
+						a++;
+						$("#subs${vs.index}").prop("disabled", !a);
+						$rooms.val(a);
+
+						modify(${ anEntry.key }, ${ anEntry.value.quantity }, ${ vs.index });
+						$("#newQty${vs.index}").trigger(isNegative());
+
+					});
+					$("#subs${vs.index}").prop("disabled", !$("#newQty${vs.index}").val());
+
+					$('#subs${vs.index}').click(function subst() {
+						var $rooms = $("#newQty${vs.index}");
+						var b = $rooms.val();
+						if (b >= 2) {
+							b--;
+							$rooms.val(b);
+						}
+						else {
+
+							$("#subs${vs.index}").prop("disabled", true);
+						}
+						modify(${anEntry.key},${anEntry.value.quantity},${vs.index});
+					});
+				</script>
+				<!--         動態JS結束 -->
 			</c:forEach>
 
 
 		</table>
 
 		<div class='sel'>
-				<div>合計金額：</div>
-				<div>
-					<fmt:formatNumber value="${subtotal}" pattern="#,###,###" />元</div>
-			
+			<div>
+				合計金額：
+				<fmt:formatNumber value="${subtotal}" pattern="#,###,###" />
+				元
+			</div>
+			<!-- <div>
+					元</div> -->
+
 		</div>
 		<table class='sel'>
 			<tr height='80'>
@@ -195,8 +211,7 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 									onClick="return Checkout(${subtotal});"><i
 										class="fa fa-credit-card fa-lg"></i>再次確認</a></td>
 							<td width="265" align='center'><a class="btn btn-danger" href="<c:url value='abort' />"
-									onClick="return Abort();"><i class="fa fa-trash-alt fa-lg"></i>放棄購物</a>
-							</td>
+									onClick="return Abort();"><i class="fa fa-trash-alt fa-lg"></i>放棄購物</a></td>
 						</tr>
 					</table>
 				</td>
@@ -213,6 +228,9 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 	<form>
 		<input type="hidden" name="a" />
 	</form>
+
+	<script src="<c:url value='/javascript/shoppingList_1.js' />"></script>
+
 	<!-- footer -->
 	<jsp:include page="/fragment/footer.jsp" />
 </body>

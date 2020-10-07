@@ -12,7 +12,7 @@
 }
 
 body {
-  background-image: url(../image/Desktop.png);
+  background-image: url(../image/background2.png);
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -37,17 +37,19 @@ body {
     width: 750px;
     height: auto;
     margin: 80px auto;
-    background: #ffffff;
+    background: rgba(0,0,0,0.1);
     box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
-    border-radius: 6px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-} 
+    color: #ffffff;
+    
+}
 .title {
   height: 120px;
   width: 750px;
   text-align:center;
-  background: #ffffff;
+  /* background: #ffffff; */
   margin: 0px auto;
   font-size: 30px;s
   box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.1);
@@ -57,14 +59,14 @@ body {
   height: 120px;
   width: 750px;
   display: flex;
-  background: #ffffff;
+  /* background: #ffffff; */
   margin: 0px auto;
   box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.1);
 }
 .sel {
   height: 120px;
   width: 750px;
-  background: #ffffff;
+  /* background: #ffffff; */
   margin: 0px auto;
   text-align:right;
   box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.1);
@@ -125,7 +127,8 @@ body {
 .description {
   /* padding-top: 10px; */
   margin-top: 20px;
-  width: 180px;
+  width: 200px;
+  color: #ffffff;
 }
 .description span {
   display: block;
@@ -135,22 +138,24 @@ body {
 }
 .description span:first-child {
   margin-bottom: auto;
+  color: #ffffff;
 }
 .description span:last-child {
   font-weight: 300;
   margin-top: auto;
-  color: #86939e;
+  color: #ffffff;
 }
 /* product-quantity */
 .quantity {
+  width: 150px;
   padding-top: 20px;
-  margin: 5px 10px 1px 140px;
+  margin: 5px 12px 1px 120px;
 }
 .quantity input {
   /* -webkit-appearance: none; */
   border: none;
   text-align: center;
-  width: 32px;
+  width: 20px;
   font-size: 16px;
   color: #43484d;
   font-weight: 300;
@@ -179,7 +184,7 @@ input:focus {
   padding-top: 27px;
   text-align: center;
   font-size: 16px;
-  color: #43484d;
+  color: #ffffff;
   font-weight: 300;
 }
 /* RWD */

@@ -136,9 +136,12 @@ body {
 
 				<div class="col-10">
 
+<!-- 						<li class="gp">讚12</li> -->
+<!-- 						<li class="bp">噓18</li> -->
+					</ul>
+				
 					<div>樓主</div>
 					<a href="#" style="color: white;">發表於${TalkBean.postTime}</a>
-
 
 					<!-- 按讚功能 -->
 					<c:if test="${loh.likeOrHate==0 || empty loh.likeOrHate}">
@@ -283,7 +286,7 @@ body {
 								<li id="hate1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x"">${comment.comHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x" style="color: red">${comment.comHate}</i></a></li>
 							</ul>
 						</div>
 					</c:if>

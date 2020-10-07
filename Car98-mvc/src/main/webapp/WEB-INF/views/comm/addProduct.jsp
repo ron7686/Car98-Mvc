@@ -12,8 +12,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type="text/css">
 .control-label {
-	color: white;
-	font-size: 20px;
+	color:white;
+	font-size:20px;
 }
 
 fieldset {
@@ -27,17 +27,10 @@ fieldset {
 body {
 	background-image: url(${pageContext.request.contextPath}/image/ado.jpg);
 	background-position: center;
+	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
-	background-size: cover
-}
-
-.container-height {
-	height: 500px;
-}
-
-.row-width {
-	width: 100%;
+	background-size: cover;
 }
 
 .footer-bottom {
@@ -77,7 +70,7 @@ body {
 
 	<section>
 		<div class="container">
-			<h1 style="text-align: center; color: white;">上架商品</h1>
+			<h1 style="text-align: center;color: white;">上架商品</h1>
 		</div>
 	</section>
 	<hr>
@@ -167,8 +160,9 @@ body {
 			</fieldset>
 		</form:form>
 
-		<a href="<spring:url value='/comm/products' />" class="btn btn-info">
-			<span class="glyphicon-hand-left glyphicon"></span>返回
+		<a href="<spring:url value='/comm/products' />"
+			class="btn btn-info"> <span
+			class="glyphicon-hand-left glyphicon"></span>返回
 		</a>
 
 	</section>
