@@ -160,18 +160,16 @@
 					<input type="submit" value="開始搜尋" class="start">
 				
 				</div>
-<!-- 				<tr> -->
-<!-- 				    <td colspan="3" align="center"><input type="button" id="testButton" name="submit"  -->
-<!-- 				    value="提交" style="width: 60px" onclick="submitForms()" /></td> -->
-<!-- 			    </tr> -->
+
 				<!--         <div class="col-md-12 text-white"> -->
 				<!--           <iframe src="https://maps.google.com?output=embed&q=北科大" width="100%" height="460"> -->
 				<!--           </iframe> -->
 				<!--           <div  class="col-12" id="map" style="width: 800px;height: 600px;"> -->
 				<!--         </div> -->
 				<div id="map"></div>
+				<div id="list"></div>
 			</div>
-</form>
+         </form>
 		</div>
 
 		
@@ -179,12 +177,6 @@
 	<!-- footer -->
 	<jsp:include page="/fragment/footer.jsp"></jsp:include>
 				<script>
-				    function submitForms(){
-				       document.getElementById("areaitem").submit();
-				       document.getElementById("priceitem").submit();
-				       document.getElementById("caritem").submit();
-				    }
-				    
 					var map, geocoder;
 
 					function initMap() {
@@ -208,6 +200,58 @@
 					    }
 					  });
 					}
+				</script>
+				<script>
+					$(document).ready(function () {
+						$.ajax({
+							url: 'http://localhost:8080/Car98-mvc/carRent/',
+							type: 'GET',
+							dataType: 'Json',
+							success(data) {
+								console.log(JSON.stringify(data));
+								// alert();
+								let areaitem = $('#areaitem').val();
+								let priceitem = $('#priceitem').val();
+								let caritem = $('#caritem').val();
+							}
+						});
+						
+						$(".start").click(function () {
+							let test123 = {
+								"city": city,
+								"district": district,
+								"min": min,
+								"max": max,
+								"brand": carBrand,
+								"type": carType
+							}
+							alert(JSON.stringify(test123));
+							
+							$.ajax({
+								url: "http://localhost:8080/Car98-mvc/dist",
+								data: JSON.stringify(test123),
+								method: "POST",
+								contentType: "application/json",
+								success: function (data) {
+									alert(JSON.stringify(test123))
+									let table = $("<table border=\"1\" class='table'>");
+									table.appendTo($('#list'));
+									th = $(`<tr><th>租車行</th><th>地址</th></tr>`);
+									th.appendTo(table);
+									for (let i = 0; i < data.length; i++) {
+										tr = $(`<tr>`);
+										tr.appendTo(table);
+										td = $(`<td>` + data[i].store + `</td>` +
+											+ `<td>` + data[i].city + data[i].district + data[i].street + `</td>` +
+											+ `</tr>`);
+										td.appendTo(tr);
+									}
+									$("#list").append("</table>");
+								}
+							})
+							window.location.href("http://localhost:8080/Car98-mvc/carRent");
+						})
+					})
 				</script>
 	<script src="${pageContext.servletContext.contextPath}/javascript/BSRent.js"></script>
 </body>

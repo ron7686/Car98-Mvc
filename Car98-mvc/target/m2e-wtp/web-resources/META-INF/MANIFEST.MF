@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: user
+=======
+Built-By: Machi
+>>>>>>> c41f5da7ba67bd8a82485b510960fc7c69d405ee
 Build-Jdk: 1.8.0_252
 Created-By: Maven Integration for Eclipse
 

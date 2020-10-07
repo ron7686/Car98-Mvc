@@ -45,16 +45,17 @@ public class CarTypeController{
 			@RequestBody CarTypeBean cb, 
 			Model model) throws Exception {
 		List<CarTypeBean> carTypeBean = this.carTypeService.getRentCarsByType(cb.getCarBrand() , cb.getCarType());
-		model.addAttribute("rcbean1", carTypeBean);
+		model.addAttribute("rcbean", carTypeBean);
 		
 		return carTypeBean;
 	}
 	
 	@PostMapping("/dollar")
-	protected @ResponseBody List<CarTypeBean> doPost1(HttpServletRequest request, 
+	@ResponseBody
+	protected List<CarTypeBean> doPost1(HttpServletRequest request, 
 			@RequestBody String dollar , Model model) throws Exception {
-		int first = dollar.indexOf('=');
-		int last = dollar.lastIndexOf('=');
+		int first = dollar.indexOf("=");
+		int last = dollar.lastIndexOf("=");
 		// 將String 轉成 Integer
 		String mindollar = dollar.substring(first+1, first+4);
 		Integer min = Integer.parseInt(mindollar);
@@ -63,9 +64,9 @@ public class CarTypeController{
 		Integer max = Integer.parseInt(maxdollar);
 		
 		List<CarTypeBean> carTypeBean = this.carTypeService.getRentCarsByPrice(min, max);
-		model.addAttribute("rcbean2", carTypeBean);
+		model.addAttribute("rcbean", carTypeBean);
 		
-//		System.out.println(carTypeBean);
+		System.out.println(carTypeBean);
 		return carTypeBean;
 	}
 

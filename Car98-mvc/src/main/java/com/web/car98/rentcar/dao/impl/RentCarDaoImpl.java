@@ -22,7 +22,7 @@ public class RentCarDaoImpl implements RentCarDao {
 	@Override
 //	建立城市-區(第一個下拉式)選單
 	public List<RentCarBean> showCityDistMenu() {
-		String hql = "SELECT city, district FROM RentCarBean GROUP BY city , district";
+		String hql = "SELECT city, district FROM RentCarBean GROUP BY city , district ORDER BY city";
 		Session session = factory.getCurrentSession();
 		List<RentCarBean> rentCarBean = new ArrayList<>();
 		rentCarBean = session.createQuery(hql).getResultList();

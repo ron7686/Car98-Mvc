@@ -34,9 +34,10 @@ public class QueryStoreController{
 		return new ModelAndView("/rent/carRent");  //jsp檔名
 	}
 	
+	//抓取三個下拉式選單的共六個值
 	@GetMapping("/getStoreList")
 	public ModelAndView getStoreList(String city, String district, 
-			Integer min, Integer max, String brand, String type) {
+			String min, String max, String brand, String type) {
 		System.out.println(city);
 		System.out.println(district);
 		System.out.println(min);
