@@ -12,4 +12,5 @@ public interface MemberService {
 	int updateLoginTime (String id);
 	int updateUserData(MemberBean mb);
 	List<MemberBean> findAllMembers();
+	int deleteMemberById(Integer memId);
 }

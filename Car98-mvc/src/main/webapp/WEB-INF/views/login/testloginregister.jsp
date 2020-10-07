@@ -14,6 +14,10 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -62,18 +66,100 @@
       background-size: cover;
     }
     body{
-      /* background-image: url(./image/Desktop.png); */
+      background-image: url(./image/carLogin.jpg);
       /* background-color:black ; */
       background-position: center;
       background-attachment: fixed;
       background-repeat:no-repeat;
       background-size: cover;
-      background-image: linear-gradient(to left, #434343 0%, black 100%);
+      /* background-image: linear-gradient(to left, #434343 0%, black 100%); */
     }
 
+.text {
+  border: none;
+  width: 100%;
+  padding: 10px 20px;
+  display: block;
+  height: 35px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0);
+  overflow: hidden;
+  margin-top: 15px;
+  transition: all 0.5s ease-in-out;
+}
+
+.text:focus {
+  outline: 0;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0);
+}
+
+.text:focus + span {
+  opacity: 0.6;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="password"] {
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+}
 
 
-   
+
+input {
+  display: inline-block;
+  padding-top: 20px;
+  font-size: 14px;
+}
+
+
+   label {
+  display: inline-block;
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+.signin {
+  background-color: #1161ed;
+  color: #FFF;
+  width: 100%;
+  padding: 10px 20px;
+  display: block;
+  height: 40px;
+  border-radius: 20px;
+  margin-top: 30px;
+  transition: all 0.5s ease-in-out;
+  border: none;
+  text-transform: uppercase;
+}
+
+.signin:hover {
+  background: #4082f5;
+  box-shadow: 0px 4px 35px -5px #4082f5;
+  cursor: pointer;
+}
+
+.signin:focus {
+  outline: none;
+}
+
+.login {
+/*   position: relative; */
+/*   height: 560px; */
+/*   width: 405px; */
+  margin: auto;
+  padding: 60px 60px;
+  background: linear-gradient(rgba(50, 50, 50, 0.5),rgba(50, 50, 50, 0.5)),url(https://picsum.photos/id/1004/5616/3744) no-repeat   center center;
+  background-size: cover;
+  box-shadow: 0px 30px 60px -5px #000;
+}
+
+.animate__animated .animate__fadeInDown {
+  --animate-duration: 4s;
+}
     </style>
   </head>
   <body>
@@ -94,11 +180,11 @@
                         <li class="col-6"><a  class="memregister" href="#tab02"><b>註冊</b></a></li>
                         
                     </ul>
-                    <div id="tab01" class="tab-inner text-white ">
+                    <div id="tab01" class="tab-inner text-white login animate__animated animate__fadeInDown">
 
                  <!-- 會員登入 -->
                         <form:form method="POST" modelAttribute="loginBean">
-					<div class="form-group  mt-5 ">
+					<div class="form-group  mt-5">
 						<label for="email" class="email">Email</label> 
 						
 
@@ -106,7 +192,7 @@
     	         		<form:errors  path="user" cssClass="error" /><br>
 						<div class="invalid-feedback">請輸入Email</div>
 					</div>
-					<div class="form-group mt-5">
+					<div class="form-group user-box">
 						<label for="password" class="pswd">密碼</label> 
 						<form:input class="form-control text" type="password" path="password"  />
              			<form:errors  path="password" cssClass="error" /><br>
@@ -132,21 +218,21 @@
 					</div>
 				</form:form>
                     </div>
-                    <div id="tab02" class="tab-inner text-white">
+                    <div id="tab02" class="tab-inner text-white login animate__animated animate__fadeInDown">
 
                  <!-- 註冊會員 -->
           <form:form method='POST' modelAttribute="memberBean" action="register"
 			class='form-horizontal mx-auto' 
 			enctype="multipart/form-data">
 			<fieldset>
-                <div class="form-row ">
+                <div class="form-row user-box">
 				<div class="form-group col-lg-6 ">
                     
 					<label class="control-label ml-3 " for='name' >
 						姓名 </label>
 					<div class="col-10  p-0 ">
 						<form:input id="name" path="name" type='text'
-							class='form:input-large form-control ml-3 ' />
+							class='text form:input-large form-control ml-3 ' />
 						<form:errors class="error ml-3" path="name" />
                     </div>
                 </div>
@@ -155,7 +241,7 @@
 					</label>
 					<div class="col-10  p-0  nickname">
 						<form:input id="id" path="id" type='text'
-							class='form:input-large form-control '  />
+							class='text form:input-large form-control '  />
 						<form:errors class="error" path="id" />                
                 </div>
 				</div>
@@ -166,7 +252,7 @@
 						email </label>
 					<div class="col-lg-11 email ">
 						<form:input id="email" path="email" type='text'
-							class='form:input-large form-control ' />
+							class='text form:input-large form-control ' />
 						<form:errors class="error" path="email" />
 					</div>
 				</div>
@@ -177,7 +263,7 @@
 						電話 </label>
 					<div class='col-lg-11 phone'>
 						<form:input id="phone" path="phone" type='text'
-							class='form:input-large form-control ' />
+							class='text form:input-large form-control ' />
 						<form:errors class="error" path="phone" />
 					</div>
                 </div>
@@ -188,7 +274,7 @@
 						密碼 </label>
 					<div class='col-10  p-0 '>
 						<form:input id="password" path="password" type='password'
-							class='form:input-large form-control ml-3' 
+							class='text form:input-large form-control ml-3' 
 							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" />
 						<form:errors class="error ml-3" path="password" />
                     </div>
@@ -198,7 +284,7 @@
 						確認密碼 </label>
 					<div class='col-10 p-0'>
 						<form:input id="password1" path="password1" type='password'
-							class='form:input-large form-control psw' 
+							class='text form:input-large form-control psw' 
 							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}"/>
 						<form:errors class="error" path="password1" />
 					</div>
@@ -209,7 +295,7 @@
 						生日 </label>
 					<div class='col-lg-11 birth'>
 						<form:input id="birth" path="birth" type='date'
-							class='form:input-large form-control ' />
+							class='text form:input-large form-control ' />
 						<form:errors class="error" path="birth" />
 					</div>
 				</div>
@@ -231,11 +317,11 @@
 
 				<div class="form-group ">
 					<div class="mx-auto row">
-					<label class='control-label col-lg-5 col-lg-5'
-						for="memberMultipartFile"> 上傳大頭貼 </label>
+					<label class='control-label col-lg-5 col-lg-5 btn btn-info fa fa-upload bg-dark border-dark' 
+						for="memberMultipartFile"> 上傳頭貼</label>
 						<div class="col-10">
 							<form:input class="" id="memberMultipartFile"
-								path="memberMultipartFile" type='file' />
+								path="memberMultipartFile" type='file' style="display: none" />
 							<p class="mt-3">
 								<img id="image" src="">
 							</p>
@@ -245,7 +331,7 @@
 
 				<div class="form-group">
 					<div class='col-lg-offset-2 col-lg-10 mx-auto' align="center">
-						<input id="btnAdd" type='submit' class='btn btn-primary'
+						<input id="btnAdd" type='submit' class='signin btn btn-primary'
 							value="送出" />
 					</div>
 				</div>

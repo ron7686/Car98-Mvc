@@ -34,10 +34,8 @@ public class MemberBean implements Serializable {
 	private Integer memId;
 
 	private String email;
-	@JsonIgnore
 	private String password;
 	@Transient
-	@JsonIgnore
 	private String password1;
 	private String name;
 	private String id;

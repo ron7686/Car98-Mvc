@@ -19,9 +19,22 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
 	crossorigin="anonymous">
+<link
+	rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+   />
 <link rel="stylesheet" href="<c:url value='/css/all.css'/>">
 
 <style>
+    body{
+      background-image: url(./image/carLogin.jpg);
+      /* background-color:black ; */
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat:no-repeat;
+      background-size: cover;
+      /* background-image: linear-gradient(to left, #434343 0%, black 100%); */
+    }
 input[type="submit"]:disabled {
 	background-color: red;
 }
@@ -71,8 +84,7 @@ input[type="submit"]:disabled {
 	animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
-@
--webkit-keyframes fadein {
+@-webkit-keyframes fadein {
 	from {bottom: 0;
 	opacity: 0;
 }
@@ -83,8 +95,7 @@ to {
 }
 
 }
-@
-keyframes fadein {
+@keyframes fadein {
 	from {bottom: 0;
 	opacity: 0;
 }
@@ -95,8 +106,7 @@ to {
 }
 
 }
-@
--webkit-keyframes fadeout {
+@-webkit-keyframes fadeout {
 	from {bottom: 30px;
 	opacity: 1;
 }
@@ -107,8 +117,7 @@ to {
 }
 
 }
-@
-keyframes fadeout {
+@keyframes fadeout {
 	from {bottom: 30px;
 	opacity: 1;
 }
@@ -134,6 +143,96 @@ fieldset {
 .input-w {
 	width: 40%;
 }
+
+.text {
+  border: none;
+  width: 100%;
+  padding: 10px 20px;
+  display: block;
+  height: 35px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0);
+  overflow: hidden;
+  margin-top: 15px;
+  transition: all 0.5s ease-in-out;
+}
+
+.text:focus {
+  outline: 0;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0);
+}
+
+.text:focus + span {
+  opacity: 0.6;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="password"] {
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+}
+
+
+
+input {
+  display: inline-block;
+  padding-top: 20px;
+  font-size: 14px;
+}
+
+
+   label {
+  display: inline-block;
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+.signin {
+  background-color: #1161ed;
+  color: #FFF;
+  width: 100%;
+  padding: 10px 20px;
+  display: block;
+  height: 40px;
+  border-radius: 20px;
+  margin-top: 30px;
+  transition: all 0.5s ease-in-out;
+  border: none;
+  text-transform: uppercase;
+}
+
+.signin:hover {
+  background: #4082f5;
+  box-shadow: 0px 4px 35px -5px #4082f5;
+  cursor: pointer;
+}
+
+.signin:focus {
+  outline: none;
+}
+
+.login {
+/*   position: relative; */
+/*   height: 560px; */
+/*   width: 405px; */
+  margin: auto;
+  padding: 60px 60px;
+  background: linear-gradient(rgba(50, 50, 50, 0.5),rgba(50, 50, 50, 0.5)),url(https://picsum.photos/id/1004/5616/3744) no-repeat   center center;
+  background-size: cover;
+  box-shadow: 0px 30px 60px -5px #000;
+}
+
+.animate__animated .animate__fadeInDown {
+  --animate-duration: 4s;
+}
+
+label{
+	color: #FFF;
+}
 </style>
 
 <title>會員資料</title>
@@ -143,7 +242,7 @@ fieldset {
 	<jsp:include page="/fragment/topIndex.jsp"></jsp:include>
 	<section>
 		<div class="container">
-			<h1 style="text-align: center">會員資料</h1>
+			<h1 style="text-align: center;color:#fff">會員資料</h1>
 		</div>
 	</section>
 	<hr
@@ -153,13 +252,14 @@ fieldset {
 		<form:form method='POST' modelAttribute="memberBean"
 			class='form-horizontal mx-auto' align="center"
 			enctype="multipart/form-data">
-			<fieldset class="mx-auto">
+			<fieldset class="mx-auto login animate__animated animate__fadeInDown">
 				<div
 					class="d-flex justify-content-center align-items-center mt-3 mb-3">
 					<label for="exampleFormControlFile1s" class="control-label">
 						<form:input type="file" path="memberMultipartFile" id="image_file"
 							style="display: none;" /> <form:errors
-							path="memberMultipartFile" /> <img
+							path="memberMultipartFile" /> 
+						<img
 						style="width: 350px; height: 350px; border-radius: 50%;"
 						src='${pageContext.request.contextPath}/init/getMemberImage?id=${LoginOK.memId}'
 						id="show_image">
@@ -174,7 +274,7 @@ fieldset {
 					<label for="validationCustom01"
 						class="control-label col-lg-2 col-lg-2"> 姓名: </label>
 					<div class="d-flex justify-content-center align-items-center">
-						<form:input type="text" path="name" class="form-control input-w"
+						<form:input type="text" path="name" class="text form-control input-w"
 							name="name" id="validationCustom01" placeholder="姓名"
 							required="required" />
 						<form:errors path="name" />
@@ -185,7 +285,7 @@ fieldset {
 					<label for="validationCustom02"
 						class="control-label col-lg-2 col-lg-2"> 暱稱: </label>
 					<div class="d-flex justify-content-center align-items-center">
-						<form:input type="text" path="id" class="form-control input-w"
+						<form:input type="text" path="id" class="text form-control input-w"
 							name="memberId" id="validationCustom02" placeholder="暱稱"
 							required="required" />
 						<form:errors path="id" />
@@ -194,9 +294,9 @@ fieldset {
 
 				<div class="form-group">
 					<label for="validationCustom02"
-						class="control-label col-lg-2 col-lg-2"> 手機號碼: </label>
+						class="control-label col-lg-6 col-lg-6"> 手機號碼: </label>
 					<div class="d-flex justify-content-center align-items-center">
-						<form:input type="tel" class="form-control input-w" path="phone"
+						<form:input type="tel" class="form-control input-w text" path="phone"
 							name="phone" id="validationCustom02" placeholder="手機號碼"
 							pattern="[0-9]{4}[0-9]{3}[0-9]{3}" required="required" />
 						<form:errors path="phone" />
@@ -207,7 +307,7 @@ fieldset {
 					<label for="exampleInputEmail1"
 						class="control-label col-lg-6 col-sm-12"> Email address: </label>
 					<div class="d-flex justify-content-center align-items-center">
-						<form:input type="email" class="form-control input-w"
+						<form:input type="email" class="text form-control input-w"
 							id="exampleInputEmail1" path="email" name="email"
 							aria-describedby="emailHelp" placeholder="Enter email"
 							pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
@@ -220,8 +320,8 @@ fieldset {
 					<label for="validationCustom03"
 						class="control-label col-lg-6 col-sm-12"> 生日: </label>
 					<div class="d-flex justify-content-center align-items-center">
-						<%-- 						<input type="date" class="form-control" value="${LoginOK.birth}" name="birth" disabled="disabled"/> --%>
-						<form:input type="date" class="form-control input-w"
+						<!-- <input type="date" class="form-control" value="${LoginOK.birth}" name="birth" disabled="disabled"/> -->
+						<form:input type="date" class="text form-control input-w"
 							value="${memberBean.birth}" path="birth" name="birth"
 							disabled="true" />
 						<form:errors path="birth" />
@@ -234,9 +334,9 @@ fieldset {
 					<div class="mx-auto row">
 						<div class="col-10 mx-auto">
 							<form:radiobutton path="sex" class='radio-size mx-3' value="M"
-								label="男" id="gender" />
+								label="男" id="gender1" />
 							<form:radiobutton path="sex" class='radio-size mx-3' value="F"
-								label="女" id="gender" />
+								label="女" id="gender2" />
 							<form:errors path="sex" />
 						</div>
 
@@ -244,7 +344,7 @@ fieldset {
 				</div>
 
 				<div class="mb-3">
-					<button class="btn btn-secondary" id="button" type="submit">確認送出</button>
+					<button class="signin btn btn-secondary" id="button" type="submit">確認送出</button>
 				</div>
 			</fieldset>
 			<!-- Button trigger modal -->
@@ -260,9 +360,9 @@ fieldset {
 		data-keyboard="false" tabindex="-1"
 		aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<div class="modal-content">
+			<div class="modal-content bg-dark">
 				<div class="modal-header">
-					<h5 class="modal-title" id="staticBackdropLabel">修改密碼</h5>
+					<h5 class="modal-title text-white" id="staticBackdropLabel">修改密碼</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -273,23 +373,23 @@ fieldset {
 					method="POST">
 					<div class="modal-body">
 						<div class="form-group w-50 mx-auto">
-							<p class="text-secondary">新密碼</p>
+							<p class="text-white">新密碼</p>
 							<form:input path="password" type="password" id="pwdId"
-								class="form-control" value="" name="password"
+								class="text form-control" value="" name="password"
 								required="required"
 								pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" />
 							<form:errors path="password" />
 						</div>
 						<div class="form-group w-50 mx-auto">
-							<p class="text-secondary">確認密碼</p>
+							<p class="text-white">確認密碼</p>
 							<form:input path="password1" type="password" id="pwdId"
-								class="form-control" name="password1" required="required"
+								class="text form-control" name="password1" required="required"
 								pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" />
 							<form:errors path="password1" />
 						</div>
 					</div>
 					<div class="modal-footer justify-content-center">
-						<button type="submit" class="btn btn-secondary"
+						<button type="submit" class="signin btn btn-secondary"
 							onclick="myFunction()">送出</button>
 						<c:if test="${empty errors}">
 							<div id="snackbar">修改成功</div>

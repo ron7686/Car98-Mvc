@@ -78,10 +78,19 @@ public class MemberServiceImpl_Spring implements MemberService {
 		n++;
 		return n;
 	}
-	
+
 	@Transactional
 	@Override
 	public List<MemberBean> findAllMembers() {
 		return dao.findAllMembers();
+	}
+
+	@Transactional
+	@Override
+	public int deleteMemberById(Integer memId) {
+		int n = 0;
+		dao.deleteMemberById(memId);
+		n++;
+		return n;
 	}
 }
