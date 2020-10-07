@@ -139,12 +139,7 @@ body {
 <!-- 						<li class="gp">讚12</li> -->
 <!-- 						<li class="bp">噓18</li> -->
 					</ul>
-					<div class="col-12 article-content">
-						${TalkBean.postText} 
-<!-- 						<img class="picture"  -->
-<!-- 							src="https://picsum.photos/id/222/500/600" alt=""> -->
-							<br>
-					</div>
+				
 					<div>樓主</div>
 					<a href="#" style="color: white;">發表於${TalkBean.postTime}</a>
 
