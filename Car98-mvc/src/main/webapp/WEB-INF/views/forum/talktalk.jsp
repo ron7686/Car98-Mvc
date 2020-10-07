@@ -130,12 +130,14 @@ body {
 					<ul class="article-information">
 						<li class="floor">樓主<br> <a href="#">發表於${TalkBean.postTime}</a></li>
 
-						<li class="gp">讚12</li>
-						<li class="bp">噓18</li>
+<!-- 						<li class="gp">讚12</li> -->
+<!-- 						<li class="bp">噓18</li> -->
 					</ul>
 					<div class="col-12 article-content">
-						${TalkBean.postText} <img class="picture" 
-							src="https://picsum.photos/id/222/500/600" alt=""><br>
+						${TalkBean.postText} 
+<!-- 						<img class="picture"  -->
+<!-- 							src="https://picsum.photos/id/222/500/600" alt=""> -->
+							<br>
 					</div>
 					<!-- 按讚功能 -->
 					<c:if test="${loh.likeOrHate==0 || empty loh.likeOrHate}">
