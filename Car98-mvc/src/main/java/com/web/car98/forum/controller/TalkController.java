@@ -54,8 +54,6 @@ public class TalkController {
 		int lastpage=talkservice.lastpage(type);
 		list = talkservice.getPageByType(pageNo, type);
 		
-
-		
 		model.addAttribute("abean", list);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("lastPage", lastpage);
