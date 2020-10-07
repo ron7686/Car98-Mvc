@@ -509,7 +509,7 @@ body {
 		var ajaxPost = function(action, postData, fn) {
 			console.log(_baseUrl + action);
 			$.ajax({
-				url : action,
+				url : _baseUrl + action,
 				type : "POST",
 				contentType : "application/json",
 				data : JSON.stringify(postData),

@@ -36,7 +36,7 @@
 	<div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table mr-1"></i>
-                                DataTable Example
+                                會員後臺管理系統
                             </div>
                             <div class="card-body">
 	<div id="createtable" class="table-responsive"></div>
@@ -48,7 +48,7 @@
                     type: 'GET',
                     dataType: 'json',
                     success(data) {
-                         let table = $("<table border=\"1\"  idataTable' class='table table-bordered'>");
+                         let table = $("<table border=\"1\" id='dataTable' class='table table-bordered'>");
                          table.appendTo($("#createtable"));
                          th = $(`<tr><th>編輯修改</th><th>會員ID</th><th>Email</th><th>姓名</th>
                                    <th>暱稱</th><th>電話</th><th>生日</th><th>性別</th><th>最後登入時間</th>
@@ -98,7 +98,7 @@
 			window.location.href = "/Car98-mvc/memberAx/"+memId;
 		});
 	 </script>
-	 <script type="text/javascript">
+      <script type="text/javascript">
 	     $("#createtable").on('click','.deleteUser',function(e) {
 	  	 e.preventDefault();
           let memId = this.parentNode.parentNode.childNodes[1].innerHTML;
@@ -130,8 +130,13 @@
 			});
 		});
      </script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+	 <script>
+	     $(document).ready(function() {
+	         $('#dataTable').DataTable();
+	    });
+	 </script>
 </body>
 
 </html>
