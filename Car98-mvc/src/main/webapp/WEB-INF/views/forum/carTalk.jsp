@@ -66,34 +66,13 @@
                 汽車交流論壇
             </div>
             <form action="" class="d-flex m-auto">
+            <c:forEach var="aBean" items="${abean}">
             <div class="col-2 border">
                 <a href="">
-                <img src="https://picsum.photos/id/231/180/90" class="img-fluid"  alt="Responsive image" style="width:100%; height:auto;"></a>
+                <c:if test="${!empty TalkBean.postFileName}"><img src="${pageContext.request.contextPath}/getpostPic?postID=${aBean.postID}" class="img-fluid"  alt="Responsive image" style="width:100%; height:auto;"></c:if></a>
             </div>
-            <div class="col-2 border ">
-                <a href="">
-                <img  src="https://picsum.photos/id/238/180/90" class="img-fluid"  alt="Responsive image" style="width:100%; height:auto;"></a>
-                
-            </div>
-            <div class="col-2 border">
-                <a href="">
-                <img src="https://picsum.photos/id/236/180/90" class="img-fluid"  alt="Responsive image" style="width:100%; height:auto;"></a>
-
-            </div>
-            <div class="col-2 border">
-                <a href="">
-                <img src="https://picsum.photos/id/235/180/90" class="img-fluid"  alt="Responsive image" style="width:100%; height:auto;"></a>
-
-            </div>
-            <div class="col-2 border">
-                <a href="">
-                <img src="https://picsum.photos/id/234/180/90" class="img-fluid"  alt="Responsive image" style="width:100%; height:auto;"></a>
-
-            </div>
-            <div class="col-2 border">
-                <a href="">
-                <img src="https://picsum.photos/id/233/180/90" class="img-fluid"  alt="Responsive image" style="width:100%; height:auto;"></a>
-            </div>
+            </c:forEach>
+            
             </form>
             
             <div class="col-12 publish ">
