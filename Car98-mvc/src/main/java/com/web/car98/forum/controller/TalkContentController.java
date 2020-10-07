@@ -46,8 +46,13 @@ public class TalkContentController {
 	ServletContext servletContext;
 	
 	@GetMapping("/talkContent")
-	public String talkContent(Model model) {
+	public String talkContent(Model model,
+			@RequestParam(value="postId",required=false)Integer postId) {
+			
 			TalkBean talkBean=new TalkBean();
+			if(postId!=null) {
+				talkBean=talkservice.selectOne(postId);
+			}
 			model.addAttribute("talkBean",talkBean);
 			MemberBean memberBean=(MemberBean) model.getAttribute("LoginOK");
 			if(memberBean==null) {
@@ -89,11 +94,11 @@ public class TalkContentController {
 				e.printStackTrace();
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
-		}		
-		
+		}
 		talkservice.persist(tb);
 		model.addAttribute("TalkBean", tb);
-		return "redirect:/forum/talktop.do";
+		
+		return "redirect:/talktalk?postID=" + tb.getPostID();
 		
 	}
 	

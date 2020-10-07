@@ -38,7 +38,7 @@ public class TalkController {
 	int postID = 1;
 
 	@RequestMapping("/forum/talktop.do")
-	public String list(Model model, HttpServletRequest request, HttpServletResponse response,
+	public String list(Model model,
 			@RequestParam(value = "pageNo", required = false) Integer pageNo,
 			@RequestParam(value = "type", required = false) String type,
 			@ModelAttribute("talkBean") TalkBean talkBean) {
@@ -53,8 +53,6 @@ public class TalkController {
 		}
 		int lastpage=talkservice.lastpage(type);
 		list = talkservice.getPageByType(pageNo, type);
-		
-
 		
 		model.addAttribute("abean", list);
 		model.addAttribute("pageNo", pageNo);

@@ -199,6 +199,7 @@ body {
 							src="${pageContext.request.contextPath}/getpostPic?id=${LoginOK.memId}&postID=${TalkBean.postID}"
 							alt="">
 					</c:if>
+					<a type="submit" href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
 				</div>
 
 			</div>

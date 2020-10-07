@@ -151,4 +151,13 @@ public class MemberDaoImpl_Spring implements MemberDao {
 		List<MemberBean> mbl = session.createQuery(hql).getResultList();
 		return mbl;
 	}
+
+	@SuppressWarnings("unused")
+	@Override
+	public int deleteMemberById(Integer memId) {
+		Session session = factory.getCurrentSession();
+		MemberBean memberBean = session.get(MemberBean.class,memId);
+		session.delete(memberBean);
+		return 0;
+	}
 }

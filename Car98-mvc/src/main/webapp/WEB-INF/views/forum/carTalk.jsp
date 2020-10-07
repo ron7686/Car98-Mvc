@@ -183,5 +183,6 @@
     ></script>
     <script src="http://maps.google.com/maps/api/js"></script>
     <script src="${pageContext.servletContext.contextPath}/javascript/BSTalk.js"></script>
+     
       </body>
     </html>

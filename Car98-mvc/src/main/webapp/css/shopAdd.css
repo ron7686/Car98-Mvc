@@ -29,11 +29,11 @@
 /* 修改W and H */
 /* car shopping position: relative */
 .product-grid{
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   font-family:Raleway,sans-serif;
   text-align:center;
-  padding:0 0 72px;
+  padding:15px 0 72px;
   border:1px solid rgba(0,0,0,.1);
   border-radius: 10px;
   overflow:hidden;

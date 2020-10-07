@@ -26,5 +26,7 @@ public interface MemberDao {
 
 	public void setConnection(Connection con);
 	
+	public int deleteMemberById (Integer memId);
+	
 	void updateUnpaidOrderAmount(OrderBean ob);
 }
