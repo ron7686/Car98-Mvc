@@ -10,7 +10,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
 .container-height {
-	height: 500px;
+	height: 100vh;
 }
 
 .row-width {
@@ -39,7 +39,7 @@ body {
 	justify-content: center;
 }
 </style>
-<title>金玉堂網路購物商城</title>
+<title>Car98 購物</title>
 </head>
 
 <body>
@@ -48,7 +48,7 @@ body {
 	<jsp:include page="/fragment/topIndex.jsp" />
 
 
-	<section class="py-5">
+	<section class="py-5 container-height">
 		<div class="container">
 			<div class="h1 text-center mb-3 text-white">
 			親愛的會員 ${LoginOK.name} 您好： <BR>

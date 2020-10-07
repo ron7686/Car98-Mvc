@@ -22,9 +22,9 @@
 
 
 	<!-- shopping product -->
-	<div class="container">
+	<div class="container container-height">
 		<div class="contorl  my-2 d-flex justify-content-end">
-			<FONT color='red' size='-1'> 金額小計(OK):
+			<FONT color='red' size='-1' class="mr-3"> 金額小計(OK):
 				<c:out value="${ShoppingCart.subtotal}" default="0" /> 元
 			</FONT>
 			<!-- <a href='products/add'>新增商品</a>
@@ -44,7 +44,7 @@
 		<div class="row">
 			<!-- product card -->
 			<c:forEach var="product" items="${products}">
-				<div class="col-md-3 col-sm-6">
+				<div class="col-md-3 col-sm-4">
 					<div class="product-grid">
 						<div class="product-image">
 							<a href="<spring:url value='/comm/product?id=${product.value.bidId}' />">
@@ -61,13 +61,15 @@
 								data-target="#proModal">
 								more
 							</button> -->
-							<button type="button" class="btn btn-info" data-toggle="modal"
-								data-target="#proModal${product.value.bidId}">看更多</button>
+							<!-- <button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#proModal${product.value.bidId}">看更多</button> -->
 							<FORM action="<c:url value='BuyBid.do' />" method="POST">
 								<input name='qty' type="hidden" value='1' /> <Input type='hidden' name='bidId'
 									value='${product.value.bidId}'>
 								<Input class='btn btn-warning btn-large' type='submit' value='加入購物車'>
 							</FORM>
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#proModal${product.value.bidId}">看更多</button>
 						</div>
 					</div>
 				</div>
@@ -84,8 +86,8 @@
 							</div>
 							<div class="modal-body">
 								<div class="row justify-content-center align-items-center row-width mx-auto">
-									<div class="col-md-6">
-										<img width='300' height='300'
+									<div class="col-md-4 col-sm-12">
+										<img width='200' height='200'
 											src="<c:url value='comm/picture/${product.value.bidId}'/>" />
 									</div>
 									<div class="col-md-6">

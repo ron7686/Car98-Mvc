@@ -23,9 +23,9 @@
     <FORM action="<c:url value='ProcessOrder' />" method="POST">
         <section class="py-5">
             <div class="container">
-                <div class="h1 text-center mb-3 text-secondary">結帳囉！</div>
-                <div class="row justify-content-center mt-5">
+                <div class="row justify-content-center mt-3">
                     <div class="col-md-8">
+                        <div class="h1 text-center mb-2 text-secondary">結帳囉！</div>
                         <div class="accordion" id="accordionExample">
                             <!-- 購物車商品記錄<p class="text-white" id="result"></p>  -->
                             <div class="card border-0">
@@ -42,7 +42,7 @@
                                         <p class="text-white" id="totalresult"></p> -->
                                         <div>
                                             <span style="color:white">${anEntry.value.bidName}</span><br>
-                                            <span style="color:white">賣家: ${anEntry.value.sellMan}</span>
+                                            <span style="color:white">賣家: ${anEntry.value.sellMan}</span><br>
                                             <span style="color:white; margin-left:500px">$: ${anEntry.value.unitPrice}</span>
                                         </div>
                                     </c:forEach>
@@ -93,17 +93,17 @@
                         </div>
                         <h5 class="text-center bg-light py-3 my-5">訂購人資料</h5>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 col-sm-12">
                                 <label for="name" class="text-white">姓名</label>
                                 <input type="name" class="form-control" id="name" name="BuyName" placeholder="姓名" value="${LoginOK.id}"
                                     required>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 col-sm-12">
                                 <label for="Email" class="text-white">Email</label>
                                 <input type="email" class="form-control" id="Email" name="Email" placeholder="Email"
                                     value="${LoginOK.email}" required>
                             </div>
-                            <div class="form-group col">
+                            <div class="form-group col col-sm-12">
                                 <label for="Address" class="text-white">地址</label>
                                 <input type="text" class="form-control" id="ShippingAddress" name="ShippingAddress"
                                     placeholder="ShippingAddress" required>

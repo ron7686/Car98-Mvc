@@ -23,9 +23,14 @@
     background-repeat:no-repeat;
     background-size: cover;
   }
-
+  .container-height {
+    height: 100vh;
+  }
+/* 修改W and H */
 /* car shopping position: relative */
 .product-grid{
+  width: 200px;
+  height: 200px;
   font-family:Raleway,sans-serif;
   text-align:center;
   padding:0 0 72px;
@@ -34,6 +39,7 @@
   overflow:hidden;
   position:relative;
   z-index:1
+  margin-bottom:20px;
 }
 /*  all image hover 效果 */
 .product-grid .product-image{
@@ -121,6 +127,6 @@
   letter-spacing: 2px;
 }
 /* RWD */
-@media only screen and (max-width:990px){
-  .product-grid{margin-bottom:30px}
-}
+@media only screen and (max-width:768px){
+  .product-grid{margin-bottom:20px;}
+} 
