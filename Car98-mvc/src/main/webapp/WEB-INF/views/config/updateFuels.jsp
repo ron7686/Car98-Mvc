@@ -18,7 +18,7 @@
 	crossorigin="anonymous" />
 <style>
 .footer-bottom {
-	margin-bottom: 50px;
+	margin-top: 1em;
 	padding-top: 10px;
 	padding-bottom: 5px;
 }
@@ -40,7 +40,8 @@
 }
 
 body {
-	background-image: url(../image/Desktop.png);
+	background-image:
+		url(${pageContext.request.contextPath}/image/Desktop.png);
 	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -52,7 +53,8 @@ body {
 	<!-- nav -->
 	<jsp:include page="/fragment/topIndex.jsp" />
 
-	<form:form method='POST' modelAttribute="fuel" class='form-horizontal'	enctype="multipart/form-data">
+	<form:form method='POST' modelAttribute="fuel" class='form-horizontal'
+		enctype="multipart/form-data">
 		<section class="text-white" style="border-radius: 6px;">
 			<div class=" container text-center my-5">
 				<div class="" style="background-color: rgba(27, 27, 27, 0.2);">
@@ -64,24 +66,28 @@ body {
 									<form:option value="-1" label="請挑選" />
 									<form:options items="${typeList}" />
 								</form:select>
+								<form:errors path="fuelPriceBean.typeNo" />
 							</div>
 							<div>
-								<label for="gallon">本次加油</label> 
-								<form:input type="text" path="gallon" class="form-control" id="liter" placeholder="公升"/>
-								<label for="price">加油金額</label>
-								<form:input type="text" path="price" id="liter_total" class="form-control" placeholder="總金額" /> 
-								<label for="time">日期</label> 
-								<form:input type="date" path="time" class="form-control" placeholder="日期" />
+								<label for="gallon">本次加油</label>
+								<form:input type="text" path="gallon" class="form-control"
+									id="liter" placeholder="公升" />
+								<form:errors path="gallon" />
+								<label for="mileage">行駛里程</label>
+								<form:input type="text" path="mileage" id="liter_total"
+									class="form-control" placeholder="里程數" />
+								<form:errors path="mileage" />
+								<label for="time">日期</label>
+								<form:input type="date" path="time" class="form-control"
+									placeholder="日期" />
+								<form:errors path="time" />
 							</div>
 							<div class="form-group">
 								<div class='col-lg-offset-2 col-sm-10'>
-									<input id="btnAdd" type='submit' class='btn btn-info' value="送出" />
+									<input id="btnAdd" type='submit' class='btn btn-info'
+										value="送出" />
 								</div>
 							</div>
-<!-- 							<div class="mt-3"> -->
-<!-- 								<button class="btn btn-outline-light" type="button" id="btnAdd">新增</button> -->
-<!-- 								<button class="btn btn-outline-light" type="reset">取消</button> -->
-<!-- 							</div> -->
 							<div class="col-12 col-md-6">
 								<form action="">
 									<table id="message_area" class="">
@@ -94,17 +100,6 @@ body {
 			</div>
 		</section>
 	</form:form>
-	
-	
-<%-- 	<c:forEach var='fuels' items='${fuels}'> --%>
-<!-- 		<tr> -->
-<%-- 			<td style="text-align: center">${fuels.fuelId}</td> --%>
-<%-- 			<td style="text-align: center">${fuels.gallon}</td> --%>
-<%-- 			<td style="text-align: center">${fuels.price}</td> --%>
-<%-- 			<td style="text-align: center">${fuels.time}</td> --%>
-<%-- 			<td style="text-align: center">${fuels.fuelPriceBean.typeNo}</td> --%>
-<!-- 		</tr> -->
-<%-- 	</c:forEach> --%>
 
 	<!-- footer -->
 	<jsp:include page="/fragment/footer.jsp" />

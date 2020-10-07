@@ -16,16 +16,18 @@
 
 			<li class="nav-item"><a class="nav-link" href="<c:url value='searchresource' /> "> Car好康 </a>
 				</li>
-			<li class="nav-item dropdown"><a
-				class="nav-link" href="<c:url value='/config/fuels'/>"
-				id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-				aria-haspopup="true" aria-expanded="false"> Car方便 </a>
-
+			<li class="nav-item dropdown">
+				<a class="nav-link" href="<c:url value='/config/fuels'/>"
+				id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" 
+				aria-expanded="false"> Car方便 </a>
+				
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" href="<c:url value='/config/fuels/add'/>">加油紀錄</a> <a class="dropdown-item" href="#">保養紀錄</a> <a
-						class="dropdown-item" href="#">保險紀錄</a>
+					<a class="dropdown-item" href="<c:url value='/config/fuels'/>">加油紀錄</a>
+					<a class="dropdown-item" href="<c:url value='/config/fuels/add'/>">新增加油</a>
+					<a class="dropdown-item" href="#">保養紀錄</a>
 				</div>
 			</li>
+			
 			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/carRent">Car租車</a></li>
 			<li class="nav-item dropdown"><a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Car帳單 </a>
@@ -35,9 +37,11 @@
 						target="_blank">停車費查詢</a>
 				</div>
 			</li>
-			<li class="nav-item dropdown"><a class="nav-link" href="<c:url value='/comm/products'/>"
+			<li class="nav-item dropdown">
+					<a class="nav-link" href="<c:url value='/comm/products'/>"
 					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"> Car好買 </a>
+					
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					<a class="dropdown-item" href="<c:url value='/comm/products'/>" >拍賣</a> 
 					<a class="dropdown-item" href="<c:url value='/comm/products/add'/>" >新增商品</a> 
@@ -52,6 +56,11 @@
 				<li class="nav-item active"><a class="nav-link" href="<c:url value='/login' />">登入
 						<span class="sr-only">(current)</span>
 
+					</a></li>
+			</c:if>
+			<c:if test="${LoginOK.levels == 1}">
+				<li class="nav-item active"><a class="nav-link" href="<c:url value='/userManager' />">管理員 <span
+							class="sr-only">(current)</span>
 					</a></li>
 			</c:if>
 			<c:if test="${ ! empty LoginOK }">

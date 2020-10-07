@@ -34,8 +34,10 @@ public class MemberBean implements Serializable {
 	private Integer memId;
 
 	private String email;
+	@JsonIgnore
 	private String password;
 	@Transient
+	@JsonIgnore
 	private String password1;
 	private String name;
 	private String id;
@@ -55,15 +57,19 @@ public class MemberBean implements Serializable {
 	@Transient
 	MultipartFile memberMultipartFile;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "memberBean")
 	private List<TalkBean> talkBean = new ArrayList<>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "memberBean")
 	private List<CommentBean> commentbean = new ArrayList<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "memberBean")
 	private List<LikeOrHateBean> likeOrHate = new ArrayList<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "memberBean")
 	private List<ComLikeOrHateBean> comlikeOrHate = new ArrayList<>();
 	

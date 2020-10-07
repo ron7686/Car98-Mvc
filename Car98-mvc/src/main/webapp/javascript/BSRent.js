@@ -23,33 +23,27 @@ $(document).ready(function() {
 });
 
 function getCityDistOptions() {
-	$.ajax({
-		method : "GET",
-		url : "/Car98-mvc/dist",
+    $.ajax({
+		method: "GET",
+		url: "/Car98-mvc/area",
 		contentType: "application/json",
-		success : function(cd) {
-			//console.log(cd);
+		success: function (ado) {
 			var last_city = "";
-			// 先設一個變數last_city
-			for (j = 0; j < cd.length; j++) {
-				// 新增optgroup：city
-				if (last_city != cd[j].city){
+		
+			for (i = 0; i < ado.length; i++) {
+				if (last_city != ado[i][0]) {
 					$("#areaitem").append(
-						"<optgroup label=" + cd[j].city + ">"
-						                   + "</optgroup>"
-						                   );
-				}	
-				// 新增option：district，option的爸爸為新產生的<optgroup></optgroup>
-				$("optgroup[label=" + cd[j].city + "]").append(
-				   "<option value=" + cd[j].city+"-"+cd[j].district + ">"
-				   + cd[j].district
-				   + "</option>"
+						"<optgroup label=" + ado[i][0] + ">"
+						+ "</optgroup>"
+					);
+				}
+				$("optgroup[label=" + ado[i][0] + "]").append(
+					"<option value="+"city=" +ado[i][0]+"&district="+ ado[i][1] + ">"
+					+ ado[i][1]
+					+ "</option>"
 				);
-				last_city = cd[j].city;
+				last_city = ado[i][0];
 			}
-			// 預設第二個option value為selected
-			$("#areaitem option:eq(1)").attr("selected", true);
-			$("#areaitem").trigger("change");
 		}
 	})
 }
@@ -73,11 +67,10 @@ function getCarDataOptions() {
 				}	
 				// 新增option：carType，option的爸爸為新產生的<optgroup></optgroup>
 				$("optgroup[label=" + res[i].carBrand + "]").append(
-				    "<option value=" + res[i].carBrand+"-"+res[i].carType + ">"
+				    "<option value=" + "brand="+ res[i].carBrand + "&type="+ res[i].carType + ">"
 				     + res[i].carType
 				     + "</option>"
-				     );	
-				
+				     );
 				last_brand = res[i].carBrand;	
 			}
 		}
@@ -105,4 +98,27 @@ function getCarDataOptions() {
     sel3 = opt3.text();
     og3 = opt3.closest("optgroup").attr("label");
     return (og3 ? og3 + " - " : "") + item3.text;
-  } 
+  }
+  
+function queryArea(){
+	 var qUrl = "/Car98-mvc/getStoreList?";
+	 if ($("#areaitem").val().length > 0) {
+	 qUrl = qUrl +  $("#areaitem").val() + "&";
+	 }
+	 if ($("#priceitem").val().length > 0) {
+	 	qUrl = qUrl + $("#priceitem").val() + "&";
+	 }
+	 if ($("#caritem").val().length > 0) {
+	 	qUrl = qUrl + $("#caritem").val();
+	 }
+	 if (qUrl[qUrl.length-1] == "&") {
+	 	qUrl = qUrl.substring(0,qUrl.length-1);
+	 }
+	 console.log(qUrl);
+	 $.ajax({
+	    method: "GET",
+	    url: qUrl,
+	    sucess: function(res){
+	    }
+	 })
+}

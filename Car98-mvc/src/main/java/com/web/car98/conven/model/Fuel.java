@@ -22,7 +22,8 @@ public class Fuel {
 	private Integer price;
 	private Double gallon;
 	private Integer mileage;
-
+	private Double consumption;
+	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="typeNo") 	
 	private FuelPriceBean fuelPriceBean;
@@ -33,14 +34,15 @@ public class Fuel {
 		super();
 	}
 
-	public Fuel(Integer fuelId, Date time, Integer price, Double gallon, Integer mileage, FuelPriceBean fuelPriceBean,
-			Integer memId) {
+	public Fuel(Integer fuelId, Date time, Integer price, Double gallon, Integer mileage, Double consumption,
+			FuelPriceBean fuelPriceBean, Integer memId) {
 		super();
 		this.fuelId = fuelId;
 		this.time = time;
 		this.price = price;
 		this.gallon = gallon;
 		this.mileage = mileage;
+		this.consumption = consumption;
 		this.fuelPriceBean = fuelPriceBean;
 		this.memId = memId;
 	}
@@ -99,6 +101,15 @@ public class Fuel {
 
 	public void setMileage(Integer mileage) {
 		this.mileage = mileage;
+	}
+
+	public Double getConsumption() {
+		return consumption;
+	}
+
+	public void setConsumption(Double consumption) {
+		this.consumption = consumption;
 	} 
+	
 	
 }

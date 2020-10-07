@@ -24,8 +24,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -40,7 +42,7 @@ import com.web.car98.member.model.MemberBean;
 import com.web.car98.member.service.MemberService;
 import com.web.car98.validator.CommentValidator;
 
-@Controller
+@Controller(value ="CommentController")
 @SessionAttributes({ "LoginOK", "CommentBean", "TalkBean", "pageNo" })
 public class CommentController {
 
@@ -74,7 +76,9 @@ public class CommentController {
 		}
 
 		MemberBean memberBean=(MemberBean) model.getAttribute("LoginOK");
-		
+		if(memberBean==null) {
+			return "redirect:/login";
+		}
 		List<CommentBean> resultList;
 		//try {
 			resultList = commentservice.getPageCom(pageNo, postId,memberBean.getMemId());
@@ -175,30 +179,22 @@ public class CommentController {
 		
 	}
 
-//	@RequestMapping(value = "/forum/updateCom.do", method = RequestMethod.POST)
-//	@PostMapping("/talktalk")
-//	public String updateCom(Model model, HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//		HttpSession session = request.getSession();
-//		Map<String, String> errorMessage = new HashMap<>();
-//		model.addAttribute("ErrorMsgKey", errorMessage);
-//		request.setCharacterEncoding("UTF-8");
-//		String comIdStr = request.getParameter("comId");
-//		System.out.println(comIdStr);
-//		Integer comId = Integer.valueOf(comIdStr);
-//		CommentBean commentBean = null;
-//		CommentServiceImpl service = new CommentServiceImpl();
-//		
-//		int n = 0;
-//    	n = service.updateComByPk(commentBean);
-//		if(n != 0) {
-//			return "/forum/talktalk";
-//		}else {
-//			
-//		}
-//		return "/forum/talktalk";
-//
-//	}
+//	@PostMapping("/forum/updateCom")
+	@PostMapping("/updateCom")
+	@ResponseBody
+	public String updateCom(Model model, @ModelAttribute("commentBean") CommentBean cb,
+			@RequestBody CommentBean commentBean,
+			@RequestParam("comId") Integer comId,
+			@RequestParam("postID") Integer postID) {
+		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
+		if (memberBean == null) {
+			return "redirect:/login";
+		}
+		CommentBean commentbean = commentservice.selectComByPk(comId);
+		commentservice.updateComByPk(commentbean);
+		return "redirect:/talktalk?postID=" + postID;
+
+	}
 
 	// 刪除留言
 	@RequestMapping("/forum/deleteCom")
@@ -208,12 +204,9 @@ public class CommentController {
 			return "redirect:/login";
 		}
 
-//    	String comIdStr = request.getParameter("comId");
-//		Integer comId = Integer.valueOf(comIdStr);
-//		CommentServiceImpl service = new CommentServiceImpl();
 		commentservice.deleteComByPk(comId);
 		return "redirect:/talktalk?postID=" + postID;
-//		return "/forum/talktalk";
+
 	}
 
 	// 取出此留言的留言者為哪個會員 進而取出該會員頭像

@@ -4,7 +4,7 @@
     font-size:20px;
     height: 500px;
 }
-.col-md-4{
+.col-md-3{
     /* border:1px solid yellow; */
     height: 40px;
     text-align:center;
@@ -14,6 +14,9 @@
     border:1px solid green;
     text-align: center;
     
+}
+#areaitem{
+	margin-left:50px;
 }
 
 #caritem{
@@ -33,4 +36,7 @@
     /* border:1px solid yellow; */
     text-align: center;
     font-size:30px;
+}
+.start{
+	margin-left:62px;
 }

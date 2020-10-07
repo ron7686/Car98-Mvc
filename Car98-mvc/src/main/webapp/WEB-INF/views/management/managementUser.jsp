@@ -150,18 +150,15 @@ fieldset {
 		style="height: 1px; border: none; color: #000000; background-color: #000000;">
 	<section class="container registerbg">
 		<!--    modelAttribute  三個地方要完全一樣  -->
-		<form:form method='POST' modelAttribute="memberBean"
-			class='form-horizontal mx-auto' align="center"
-			enctype="multipart/form-data">
+		<form class='form-horizontal mx-auto' align="center" enctype="multipart/form-data">
 			<fieldset class="mx-auto">
 				<div
 					class="d-flex justify-content-center align-items-center mt-3 mb-3">
 					<label for="exampleFormControlFile1s" class="control-label">
-						<form:input type="file" path="memberMultipartFile" id="image_file"
-							style="display: none;" /> <form:errors
-							path="memberMultipartFile" /> <img
+						<input type="file"  id="image_file"
+							style="display: none;" /> <img
 						style="width: 350px; height: 350px; border-radius: 50%;"
-						src='${pageContext.request.contextPath}/init/getMemberImage?id=${LoginOK.memId}'
+						src='${pageContext.request.contextPath}/init/getMemberImage?id=${memId}'
 						id="show_image">
 					</label>
 					<p class="mt-2">
@@ -174,10 +171,9 @@ fieldset {
 					<label for="validationCustom01"
 						class="control-label col-lg-2 col-lg-2"> 姓名: </label>
 					<div class="d-flex justify-content-center align-items-center">
-						<form:input type="text" path="name" class="form-control input-w"
-							name="name" id="validationCustom01" placeholder="姓名"
+						<input type="text" class="form-control input-w"
+							name="name" id="name" placeholder="姓名"
 							required="required" />
-						<form:errors path="name" />
 					</div>
 				</div>
 
@@ -185,8 +181,8 @@ fieldset {
 					<label for="validationCustom02"
 						class="control-label col-lg-2 col-lg-2"> 暱稱: </label>
 					<div class="d-flex justify-content-center align-items-center">
-						<form:input type="text" path="id" class="form-control input-w"
-							name="memberId" id="validationCustom02" placeholder="暱稱"
+						<input type="text" class="form-control input-w"
+							name="memberId" id="memberId" placeholder="暱稱"
 							required="required" />
 						<form:errors path="id" />
 					</div>
@@ -196,10 +192,9 @@ fieldset {
 					<label for="validationCustom02"
 						class="control-label col-lg-2 col-lg-2"> 手機號碼: </label>
 					<div class="d-flex justify-content-center align-items-center">
-						<form:input type="tel" class="form-control input-w" path="phone"
-							name="phone" id="validationCustom02" placeholder="手機號碼"
+						<input type="tel" class="form-control input-w"
+							name="phone" id="phone" placeholder="手機號碼"
 							pattern="[0-9]{4}[0-9]{3}[0-9]{3}" required="required" />
-						<form:errors path="phone" />
 					</div>
 				</div>
 
@@ -207,12 +202,11 @@ fieldset {
 					<label for="exampleInputEmail1"
 						class="control-label col-lg-6 col-sm-12"> Email address: </label>
 					<div class="d-flex justify-content-center align-items-center">
-						<form:input type="email" class="form-control input-w"
-							id="exampleInputEmail1" path="email" name="email"
+						<input type="email" class="form-control input-w"
+							id="email" name="email"
 							aria-describedby="emailHelp" placeholder="Enter email"
 							pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
 							disabled="true" />
-						<form:errors path="email" />
 					</div>
 				</div>
 
@@ -221,10 +215,9 @@ fieldset {
 						class="control-label col-lg-6 col-sm-12"> 生日: </label>
 					<div class="d-flex justify-content-center align-items-center">
 						<%-- 						<input type="date" class="form-control" value="${LoginOK.birth}" name="birth" disabled="disabled"/> --%>
-						<form:input type="date" class="form-control input-w"
-							value="${memberBean.birth}" path="birth" name="birth"
+						<input type="date" class="form-control input-w"
+							value="${memberBean.birth}" name="birth" id="birth"
 							disabled="true" />
-						<form:errors path="birth" />
 					</div>
 				</div>
 
@@ -233,15 +226,20 @@ fieldset {
 						性別 </label>
 					<div class="mx-auto row">
 						<div class="col-10 mx-auto">
-							<form:radiobutton path="sex" class='radio-size mx-3' value="M"
-								label="男" id="gender" />
-							<form:radiobutton path="sex" class='radio-size mx-3' value="F"
-								label="女" id="gender" />
-							<form:errors path="sex" />
+							<input type="radio" name="sex" class='sex radio-size mx-3' value="M"
+								label="男" id="male" />男
+							<input type="radio" name="sex" class='sex radio-size mx-3' value="F"
+								label="女" id="female" />女
 						</div>
 
 					</div>
 				</div>
+					<!-- 隱藏欄位 -->
+			<tr>
+				<td>
+					<input id='memId' name='memId' type="hidden">
+				</td>
+			</tr>
 
 				<div class="mb-3">
 					<button class="btn btn-secondary" id="button" type="submit">確認送出</button>
@@ -252,7 +250,7 @@ fieldset {
 				<button type="button" class="btn btn-secondary" data-toggle="modal"
 					data-target="#staticBackdrop">修改密碼</button>
 			</div>
-		</form:form>
+			</form>
 	</section>
 
 	<!-- Modal -->
@@ -306,9 +304,8 @@ fieldset {
 		src="${pageContext.request.contextPath}/javascript/registerForm.js"></script>
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
 		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
@@ -333,6 +330,69 @@ fieldset {
 				// image.width = 500 ;
 				image.style.maxWidth = "350px"; //css屬性
 				image.style.maxHeight = "350px";
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function(e){
+			// 取得前一頁傳回來的id
+			let src = location.href;
+			let n1 = src.length;
+			let n2 = src.lastIndexOf("/");
+			let memId = src.substr(n2+1,n1-n2);
+			$.ajax({
+				url:'http://localhost:8080/Car98-mvc/user/'+memId,
+				type:'GET',
+				dataType:'Json',
+				success(data){
+					console.log(JSON.stringify(data));
+					// alert(data.name);
+					$('#memId').val(data.memId);
+					$('#name').val(data.name);
+					$('#memberId').val(data.id);
+					$('#phone').val(data.phone);
+					$('#email').val(data.email);
+					$('#birth').val(data.birth);
+					if(data.sex=="M"){
+						$("#male").attr("checked",data.sex);
+					}else{
+						$("#female").attr("checked",data.sex);
+					}
+				}
+			});
+			$('#button').click(function(e){
+				let name = $("#name").val();
+				let memId = $('#memId').val();
+				let id = $('#memberId').val();
+				let phone = $('#phone').val();
+				let email = $('#email').val();
+				let birth = $('#birth').val();
+				let sex = $(".sex:checked").val();
+				// e.preventDefault();
+				let jsonPortfolio = {
+					"memId":memId,
+					"name": name,
+					"id": id,
+					"phone": phone,
+					"email": email,
+					"birth": birth,
+					"sex": sex,
+				}
+				alert(JSON.stringify(jsonPortfolio));
+				$.ajax({
+				url:'http://localhost:8080/Car98-mvc/user/'+memId,
+				type:'PUT',
+				contentType:"application/json",
+				data : JSON.stringify(jsonPortfolio),
+				dataType:'json' ,
+				success : function (data) {
+					JSON.stringify(data);
+					console.log(JSON.stringify(data))
+				},
+				complete:function(data){
+					window.location.href = "/Car98-mvc/memberAx/"+memId;
+				}
+				});
 			});
 		});
 	</script>
