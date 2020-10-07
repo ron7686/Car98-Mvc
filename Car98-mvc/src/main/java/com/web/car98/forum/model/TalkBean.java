@@ -2,8 +2,6 @@ package com.web.car98.forum.model;
 
 import java.io.Serializable;
 import java.sql.Blob;
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,6 +90,7 @@ public class TalkBean implements Serializable {
 		Postmember = postmember;
 		PostType = postType;
 		PostPic = postPic;
+		this.PostFileName=PostFileName;
 		this.comment = comment;
 	}
 

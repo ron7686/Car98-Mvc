@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.ServletContext;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,8 @@ public class TalkContentController {
 	TalkService talkservice;
 	@Autowired
 	TalkContentValidator talkContentValidator;
-	
+	@Autowired
+	ServletContext servletContext;
 	
 	@GetMapping("/talkContent")
 	public String talkContent(Model model) {
@@ -95,68 +97,69 @@ public class TalkContentController {
 		
 	}
 	
-//	@GetMapping("/getpostPic")
-//	public ResponseEntity<byte[]> getComImage(@RequestParam("postId") Integer comId) {
-//		InputStream is = null;
-//		OutputStream os = null;
-//		String fileName = null;
-//		String mimeType = null;
-//		byte[] media = null;
-//		ResponseEntity<byte[]> responseEntity = null;
-//		HttpHeaders headers = new HttpHeaders();
-//		MediaType mediaType = null;
-//		Blob blob = null;
-//		try {
-//			// 取出此留言 進而取出該留言的圖片
-//			TalkBean talkbean = talkservice.selectOne();
-//
-//			if (bean != null) {
-//				blob = bean.getComPic();
-//				if (blob != null) {
-//					is = blob.getBinaryStream();
-//				}
-//				fileName = bean.getFileName();
-//			}
-//			// 如果此留言沒有上傳圖片，就傳回null
-//			if (is == null) {
-//				return null;
-//			}
-//			// 由圖片檔的檔名來得到檔案的MIME型態
-//			mimeType = servletContext.getMimeType(fileName);
-//			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//			// 由InputStream讀取位元組，然後由OutputStream寫出
-//			int len = 0;
-//			byte[] bytes = new byte[81920];
-//
-//			while ((len = is.read(bytes)) != -1) {
-//				baos.write(bytes, 0, len);
-//			}
-//			media = baos.toByteArray();
-//			mediaType = MediaType.valueOf(mimeType);
-//			// 連線不要Cache在裡面
-//			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
-//			headers.setContentType(mediaType);
-//			responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			throw new RuntimeException("getComImage 發生Exception: " + e.getMessage());
-//		} finally {
-//			try {
-//				if (is != null)
-//					is.close();
-//			} catch (IOException e) {
-//				;
-//			}
-//			try {
-//				if (os != null)
-//					os.close();
-//			} catch (IOException e) {
-//				;
-//			}
-//		}
-//		return responseEntity;
-//	}	
-//	
+	@GetMapping("/getpostPic")
+	public ResponseEntity<byte[]> getPostPic(@RequestParam("postID") Integer postID) {
+		InputStream is = null;
+		OutputStream os = null;
+		String fileName = null;
+		String mimeType = null;
+		byte[] media = null;
+		ResponseEntity<byte[]> responseEntity = null;
+		HttpHeaders headers = new HttpHeaders();
+		MediaType mediaType = null;
+		Blob blob = null;
+		try {
+			// 取出此留言 進而取出該留言的圖片
+			TalkBean talkbean = talkservice.selectOne(postID);
+
+			if (talkbean != null) {
+				blob = talkbean.getPostPic();
+				if (blob != null) {
+					is = blob.getBinaryStream();
+				}
+				fileName = talkbean.getPostFileName();
+			}
+			// 如果此留言沒有上傳圖片，就傳回null
+			if (is == null) {
+				return null;
+			}
+			// 由圖片檔的檔名來得到檔案的MIME型態
+			mimeType = servletContext.getMimeType(fileName);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			// 由InputStream讀取位元組，然後由OutputStream寫出
+			int len = 0;
+			byte[] bytes = new byte[81920];
+
+			while ((len = is.read(bytes)) != -1) {
+				baos.write(bytes, 0, len);
+			}
+			media = baos.toByteArray();
+			mediaType = MediaType.valueOf(mimeType);
+			// 連線不要Cache在裡面
+			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+			headers.setContentType(mediaType);
+			responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("getPostPic 發生Exception: " + e.getMessage());
+		} finally {
+			try {
+				if (is != null)
+					is.close();
+			} catch (IOException e) {
+				;
+			}
+			try {
+				if (os != null)
+					os.close();
+			} catch (IOException e) {
+				;
+			}
+		}
+		return responseEntity;
+	}	
+	
+
 	
 	
 }
