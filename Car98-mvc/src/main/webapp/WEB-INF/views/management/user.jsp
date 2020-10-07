@@ -71,8 +71,7 @@ input[type="submit"]:disabled {
 	animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
-@
--webkit-keyframes fadein {
+@-webkit-keyframes fadein {
 	from {bottom: 0;
 	opacity: 0;
 }
@@ -83,8 +82,7 @@ to {
 }
 
 }
-@
-keyframes fadein {
+@keyframes fadein {
 	from {bottom: 0;
 	opacity: 0;
 }
@@ -95,8 +93,7 @@ to {
 }
 
 }
-@
--webkit-keyframes fadeout {
+@-webkit-keyframes fadeout {
 	from {bottom: 30px;
 	opacity: 1;
 }
@@ -107,8 +104,7 @@ to {
 }
 
 }
-@
-keyframes fadeout {
+@keyframes fadeout {
 	from {bottom: 30px;
 	opacity: 1;
 }
@@ -159,7 +155,8 @@ fieldset {
 					<label for="exampleFormControlFile1s" class="control-label">
 						<form:input type="file" path="memberMultipartFile" id="image_file"
 							style="display: none;" /> <form:errors
-							path="memberMultipartFile" /> <img
+							path="memberMultipartFile" /> 
+						<img
 						style="width: 350px; height: 350px; border-radius: 50%;"
 						src='${pageContext.request.contextPath}/init/getMemberImage?id=${LoginOK.memId}'
 						id="show_image">
@@ -220,7 +217,7 @@ fieldset {
 					<label for="validationCustom03"
 						class="control-label col-lg-6 col-sm-12"> 生日: </label>
 					<div class="d-flex justify-content-center align-items-center">
-						<%-- 						<input type="date" class="form-control" value="${LoginOK.birth}" name="birth" disabled="disabled"/> --%>
+						<!-- <input type="date" class="form-control" value="${LoginOK.birth}" name="birth" disabled="disabled"/> -->
 						<form:input type="date" class="form-control input-w"
 							value="${memberBean.birth}" path="birth" name="birth"
 							disabled="true" />

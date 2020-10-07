@@ -29,10 +29,18 @@
 	<!-- bootbox code -->
 	<script
 		src='https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js'></script>
-
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
+	<div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table mr-1"></i>
+                                DataTable Example
+                            </div>
+                            <div class="card-body">
 	<div id="createtable" class="table-responsive"></div>
+	
 	<script>
           $(document).ready(function() {
                $.ajax({
@@ -40,7 +48,7 @@
                     type: 'GET',
                     dataType: 'json',
                     success(data) {
-                         let table = $("<table border=\"1\" class='table'>");
+                         let table = $("<table border=\"1\"  idataTable' class='table table-bordered'>");
                          table.appendTo($("#createtable"));
                          th = $(`<tr><th>編輯修改</th><th>會員ID</th><th>Email</th><th>姓名</th>
                                    <th>暱稱</th><th>電話</th><th>生日</th><th>性別</th><th>最後登入時間</th>
@@ -93,6 +101,8 @@
 	 <script type="text/javascript">
 	     $("#createtable").on('click','.deleteUser',function(e) {
 	  	 e.preventDefault();
+          let memId = this.parentNode.parentNode.childNodes[1].innerHTML;
+          alert(memId);
 	  	 bootbox.confirm({
 				title : "確認刪除",
 				message : "確定要刪除嗎?",
@@ -105,20 +115,23 @@
 					}
 				},
 				callback : function(result) {
-// 					if(result){
-// 						$.ajax({
-//                                    url:'http://localhost:8080/Car98-mvc/User',
-//                                    type:'DELETE',
-//                                    dataType:'json',
-//                                    complete(data){
-//                                         console.log(this.parent());
-//                                    }
-//                               });
-// 					}
+					if(result){
+						$.ajax({
+                                   url:'http://localhost:8080/Car98-mvc/user/'+memId,
+                                   type:'DELETE',
+                                   dataType:'json',
+                                   complete(data){
+                                       alert("刪除成功");
+                                       window.location.href="http://localhost:8080/Car98-mvc/userManager";
+                                   }
+                              });
+					}
 				}
 			});
 		});
      </script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
