@@ -42,7 +42,7 @@ public class TalkServiceImpl implements TalkService  {
 	@Override
 	public int lastpage(String type) {
 		List<TalkBean> li=new ArrayList<>();
-		if(type==null) {
+		if(type==null||type.length()==0) {
 			li = dao.getAll();
 		}else {
 			li = dao.getAllByType(type);
@@ -68,7 +68,7 @@ public class TalkServiceImpl implements TalkService  {
 	@Override
 	public List<TalkBean> getPageByType(int page,String type) {
 		List<TalkBean> li=new ArrayList<>();
-		if(type==null) {
+		if(type==null||type.length()==0) {
 			li = dao.getAll();
 		}else {
 			li = dao.getAllByType(type);

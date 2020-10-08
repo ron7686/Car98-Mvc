@@ -148,15 +148,15 @@ body {
 						<div class=" article-mood  float-right">
 							<ul class="like-or-hate ">
 
-								<li id="like1" class="fas"><a
+								<li id="like1 " class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x">${TalkBean.postLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x"></i></a>${TalkBean.postLike}</li>
 
 								<li id="hate1" class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x">${TalkBean.postHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x"></i></a>${TalkBean.postHate}</li>
 							</ul>
 						</div>
 					</c:if>
@@ -167,12 +167,12 @@ body {
 								<li id="like1" class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x" style="color: red">${TalkBean.postLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x" style="color: red"></i></a>${TalkBean.postLike}</li>
 
 								<li id="hate1" class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x">${TalkBean.postHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x"></i></a>${TalkBean.postHate}</li>
 							</ul>
 						</div>
 					</c:if>
@@ -183,12 +183,12 @@ body {
 								<li id="like1" class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x">${TalkBean.postLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x"></i></a>${TalkBean.postLike}</li>
 
 								<li id="hate1" class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x" style="color: red">${TalkBean.postHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x" style="color: red"></i></a>${TalkBean.postHate}</li>
 							</ul>
 						</div>
 					</c:if>
@@ -243,12 +243,12 @@ body {
 								<li id="like1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x"">${comment.comLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x""></i></a>${comment.comLike}</li>
 
 								<li id="hate1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x">${comment.comHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x"></i></a>${comment.comHate}</li>
 
 
 
@@ -264,12 +264,12 @@ body {
 								<li id="like1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x" style="color: red">${comment.comLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x" style="color: red"></i></a>${comment.comLike}</li>
 
 								<li id="hate1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x"">${comment.comHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x""></i></a>${comment.comHate}</li>
 
 							</ul>
 						</div>
@@ -282,12 +282,12 @@ body {
 								<li id="like1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x"">${comment.comLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x""></i></a>${comment.comLike}</li>
 
 								<li id="hate1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x" style="color: red">${comment.comHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x" style="color: red"></i></a>${comment.comHate}</li>
 							</ul>
 						</div>
 					</c:if>
