@@ -22,7 +22,7 @@ import _00_init.util.HibernateUtils;
 public class TalkServiceImpl implements TalkService  {
 @Autowired
 	TalkDao dao;
-	int onepage=5;
+	int onepage=6;
 //	SessionFactory factory;
 	
 	public TalkServiceImpl() {
@@ -42,7 +42,7 @@ public class TalkServiceImpl implements TalkService  {
 	@Override
 	public int lastpage(String type) {
 		List<TalkBean> li=new ArrayList<>();
-		if(type==null) {
+		if(type==null||type.length()==0) {
 			li = dao.getAll();
 		}else {
 			li = dao.getAllByType(type);
@@ -68,7 +68,7 @@ public class TalkServiceImpl implements TalkService  {
 	@Override
 	public List<TalkBean> getPageByType(int page,String type) {
 		List<TalkBean> li=new ArrayList<>();
-		if(type==null) {
+		if(type==null||type.length()==0) {
 			li = dao.getAll();
 		}else {
 			li = dao.getAllByType(type);

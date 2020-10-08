@@ -48,7 +48,8 @@ public class TalkController {
 		}
 		List<TalkBean> list = new ArrayList<>();
 		model.addAttribute("type",type);
-		if (type != null) {
+		
+		if (type!=null&&type.length()!=0) {
 			type=talkservice.intToType(type);
 		}
 		int lastpage=talkservice.lastpage(type);
