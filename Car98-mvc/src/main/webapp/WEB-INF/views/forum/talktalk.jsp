@@ -138,7 +138,7 @@ body {
 
 <!-- 						<li class="gp">讚12</li> -->
 <!-- 						<li class="bp">噓18</li> -->
-					</ul>
+					
 				
 					<div>樓主</div>
 					<a href="#" style="color: white;">發表於${TalkBean.postTime}</a>
@@ -195,7 +195,7 @@ body {
 
 					<div class="col-12 article-content">${TalkBean.postText}</div>
 					<c:if test="${!empty TalkBean.postFileName}">
-						<img class="picture"
+						<img class="picture mb-3 mt-3"
 							src="${pageContext.request.contextPath}/getpostPic?id=${LoginOK.memId}&postID=${TalkBean.postID}"
 							alt="">
 					</c:if>
@@ -212,7 +212,8 @@ body {
 	</div>
 	<!-- 	</div> -->
 
-
+	<div class="space mt-5">
+	</div>
 
 	<!-- 留言內容 -->
 	<c:forEach var="comment" items="${CommentBean}">
@@ -240,12 +241,12 @@ body {
 						<div class=" article-mood float-right">
 							<ul class="like-or-hate">
 
-								<li id="like1"><a
+								<li id="like1" class="fas"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
 										class="fas fa-thumbs-up fa-2x""></i></a>${comment.comLike}</li>
 
-								<li id="hate1"><a
+								<li id="hate1" class="fas"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
 										class="fas fa-thumbs-down fa-2x"></i></a>${comment.comHate}</li>
@@ -261,12 +262,12 @@ body {
 							<ul class="like-or-hate">
 
 
-								<li id="like1"><a
+								<li id="like1" class="fas"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
 										class="fas fa-thumbs-up fa-2x" style="color: red"></i></a>${comment.comLike}</li>
 
-								<li id="hate1"><a
+								<li id="hate1" class="fas"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
 										class="fas fa-thumbs-down fa-2x""></i></a>${comment.comHate}</li>
@@ -279,12 +280,12 @@ body {
 							<ul class="like-or-hate">
 
 
-								<li id="like1"><a
+								<li id="like1" class="fas"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
 										class="fas fa-thumbs-up fa-2x""></i></a>${comment.comLike}</li>
 
-								<li id="hate1"><a
+								<li id="hate1" class="fas"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
 										class="fas fa-thumbs-down fa-2x" style="color: red"></i></a>${comment.comHate}</li>

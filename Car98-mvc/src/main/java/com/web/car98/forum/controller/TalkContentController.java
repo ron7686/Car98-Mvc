@@ -126,7 +126,8 @@ public class TalkContentController {
 			}
 			// 如果此留言沒有上傳圖片，就傳回null
 			if (is == null) {
-				return null;
+				fileName = "car98logo.png";
+				is = servletContext.getResourceAsStream("/image/" + fileName);
 			}
 			// 由圖片檔的檔名來得到檔案的MIME型態
 			mimeType = servletContext.getMimeType(fileName);
