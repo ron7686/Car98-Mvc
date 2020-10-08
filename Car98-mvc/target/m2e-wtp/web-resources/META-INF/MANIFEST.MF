@@ -1,13 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: Wayne-Chen
-=======
-<<<<<<< HEAD
-Built-By: user
-=======
-Built-By: Machi
->>>>>>> f336c02d4fae836c82792c387ab1ba0ff9cf6561
->>>>>>> 4d0f003c6cbb92d9c775d051188b3f58b9a96713
 Build-Jdk: 1.8.0_252
 Created-By: Maven Integration for Eclipse
 

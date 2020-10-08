@@ -185,9 +185,10 @@ public class CommentController {
 	@PostMapping("/updateCom")
 	@ResponseBody
 	public String updateCom(Model model, @ModelAttribute("commentBean") CommentBean cb,
-			@RequestBody CommentBean commentBean,
 			@RequestParam("comId") Integer comId,
-			@RequestParam("postID") Integer postID) {
+			@RequestParam("comText") String comText,
+			@RequestParam("postID") Integer postID)
+	{
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {
 			return "redirect:/login";

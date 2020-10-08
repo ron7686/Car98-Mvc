@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.car98.member.model.MemberBean;
 import com.web.car98.member.service.MemberService;
@@ -157,6 +158,7 @@ public class RegisterController {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		// 清除密碼 停在表單
 		memberBean.setPassword("");
+		memberBean.setPassword1("");
 		model.addAttribute(memberBean);
 		return "/management/user";
 	}
@@ -190,7 +192,8 @@ public class RegisterController {
 
 	@PostMapping("/changePassword")
 	public String changePassword(@ModelAttribute("memberBean") MemberBean memberBean, Model model,
-			BindingResult result) {
+			BindingResult result,
+			RedirectAttributes redirectAtt) {
 		changePasswordValidator.validate(memberBean, result);
 		if (result.hasErrors()) {
 			return "/management/user";
