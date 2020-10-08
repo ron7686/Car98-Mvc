@@ -196,7 +196,7 @@ body {
 					<div class="col-12 article-content">${TalkBean.postText}</div>
 					<c:if test="${!empty TalkBean.postFileName}">
 						<img class="picture mb-3 mt-3"
-							src="${pageContext.request.contextPath}/getpostPic?id=${LoginOK.memId}&postID=${TalkBean.postID}"
+							src="${pageContext.request.contextPath}/getpostPic?postID=${TalkBean.postID}"
 							alt="">
 					</c:if>
 					<a type="submit" href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>

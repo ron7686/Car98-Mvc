@@ -54,7 +54,7 @@ public class TalkController {
 		}
 		int lastpage=talkservice.lastpage(type);
 		list = talkservice.getPageByType(pageNo, type);
-		
+		System.out.println(list.get(3).getPostFileName()+"=============================");
 		model.addAttribute("abean", list);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("lastPage", lastpage);
@@ -63,7 +63,69 @@ public class TalkController {
 
 	}
 	
-	
+	@GetMapping("/getpostPic")
+	public ResponseEntity<byte[]> getPostPic(@RequestParam("postID") Integer postID) {
+		InputStream is = null;
+		OutputStream os = null;
+		String fileName = null;
+		String mimeType = null;
+		byte[] media = null;
+		ResponseEntity<byte[]> responseEntity = null;
+		HttpHeaders headers = new HttpHeaders();
+		MediaType mediaType = null;
+		Blob blob = null;
+		try {
+			// 取出此留言 進而取出該留言的圖片
+			TalkBean talkbean = talkservice.selectOne(postID);
+
+			if (talkbean != null) {
+				blob = talkbean.getPostPic();
+				if (blob != null) {
+					is = blob.getBinaryStream();
+				}
+				fileName = talkbean.getPostFileName();
+			}
+			// 如果此留言沒有上傳圖片，就傳回null
+			if (is == null) {
+				fileName = "car98logo.png";
+				is = servletContext.getResourceAsStream("/image/" + fileName);
+			}
+			// 由圖片檔的檔名來得到檔案的MIME型態
+			mimeType = servletContext.getMimeType(fileName);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			// 由InputStream讀取位元組，然後由OutputStream寫出
+			int len = 0;
+			byte[] bytes = new byte[81920];
+
+			while ((len = is.read(bytes)) != -1) {
+				baos.write(bytes, 0, len);
+			}
+			media = baos.toByteArray();
+			mediaType = MediaType.valueOf(mimeType);
+			// 連線不要Cache在裡面
+			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+			headers.setContentType(mediaType);
+			responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("getPostPic 發生Exception: " + e.getMessage());
+		} finally {
+			try {
+				if (is != null)
+					is.close();
+			} catch (IOException e) {
+				;
+			}
+			try {
+				if (os != null)
+					os.close();
+			} catch (IOException e) {
+				;
+			}
+		}
+		return responseEntity;
+	}	
+
 	
 	
 	

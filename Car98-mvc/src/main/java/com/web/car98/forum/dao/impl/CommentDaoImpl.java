@@ -85,16 +85,14 @@ public class CommentDaoImpl implements CommentDao {
 	}
 
 	@Override
-	public int deleteComByPk(Integer comId) {
-		Integer n = 0;
+	public void deleteComByPk(Integer comId) {
 		Session session = factory.getCurrentSession();
-//		String hql = "Delete FROM CommentBean where comId=:comId";
+		String hql = "Delete FROM ComLikeOrHateBean where comId=:comId";
+		session.createQuery(hql).setParameter("comId",comId).executeUpdate();
+		
 		CommentBean commentbean = session.get(CommentBean.class, comId);
 		session.delete(commentbean);
-//		session.createQuery(hql).setParameter("comId",comId).executeUpdate();
-		n++;
-		return n;
-
+		
 	}
 
 	@Override
@@ -135,19 +133,25 @@ public class CommentDaoImpl implements CommentDao {
 		int lastpage = 0;
 		int op = 0;
 		List<CommentBean> li = getComsByFk(postId);
-
-		if (page == 1) {
-			op = onepage - 1;
-			lastpage = li.size() / op;
-			page = li.size() % op;
-			if (page > 0) lastpage++;
-		} else {
-			lastpage = li.size() / onepage;
-			page = li.size() % onepage;
-			if(page == 0) {
-				lastpage++;
-			}
+		int l=li.size();
+		if(l<=4) {
+			return 1;
 		}
+		lastpage=(l-4)/5+1;
+		if((l-4)%5!=0)lastpage++;
+		
+//		if (page == 1) {
+//			op = onepage - 1;
+//			lastpage = li.size() / op;
+//			page = li.size() % op;
+//			if (page > 0) lastpage++;
+//		} else {
+//			lastpage = li.size() / onepage;
+//			page = li.size() % onepage;
+//			if(page == 0) {
+//				lastpage++;
+//			}
+//		}
 		return lastpage;
 	}
 
