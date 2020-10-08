@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -33,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.car98.forum.model.ComLikeOrHateBean;
+import com.web.car98.forum.model.CommentAllBean;
 import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.model.TalkBean;
@@ -184,17 +184,17 @@ public class CommentController {
 //	@PostMapping("/forum/updateCom")
 	@PostMapping("/updateCom")
 	@ResponseBody
-	public String updateCom(Model model, @ModelAttribute("commentBean") CommentBean cb,
-			@RequestBody CommentBean commentBean,
-			@RequestParam("comId") Integer comId,
-			@RequestParam("postID") Integer postID) {
+	public String updateCom(Model model,
+			@RequestBody CommentAllBean commentAllBean)
+	{
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {
 			return "redirect:/login";
 		}
-		CommentBean commentbean = commentservice.selectComByPk(comId);
+		CommentBean commentbean = commentservice.selectComByPk(commentAllBean.getComId());
+		commentbean.setComText(commentAllBean.getComText());
 		commentservice.updateComByPk(commentbean);
-		return "redirect:/talktalk?postID=" + postID;
+		return "redirect:/talktalk?postID=" + commentAllBean.getPostID();
 
 	}
 

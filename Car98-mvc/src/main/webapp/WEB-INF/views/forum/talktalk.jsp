@@ -473,18 +473,22 @@ body {
 		};
 
 		var confirm = function(value) {
-			var bean = [];
 			var updateMapping = 'updateCom'
 			var idNo = value.id.substring(12);
 			var textValue = $('#updateText' + idNo).val().trim();
 			console.log(textValue);
-			bean.comId = idNo;
-			bean.comText = textValue;
-			bean.postID = getPostID();
+			bean = {
+				"comId":parseInt(idNo),
+				"comText":textValue,
+				"postID" :parseInt(getPostID())
+			};
+			// bean.comId = parseInt(idNo);
+			// bean.comText = textValue;
+			// bean.postID = parseInt(getPostID());
 			console.log(bean);
+			// alert(JSON.stringify(bean));
 			ajaxPost(updateMapping, bean, function() {
 				console.log('傳送成功');
-
 			});
 
 		}
@@ -513,8 +517,9 @@ body {
 
 		var ajaxPost = function(action, postData, fn) {
 			console.log(_baseUrl + action);
+			console.log(postData);
 			$.ajax({
-				url : _baseUrl + action,
+				url : action,
 				type : "POST",
 				contentType : "application/json",
 				data : JSON.stringify(postData),
@@ -527,12 +532,17 @@ body {
 						console.log('success');
 						return;
 					}
-					fn(data);
+// 					alert(data);
 				},
 				error : function(data) {
 					console.log('fail');
+// 					alert("error")
 				},
+				complete:function(data){
+					window.location.href="/Car98-mvc/talktalk?postID=" + postData.postID;
+				}
 			});
+				
 		};
 	</script>
 
