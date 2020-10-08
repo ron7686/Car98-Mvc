@@ -74,11 +74,12 @@
 }
 .like-or-hate {
   list-style: none;
-  display: flex;
+  display:inline;
 }
 
 .fas {
   width: 80px;
+
 }
 textarea {
   max-width: 100%;

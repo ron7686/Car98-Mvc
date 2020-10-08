@@ -478,7 +478,7 @@ label{
 // 					"birth": birth,
 // 					"sex": sex,
 // 				}
-// 				// alert(JSON.stringify(jsonPortfolio));
+				// alert(JSON.stringify(jsonPortfolio));
 // 				$.ajax({
 // 					url: 'http://localhost:8080/Car98-mvc/user/' + memId,
 // 					type: 'PUT',
@@ -493,7 +493,7 @@ label{
 // 					}
 // 				});
 // 				alert("送出資料");
-// // 				window.location.href = "http://localhost:8080/Car98-mvc/userManager";
+// 				window.location.href = "http://localhost:8080/Car98-mvc/userManager";
 // 			});
 // 		});
 	</script>

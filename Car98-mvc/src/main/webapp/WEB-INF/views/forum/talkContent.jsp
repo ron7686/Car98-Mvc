@@ -112,7 +112,7 @@ body {
 				<div class="col-9">
 
 				
-
+						<form:input style="display:none" path="PostID"></form:input>
 						<form:input class="title" path="PostTitle" type="text" name="title" style="width: 100%"
 							placeholder="請輸入文章標題......." value="${param.title}" />
 							<form:errors class="errormsg" path="PostTitle" > </form:errors>

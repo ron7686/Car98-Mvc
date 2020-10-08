@@ -148,15 +148,15 @@ body {
 						<div class=" article-mood  float-right">
 							<ul class="like-or-hate ">
 
-								<li id="like1" class="fas"><a
+								<li id="like1 " class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x">${TalkBean.postLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x"></i></a>${TalkBean.postLike}</li>
 
 								<li id="hate1" class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x">${TalkBean.postHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x"></i></a>${TalkBean.postHate}</li>
 							</ul>
 						</div>
 					</c:if>
@@ -167,12 +167,12 @@ body {
 								<li id="like1" class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x" style="color: red">${TalkBean.postLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x" style="color: red"></i></a>${TalkBean.postLike}</li>
 
 								<li id="hate1" class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x">${TalkBean.postHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x"></i></a>${TalkBean.postHate}</li>
 							</ul>
 						</div>
 					</c:if>
@@ -183,12 +183,12 @@ body {
 								<li id="like1" class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x">${TalkBean.postLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x"></i></a>${TalkBean.postLike}</li>
 
 								<li id="hate1" class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x" style="color: red">${TalkBean.postHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x" style="color: red"></i></a>${TalkBean.postHate}</li>
 							</ul>
 						</div>
 					</c:if>
@@ -199,6 +199,7 @@ body {
 							src="${pageContext.request.contextPath}/getpostPic?id=${LoginOK.memId}&postID=${TalkBean.postID}"
 							alt="">
 					</c:if>
+					<a type="submit" href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
 				</div>
 
 			</div>
@@ -242,12 +243,12 @@ body {
 								<li id="like1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x"">${comment.comLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x""></i></a>${comment.comLike}</li>
 
 								<li id="hate1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x">${comment.comHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x"></i></a>${comment.comHate}</li>
 
 
 
@@ -263,12 +264,12 @@ body {
 								<li id="like1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x" style="color: red">${comment.comLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x" style="color: red"></i></a>${comment.comLike}</li>
 
 								<li id="hate1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x"">${comment.comHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x""></i></a>${comment.comHate}</li>
 
 							</ul>
 						</div>
@@ -281,12 +282,12 @@ body {
 								<li id="like1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x"">${comment.comLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x""></i></a>${comment.comLike}</li>
 
 								<li id="hate1"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x" style="color: red">${comment.comHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x" style="color: red"></i></a>${comment.comHate}</li>
 							</ul>
 						</div>
 					</c:if>
@@ -471,18 +472,22 @@ body {
 		};
 
 		var confirm = function(value) {
-			var bean = [];
 			var updateMapping = 'updateCom'
 			var idNo = value.id.substring(12);
 			var textValue = $('#updateText' + idNo).val().trim();
 			console.log(textValue);
-			bean.comId = idNo;
-			bean.comText = textValue;
-			bean.postID = getPostID();
+			bean = {
+				"comId":parseInt(idNo),
+				"comText":textValue,
+				"postID" :parseInt(getPostID())
+			};
+			// bean.comId = parseInt(idNo);
+			// bean.comText = textValue;
+			// bean.postID = parseInt(getPostID());
 			console.log(bean);
+			// alert(JSON.stringify(bean));
 			ajaxPost(updateMapping, bean, function() {
 				console.log('傳送成功');
-
 			});
 
 		}
@@ -511,6 +516,7 @@ body {
 
 		var ajaxPost = function(action, postData, fn) {
 			console.log(_baseUrl + action);
+			console.log(postData);
 			$.ajax({
 				url : action,
 				type : "POST",
@@ -525,12 +531,17 @@ body {
 						console.log('success');
 						return;
 					}
-					fn(data);
+// 					alert(data);
 				},
 				error : function(data) {
 					console.log('fail');
+// 					alert("error")
 				},
+				complete:function(data){
+					window.location.href="/Car98-mvc/talktalk?postID=" + postData.postID;
+				}
 			});
+				
 		};
 	</script>
 

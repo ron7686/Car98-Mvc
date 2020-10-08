@@ -1,7 +1,7 @@
 package com.web.car98.rentcar.service.impl;
 
+import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,35 +14,13 @@ import com.web.car98.rentcar.service.CarTypeService;
 @Service
 public class CarTypeServiceImpl implements CarTypeService{
 	@Autowired
-	CarTypeDao ctdao;
+	CarTypeDao ctdao ;
 	
 	@Transactional
 	@Override
 	public Collection<CarTypeBean> getCarTypeData(){
 		Collection<CarTypeBean> carTypeBean = null;
 		carTypeBean = ctdao.getCarTypeData();
-		return carTypeBean;
-	}
-	
-	@Transactional
-	@Override
-	public List<CarTypeBean> showBrandTypeMenu() {
-		return ctdao.showBrandTypeMenu();
-	}
-	
-	@Transactional
-	@Override
-	public List<CarTypeBean> getRentCarsByPrice(Integer min, Integer max) {
-		List<CarTypeBean> carTypeBean = null;
-		carTypeBean = ctdao.getRentCarsByPrice(min , max);
-		return carTypeBean;
-	}
-	
-	@Transactional
-	@Override
-	public List<CarTypeBean> getRentCarsByType(String carBrand, String carType) {
-		List<CarTypeBean> carTypeBean = null;
-		carTypeBean = ctdao.getRentCarsByType(carBrand, carType);
 		return carTypeBean;
 	}
 }
