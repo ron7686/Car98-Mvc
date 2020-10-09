@@ -181,7 +181,7 @@ public class CommentController {
 		
 	}
 
-//	@PostMapping("/forum/updateCom")
+
 	@PostMapping("/updateCom")
 	@ResponseBody
 	public String updateCom(Model model,
@@ -199,7 +199,7 @@ public class CommentController {
 	}
 
 	// 刪除留言
-	@RequestMapping("/forum/deleteCom")
+	@RequestMapping("/deleteCom")
 	public String deleteCom(Model model, @RequestParam("comId") Integer comId, @RequestParam("postID") Integer postID) {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {
@@ -237,7 +237,7 @@ public class CommentController {
 			// 如果圖片的來源有問題，就送回預設圖片(/images/NoImage.png)
 			if (is == null) {
 				fileName = "NoImage.png";
-				is = servletContext.getResourceAsStream("/images/" + fileName);
+				is = servletContext.getResourceAsStream("/image/" + fileName);
 			}
 			// 由圖片檔的檔名來得到檔案的MIME型態
 			mimeType = servletContext.getMimeType(fileName);

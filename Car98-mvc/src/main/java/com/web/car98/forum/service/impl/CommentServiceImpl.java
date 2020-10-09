@@ -109,12 +109,12 @@ public class CommentServiceImpl implements CommentService {
 
 	@Transactional
 	@Override
-	public int deleteComByPk(Integer comId) {
+	public void deleteComByPk(Integer comId) {
 //		Session session = factory.getCurrentSession();
 //		Transaction tx = null;
 //		try {
 //			tx = session.beginTransaction();
-		return dao.deleteComByPk(comId);
+		 dao.deleteComByPk(comId);
 //			tx.commit();
 //		} catch (Exception e) {
 //			if (tx != null) {
