@@ -30,10 +30,11 @@ public class QueryStoreController{
 	
 	@GetMapping("/getStoreList")
 	@ResponseBody
-	protected Collection<CarTypeBean> getStoreList(String city,String district,boolean isHoliday,Integer min,Integer max,String carBrand,String carType) {
+	protected Collection<CarTypeBean> getStoreList(String city, String district, boolean isHoliday, boolean isWeekday, Integer min, Integer max, String carBrand, String carType) {
 		System.out.println(city);
 		System.out.println(district);
 		System.out.println(isHoliday);
+		System.out.println(isWeekday);
 		System.out.println(min);
 		System.out.println(max);
 		System.out.println(carBrand);
@@ -42,14 +43,18 @@ public class QueryStoreController{
 		
 		city = city + "%";
 		district = district + "%";
-		if(isHoliday) {
-			Collection<CarTypeBean> storeData = rentCarService.queryStoreHoliday(city, district, isHoliday, min, max, carBrand, carType);
+		if(isHoliday==true && isWeekday==false) {
+			Collection<CarTypeBean> storeData = rentCarService.queryStoreHoliday(city, district, isHoliday, isWeekday, min, max, carBrand, carType);
+			System.out.println(storeData);
+			return storeData;
+		}else if(isHoliday==false && isWeekday==true) {
+			Collection<CarTypeBean> storeData = rentCarService.queryStoreWeekday(city, district, isHoliday, isWeekday, min, max, carBrand, carType);
+			System.out.println(storeData);
 			return storeData;
 		}else {
-			Collection<CarTypeBean> storeData = rentCarService.queryStoreWeekday(city, district, isHoliday, min, max, carBrand, carType);
+			Collection<CarTypeBean> storeData = rentCarService.queryStoreAllday(city, district, isHoliday, isWeekday, min, max, carBrand, carType);
+			System.out.println(storeData);
 			return storeData;
 		}
-		
-//	return storeData;
 	}
 }

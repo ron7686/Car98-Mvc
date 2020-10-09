@@ -26,14 +26,20 @@ public class RentCarServiceImpl implements RentCarService{
 	
 	@Transactional
 	@Override
-	public Collection<CarTypeBean> queryStoreHoliday(String city, String district, boolean isHoliday, Integer min, Integer max, String carBrand, String carType) {
-		return dao.queryStoreHoliday(city, district, isHoliday, min, max, carBrand, carType);
+	public Collection<CarTypeBean> queryStoreHoliday(String city, String district, boolean isHoliday, boolean isWeekday, Integer min, Integer max, String carBrand, String carType) {
+		return dao.queryStoreHoliday(city, district, isHoliday, isWeekday, min, max, carBrand, carType);
 	}
 	
 	@Transactional
 	@Override
-	public Collection<CarTypeBean> queryStoreWeekday(String city, String district, boolean isHoliday, Integer min, Integer max, String carBrand, String carType) {
-		return dao.queryStoreWeekday(city, district, isHoliday, min, max, carBrand, carType);
+	public Collection<CarTypeBean> queryStoreWeekday(String city, String district, boolean isHoliday, boolean isWeekday, Integer min, Integer max, String carBrand, String carType) {
+		return dao.queryStoreWeekday(city, district, isHoliday, isWeekday, min, max, carBrand, carType);
+	}
+	
+	@Transactional
+	@Override
+	public Collection<CarTypeBean> queryStoreAllday(String city, String district, boolean isHoliday, boolean isWeekday,	Integer min, Integer max, String carBrand, String carType) {
+		return dao.queryStoreAllday(city, district, isHoliday, isWeekday, min, max, carBrand, carType);
 	}
 	
 //	@Transactional
@@ -63,4 +69,6 @@ public class RentCarServiceImpl implements RentCarService{
 		rentcarbean = dao.getRentCar();
 		return rentcarbean;
 	}
+
+
 }

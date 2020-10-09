@@ -19,29 +19,11 @@ public class RentCarDaoImpl implements RentCarDao {
 	@Autowired
 	SessionFactory factory;
 	
-//	@Override //用地區取得店家資料
-//	public Collection<RentCarBean> queryStoreByArea(String city, String district) { 
-//		String hql = "FROM RentCarBean WHERE city = :city AND district = :district";
-//		Session session = factory.getCurrentSession();
-//		Collection<RentCarBean> rentCarBean = session.createQuery(hql)
-//				.setParameter("city", city)
-//				.setParameter("district", district)
-//				.getResultList();
-//		return rentCarBean;
-//	}
-	
-//	public Collection<CarTypeBean> qqq111(String city, String district,boolean isHoliday, Integer min,Integer max,String carBrand,String carType) {
-//		String sql = "holiday";
-//	}
-//	
-//	public Collection<CarTypeBean> qqq222(String city, String district,boolean isHoliday, Integer min,Integer max,String carBrand,String carType) {
-//		String sql = "weekday";
-//	}
-	
 	@Override //用價格取得店家資料
-	public Collection<CarTypeBean> queryStoreHoliday(String city, String district,boolean isHoliday, Integer min,Integer max,String carBrand,String carType) {
-		String sql = "SELECT A.*,B.* FROM cartype A LEFT JOIN rentcar B ON A.rentId = B.rentId "
-				+ "WHERE B.city LIKE :city AND B.district LIKE :district AND (A.holidayDaily BETWEEN :min AND :max) AND (A.carBrand = :carBrand AND A.carType= :carType);"; 
+	public Collection<CarTypeBean> queryStoreHoliday(String city, String district, boolean isHoliday, boolean isWeekday, Integer min,Integer max,String carBrand,String carType) {
+
+		String sql = "SELECT A.*,B.city,B.district,B.store,B.street FROM cartype A LEFT JOIN rentcar B ON A.rentId = B.rentId "
+				+ "WHERE B.city LIKE :city AND B.district LIKE :district AND (A.holidayDaily BETWEEN :min AND :max) AND (A.carBrand = :carBrand AND A.carType= :carType);";
 		Session session = factory.getCurrentSession();
 		Collection<CarTypeBean> carTypeBean = session.createSQLQuery(sql)
 				.setParameter("city", city)
@@ -54,8 +36,8 @@ public class RentCarDaoImpl implements RentCarDao {
 		return carTypeBean;
 	}
 	
-	public Collection<CarTypeBean> queryStoreWeekday(String city, String district,boolean isHoliday, Integer min,Integer max,String carBrand,String carType) {
-		String sql = "SELECT A.*,B.* FROM cartype A LEFT JOIN rentcar B ON A.rentId = B.rentId "
+	public Collection<CarTypeBean> queryStoreWeekday(String city, String district,boolean isHoliday, boolean isWeekday, Integer min,Integer max,String carBrand,String carType) {
+		String sql = "SELECT A.*,B.city,B.district,B.store,B.street FROM cartype A LEFT JOIN rentcar B ON A.rentId = B.rentId "
 				+ "WHERE B.city LIKE :city AND B.district LIKE :district AND (A.weekdayDaily BETWEEN :min AND :max) AND (A.carBrand = :carBrand AND A.carType= :carType);";
 		Session session = factory.getCurrentSession();
 		Collection<CarTypeBean> carTypeBean = session.createSQLQuery(sql)
@@ -67,6 +49,21 @@ public class RentCarDaoImpl implements RentCarDao {
 				.setParameter("carType", carType)
 				.list();
 //				.getResultList();
+		return carTypeBean;
+	}
+	
+	public Collection<CarTypeBean> queryStoreAllday(String city, String district, boolean isHoliday, boolean isWeekday, Integer min, Integer max, String carBrand, String carType) {
+		String sql = "SELECT A.*,B.city,B.district,B.store,B.street FROM cartype A LEFT JOIN rentcar B ON A.rentId = B.rentId "
+				+ "WHERE B.city LIKE :city AND B.district LIKE :district AND (A.holidayDaily BETWEEN :min AND :max) AND (A.weekdayDaily BETWEEN :min AND :max) AND (A.carBrand = :carBrand AND A.carType= :carType);";
+		Session session = factory.getCurrentSession();
+		Collection<CarTypeBean> carTypeBean = session.createSQLQuery(sql)
+				.setParameter("city", city)
+				.setParameter("district", district)
+				.setParameter("min", min)
+				.setParameter("max", max)
+				.setParameter("carBrand", carBrand)
+				.setParameter("carType", carType)
+				.list();
 		return carTypeBean;
 	}
 
@@ -117,6 +114,8 @@ public class RentCarDaoImpl implements RentCarDao {
 	public RentCarBean getRentCar(Integer rentId) {
 		return null;
 	}
+
+
 
 
 	
