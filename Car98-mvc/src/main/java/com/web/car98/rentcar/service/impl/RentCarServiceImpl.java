@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.web.car98.rentcar.dao.RentCarDao;
+import com.web.car98.rentcar.model.CarTypeBean;
 import com.web.car98.rentcar.model.RentCarBean;
 import com.web.car98.rentcar.service.RentCarService;
 
@@ -16,6 +17,36 @@ public class RentCarServiceImpl implements RentCarService{
 	
 	@Autowired
 	RentCarDao dao;
+	
+//	@Transactional
+//	@Override
+//	public Collection<RentCarBean> queryStoreByArea(String city, String district) {
+//		return dao.queryStoreByArea(city, district);
+//	}
+	
+	@Transactional
+	@Override
+	public Collection<CarTypeBean> queryStoreHoliday(String city, String district, boolean isHoliday, Integer min, Integer max, String carBrand, String carType) {
+		return dao.queryStoreHoliday(city, district, isHoliday, min, max, carBrand, carType);
+	}
+	
+	@Transactional
+	@Override
+	public Collection<CarTypeBean> queryStoreWeekday(String city, String district, boolean isHoliday, Integer min, Integer max, String carBrand, String carType) {
+		return dao.queryStoreWeekday(city, district, isHoliday, min, max, carBrand, carType);
+	}
+	
+//	@Transactional
+//	@Override
+//	public Collection<CarTypeBean> queryStoreByCar(String carBrand,String carType) {
+//		return dao.queryStoreByCar(carBrand,carType);
+//	}
+	
+	@Transactional
+	@Override
+	public List<RentCarBean> showArea() {
+		return dao.showArea();
+	}
 	
 	@Transactional
 	@Override
@@ -32,19 +63,4 @@ public class RentCarServiceImpl implements RentCarService{
 		rentcarbean = dao.getRentCar();
 		return rentcarbean;
 	}
-	
-	@Transactional
-	@Override
-	public List<RentCarBean> showCityDistMenu(){
-		return dao.showCityDistMenu();
-	}
-	
-	@Transactional
-	@Override
-	public List<RentCarBean> getRentCarsByDist(String city , String district) {	//取得符合地區的資料(經過使用者篩選)
-		List<RentCarBean> rentcarbean = null;
-		rentcarbean = dao.getRentCarsByDist(city, district);
-		return rentcarbean;
-	}
-	
 }

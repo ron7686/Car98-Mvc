@@ -233,6 +233,10 @@ input {
 label{
 	color: #FFF;
 }
+.imgUser{
+	width: 350px; 
+	height: 350px; 
+}
 </style>
 
 <title>會員資料</title>
@@ -260,7 +264,8 @@ label{
 							style="display: none;" /> <form:errors
 							path="memberMultipartFile" /> 
 						<img
-						style="width: 350px; height: 350px; border-radius: 50%;"
+						style="border-radius: 50%;"
+						class="imgUser"
 						src='${pageContext.request.contextPath}/init/getMemberImage?id=${LoginOK.memId}'
 						id="show_image">
 					</label>

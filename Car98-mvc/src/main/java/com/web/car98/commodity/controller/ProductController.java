@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,13 +36,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.web.car98.commodity.model.BidBean;
 import com.web.car98.commodity.model.BidItemBean;
+import com.web.car98.commodity.model.BidPicBean;
 import com.web.car98.commodity.service.ProductService;
 import com.web.car98.commodity.validators.BidValidator;
 import com.web.car98.member.model.MemberBean;
 
 @Controller
 @RequestMapping("/comm")
-@SessionAttributes({ "LoginOK", "products", "pagePNo" })
+@SessionAttributes({ "LoginOK", "products", "pagePNo" ,"bid","picList"})
 public class ProductController {
 	@Autowired
 	ProductService service;
@@ -110,6 +112,8 @@ public class ProductController {
 	// 單獨商品分頁
 	@RequestMapping("/product")
 	public String getProductsById(@RequestParam Integer id, Model model) {
+		List<BidPicBean> picList = service.getPicByBidId(id);
+		model.addAttribute("picList", picList);
 		model.addAttribute("product", service.getProductById(id));
 		return "comm/product";
 	}
@@ -148,12 +152,14 @@ public class ProductController {
 		return "comm/addProduct";
 	}
 
+	
 	@PostMapping("/products/add")
-	public String processAddNewProductForm(@ModelAttribute("bid") BidBean bb, BindingResult result, Model model) {
-		bidValidator.validate(bb, result);
-		if (result.hasErrors()) {
-			return "comm/addProduct";
-		}
+	public String processAddNewProductForm(@ModelAttribute("bid") BidBean bb,BindingResult result, Model model) {
+		BidPicBean pfdBean = null;
+//		bidValidator.validate(bb, result);
+//		if (result.hasErrors()) {
+//			return "comm/addProduct";
+//		}
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");		
 		bb.setMemId(memberBean.getMemId());
 		bb.setMemName(memberBean.getName());
@@ -180,8 +186,41 @@ public class ProductController {
 		}
 		Timestamp adminTime = new Timestamp(System.currentTimeMillis());
 		bb.setBidTime(adminTime);
-
 		service.addByBidBean(bb);
+		
+		List<MultipartFile> files = bb.getBidPicBean().getPicImages();
+		List<String> fileNames = new ArrayList<>();
+		
+		if(files != null && files.size()>0) {
+			System.out.println("files != null" + files);
+			for(MultipartFile multipartFile : files) {
+				String fileName = multipartFile.getOriginalFilename();
+				fileNames.add(fileName);
+				pfdBean = bb.getBidPicBean();
+				pfdBean.setFileName(fileName);
+				//建立Blob物件，交由hibernate寫入資料庫
+				if(multipartFile != null  && !multipartFile.isEmpty() ) {
+					
+					try {
+						byte[]b = multipartFile.getBytes();
+						Blob blob = new SerialBlob(b);
+						pfdBean.setBidPic(blob);
+					} catch (Exception e) {
+						e.printStackTrace();
+						throw new RuntimeException("圖片上傳發生異常"+ e.getMessage());
+					}
+				}
+				
+				pfdBean.setBidId(bb.getBidId());
+				bb.setBidPicBean(pfdBean);
+				service.addPics(pfdBean);
+				}
+		
+		}
+		
+		model.addAttribute("bid",bb);
+		model.addAttribute("picBean", pfdBean);
+		
 		return "redirect:/comm/products";
 	}
 
@@ -218,6 +257,31 @@ public class ProductController {
 
 		return re;
 	}
+	// 取得多張圖片
+		@GetMapping("/pictures/{picId}")
+		public ResponseEntity<byte[]> getPictures(
+				@PathVariable Integer picId
+				) throws Exception{
+			BidPicBean bpBean = service.getPicByPicId(picId);
+			Blob blob = bpBean.getBidPic();
+			String fileName = bpBean.getFileName();
+			String mimeType = context.getMimeType(fileName);
+			MediaType mType = MediaType.valueOf(mimeType);
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(mType);
+			
+			InputStream is = blob.getBinaryStream();
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			byte[]b = new byte[81920];
+			int len = 0 ;
+			while((len = is.read(b))!= -1){
+				baos.write(b, 0, len);
+			}
+			//byte[] ba回應本體形式
+			byte[]ba = baos.toByteArray();// 轉成位元組陣列   
+			ResponseEntity<byte[]> re = new ResponseEntity<>(ba,headers,HttpStatus.OK);
+			return re ; 
+		}
 
 	private byte[] toByteArray(String path) {
 		byte[] result = null;

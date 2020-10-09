@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.web.car98.commodity.model.BidBean;
 import com.web.car98.commodity.model.BidItemBean;
+import com.web.car98.commodity.model.BidPicBean;
 
 public interface ProductService {
 	List<BidBean> getAllProducts();
@@ -27,4 +28,10 @@ public interface ProductService {
 	public int getTotalPages();
 	
 	List<BidBean> getByIdProducts(int memId);
+
+	void addPics(BidPicBean pfdBean);
+
+	List<BidPicBean> getPicByBidId(Integer id);
+
+	BidPicBean getPicByPicId(Integer picId);
 }

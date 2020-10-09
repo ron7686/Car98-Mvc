@@ -19,7 +19,7 @@ import _00_init.util.HibernateUtils;
 
 @Repository
 public class TalkDaoImpl implements TalkDao  {
-	int onepage=5;
+	int onepage=6;
 	@Autowired
 	SessionFactory factory;
 	

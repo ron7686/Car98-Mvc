@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.web.car98.commodity.dao.ProductDao;
 import com.web.car98.commodity.model.BidBean;
 import com.web.car98.commodity.model.BidItemBean;
+import com.web.car98.commodity.model.BidPicBean;
 import com.web.car98.commodity.service.ProductService;
 
 
@@ -77,5 +78,20 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<BidBean> getByIdProducts(int memId) {
 		return dao.getByIdProducts(memId);
+	}
+	@Transactional
+	@Override
+	public void addPics(BidPicBean pfdBean) {
+		dao.getAddPics(pfdBean);
+	}
+	@Transactional
+	@Override
+	public List<BidPicBean> getPicByBidId(Integer id) {
+		return dao.getPicByBidId(id);
+	}
+	@Transactional
+	@Override
+	public BidPicBean getPicByPicId(Integer picId) {
+		return dao.getPicByPicId(picId);
 	}
 }

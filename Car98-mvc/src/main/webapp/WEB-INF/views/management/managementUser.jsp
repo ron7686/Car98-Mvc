@@ -158,6 +158,7 @@
   overflow: hidden;
   margin-top: 15px;
   transition: all 0.5s ease-in-out;
+  color: #fff;
 }
 
 .text:focus {
@@ -165,6 +166,7 @@
   border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 20px;
   background: rgba(0, 0, 0, 0);
+  color: #fff;
 }
 
 .text:focus + span {
@@ -245,7 +247,7 @@ label{
 	<jsp:include page="/fragment/topIndex.jsp"></jsp:include>
 	<section>
 		<div class="container">
-			<h1 style="text-align: center">會員資料</h1>
+			<h1 style="text-align: center;color:#fff;" >會員資料</h1>
 		</div>
 	</section>
 	<hr style="height: 1px; border: none; color: #000000; background-color: #000000;">
@@ -476,7 +478,7 @@ label{
 // 					"birth": birth,
 // 					"sex": sex,
 // 				}
-// 				// alert(JSON.stringify(jsonPortfolio));
+				// alert(JSON.stringify(jsonPortfolio));
 // 				$.ajax({
 // 					url: 'http://localhost:8080/Car98-mvc/user/' + memId,
 // 					type: 'PUT',
@@ -491,7 +493,7 @@ label{
 // 					}
 // 				});
 // 				alert("送出資料");
-// // 				window.location.href = "http://localhost:8080/Car98-mvc/userManager";
+// 				window.location.href = "http://localhost:8080/Car98-mvc/userManager";
 // 			});
 // 		});
 	</script>

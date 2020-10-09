@@ -85,15 +85,13 @@ public class CommentDaoImpl implements CommentDao {
 	}
 
 	@Override
-	public int deleteComByPk(Integer comId) {
-		Integer n = 0;
+	public void deleteComByPk(Integer comId) {
 		Session session = factory.getCurrentSession();
-//		String hql = "Delete FROM CommentBean where comId=:comId";
+		String hql = "Delete FROM ComLikeOrHateBean where comId=:comId";
+		session.createQuery(hql).setParameter("comId", comId).executeUpdate();
+
 		CommentBean commentbean = session.get(CommentBean.class, comId);
 		session.delete(commentbean);
-//		session.createQuery(hql).setParameter("comId",comId).executeUpdate();
-		n++;
-		return n;
 
 	}
 
@@ -108,7 +106,7 @@ public class CommentDaoImpl implements CommentDao {
 	@Override
 	public List<CommentBean> getPageCom(Integer page, List<CommentBean> li) {
 		int getpage = (page - 1) * onepage;
-		//List<CommentBean> li = getComsByFk(postId);
+		// List<CommentBean> li = getComsByFk(postId);
 		List<CommentBean> list_floor = new ArrayList<>(); // new一個容器裝有floor的
 		Integer floor = 2; // 起始樓層
 		for (CommentBean cb : li) {
@@ -134,20 +132,28 @@ public class CommentDaoImpl implements CommentDao {
 	public int getLastPage(Integer postId, Integer page) {
 		int lastpage = 0;
 		int op = 0;
+		op = onepage - 1;
 		List<CommentBean> li = getComsByFk(postId);
-
-		if (page == 1) {
-			op = onepage - 1;
-			lastpage = li.size() / op;
-			page = li.size() % op;
-			if (page > 0) lastpage++;
-		} else {
-			lastpage = li.size() / onepage;
-			page = li.size() % onepage;
-			if(page == 0) {
-				lastpage++;
-			}
+		int l = li.size();
+		if (l <= op) {
+			return 1;
 		}
+		lastpage = (l - op) / onepage + 1;
+		if ((l - op) % onepage != 0)
+			lastpage++;
+
+//		if (page == 1) {
+//			op = onepage - 1;
+//			lastpage = li.size() / op;
+//			page = li.size() % op;
+//			if (page > 0) lastpage++;
+//		} else {
+//			lastpage = li.size() / onepage;
+//			page = li.size() % onepage;
+//			if(page == 0) {
+//				lastpage++;
+//			}
+//		}
 		return lastpage;
 	}
 
@@ -170,41 +176,37 @@ public class CommentDaoImpl implements CommentDao {
 		MemberBean memberBean = talkBean.getMemberBean();
 		return memberBean;
 	}
-	
+
 	@Override
 	public void savelike(LikeOrHateBean loh) {
 		Session session = factory.getCurrentSession();
 		session.saveOrUpdate(loh);
 	}
-	
+
 	@Override
 	public void saveComLike(ComLikeOrHateBean cloh) {
 		Session session = factory.getCurrentSession();
 		session.saveOrUpdate(cloh);
 	}
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<ComLikeOrHateBean> getComLoh(int comId) {
-		List<ComLikeOrHateBean> cloh=new ArrayList<>();
+		List<ComLikeOrHateBean> cloh = new ArrayList<>();
 		String hql = "FROM ComLikeOrHateBean l where l.commentBean.comId=:comId";
 		Session session = factory.getCurrentSession();
-		cloh=session.createQuery(hql).
-					setParameter("comId", comId).
-					list();
+		cloh = session.createQuery(hql).setParameter("comId", comId).list();
 		return cloh;
 	}
 
 	@Override
 	public ComLikeOrHateBean getComOneLoh(int comId, int memId) {
-		ComLikeOrHateBean cloh=new ComLikeOrHateBean();
+		ComLikeOrHateBean cloh = new ComLikeOrHateBean();
 		String hql = "FROM ComLikeOrHateBean l where l.commentBean.comId=:comId and l.memberBean.memId=:memId";
 		Session session = factory.getCurrentSession();
-		cloh=(ComLikeOrHateBean)session.createQuery(hql).
-					setParameter("comId", comId).
-					setParameter("memId", memId).
-					getSingleResult();
+		cloh = (ComLikeOrHateBean) session.createQuery(hql).setParameter("comId", comId).setParameter("memId", memId)
+				.getSingleResult();
 		return cloh;
 	}
-		
+
 }

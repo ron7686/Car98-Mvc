@@ -5,15 +5,15 @@ import java.io.Serializable;
 public class CommentAllBean implements Serializable {
 	
 	private String comText;
-	private String comId;
-	private String postID;
+	private Integer comId;
+	private Integer postID;
 	
 	public CommentAllBean() {
 		super();
 
 	}
 	
-	public CommentAllBean(String comText, String comId, String postID) {
+	public CommentAllBean(String comText, Integer comId, Integer postID) {
 		super();
 		this.comText = comText;
 		this.comId = comId;
@@ -25,16 +25,16 @@ public class CommentAllBean implements Serializable {
 	public void setComText(String comText) {
 		this.comText = comText;
 	}
-	public String getComId() {
+	public Integer getComId() {
 		return comId;
 	}
-	public void setComId(String comId) {
+	public void setComId(Integer comId) {
 		this.comId = comId;
 	}
-	public String getPostID() {
+	public Integer getPostID() {
 		return postID;
 	}
-	public void setPostID(String postID) {
+	public void setPostID(Integer postID) {
 		this.postID = postID;
 	}
 	

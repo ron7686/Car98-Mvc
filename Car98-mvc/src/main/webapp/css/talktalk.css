@@ -1,8 +1,9 @@
 .container {
   border: 2px solid white;
   color: white;
+  background:rgba(0,0,0,0.6);
 }
-.col-12 {
+.postitle{
   /*     border:1px solid pink; */
   font-size: 35px;
 }
@@ -74,11 +75,12 @@
 }
 .like-or-hate {
   list-style: none;
-  display: flex;
+  display:inline;
 }
 
 .fas {
   width: 80px;
+
 }
 textarea {
   max-width: 100%;
@@ -95,7 +97,12 @@ textarea {
 .update{
 	
 }
-
+.space{
+	
+}
+.message{
+	font-size:20px;
+}
 
 
 

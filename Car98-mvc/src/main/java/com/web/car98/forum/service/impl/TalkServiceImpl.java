@@ -22,7 +22,7 @@ import _00_init.util.HibernateUtils;
 public class TalkServiceImpl implements TalkService  {
 @Autowired
 	TalkDao dao;
-	int onepage=5;
+	int onepage=6;
 //	SessionFactory factory;
 	
 	public TalkServiceImpl() {

@@ -57,7 +57,7 @@
 }
 
 body {
-	background-image: url(<%=path%>/image/Desktop.png);
+	background-image: url(${pageContext.servletContext.contextPath}/image/olav-tvedt-yq-efMJMuPg-unsplash.jpg);
 	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -123,7 +123,7 @@ body {
 	<div class="container publish">
 		<c:if test="${pageNo <2}">
 			<div class="row ">
-				<div class="col-12 text-white">${TalkBean.postTitle}</div>
+				<div class="col-12 text-white postitle">${TalkBean.postTitle}</div>
 				<!-- 作者資訊 -->
 				<div class="col-2 author">
 					<br> <a href="#"><img class="photo"
@@ -136,10 +136,10 @@ body {
 
 				<div class="col-10">
 
-<!-- 						<li class="gp">讚12</li> -->
-<!-- 						<li class="bp">噓18</li> -->
-					</ul>
-				
+					<!-- 						<li class="gp">讚12</li> -->
+					<!-- 						<li class="bp">噓18</li> -->
+
+
 					<div>樓主</div>
 					<a href="#" style="color: white;">發表於${TalkBean.postTime}</a>
 
@@ -148,15 +148,15 @@ body {
 						<div class=" article-mood  float-right">
 							<ul class="like-or-hate ">
 
-								<li id="like1" class="fas"><a
+								<li id="like1 " class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x">${TalkBean.postLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x"></i></a>${TalkBean.postLike}</li>
 
 								<li id="hate1" class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x">${TalkBean.postHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x"></i></a>${TalkBean.postHate}</li>
 							</ul>
 						</div>
 					</c:if>
@@ -167,12 +167,12 @@ body {
 								<li id="like1" class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x" style="color: red">${TalkBean.postLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x" style="color: red"></i></a>${TalkBean.postLike}</li>
 
 								<li id="hate1" class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=2"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x">${TalkBean.postHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x"></i></a>${TalkBean.postHate}</li>
 							</ul>
 						</div>
 					</c:if>
@@ -183,23 +183,24 @@ body {
 								<li id="like1" class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=1"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x">${TalkBean.postLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x"></i></a>${TalkBean.postLike}</li>
 
 								<li id="hate1" class="fas"><a
 									href="<%=path%>/like?postId=${TalkBean.postID}&loh=${loh.aa}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x" style="color: red">${TalkBean.postHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x" style="color: red"></i></a>${TalkBean.postHate}</li>
 							</ul>
 						</div>
 					</c:if>
 
 					<div class="col-12 article-content">${TalkBean.postText}</div>
 					<c:if test="${!empty TalkBean.postFileName}">
-						<img class="picture"
-							src="${pageContext.request.contextPath}/getpostPic?id=${LoginOK.memId}&postID=${TalkBean.postID}"
+						<img class="picture mb-3 mt-3"
+							src="${pageContext.request.contextPath}/getpostPic?postID=${TalkBean.postID}"
 							alt="">
 					</c:if>
-					<a type="submit" href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
+					<a type="submit"
+						href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
 				</div>
 
 			</div>
@@ -212,7 +213,7 @@ body {
 	</div>
 	<!-- 	</div> -->
 
-
+	<p class="space mt-5"></p>
 
 	<!-- 留言內容 -->
 	<c:forEach var="comment" items="${CommentBean}">
@@ -240,15 +241,15 @@ body {
 						<div class=" article-mood float-right">
 							<ul class="like-or-hate">
 
-								<li id="like1"><a
+								<li id="like1" class="fas"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x"">${comment.comLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x""></i></a>${comment.comLike}</li>
 
-								<li id="hate1"><a
+								<li id="hate1" class="fas"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x">${comment.comHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x"></i></a>${comment.comHate}</li>
 
 
 
@@ -261,15 +262,15 @@ body {
 							<ul class="like-or-hate">
 
 
-								<li id="like1"><a
+								<li id="like1" class="fas"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x" style="color: red">${comment.comLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x" style="color: red"></i></a>${comment.comLike}</li>
 
-								<li id="hate1"><a
+								<li id="hate1" class="fas"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x"">${comment.comHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x""></i></a>${comment.comHate}</li>
 
 							</ul>
 						</div>
@@ -279,15 +280,15 @@ body {
 							<ul class="like-or-hate">
 
 
-								<li id="like1"><a
+								<li id="like1" class="fas"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=1"
 									data-toggle="tooltip" data-placement="bottom" title="Like"><i
-										class="fas fa-thumbs-up fa-2x"">${comment.comLike}</i></a></li>
+										class="fas fa-thumbs-up fa-2x""></i></a>${comment.comLike}</li>
 
-								<li id="hate1"><a
+								<li id="hate1" class="fas"><a
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=0"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
-										class="fas fa-thumbs-down fa-2x" style="color: red">${comment.comHate}</i></a></li>
+										class="fas fa-thumbs-down fa-2x" style="color: red"></i></a>${comment.comHate}</li>
 							</ul>
 						</div>
 					</c:if>
@@ -333,9 +334,10 @@ body {
 							<button id="updateButton${comment.comId}"
 								class="updateButton m-2" onclick="openTextarea(this)">編輯</button>
 							<button id="updateFinish${comment.comId}" hidden="true"
-								class="updateButton m-2" onclick="confirm(this)">送出</button>
-							<a id="" class="deleteButton m-2"
-								href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
+								class="updateButton m-2" onclick="updateConfirm(this)">送出</button>
+							<a id="deleteButton${comment.comId}" class="deleteButton m-2"
+								href="${pageContext.request.contextPath}/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
+
 						</div>
 					</c:if>
 				</div>
@@ -385,18 +387,23 @@ body {
 	<!-- 留言輸入 -->
 	<div class="container">
 		<div class="row">
-			<div class="col-12 mt-2">
+			<div class="col-12 mt-1 message">
 				<form:form class="comment" method="POST"
 					modelAttribute="commentBean" enctype="multipart/form-data">
-					<form:textarea id="comments" path="comText" class="" cols="68"
-						rows="5" placeholder="請輸入內容...." />
-					<label class='control-label col-lg-5 col-lg-5'
+					<form:textarea id="comments" path="comText" class="mt-2 " cols="120"
+						rows="3" placeholder="請輸入內容...." />
+						
+					<label class='control-label'
 						for="commentMultipartFile"> 上傳圖片 </label>
-					<p class="mt-3">
+						
+					<form:input type="file" class="form-control-file float-right"
+						id="commentMultipartFile" path="commentMultipartFile" />
+					
+						
+					<p class="mt-3 ">
 						<img id="image" src="">
 					</p>
-					<form:input type="file" class="form-control-file"
-						id="commentMultipartFile" path="commentMultipartFile" />
+					
 					<input class="float-right" type="submit" value="送出" />
 				</form:form>
 
@@ -471,49 +478,63 @@ body {
 			document.getElementById('updateFinish' + idNo).hidden = false;
 		};
 
-		var confirm = function(value) {
-			var bean = [];
+		var updateConfirm = function(value) {
 			var updateMapping = 'updateCom'
 			var idNo = value.id.substring(12);
 			var textValue = $('#updateText' + idNo).val().trim();
-			console.log(textValue);
-			bean.comId = idNo;
-			bean.comText = textValue;
-			bean.postID = getPostID();
+			var reqParams = getReqParams(); // 取得網址的參數
+			var postId = reqParams.postID;
+			var pageNo = reqParams.pageNo;
+			bean = {
+				"comId" : parseInt(idNo),
+				"comText" : textValue,
+				"postID" : parseInt(postId),
+				"pageNo" : parseInt(pageNo),
+			};
+			// bean.comId = parseInt(idNo);
+			// bean.comText = textValue;
+			// bean.postID = parseInt(getPostID());
 			console.log(bean);
 			ajaxPost(updateMapping, bean, function() {
 				console.log('傳送成功');
-
 			});
 
 		}
 
-		var getPostID = function() {
+		var getReqParams = function() {
+			var reqParams = {};
 			//先取得網址字串，假設此頁網址為「index.aspx?id=U001&name=GQSM」
 			var url = location.href;
 			//再來用去尋找網址列中是否有資料傳遞(QueryString)
 			if (url.indexOf('?') != -1) {
-				var id = "";
 				//在此直接將各自的參數資料切割放進ary中
 				var ary = url.split('?')[1].split('&');
+
 				//此時ary的內容為：
 				//ary[0] = 'id=U001'，ary[1] = 'name=GQSM'
 
 				//下迴圈去搜尋每個資料參數
 				for (i = 0; i <= ary.length - 1; i++) {
+					debugger;
 					//如果資料名稱為id的話那就把他取出來
 					if (ary[i].split('=')[0] == 'postID') {
-						id = ary[i].substring(7);
+						reqParams.postID = ary[i].substring(7);
 					}
+
+					if (ary[i].split('=')[0] == 'pageNo') {
+						reqParams.pageNo = ary[i].substring(7);
+					}
+
 				}
-				return id;
+				return reqParams;
 			}
 		}
 
 		var ajaxPost = function(action, postData, fn) {
 			console.log(_baseUrl + action);
+			console.log(postData);
 			$.ajax({
-				url : _baseUrl + action,
+				url : action,
 				type : "POST",
 				contentType : "application/json",
 				data : JSON.stringify(postData),
@@ -526,17 +547,25 @@ body {
 						console.log('success');
 						return;
 					}
-					fn(data);
+					// 					alert(data);
 				},
 				error : function(data) {
 					console.log('fail');
+					// 					alert("error")
 				},
+				complete : function(data) {
+					window.location.href = "/Car98-mvc/talktalk?postID="
+							+ postData.postID + "&pageNo=" + postData.pageNo;
+				}
 			});
+
 		};
 	</script>
 
 	<script src="${pageContext.request.contextPath}/javascript/talktalk.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/javascript/talktalk2.js"></script>
+	
+
 </body>
 </html>

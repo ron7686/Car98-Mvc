@@ -91,7 +91,7 @@ body {
 						<option id="small" value="small">小</option>
 					</select>
 
-					<button type="button " id="Boldbtn" class="btn-light "
+					<button type="button" id="Boldbtn" class="btn-light "
 						data-toggle="tooltip" data-placement="bottom" title="粗體">
 						<i class="fas fa-bold"></i>
 					</button>
