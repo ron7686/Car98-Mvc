@@ -67,7 +67,7 @@
             </div>
             <form action="" class="d-flex m-auto">
             <c:forEach var="aBean" items="${abean}">
-            <div class="col-2 border">
+            <div class="col-2 border mt-2">
                 <a href="">
                 <c:if test="${!empty TalkBean.postFileName}"><img src="${pageContext.request.contextPath}/getpostPic?postID=${aBean.postID}" class="img-fluid topPic"  alt="" ></c:if></a>
             </div>
