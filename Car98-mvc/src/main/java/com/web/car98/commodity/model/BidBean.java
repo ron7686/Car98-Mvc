@@ -2,14 +2,17 @@
 
 import java.sql.Blob;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -43,14 +46,19 @@ public class BidBean {
 
 	@Transient
 	private MultipartFile productImage;
-
+	
+	@Transient
+	BidPicBean bidPicBean;
+	
+	@OneToMany(mappedBy = "bidBean",orphanRemoval = true , cascade = CascadeType.ALL,fetch = FetchType.EAGER )
+	List<BidPicBean> detailList ;
 	
 	public BidBean() {
 	}
 
 	public BidBean(Integer bidId, Integer memId, String memName, String bidItemName, String bidFormat, Integer bidPrice,
 			Integer bidStock, Timestamp bidTime, Integer bidScore, Blob bidPic, String fileName,
-			BidItemBean bidItemBean, MultipartFile productImage) {
+			BidItemBean bidItemBean, MultipartFile productImage, BidPicBean bidPicBean, List<BidPicBean> detailList) {
 		super();
 		this.bidId = bidId;
 		this.memId = memId;
@@ -65,7 +73,10 @@ public class BidBean {
 		this.fileName = fileName;
 		this.bidItemBean = bidItemBean;
 		this.productImage = productImage;
+		this.bidPicBean = bidPicBean;
+		this.detailList = detailList;
 	}
+
 
 	public MultipartFile getProductImage() {
 		return productImage;
@@ -169,6 +180,22 @@ public class BidBean {
 
 	public void setMemName(String memName) {
 		this.memName = memName;
+	}
+
+	public List<BidPicBean> getDetailList() {
+		return detailList;
+	}
+
+	public void setDetailList(List<BidPicBean> detailList) {
+		this.detailList = detailList;
+	}
+
+	public BidPicBean getBidPicBean() {
+		return bidPicBean;
+	}
+
+	public void setBidPicBean(BidPicBean bidPicBean) {
+		this.bidPicBean = bidPicBean;
 	}
 
 }

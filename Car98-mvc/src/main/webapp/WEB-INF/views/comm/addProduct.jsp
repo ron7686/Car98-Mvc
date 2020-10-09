@@ -154,6 +154,15 @@ body {
 							class='form:input-large' />
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-lg-6 col-sm-8 "  for='portfolioImage'>
+						上傳多張圖片 </label>
+					<div class="col-lg-10">
+						<form:input path="bidPicBean.picImages" id="pfdPic" type='file' multiple="multiple" class='form:input-large ' /> 
+				
+					</div>
+				</div>
 
 				<div class="form-group">
 					<div class='col-lg-offset-2 col-sm-10'>
