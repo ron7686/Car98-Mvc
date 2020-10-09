@@ -22,7 +22,7 @@
 
 
 	<!-- shopping product -->
-	<div class="container container-height">
+	<div class="container">
 		<div class="contorl  my-2 d-flex justify-content-end">
 			<FONT color='red' size='-1' class="mr-3"> 金額小計(OK):
 				<c:out value="${ShoppingCart.subtotal}" default="0" /> 元
@@ -200,8 +200,7 @@
 	</div>
 
 
-	<!-- footer -->
-	<jsp:include page="/fragment/footer.jsp" />
+	
 
 
 

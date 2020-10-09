@@ -45,6 +45,7 @@
 <body>
     <!-- navbar -->
     <jsp:include page="/fragment/topIndex.jsp" />
+    
     <div class="container d-flex text-white container-height">
         <div class="row justify-content-center align-items-center row-width mx-auto">
             <div class="col-md-6">
@@ -75,14 +76,26 @@
                      
                         <Input class='btn btn-warning btn-large' type='submit' value='加入購物車'>
                        
-                        
+               
                     </FORM>
                     
                 </div>
             </div>
         </div>
+       
+        
+        
     </div>
-
+     	<c:forEach var='picList' items="${picList}">
+					<div class="col mb-4">
+    			<div class="card h-100">										
+					<img src="<c:url value='pictures/${picList.picId}'/>" class='pfDetailImage card-img-top'>
+				</div>
+			</div>	
+					
+		</c:forEach>
+			
+			
     <!-- footer -->
     <jsp:include page="/fragment/footer.jsp" />
 </body>

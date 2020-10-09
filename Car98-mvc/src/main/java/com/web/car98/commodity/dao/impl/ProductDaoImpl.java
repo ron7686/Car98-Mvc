@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.web.car98.commodity.dao.ProductDao;
 import com.web.car98.commodity.model.BidBean;
 import com.web.car98.commodity.model.BidItemBean;
+import com.web.car98.commodity.model.BidPicBean;
 
 import _00_init.util.GlobalService;
 
@@ -125,5 +126,30 @@ public class ProductDaoImpl implements ProductDao {
 		String hql = "FROM BidBean ob WHERE ob.memId = :mid";
 		list = session.createQuery(hql).setParameter("mid", memId).getResultList();
 		return list;
+	}
+
+	@Override
+	public void getAddPics(BidPicBean pfdBean) {
+		Session session = factory.getCurrentSession();
+		BidBean bidBean = session.get(BidBean.class,pfdBean.getBidId());
+		pfdBean.setBidBean(bidBean);		
+		session.save(pfdBean);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BidPicBean> getPicByBidId(Integer id) {
+		Session session = factory.getCurrentSession();
+		List<BidPicBean> list = null;	
+		String hql = "FROM BidPicBean WHERE bidId = :bidId";
+		list = session.createQuery(hql)
+				.setParameter("bidId", id)
+				.getResultList();
+		return list;
+	}
+
+	@Override
+	public BidPicBean getPicByPicId(Integer picId) {
+		return factory.getCurrentSession().get(BidPicBean.class, picId);
 	}
 }
