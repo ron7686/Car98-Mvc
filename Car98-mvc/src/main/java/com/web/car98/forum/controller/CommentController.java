@@ -181,7 +181,7 @@ public class CommentController {
 		
 	}
 
-//	@PostMapping("/forum/updateCom")
+
 	@PostMapping("/updateCom")
 	@ResponseBody
 	public String updateCom(Model model,
@@ -199,7 +199,7 @@ public class CommentController {
 	}
 
 	// 刪除留言
-	@RequestMapping("/forum/deleteCom")
+	@RequestMapping("/deleteCom")
 	public String deleteCom(Model model, @RequestParam("comId") Integer comId, @RequestParam("postID") Integer postID) {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {

@@ -136,10 +136,10 @@ body {
 
 				<div class="col-10">
 
-<!-- 						<li class="gp">讚12</li> -->
-<!-- 						<li class="bp">噓18</li> -->
-					
-				
+					<!-- 						<li class="gp">讚12</li> -->
+					<!-- 						<li class="bp">噓18</li> -->
+
+
 					<div>樓主</div>
 					<a href="#" style="color: white;">發表於${TalkBean.postTime}</a>
 
@@ -199,7 +199,8 @@ body {
 							src="${pageContext.request.contextPath}/getpostPic?postID=${TalkBean.postID}"
 							alt="">
 					</c:if>
-					<a type="submit" href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
+					<a type="submit"
+						href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
 				</div>
 
 			</div>
@@ -212,8 +213,7 @@ body {
 	</div>
 	<!-- 	</div> -->
 
-	<div class="space mt-5">
-	</div>
+	<div class="space mt-5"></div>
 
 	<!-- 留言內容 -->
 	<c:forEach var="comment" items="${CommentBean}">
@@ -334,9 +334,10 @@ body {
 							<button id="updateButton${comment.comId}"
 								class="updateButton m-2" onclick="openTextarea(this)">編輯</button>
 							<button id="updateFinish${comment.comId}" hidden="true"
-								class="updateButton m-2" onclick="confirm(this)">送出</button>
-							<a id="" class="deleteButton m-2"
-								href="${pageContext.request.contextPath}/forum/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
+								class="updateButton m-2" onclick="updateConfirm(this)">送出</button>
+							<a id="deleteButton${comment.comId}" class="deleteButton m-2"
+								href="${pageContext.request.contextPath}/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
+
 						</div>
 					</c:if>
 				</div>
@@ -472,46 +473,55 @@ body {
 			document.getElementById('updateFinish' + idNo).hidden = false;
 		};
 
-		var confirm = function(value) {
+		var updateConfirm = function(value) {
 			var updateMapping = 'updateCom'
 			var idNo = value.id.substring(12);
 			var textValue = $('#updateText' + idNo).val().trim();
-			console.log(textValue);
+			var reqParams = getReqParams(); // 取得網址的參數
+			var postId = reqParams.postID;
+			var pageNo = reqParams.pageNo;
 			bean = {
-				"comId":parseInt(idNo),
-				"comText":textValue,
-				"postID" :parseInt(getPostID())
+				"comId" : parseInt(idNo),
+				"comText" : textValue,
+				"postID" : parseInt(postId),
+				"pageNo" : parseInt(pageNo),
 			};
 			// bean.comId = parseInt(idNo);
 			// bean.comText = textValue;
 			// bean.postID = parseInt(getPostID());
 			console.log(bean);
-			// alert(JSON.stringify(bean));
 			ajaxPost(updateMapping, bean, function() {
 				console.log('傳送成功');
 			});
 
 		}
 
-		var getPostID = function() {
+		var getReqParams = function() {
+			var reqParams = {};
 			//先取得網址字串，假設此頁網址為「index.aspx?id=U001&name=GQSM」
 			var url = location.href;
 			//再來用去尋找網址列中是否有資料傳遞(QueryString)
 			if (url.indexOf('?') != -1) {
-				var id = "";
 				//在此直接將各自的參數資料切割放進ary中
 				var ary = url.split('?')[1].split('&');
+
 				//此時ary的內容為：
 				//ary[0] = 'id=U001'，ary[1] = 'name=GQSM'
 
 				//下迴圈去搜尋每個資料參數
 				for (i = 0; i <= ary.length - 1; i++) {
+					debugger;
 					//如果資料名稱為id的話那就把他取出來
 					if (ary[i].split('=')[0] == 'postID') {
-						id = ary[i].substring(7);
+						reqParams.postID = ary[i].substring(7);
 					}
+
+					if (ary[i].split('=')[0] == 'pageNo') {
+						reqParams.pageNo = ary[i].substring(7);
+					}
+
 				}
-				return id;
+				return reqParams;
 			}
 		}
 
@@ -532,22 +542,25 @@ body {
 						console.log('success');
 						return;
 					}
-// 					alert(data);
+					// 					alert(data);
 				},
 				error : function(data) {
 					console.log('fail');
-// 					alert("error")
+					// 					alert("error")
 				},
-				complete:function(data){
-					window.location.href="/Car98-mvc/talktalk?postID=" + postData.postID;
+				complete : function(data) {
+					window.location.href = "/Car98-mvc/talktalk?postID="
+							+ postData.postID + "&pageNo=" + postData.pageNo;
 				}
 			});
-				
+
 		};
 	</script>
 
 	<script src="${pageContext.request.contextPath}/javascript/talktalk.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/javascript/talktalk2.js"></script>
+	
+
 </body>
 </html>
