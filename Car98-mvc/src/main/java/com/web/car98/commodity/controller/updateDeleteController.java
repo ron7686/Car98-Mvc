@@ -117,6 +117,8 @@ public class updateDeleteController {
 		}
 
 		service.updateProducts(bb);
+		
+		
 		return "redirect:/comm/showUpdate";
 	}
 

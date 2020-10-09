@@ -69,7 +69,7 @@
             <c:forEach var="aBean" items="${abean}">
             <div class="col-2 border mt-2">
                 <a href="">
-                <c:if test="${!empty TalkBean.postFileName}"><img src="${pageContext.request.contextPath}/getpostPic?postID=${aBean.postID}" class="img-fluid topPic"  alt="" ></c:if></a>
+                <img src="${pageContext.request.contextPath}/getpostPic?postID=${aBean.postID}" class="img-fluid topPic"  alt="" ></a>
             </div>
             </c:forEach>
             
@@ -148,11 +148,12 @@
                 <c:forEach var="aBean" items="${abean}">
 				  <tr>
                         <td class="sort "><a href=""><i class="fab fa-discourse"></i>${aBean.postType}</a></td>
-                        <td class="pic "><c:if test="${!empty TalkBean.postFileName}"><img src="<%=path%>/getpostPic?postID=${aBean.postID}" class="contentimage " alt=""></c:if></td>
+<%--                         <td class="pic "><c:if test="${!empty TalkBean.postFileName}"><img src="<%=path%>/getpostPic?postID=${aBean.postID}" class="contentimage " alt=""></c:if></td> --%>
+						<td class="pic "><img src="<%=path%>/getpostPic?postID=${aBean.postID}" class="contentimage " alt=""></td>
                         <th class="title itemtitle "><a class="subtitle ml-3" href="<%=path%>/talktalk?postID=${aBean.postID}&pageNo=1">${aBean.postTitle}</a></th>
                         <td class="author"><a class="talkname" href="${pageContext.request.contextPath}/management?memId=${aBean.memberBean.id}">${aBean.memberBean.id}</a><br>${aBean.postTime} </td>
                         <td class="respon">${aBean.postCom}/<br>${aBean.postView}</td>
-                        <td class="lastupdate"><a class="talkname" href="">WayneChen</a><br><a  class="time" href="">昨天10:43pm</a></td>
+                        <td class="lastupdate"><a class="talkname" href="">${aBean.commentbean.memberBean.id}</a><br><a  class="time" href="">${aBean.commentbean.comTime}</a></td>
                   </tr>
 				 </c:forEach>
                 </table>

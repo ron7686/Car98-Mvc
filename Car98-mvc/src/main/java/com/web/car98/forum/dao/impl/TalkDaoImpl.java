@@ -45,16 +45,17 @@ public class TalkDaoImpl implements TalkDao  {
 		return li;
 	}
 
-	@Override
-	public List<TalkBean> getPage(List<TalkBean> li,int page){
-		int getpage=(page-1)*onepage;
-		List<TalkBean> lipage=new ArrayList<>();
-		for(int i=getpage;i<getpage+onepage&&i<li.size();i++) {
-			lipage.add(li.get(i));
-			lipage.get(i-getpage).setPostCom(li.get(i).getComment().size());
-		}
-		return lipage;
-	}
+//	@Override
+//	public List<TalkBean> getPage(List<TalkBean> li,int page){
+//		int getpage=(page-1)*onepage;
+//		List<TalkBean> lipage=new ArrayList<>();
+//		for(int i=getpage;i<getpage+onepage&&i<li.size();i++) {
+//			lipage.add(li.get(i));
+//			lipage.get(i-getpage).setPostCom(li.get(i).getComment().size());
+//			lipage.get(i-getpage).setCommentbean(li.get(i).getComment().get(li.get(i).getComment().size()-1));
+//		}
+//		return lipage;
+//	}
 	
 	@Override
 	@SuppressWarnings("unchecked")

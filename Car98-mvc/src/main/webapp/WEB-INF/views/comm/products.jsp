@@ -94,7 +94,7 @@
 										<div>
 											<h2>產品資料</h2>
 											<h3>${product.value.bidItemName}</h3>
-											<p>賣家ID: ${product.value.memName}</p>
+											<p>賣家: ${product.value.memName}</p>
 											<p>單價: ${product.value.bidPrice}</p>
 											<p>商品分類: ${product.value.bidItemBean.bidCategory}</p>
 											<p>上架時間: ${product.value.bidTime}</p>
