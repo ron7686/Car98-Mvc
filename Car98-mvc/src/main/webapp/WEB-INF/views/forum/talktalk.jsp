@@ -57,7 +57,7 @@
 }
 
 body {
-	background-image: url(<%=path%>/image/Desktop.png);
+	background-image: url(${pageContext.servletContext.contextPath}/image/olav-tvedt-yq-efMJMuPg-unsplash.jpg);
 	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -123,7 +123,7 @@ body {
 	<div class="container publish">
 		<c:if test="${pageNo <2}">
 			<div class="row ">
-				<div class="col-12 text-white">${TalkBean.postTitle}</div>
+				<div class="col-12 text-white postitle">${TalkBean.postTitle}</div>
 				<!-- 作者資訊 -->
 				<div class="col-2 author">
 					<br> <a href="#"><img class="photo"
@@ -213,7 +213,7 @@ body {
 	</div>
 	<!-- 	</div> -->
 
-	<div class="space mt-5"></div>
+	<p class="space mt-5"></p>
 
 	<!-- 留言內容 -->
 	<c:forEach var="comment" items="${CommentBean}">
@@ -387,18 +387,23 @@ body {
 	<!-- 留言輸入 -->
 	<div class="container">
 		<div class="row">
-			<div class="col-12 mt-2">
+			<div class="col-12 mt-1 message">
 				<form:form class="comment" method="POST"
 					modelAttribute="commentBean" enctype="multipart/form-data">
-					<form:textarea id="comments" path="comText" class="" cols="68"
-						rows="5" placeholder="請輸入內容...." />
-					<label class='control-label col-lg-5 col-lg-5'
+					<form:textarea id="comments" path="comText" class="mt-2 " cols="120"
+						rows="3" placeholder="請輸入內容...." />
+						
+					<label class='control-label'
 						for="commentMultipartFile"> 上傳圖片 </label>
-					<p class="mt-3">
+						
+					<form:input type="file" class="form-control-file float-right"
+						id="commentMultipartFile" path="commentMultipartFile" />
+					
+						
+					<p class="mt-3 ">
 						<img id="image" src="">
 					</p>
-					<form:input type="file" class="form-control-file"
-						id="commentMultipartFile" path="commentMultipartFile" />
+					
 					<input class="float-right" type="submit" value="送出" />
 				</form:form>
 
