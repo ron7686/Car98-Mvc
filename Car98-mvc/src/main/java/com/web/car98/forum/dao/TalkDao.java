@@ -10,8 +10,6 @@ public interface TalkDao {
 	void persist(TalkBean tb);
 
 	List<TalkBean> getAll();
-
-	List<TalkBean> getPage(List<TalkBean> li,int page);
 	
 	List<TalkBean> getAllByType(String type);
 
