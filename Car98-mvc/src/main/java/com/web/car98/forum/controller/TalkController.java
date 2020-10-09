@@ -54,7 +54,7 @@ public class TalkController {
 		}
 		int lastpage=talkservice.lastpage(type);
 		list = talkservice.getPageByType(pageNo, type);
-		System.out.println(list.get(3).getPostFileName()+"=============================");
+//		System.out.println(list.get(3).getPostFileName()+"=============================");
 		model.addAttribute("abean", list);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("lastPage", lastpage);
