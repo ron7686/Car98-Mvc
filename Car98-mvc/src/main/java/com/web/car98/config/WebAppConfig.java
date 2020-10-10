@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Configuration
 @EnableWebMvc
@@ -68,6 +69,13 @@ public class WebAppConfig implements WebMvcConfigurer {
 		resolver.setDefaultEncoding("UTF-8");
 		resolver.setMaxInMemorySize(81920000);
 		return resolver;
+	}
+	
+	@Bean 
+	public MappingJackson2JsonView jsonView() {
+	    MappingJackson2JsonView view = new MappingJackson2JsonView();
+	    view.setPrettyPrint(true);
+	    return view;
 	}
 
 }

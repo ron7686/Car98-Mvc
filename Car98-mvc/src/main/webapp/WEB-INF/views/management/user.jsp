@@ -236,6 +236,9 @@ label{
 .imgUser{
     width: 350px;
     height: 350px;
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center;
 }
 </style>
 
