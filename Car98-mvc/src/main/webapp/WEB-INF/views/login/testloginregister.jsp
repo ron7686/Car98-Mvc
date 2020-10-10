@@ -211,11 +211,11 @@ input {
 						 <a href="#" class="text-light ml-2">忘記密碼</a>
 					</div>
 
-					<div class="my-3 text-center">
-						<a href="#" class="text-light"><i
-							class="fab fa-facebook-square fa-2x"></i></a> <a href="#"
-							class="text-light"><i class="fab fa-google fa-2x"></i></a>
-					</div>
+<!-- 					<div class="my-3 text-center"> -->
+<!-- 						<a href="#" class="text-light"><i -->
+<!-- 							class="fab fa-facebook-square fa-2x"></i></a> <a href="#" -->
+<!-- 							class="text-light"><i class="fab fa-google fa-2x"></i></a> -->
+<!-- 					</div> -->
 				</form:form>
                     </div>
                     <div id="tab02" class="tab-inner text-white login animate__animated animate__fadeInDown">

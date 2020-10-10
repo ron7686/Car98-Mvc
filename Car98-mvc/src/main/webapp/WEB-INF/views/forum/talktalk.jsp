@@ -404,7 +404,7 @@ body {
 						<img id="image" src="">
 					</p>
 					
-					<input class="float-right" type="submit" value="送出" />
+					<button class="float-right" type="submit"  id="confirm">送出</button>
 				</form:form>
 
 			</div>

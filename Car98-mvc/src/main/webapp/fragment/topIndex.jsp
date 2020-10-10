@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{
-font-family: 'Sansita Swashed', cursive;
-font-weight:bolder;
+font-family: 'Roboto', sans-serif;
 }
 .ul{
 margin:0 auto;
@@ -28,46 +27,46 @@ margin-right:auto;
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 		<ul class="navbar-nav ul">
 
-			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='searchresource' /> "><i> Car好康 </i></a>
+			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='searchresource' /> "> Car好康</a>
 				</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link" style="font-size:25px;" href="<c:url value='/config/fuels'/>"
 				id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" 
-				aria-expanded="false"><i> Car方便 </i></a>
+				aria-expanded="false">Car方便</a>
 				
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" style="font-size:20px;" href="<c:url value='/config/fuels'/>"><i>加油紀錄</i></a>
-					<a class="dropdown-item" style="font-size:20px;" href="<c:url value='/config/fuels/add'/>"><i>新增加油</i></a>
-					<a class="dropdown-item" style="font-size:20px;" href="#"><i>保養紀錄</i></a>
+					<a class="dropdown-item" style="font-size:20px;" href="<c:url value='/config/fuels'/>">加油紀錄</a>
+					<a class="dropdown-item" style="font-size:20px;" href="<c:url value='/config/fuels/add'/>">新增加油</a>
+					<a class="dropdown-item" style="font-size:20px;" href="#">保養紀錄</a>
 				</div>
 			</li>
 			
-			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="${pageContext.request.contextPath}/carRent"><i>Car租車</i></a></li>
+			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="${pageContext.request.contextPath}/carRent">Car租車</a></li>
 			<li class="nav-item dropdown"><a class="nav-link" style="font-size:25px;" href="#" id="navbarDropdownMenuLink" role="button"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i>Car帳單</i></a>
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Car帳單</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					<a class="dropdown-item" style="font-size:20px;" href="https://www.mvdis.gov.tw/m3-emv-vil/vil/penaltyQueryPay"
-						target="_blank"><i>罰單查詢</i></a> <a class="dropdown-item" style="font-size:20px;" href="https://parkingfee.pma.gov.taipei/"
-						target="_blank"><i>停車費查詢</i></a>
+						target="_blank">罰單查詢</a> <a class="dropdown-item" style="font-size:20px;" href="https://parkingfee.pma.gov.taipei/"
+						target="_blank">停車費查詢</a>
 				</div>
 			</li>
 			<li class="nav-item dropdown">
 					<a class="nav-link" style="font-size:25px;" href="<c:url value='/comm/products'/>"
 					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><i>Car好買</i></a>
+					aria-expanded="false">Car好買</a>
 					
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" style="font-size:20px;" href="<c:url value='/comm/products'/>" ><i>拍賣</i></a> 
-					<a class="dropdown-item" style="font-size:20px;" href="<c:url value='/comm/products/add'/>" ><i>新增商品</i></a> 
-					<a class="dropdown-item" style="font-size:20px;" href="<c:url value='/comm/showUpdate'/>" ><i>編輯商品</i></a>
-					<a class="dropdown-item" style="font-size:20px;" href="<c:url value='/comm/orderList'/>" ><i>編輯訂單</i></a>
+					<a class="dropdown-item" style="font-size:20px;" href="<c:url value='/comm/products'/>" >拍賣</a> 
+					<a class="dropdown-item" style="font-size:20px;" href="<c:url value='/comm/products/add'/>" >新增商品</a> 
+					<a class="dropdown-item" style="font-size:20px;" href="<c:url value='/comm/showUpdate'/>" >編輯商品</a>
+					<a class="dropdown-item" style="font-size:20px;" href="<c:url value='/comm/orderList'/>" >編輯訂單</a>
 				</div>
 			</li>
 			<!-- <li class="nav-item"><a class="nav-link" href="<c:url value='/comm/products' />">Car好買</a></li> -->
-			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='/forum/talktop.do' />"><i>Car論壇</i></a></li>
+			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='/forum/talktop.do' />">Car論壇</a></li>
 
 			<c:if test="${empty LoginOK}">
-				<li class="nav-item active ml-auto"><a class="nav-link" style="font-size:25px;" href="<c:url value='/login' />"><i>登入</i>
+				<li class="nav-item active ml-auto"><a class="nav-link" style="font-size:25px;" href="<c:url value='/login' />"><i class="fas fa-sign-in-alt">登入</i>
 						<span class="sr-only">(current)</span>
 
 					</a></li>
@@ -81,7 +80,7 @@ margin-right:auto;
 	</div>
 
 			<c:if test="${ ! empty LoginOK }">
-				<a class="nav-link logout " style="font-size:25px;color:white;" href="<c:url value='/logout' />"><i>登出</i><span
+				<a class="nav-link logout " style="font-size:25px;color:white;" href="<c:url value='/logout' />">登出<span
 							class="sr-only">(current)</span>
 					</a>
 

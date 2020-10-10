@@ -121,7 +121,7 @@ body {
 							style="width: 100%" cols="100" rows="20"
 							placeholder="請輸入內容......"></form:textarea>
 						<form:errors class="errormsg" path="PostText" > </form:errors>
-						<input type="submit" value="發佈文章" class="publish">
+						<button type="submit"  class="publish" id="btnpublish">發佈文章</button>
 						
 					
 				</div>
@@ -150,6 +150,22 @@ body {
 		
 	</section>
 	<jsp:include page="/fragment/footer.jsp"></jsp:include>
+	<script>
+	$(document).ready(function() {
+		$("#btnpublish").on('click', function(e) {
+			if (confirm("確定發佈文章?")) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+
+	})
+
+
+
+
+	</script>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>

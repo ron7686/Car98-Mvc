@@ -15,7 +15,7 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
-    
+   <link rel="stylesheet" href="<%=path%>/css/animate.css">
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
@@ -62,7 +62,7 @@
         
       <div class="container text-white ">
         <div class="row">
-            <div class="col-12 head">
+            <div class="col-12 head" id="headtitle">
                 汽車交流論壇
             </div>
             <form action="" class="d-flex m-auto">
@@ -184,6 +184,7 @@
     ></script>
     <script src="http://maps.google.com/maps/api/js"></script>
     <script src="${pageContext.servletContext.contextPath}/javascript/BSTalk.js"></script>
-     
+    <script src="${pageContext.servletContext.contextPath}/javascript/textillate.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/javascript/lettering.js"></script>
       </body>
     </html>
