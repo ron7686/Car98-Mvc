@@ -234,8 +234,8 @@ label{
 	color: #FFF;
 }
 .imgUser{
-	width: 350px; 
-	height: 350px; 
+    width: 350px;
+    height: 350px;
 }
 </style>
 
@@ -261,7 +261,7 @@ label{
 					class="d-flex justify-content-center align-items-center mt-3 mb-3">
 					<label for="exampleFormControlFile1s" class="control-label">
 						<form:input type="file" path="memberMultipartFile" id="image_file"
-							style="display: none;" /> <form:errors
+							style="display: none;" /> <form:errors class="error"
 							path="memberMultipartFile" /> 
 						<img
 						style="border-radius: 50%;"
@@ -282,7 +282,7 @@ label{
 						<form:input type="text" path="name" class="text form-control input-w"
 							name="name" id="validationCustom01" placeholder="姓名"
 							required="required" />
-						<form:errors path="name" />
+						<form:errors class="error" path="name" />
 					</div>
 				</div>
 
@@ -293,7 +293,7 @@ label{
 						<form:input type="text" path="id" class="text form-control input-w"
 							name="memberId" id="validationCustom02" placeholder="暱稱"
 							required="required" />
-						<form:errors path="id" />
+						<form:errors class="error" path="id" />
 					</div>
 				</div>
 
@@ -304,7 +304,7 @@ label{
 						<form:input type="tel" class="form-control input-w text" path="phone"
 							name="phone" id="validationCustom02" placeholder="手機號碼"
 							pattern="[0-9]{4}[0-9]{3}[0-9]{3}" required="required" />
-						<form:errors path="phone" />
+						<form:errors class="error" path="phone" />
 					</div>
 				</div>
 
@@ -317,7 +317,7 @@ label{
 							aria-describedby="emailHelp" placeholder="Enter email"
 							pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
 							disabled="true" />
-						<form:errors path="email" />
+						<form:errors class="error" path="email" />
 					</div>
 				</div>
 
@@ -329,7 +329,7 @@ label{
 						<form:input type="date" class="text form-control input-w"
 							value="${memberBean.birth}" path="birth" name="birth"
 							disabled="true" />
-						<form:errors path="birth" />
+						<form:errors class="error" path="birth" />
 					</div>
 				</div>
 
@@ -342,7 +342,7 @@ label{
 								label="男" id="gender1" />
 							<form:radiobutton path="sex" class='radio-size mx-3' value="F"
 								label="女" id="gender2" />
-							<form:errors path="sex" />
+							<form:errors class="error" path="sex" />
 						</div>
 
 					</div>
@@ -383,20 +383,20 @@ label{
 								class="text form-control" value="" name="password"
 								required="required"
 								pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" />
-							<form:errors path="password" />
+							<form:errors class="error" path="password" />
 						</div>
 						<div class="form-group w-50 mx-auto">
 							<p class="text-white">確認密碼</p>
 							<form:input path="password1" type="password" id="pwdId"
 								class="text form-control" name="password1" required="required"
 								pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" />
-							<form:errors path="password1" />
+							<form:errors class="error" path="password1" />
 						</div>
 					</div>
 					<div class="modal-footer justify-content-center">
 						<button type="submit" class="signin btn btn-secondary"
 							onclick="myFunction()">送出</button>
-						<c:if test="${empty errors}">
+						<c:if test="${empty inputError}">
 							<div id="snackbar">修改成功</div>
 						</c:if>
 					</div>
@@ -441,7 +441,7 @@ label{
 			});
 		});
 	</script>
-	<c:if test="${empty errors}">
+	<c:if test="${empty inputError}">
 		<script>
 			function myFunction() {
 				var x = document.getElementById("snackbar");
@@ -452,7 +452,7 @@ label{
 			}
 		</script>
 	</c:if>
-	<c:if test="${!empty erros}">
+	<c:if test="${!empty inputError}">
 		<script>
 			$('#staticBackdrop').modal('show')
 		</script>

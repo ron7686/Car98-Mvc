@@ -77,10 +77,10 @@ public class GlobalService {
 		return buffer.toString();
 	}
 	
-	public static String getSHA1Endocing(String message) {
+	public static String getSHA512Endocing(String message) {
 		final StringBuffer buffer = new StringBuffer();
 		try {
-			MessageDigest md = MessageDigest.getInstance("SHA1");
+			MessageDigest md = MessageDigest.getInstance("SHA-512");
 			md.update(message.getBytes());
 			byte[] digest = md.digest();
 

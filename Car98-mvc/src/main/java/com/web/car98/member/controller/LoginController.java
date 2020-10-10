@@ -82,7 +82,7 @@ public class LoginController {
 			try {
 				mb = memberService.checkIdPassword(
 						loginBean.getUser(), 
-						GlobalService.getMD5Endocing(GlobalService.encryptString(loginBean.getPassword())));
+						GlobalService.getSHA512Endocing(GlobalService.encryptString(loginBean.getPassword())));
 				if(mb!=null) {
 					memberService.updateLoginTime(mb.getEmail());
 					model.addAttribute("LoginOK",mb);
