@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	// storeData();
+	storeData();
 	getAreaDataOptions();
 	getCarDataOptions();
 	$("#areaitem").select2({
@@ -126,13 +126,91 @@ function queryArea() {
 	})
 }
 
-// function storeData() {
-// 	$.ajax({
-// 		method: "GET",
-// 		url: "/Car98-mvc/getStoreList",
-// 		contentType: "application/json",
-// 		success: function (res) {
-// 		console.log(res);
-// 		}
-// 	})
-// }
+function storeData() {
+	$.ajax({
+		method: "GET",
+		url: "/Car98-mvc/getStoreList",
+		contentType: "application/json",
+		success: function (res) {
+		console.log(res);
+		}
+	})
+}
+
+var map;
+var geocoder;
+
+function initMap() {
+  var markers = [];
+  var infoWindows = [];
+  var loaction;
+  geocoder = new google.maps.Geocoder();
+  var info_config = [
+    '<span>租車行：</span>'+
+    '<h3>和運租車</h3>'+
+    '<span>地址：</span>'+
+    '<h3>台北市內湖區成功路三段96號</h3>',
+
+    '<span>租車行：</span>'+
+    '<h3>富豪租車</h3>'+
+    '<span>地址：</span>'+
+    '<h3>台北市內湖區民權東路六段13-9號</h3>',
+
+    '<span>租車行：</span>'+
+    '<h3>格上租車</h3>'+
+    '<span>地址：</span>'+
+    '<h3>台北市內湖區成功路四段188號</h3>'
+  ];
+
+  //建立地圖 marker 的集合
+  var marker_config = [{
+      address: '台北市內湖區成功路三段96號'
+  },{
+      address: '台北市內湖區民權東路六段13-9號'
+  },{
+      address: '台北市內湖區成功路四段188號'
+  }];  
+
+  //geocoder主程式
+  function _geocoder(address, callback){
+    geocoder.geocode({
+      address: address
+    }, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        loaction = results[0].geometry.location;
+        callback(loaction); //用一個 callback 就不用每次多寫上面這段
+      }
+    });
+  }
+
+  //使用地址或名稱標出位置
+  _geocoder('北科大',function(address){
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: address,
+      zoom: 17
+    });
+
+    //設定資訊視窗內容
+    info_config.forEach(function(e,i){
+      infoWindows[i] = new google.maps.InfoWindow({
+        content: e
+      });
+    });
+
+    //標出 marker
+    marker_config.forEach(function(e,i){
+      _geocoder(e.address,function(address){
+        var marker = {
+          position: address,
+          map:map,
+          zIndex:1
+        }
+        markers[i] = new google.maps.Marker(marker);
+        markers[i].setMap(map);
+        markers[i].addListener('click', function() {
+          infoWindows[i].open(map, markers[i]);
+        });
+      });
+    });
+  });
+}

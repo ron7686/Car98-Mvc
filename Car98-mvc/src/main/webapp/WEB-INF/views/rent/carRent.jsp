@@ -95,7 +95,7 @@ body {
 					<form action="">
 						價格： <select name="price" id="priceitem" style="width: 250px"
 							onchange="queryArea()">
-							<option value="isHoliday&min=0&max=99999">選擇價格</option>
+							<option value="isHoliday=true&isWeekday=true&min=0&max=99999">選擇價格</option>
 							<!--               <optgroup label="平日時租"> -->
 							<%--                 <option value="min<100">100以下</option> --%>
 							<%--                 <option value="min>101&max<300">101~300</option> --%>
@@ -109,16 +109,16 @@ body {
 							<!--                 <option value="holiHour4">701以上</option> -->
 							<!--               </optgroup> -->
 							<optgroup label="平日日租">
-								<option value="isWeekday&min=0&max=1000">1000以下</option>
-								<option value="isWeekday&min=1000&max=3000">1001~3000</option>
-								<option value="isWeekday&min=3000&max=4000">3001~4000</option>
-								<option value="isWeekday&min=4000&max=6000">4001以上</option>
+								<option value="isHoliday=false&isWeekday=true&min=0&max=1000">1000以下</option>
+								<option value="isHoliday=false&isWeekday=true&min=1000&max=3000">1001~3000</option>
+								<option value="isHoliday=false&isWeekday=true&min=3000&max=4000">3001~4000</option>
+								<option value="isHoliday=false&isWeekday=true&min=4000&max=6000">4001以上</option>
 							</optgroup>
 							<optgroup label="假日日租">
-								<option value="isHoliday&min=0&max=1000">1000以下</option>
-								<option value="isHoliday&min=1000&max=3000">1001~3000</option>
-								<option value="isHoliday&min=3000&max=4000">3001~4000</option>
-								<option value="isHoliday&min=4000&max=6000">4001以上</option>
+								<option value="isHoliday=true&isWeekday=false&min=0&max=1000">1000以下</option>
+								<option value="isHoliday=true&isWeekday=false&min=1000&max=3000">1001~3000</option>
+								<option value="isHoliday=true&isWeekday=false&min=3000&max=4000">3001~4000</option>
+								<option value="isHoliday=true&isWeekday=false&min=4000&max=6000">4001以上</option>
 							</optgroup>
 						</select>
 					</form>

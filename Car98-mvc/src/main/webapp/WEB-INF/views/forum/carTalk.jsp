@@ -15,7 +15,7 @@
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
-    
+   <link rel="stylesheet" href="<%=path%>/css/animate.css">
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
@@ -46,7 +46,7 @@
       background-size: cover;
     }
     body{
-      background-image: url(${pageContext.servletContext.contextPath}/image/Desktop.png);
+      background-image: url(${pageContext.servletContext.contextPath}/image/olav-tvedt-yq-efMJMuPg-unsplash.jpg);
       background-position: center;
       background-attachment: fixed;
       background-repeat:no-repeat;
@@ -60,16 +60,16 @@
       <!-- mainCar Area -->
       <section class="my-5">
         
-      <div class="container text-white">
+      <div class="container text-white ">
         <div class="row">
-            <div class="col-12 head">
+            <div class="col-12 head" id="headtitle">
                 汽車交流論壇
             </div>
             <form action="" class="d-flex m-auto">
             <c:forEach var="aBean" items="${abean}">
-            <div class="col-2 border">
+            <div class="col-2 border mt-2">
                 <a href="">
-                <c:if test="${!empty TalkBean.postFileName}"><img src="${pageContext.request.contextPath}/getpostPic?postID=${aBean.postID}" class="img-fluid topPic"  alt="" ></c:if></a>
+                <img src="${pageContext.request.contextPath}/getpostPic?postID=${aBean.postID}" class="img-fluid topPic"  alt="" ></a>
             </div>
             </c:forEach>
             
@@ -148,11 +148,12 @@
                 <c:forEach var="aBean" items="${abean}">
 				  <tr>
                         <td class="sort "><a href=""><i class="fab fa-discourse"></i>${aBean.postType}</a></td>
-                        <td class="pic "><c:if test="${!empty TalkBean.postFileName}"><img src="${pageContext.request.contextPath}/getpostPic?postID=${aBean.postID}" class="contentimage " alt=""></c:if></td>
-                        <th class="title itemtitle"><a class="subtitle" href="<%=path%>/talktalk?postID=${aBean.postID}&pageNo=1">${aBean.postTitle}</a></th>
+<%--                         <td class="pic "><c:if test="${!empty TalkBean.postFileName}"><img src="<%=path%>/getpostPic?postID=${aBean.postID}" class="contentimage " alt=""></c:if></td> --%>
+						<td class="pic "><img src="<%=path%>/getpostPic?postID=${aBean.postID}" class="contentimage " alt=""></td>
+                        <th class="title itemtitle "><a class="subtitle ml-3" href="<%=path%>/talktalk?postID=${aBean.postID}&pageNo=1">${aBean.postTitle}</a></th>
                         <td class="author"><a class="talkname" href="${pageContext.request.contextPath}/management?memId=${aBean.memberBean.id}">${aBean.memberBean.id}</a><br>${aBean.postTime} </td>
                         <td class="respon">${aBean.postCom}/<br>${aBean.postView}</td>
-                        <td class="lastupdate"><a class="talkname" href="">WayneChen</a><br><a  class="time" href="">昨天10:43pm</a></td>
+                        <td class="lastupdate"><a class="talkname" href="">${aBean.commentbean.memberBean.id}</a><br><a  class="time" href="">${aBean.commentbean.comTime}</a></td>
                   </tr>
 				 </c:forEach>
                 </table>
@@ -183,6 +184,7 @@
     ></script>
     <script src="http://maps.google.com/maps/api/js"></script>
     <script src="${pageContext.servletContext.contextPath}/javascript/BSTalk.js"></script>
-     
+    <script src="${pageContext.servletContext.contextPath}/javascript/textillate.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/javascript/lettering.js"></script>
       </body>
     </html>

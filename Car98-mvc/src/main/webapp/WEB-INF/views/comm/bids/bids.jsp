@@ -126,8 +126,7 @@
 			});
 		})
 	</script>
-	<!-- footer -->
-	<jsp:include page="/fragment/footer.jsp" />
+	
 
 
 

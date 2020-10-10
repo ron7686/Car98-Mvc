@@ -9,7 +9,7 @@ public interface TalkService {
 
 	void persist(TalkBean tb);
 
-	List<TalkBean> getPage(int page);
+	List<TalkBean> getPage(List<TalkBean> li,int page);
 	
 	List<TalkBean> getPageByType(int page,String type);
 	

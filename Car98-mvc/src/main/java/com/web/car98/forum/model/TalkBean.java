@@ -56,6 +56,8 @@ public class TalkBean implements Serializable {
 	private Integer PostView;
 	@Transient
 	private String Postmember;
+	@Transient
+	private CommentBean commentbean;
 	@Column(name = "PostType")
 	private String PostType;
 	@JsonIgnore
@@ -100,6 +102,14 @@ public class TalkBean implements Serializable {
 
 	public void setLikeOrHate(List<LikeOrHateBean> likeOrHate) {
 		this.likeOrHate = likeOrHate;
+	}
+
+	public CommentBean getCommentbean() {
+		return commentbean;
+	}
+
+	public void setCommentbean(CommentBean commentbean) {
+		this.commentbean = commentbean;
 	}
 
 	public MemberBean getMemberBean() {

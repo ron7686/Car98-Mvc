@@ -1,6 +1,8 @@
 package com.web.car98.forum.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.web.car98.forum.dao.TalkDao;
 import com.web.car98.forum.dao.impl.TalkDaoImpl;
+import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.model.TalkBean;
 import com.web.car98.forum.service.TalkService;
@@ -34,9 +37,16 @@ public class TalkServiceImpl implements TalkService  {
 		dao.persist(tb);
 	}
 	@Override
-	public List<TalkBean> getPage(int page){
-		List<TalkBean> li = dao.getAll();
-		return dao.getPage(li,page);
+	public List<TalkBean> getPage(List<TalkBean> li,int page){
+		int getpage=(page-1)*onepage;
+		List<TalkBean> lipage=new ArrayList<>();
+		for(int i=getpage;i<getpage+onepage&&i<li.size();i++) {
+			lipage.add(li.get(i));
+			lipage.get(i-getpage).setPostCom(li.get(i).getComment().size());
+			if(li.get(i).getComment().size()>0)
+			lipage.get(i-getpage).setCommentbean(li.get(i).getComment().get(li.get(i).getComment().size()-1));
+		}
+		return lipage;
 	}
 	
 	@Override
@@ -73,7 +83,7 @@ public class TalkServiceImpl implements TalkService  {
 		}else {
 			li = dao.getAllByType(type);
 		}
-		return dao.getPage(li,page);
+		return getPage(li,page);
 	}
 	@Override
 	public String intToType(String type) {

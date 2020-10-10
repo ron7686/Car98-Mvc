@@ -119,7 +119,7 @@ body {
 
 				<div class="form-group">
 					<label class='control-label col-lg-4 col-sm-6' for="bidStock">
-						數量 </label>
+						庫存 </label>
 					<div class='col-lg-10'>
 						<form:input id="bidStock" path="bidStock" type='text'
 							class='form:input-large' />
@@ -130,7 +130,7 @@ body {
 					<label class='control-label col-lg-4 col-sm-6' for="bidScore">
 						評價 </label>
 					<div class='col-lg-10'>
-						<form:input id="bidScore" path="bidScore" type='text'
+						<form:input id="bidScore" path="bidScore" type='hidden' value='10'
 							class='form:input-large' />
 						<form:errors path="bidScore" class='error' />
 					</div>
@@ -152,6 +152,15 @@ body {
 					<div class='col-lg-10'>
 						<form:input id="productImage" path="productImage" type='file'
 							class='form:input-large' />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-lg-6 col-sm-8 "  for='portfolioImage'>
+						上傳多張圖片 </label>
+					<div class="col-lg-10">
+						<form:input path="bidPicBean.picImages" id="pfdPic" type='file' multiple="multiple" class='form:input-large ' /> 
+				
 					</div>
 				</div>
 
