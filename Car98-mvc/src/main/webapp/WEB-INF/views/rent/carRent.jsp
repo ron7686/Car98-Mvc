@@ -133,39 +133,7 @@ body {
 				</div>
 
 				<div id="map"></div>
-				<script>
-					var map, geocoder;
 
-					function initMap() {
-						geocoder = new google.maps.Geocoder();
-						map = new google.maps.Map(document
-								.getElementById('map'), {
-							zoom : 17
-						});
-
-						var address = '台北市大安區忠孝東路四段1號';
-						geocoder.geocode({
-							'address' : address
-						},
-
-						// 					  for(var i=0; i<a.length; i++) {
-						// 					      geocoder.geocode({
-						// 					          'address': a[i]
-						// 					      }, 
-
-						function(results, status) {
-							if (status == 'OK') {
-								map.setCenter(results[0].geometry.location);
-								var marker = new google.maps.Marker({
-									map : map,
-									position : results[0].geometry.location
-								});
-							} else {
-								console.log(status);
-							}
-						});
-					}
-				</script>
 				<button id="buttontext">12358765432</button>
 			</div>
 		</div>
