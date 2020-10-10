@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	storeData();
+	// storeData();
 	getAreaDataOptions();
 	getCarDataOptions();
 	$("#areaitem").select2({
@@ -41,7 +41,7 @@ function getAreaDataOptions() {
 					);
 				}
 				$("optgroup[label=" + ado[i][0] + "]").append(
-					"<option value="+"city=" +ado[i][0]+"&district="+ ado[i][1] + ">"
+					"<option value="+"city=" +ado[i][0]+"&district="+ ado[i][1] + " >"
 					+ ado[i][1]
 					+ "</option>"
 				);
@@ -59,8 +59,8 @@ function getCarDataOptions() {
 		success: function (res) {
 		// console.log(res);
 		// console.log(res[0][0]);
-		// console.log(res[0][1]);
-		// console.log(res[0][2]);
+		// console.log(res[[0][1]);
+		// console.log(res[0]2]);
 			var last_brand = "";
 			for (i = 0; i < res.length; i++) {
 				if (last_brand != res[i][1]) {
@@ -121,26 +121,20 @@ function queryArea() {
 		method: "GET",
 		url: qUrl,
 		success: function (res) {
-
+			console.log(res);
+			initMap(res);
 		}
 	})
 }
 
-function storeData() {
-	$.ajax({
-		method: "GET",
-		url: "/Car98-mvc/getStoreList",
-		contentType: "application/json",
-		success: function (res) {
-		console.log(res);
-		}
-	})
+function showStore(storeList) {
+	
 }
 
 var map;
 var geocoder;
 
-function initMap() {
+function initMap(storeList) {
   var markers = [];
   var infoWindows = [];
   var loaction;
@@ -163,13 +157,13 @@ function initMap() {
   ];
 
   //建立地圖 marker 的集合
-  var marker_config = [{
-      address: '台北市內湖區成功路三段96號'
-  },{
-      address: '台北市內湖區民權東路六段13-9號'
-  },{
-      address: '台北市內湖區成功路四段188號'
-  }];  
+  var marker_config = [];  
+
+//   if(storeList){
+//     for storeList{
+//       marker_config.push({address:storeList[i].address});
+//     }
+//   }
 
   //geocoder主程式
   function _geocoder(address, callback){
@@ -184,7 +178,12 @@ function initMap() {
   }
 
   //使用地址或名稱標出位置
-  _geocoder('北科大',function(address){
+//   cPosition = "總統府";
+//   if(storeList){
+//   	cPosition = storeList[0].address
+//   }
+//   _geocoder(cPosition,function(address){
+  _geocoder("北科大",function(address){	  
     map = new google.maps.Map(document.getElementById('map'), {
       center: address,
       zoom: 17

@@ -148,9 +148,9 @@ body {
 							'address' : address
 						},
 
-						// 					  for(var x=0; x<a.length; x++) {
+						// 					  for(var i=0; i<a.length; i++) {
 						// 					      geocoder.geocode({
-						// 					          'address': a[x]
+						// 					          'address': a[i]
 						// 					      }, 
 
 						function(results, status) {
@@ -166,6 +166,7 @@ body {
 						});
 					}
 				</script>
+				<button id="buttontext">12358765432</button>
 			</div>
 		</div>
 		</div>
@@ -178,6 +179,26 @@ body {
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQYmuo5h9pGY0c83EpRPJKTSUoLsk64FA&callback=initMap"
 		async defer></script>
+	<script>
+	// $('#buttontext').click(function(e){
+	// 	let city = this.parentNode.parentNode.childNodes[1].innerHTML;;
+	// 	alert(city);
+	// 	$.ajax({
+	// 		method: "GET",
+	// 		url: "/Car98-mvc/getStoreList?isHoliday="+true+"&isWeekday="+true+"&min="+0+"&max="+99999,
+	// 		contentType: "application/json",
+	// 		success: function (res) {
+	// 			alert("Hello");
+	// 			alert(res);
+	// 		},complete: function (res) {
+	// 			alert("Hello");
+	// 			let s= JSON.stringify(res);
+	// 			alert(s);
+	// 		}
+	// 	});
+	// 	alert("Heelo");
+	// });
+	</script>
 </body>
 
 </html>

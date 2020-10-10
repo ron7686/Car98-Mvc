@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.web.car98.rentcar.dao.RentCarDao;
 import com.web.car98.rentcar.model.CarTypeBean;
 import com.web.car98.rentcar.model.RentCarBean;
+import com.web.car98.rentcar.model.RentCarBean2;
 
 @SuppressWarnings("unchecked")
 @Repository
@@ -20,12 +21,14 @@ public class RentCarDaoImpl implements RentCarDao {
 	SessionFactory factory;
 	
 	@Override //用價格取得店家資料
-	public Collection<CarTypeBean> queryStoreHoliday(String city, String district, boolean isHoliday, boolean isWeekday, Integer min,Integer max,String carBrand,String carType) {
+	public Collection<RentCarBean2> queryStoreHoliday(String city, String district, boolean isHoliday, boolean isWeekday, Integer min,Integer max,String carBrand,String carType) {
 
+//		String sql = "SELECT A.*,B.city,B.district,B.store,B.street FROM cartype A LEFT JOIN rentcar B ON A.rentId = B.rentId "
+//				+ "WHERE B.city LIKE :city AND B.district LIKE :district AND (A.holidayDaily BETWEEN :min AND :max) AND (A.carBrand = :carBrand AND A.carType= :carType);";
 		String sql = "SELECT A.*,B.city,B.district,B.store,B.street FROM cartype A LEFT JOIN rentcar B ON A.rentId = B.rentId "
-				+ "WHERE B.city LIKE :city AND B.district LIKE :district AND (A.holidayDaily BETWEEN :min AND :max) AND (A.carBrand = :carBrand AND A.carType= :carType);";
+				+ "WHERE B.city LIKE :city AND B.district LIKE :district AND (A.holidayDaily BETWEEN :min AND :max) AND (A.carBrand LIKE :carBrand AND A.carType LIKE :carType);";
 		Session session = factory.getCurrentSession();
-		Collection<CarTypeBean> carTypeBean = session.createSQLQuery(sql)
+		Collection<RentCarBean2> carTypeBean = session.createNativeQuery(sql,RentCarBean2.class)
 				.setParameter("city", city)
 				.setParameter("district", district)
 				.setParameter("min", min)
@@ -36,11 +39,11 @@ public class RentCarDaoImpl implements RentCarDao {
 		return carTypeBean;
 	}
 	
-	public Collection<CarTypeBean> queryStoreWeekday(String city, String district,boolean isHoliday, boolean isWeekday, Integer min,Integer max,String carBrand,String carType) {
+	public Collection<RentCarBean2> queryStoreWeekday(String city, String district,boolean isHoliday, boolean isWeekday, Integer min,Integer max,String carBrand,String carType) {
 		String sql = "SELECT A.*,B.city,B.district,B.store,B.street FROM cartype A LEFT JOIN rentcar B ON A.rentId = B.rentId "
-				+ "WHERE B.city LIKE :city AND B.district LIKE :district AND (A.weekdayDaily BETWEEN :min AND :max) AND (A.carBrand = :carBrand AND A.carType= :carType);";
+				+ "WHERE B.city LIKE :city AND B.district LIKE :district AND (A.weekdayDaily BETWEEN :min AND :max) AND (A.carBrand LIKE :carBrand AND A.carType LIKE :carType);";
 		Session session = factory.getCurrentSession();
-		Collection<CarTypeBean> carTypeBean = session.createSQLQuery(sql)
+		Collection<RentCarBean2> carTypeBean = session.createNativeQuery(sql,RentCarBean2.class)
 				.setParameter("city", city)
 				.setParameter("district", district)
 				.setParameter("min", min)
@@ -52,11 +55,11 @@ public class RentCarDaoImpl implements RentCarDao {
 		return carTypeBean;
 	}
 	
-	public Collection<CarTypeBean> queryStoreAllday(String city, String district, boolean isHoliday, boolean isWeekday, Integer min, Integer max, String carBrand, String carType) {
+	public Collection<RentCarBean2> queryStoreAllday(String city, String district, boolean isHoliday, boolean isWeekday, Integer min, Integer max, String carBrand, String carType) {
 		String sql = "SELECT A.*,B.city,B.district,B.store,B.street FROM cartype A LEFT JOIN rentcar B ON A.rentId = B.rentId "
-				+ "WHERE B.city LIKE :city AND B.district LIKE :district AND (A.holidayDaily BETWEEN :min AND :max) AND (A.weekdayDaily BETWEEN :min AND :max) AND (A.carBrand = :carBrand AND A.carType= :carType);";
+				+ "WHERE B.city LIKE :city AND B.district LIKE :district AND (A.holidayDaily BETWEEN :min AND :max) AND (A.weekdayDaily BETWEEN :min AND :max) AND (A.carBrand LIKE :carBrand AND A.carType LIKE :carType);";
 		Session session = factory.getCurrentSession();
-		Collection<CarTypeBean> carTypeBean = session.createSQLQuery(sql)
+		Collection<RentCarBean2> carTypeBean = session.createNativeQuery(sql,RentCarBean2.class)
 				.setParameter("city", city)
 				.setParameter("district", district)
 				.setParameter("min", min)
