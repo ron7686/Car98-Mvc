@@ -76,12 +76,16 @@
 			<div class="row">
 				<div class="col-md-4">
 					<div class="information-card">
-						<p class="information-card-text">Lorem ipsum dolor sit, amet
-							consectetur adipisicing elit. Maxime,Lorem ipsum dolor sit, amet
-							consectetur adipisicing elit. Maxime.</p>
+							<c:forEach var="fb" items="${fuelPriceBean}">
+						<marquee class="mt-3">
+								${fb.type}    ${fb.typePrice}<br>
+						</marquee>
+							</c:forEach>
 						<div class="information-card-info text-center">
+						<a href="http://localhost:8080/Car98-mvc/config/fuels">
 							<img src="./image/fuel_PNG28.png" alt=""
 								class="information-card-img">
+							</a>
 							<h4 class="information-card-name">Car方便</h4>
 							<div class="information-card-position">今日油價</div>
 						</div>

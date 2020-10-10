@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 
@@ -19,11 +20,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.web.car98.conven.model.FuelPriceBean;
+import com.web.car98.conven.service.FuelService;
 import com.web.car98.member.model.MemberBean;
 import com.web.car98.member.service.MemberService;
 
 @Controller
+@SessionAttributes({"fuelPriceBean"})
 public class InitController {
 	
 	@Autowired
@@ -32,8 +37,13 @@ public class InitController {
 	@Autowired
 	ServletContext servletContext;
 	
+	@Autowired
+	FuelService fuelService;
+	
 	@RequestMapping("/")
 	public String index(Model model) {
+		List<FuelPriceBean> fp = fuelService.getTypeList();
+		model.addAttribute("fuelPriceBean",fp);
 		return "index";
 	}
 	
