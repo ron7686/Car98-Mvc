@@ -126,7 +126,7 @@ body {
 				<div class="col-12 text-white postitle">${TalkBean.postTitle}</div>
 				<!-- 作者資訊 -->
 				<div class="col-2 author">
-					<br> <a href="#"><img class="photo"
+					<br> <a href="<%=path%>/management?memId=${TalkBean.memberBean.memId}"><img class="photo"
 						src='${pageContext.request.contextPath}/getPostMemberImage?postID=${TalkBean.postID}'></a>
 					<div class="">${TalkBean.memberBean.id}</div>
 					<div class="account">${TalkBean.memberBean.email}</div>
@@ -217,7 +217,7 @@ body {
 
 	<!-- 留言內容 -->
 	<c:forEach var="comment" items="${CommentBean}">
-		<div class="container">
+		<div class="container" id="talkcontent">
 			<div class="row">
 				<!-- 作者資訊 -->
 				<div class="col-2 author">
@@ -465,6 +465,12 @@ body {
 					return false;
 				}
 			});
+				
+			
+
+
+
+			
 
 		})
 

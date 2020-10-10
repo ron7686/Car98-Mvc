@@ -153,7 +153,7 @@
                         <th class="title itemtitle "><a class="subtitle ml-3" href="<%=path%>/talktalk?postID=${aBean.postID}&pageNo=1">${aBean.postTitle}</a></th>
                         <td class="author"><a class="talkname" href="${pageContext.request.contextPath}/management?memId=${aBean.memberBean.id}">${aBean.memberBean.id}</a><br>${aBean.postTime} </td>
                         <td class="respon">${aBean.postCom}/<br>${aBean.postView}</td>
-                        <td class="lastupdate"><a class="talkname" href="">${aBean.commentbean.memberBean.id}</a><br><a  class="time" href="">${aBean.commentbean.comTime}</a></td>
+                        <td class="lastupdate"><a class="talkname" href="<%=path%>/management?memId=${aBean.commentbean.memberBean.id}">${aBean.commentbean.memberBean.id}</a><br><a  class="time" href="">${aBean.commentbean.comTime}</a></td>
                   </tr>
 				 </c:forEach>
                 </table>

@@ -150,6 +150,7 @@ body {
 		
 	</section>
 	<jsp:include page="/fragment/footer.jsp"></jsp:include>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	<script>
 	$(document).ready(function() {
 		$("#btnpublish").on('click', function(e) {
@@ -166,7 +167,6 @@ body {
 
 
 	</script>
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>
 	<script src="${pageContext.servletContext.contextPath}/javascript/talkContent2.js"></script>

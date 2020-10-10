@@ -34,7 +34,7 @@
 	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/SearchResource.css">
 
-<script src="http://maps.google.com/maps/api/js"></script>
+
 <script src="${pageContext.servletContext.contextPath}/javascript/SearchResource.js"></script>
 <style>
 #carouselExampleFade .carousel-inner .carousel-item img {
@@ -110,14 +110,50 @@ body {
 					</form>
 					<!-- <button><i class="fas fa-search-location"></i></button> -->
 				</div>
-				<div class="col-12 mt-2">
-					<iframe src="https://maps.google.com?output=embed&q=北科大"
-						width="100%" height="460"> </iframe>
+				<div class="col-12 mt-2" id="map">
+					
 				</div>
 			</div>
 		</div>
 	</section>
 	<jsp:include page="/fragment/footer.jsp"></jsp:include>
+					
+<script>
+var map, geocoder;
 
+					function initMap() {
+						geocoder = new google.maps.Geocoder();
+						map = new google.maps.Map(document
+								.getElementById('map'), {
+							zoom : 17
+						});
+
+						var address = '台北市大安區忠孝東路四段1號';
+						geocoder.geocode({
+							'address' : address
+						},
+
+						// 					  for(var x=0; x<a.length; x++) {
+						// 					      geocoder.geocode({
+						// 					          'address': a[x]
+						// 					      }, 
+
+						function(results, status) {
+							if (status == 'OK') {
+								map.setCenter(results[0].geometry.location);
+								var marker = new google.maps.Marker({
+									map : map,
+									position : results[0].geometry.location
+								});
+							} else {
+								console.log(status);
+							}
+						});
+					}
+
+					</script>
+					<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQYmuo5h9pGY0c83EpRPJKTSUoLsk64FA&callback=initMap"
+		async defer></script>
 </body>
 </html>
