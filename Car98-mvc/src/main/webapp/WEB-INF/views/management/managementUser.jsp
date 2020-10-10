@@ -263,7 +263,7 @@ label{
 						<form:input type="file" path="memberMultipartFile" id="image_file"
 							style="display: none;" /> <form:errors
 							path="memberMultipartFile" /> <img
-						style="width: 350px; height: 350px; border-radius: 50%;"
+						style="width: 350px; height: 350px; border-radius: 50%; object-fit:cover;"
 						src='${pageContext.request.contextPath}/init/getMemberImage?id=${memId}'
 						id="show_image">
 					</label>
