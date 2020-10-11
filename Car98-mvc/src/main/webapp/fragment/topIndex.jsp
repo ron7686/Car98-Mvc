@@ -16,7 +16,7 @@ margin-right:auto;
 </style>
 <nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
 	<a class="navbar-brand" href="<c:url value='/' />"><img
-			src="${pageContext.servletContext.contextPath}/image/car98logo.png" width="60" height="60" alt=""></a>
+			src="${pageContext.servletContext.contextPath}/image/car98logo.png" width="60" height="60" style=""alt=""></a>
 			
 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
 		data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -87,7 +87,7 @@ margin-right:auto;
 			</c:if>
 	<c:if test="${! empty LoginOK }">
 		<a class="navbar-brand" href="<c:url value='/management' />"><img
-				style="width: 50px; height: 50px; border-radius: 50%;"
+				style="width: 50px; height: 50px; object-fit:cover; border-radius: 50%;"
 				src='${pageContext.request.contextPath}/init/getMemberImage?id=${LoginOK.memId}'>
 		</a>
 

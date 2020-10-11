@@ -236,6 +236,7 @@ label{
 .imgUser{
     width: 350px;
     height: 350px;
+    object-fit:cover;
 }
 </style>
 
@@ -264,7 +265,7 @@ label{
 							style="display: none;" /> <form:errors class="error"
 							path="memberMultipartFile" /> 
 						<img
-						style="border-radius: 50%;"
+						style="border-radius: 50%; cover"
 						class="imgUser"
 						src='${pageContext.request.contextPath}/init/getMemberImage?id=${LoginOK.memId}'
 						id="show_image">

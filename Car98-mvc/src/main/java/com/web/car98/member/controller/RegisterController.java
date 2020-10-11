@@ -144,9 +144,10 @@ public class RegisterController {
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
 		}
-		SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
-		rs.send("Car98會員註冊成功", "歡迎來到Car98，\n會員"+mb.getName()+"您於"+sdf.format(mb.getMeCreate())+"的時候完成註冊。\n您的註冊帳號為"+mb.getEmail()
-		+"\n如有任何問題，請於上班時間與客服聯繫，謝謝!", mb.getEmail());
+		new Thread(()->{
+			rs.send("Car98會員註冊成功", "歡迎來到Car98，\n會員"+mb.getName()+"您於"+mb.getMeCreate()+"的時候完成註冊。\n您的註冊帳號為"+mb.getEmail()
+			+"\n如有任何問題，請於上班時間與客服聯繫，謝謝!", mb.getEmail());
+		}).start();
 		return "redirect:/";
 	}
 
@@ -213,8 +214,10 @@ public class RegisterController {
 
 			memberService.updateUserData(mb);
 		}
-		rs.send("Car98會員修改密碼成功", "您於"+mb.getLoginTime()+"的時候完成密碼修改。"
-		+"\n如有任何問題，請於上班時間與客服聯繫，謝謝!", mb.getEmail());
+		new Thread(()->{
+			rs.send("Car98會員修改密碼成功", "您於"+mb.getLoginTime()+"的時候完成密碼修改。"
+					+"\n如有任何問題，請於上班時間與客服聯繫，謝謝!", mb.getEmail());
+		  }).start();
 		return "redirect:/management";
 	}
 
@@ -222,4 +225,6 @@ public class RegisterController {
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true, 10));
 	}
+	
+
 }

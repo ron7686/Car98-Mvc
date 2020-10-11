@@ -132,40 +132,11 @@ body {
 					</form>
 				</div>
 
-				<div id="map" class="mt-3"></div>
-				<script>
-					var map, geocoder;
 
-					function initMap() {
-						geocoder = new google.maps.Geocoder();
-						map = new google.maps.Map(document
-								.getElementById('map'), {
-							zoom : 17
-						});
+				<div id="map"></div>
 
-						var address = '台北市大安區忠孝東路四段1號';
-						geocoder.geocode({
-							'address' : address
-						},
 
-						// 					  for(var x=0; x<a.length; x++) {
-						// 					      geocoder.geocode({
-						// 					          'address': a[x]
-						// 					      }, 
-
-						function(results, status) {
-							if (status == 'OK') {
-								map.setCenter(results[0].geometry.location);
-								var marker = new google.maps.Marker({
-									map : map,
-									position : results[0].geometry.location
-								});
-							} else {
-								console.log(status);
-							}
-						});
-					}
-				</script>
+				<button id="buttontext">12358765432</button>
 			</div>
 		</div>
 		</div>
@@ -178,6 +149,26 @@ body {
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQYmuo5h9pGY0c83EpRPJKTSUoLsk64FA&callback=initMap"
 		async defer></script>
+	<script>
+	// $('#buttontext').click(function(e){
+	// 	let city = this.parentNode.parentNode.childNodes[1].innerHTML;;
+	// 	alert(city);
+	// 	$.ajax({
+	// 		method: "GET",
+	// 		url: "/Car98-mvc/getStoreList?isHoliday="+true+"&isWeekday="+true+"&min="+0+"&max="+99999,
+	// 		contentType: "application/json",
+	// 		success: function (res) {
+	// 			alert("Hello");
+	// 			alert(res);
+	// 		},complete: function (res) {
+	// 			alert("Hello");
+	// 			let s= JSON.stringify(res);
+	// 			alert(s);
+	// 		}
+	// 	});
+	// 	alert("Heelo");
+	// });
+	</script>
 </body>
 
 </html>

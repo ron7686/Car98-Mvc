@@ -147,7 +147,7 @@
                 <table class="maintalk mt-1 talk">
                 <c:forEach var="aBean" items="${abean}">
 				  <tr>
-                        <td class="sort "><a href=""><i class="fab fa-discourse"></i>${aBean.postType}</a></td>
+                        <td class="sort "><a href="<%=path%>/forum/talktop.do?type=${aBean.postType}"><i class="fab fa-discourse"></i>${aBean.postType}</a></td>
 <%--                         <td class="pic "><c:if test="${!empty TalkBean.postFileName}"><img src="<%=path%>/getpostPic?postID=${aBean.postID}" class="contentimage " alt=""></c:if></td> --%>
 						<td class="pic "><img src="<%=path%>/getpostPic?postID=${aBean.postID}" class="contentimage " alt=""></td>
                         <th class="title itemtitle "><a class="subtitle ml-3" href="<%=path%>/talktalk?postID=${aBean.postID}&pageNo=1">${aBean.postTitle}</a></th>
