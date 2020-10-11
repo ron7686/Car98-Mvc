@@ -110,7 +110,7 @@ body {
 					</form>
 					<!-- <button><i class="fas fa-search-location"></i></button> -->
 				</div>
-				<div class="col-12 mt-2" id="map">
+				<div class="border" id="gmap">
 					
 				</div>
 			</div>
@@ -119,41 +119,36 @@ body {
 	<jsp:include page="/fragment/footer.jsp"></jsp:include>
 					
 <script>
-var map, geocoder;
+					var map, geocoder;
 
 					function initMap() {
 						geocoder = new google.maps.Geocoder();
 						map = new google.maps.Map(document
-								.getElementById('map'), {
+								.getElementById('gmap'), {
 							zoom : 17
 						});
 
-						var address = '台北市大安區忠孝東路四段1號';
-						geocoder.geocode({
-							'address' : address
-						},
-
-						// 					  for(var x=0; x<a.length; x++) {
-						// 					      geocoder.geocode({
-						// 					          'address': a[x]
-						// 					      }, 
-
-						function(results, status) {
-							if (status == 'OK') {
-								map.setCenter(results[0].geometry.location);
-								var marker = new google.maps.Marker({
-									map : map,
-									position : results[0].geometry.location
-								});
-							} else {
-								console.log(status);
-							}
-						});
-					}
+// 						var address = '台北市大安區忠孝東路四段1號';
+// 						geocoder.geocode({
+// 							'address' : address
+// 						},
+// 						function(results, status) {
+// 							if (status == 'OK') {
+// 								map.setCenter(results[0].geometry.location);
+// 								var marker = new google.maps.Marker({
+// 									map : map,
+// 									position : results[0].geometry.location
+// 								});
+// 							} else {
+// 								console.log(status);
+// 							}
+// 						});
+						
+					};
 
 					</script>
 					<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQYmuo5h9pGY0c83EpRPJKTSUoLsk64FA&callback=initMap"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf6FBj4puvo0abp3Imf0a6FOBrAKUsS0U&callback=initMap"
 		async defer></script>
 </body>
 </html>

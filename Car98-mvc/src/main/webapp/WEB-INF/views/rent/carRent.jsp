@@ -132,7 +132,7 @@ body {
 					</form>
 				</div>
 
-				<div id="map"></div>
+				<div id="map" class="mt-3"></div>
 				<script>
 					var map, geocoder;
 
