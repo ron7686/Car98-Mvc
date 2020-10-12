@@ -199,7 +199,7 @@ body {
 							src="${pageContext.request.contextPath}/getpostPic?postID=${TalkBean.postID}"
 							alt="">
 					</c:if>
-					<a type="submit"
+					<a type="submit" 
 						href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
 				</div>
 
@@ -316,7 +316,7 @@ body {
 
 
 						<c:if test="${!empty comment.fileName}">
-							<img class="commentPic"
+							<img class="commentPic mb-3" 
 								src='${pageContext.request.contextPath}/getComImage?id=${LoginOK.memId}&comId=${comment.comId}'>
 						</c:if>
 					</div>
