@@ -20,4 +20,9 @@ public class SearchResourceController {
 		return new ModelAndView("/searchresource/searchresource");
 	}
 	
+	
+	@GetMapping("/searchresource/map")
+	public ModelAndView getsearchresourcemap(Model model) {
+		return new ModelAndView("/searchresource/newmap");
+	}
 }

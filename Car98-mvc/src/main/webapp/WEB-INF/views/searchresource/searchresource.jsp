@@ -32,10 +32,17 @@
 	crossorigin="anonymous" />
 <script
 	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/SearchResource.css">
- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.servletContext.contextPath}/css/SearchResource.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
 
-<script src="${pageContext.servletContext.contextPath}/javascript/SearchResource.js"></script>
+<script
+	src="${pageContext.servletContext.contextPath}/javascript/SearchResource.js"></script>
+	<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQYmuo5h9pGY0c83EpRPJKTSUoLsk64FA&callback=initAutocomplete&libraries=places&v=weekly"
+      defer
+    ></script>
 <style>
 #carouselExampleFade .carousel-inner .carousel-item img {
 	height: 720px;
@@ -61,7 +68,8 @@
 }
 
 body {
-	background-image: url(${pageContext.servletContext.contextPath}/image/Desktop.png);
+	background-image:
+		url(${pageContext.servletContext.contextPath}/image/Desktop.png);
 	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -81,79 +89,87 @@ body {
 				</div>
 
 				<div class="col-md-12 mb-2">
-					<form action="" class="searchitem">
-						搜尋： <input type="text" class="form-control" ref="site" v-model="site">
-							
-					</form>
-				</div>
-				
-				<div class="" id="map" class="mt-2" style="width:100%;height:500px;">
+					
+						搜尋：<input id="pac-input" class="controls" type="text"
+							placeholder="請輸入搜尋項目">
+
 					
 				</div>
-				
+
+				<div class="" id="map" class="mt-2"
+					style="width: 100%; height: 500px;"></div>
+
 			</div>
 		</div>
 	</section>
 	<jsp:include page="/fragment/footer.jsp"></jsp:include>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQYmuo5h9pGY0c83EpRPJKTSUoLsk64FA&libraries=places"></script>
-   
-    <script>
-      const googleMap = new Vue({
-        el: '#app',
-        data: {
-          map: null,
-          autocomplete: null,
-          site: '', // place API要綁定的搜尋框
-          place: null // 存place確定後回傳的資料
-        },
-        methods: {
-          // init google map
-          initMap() {
-            let location = 
-            		{ lat: 25.042576, lng: 121.535654 };
-            this.map = new google.maps.Map(document.getElementById('map'), {
-              center: location,
-              zoom: 16
-            });
-          },
-          // 地址自動完成 + 地圖的中心移到輸入結果的地址上
-          siteAuto() {
-            let options = {
-              componentRestrictions: { country: 'tw' } // 限制在台灣範圍
-            };
-            this.autocomplete = new google.maps.places.Autocomplete(this.$refs.site, options);
-            this.autocomplete.addListener('place_changed', () => {
-              this.place = this.autocomplete.getPlace();
-              if(this.place.geometry) {
-                let searchCenter = this.place.geometry.location;
-                this.map.panTo(searchCenter); // panTo是平滑移動、setCenter是直接改變地圖中心
-                
-                // 放置標記
-                let marker = new google.maps.Marker({
-                  position: searchCenter,
-                  map: this.map
-                });
-                // info window
-                let infowindow = new google.maps.InfoWindow({
-                  content: this.place.formatted_address
-                });
-                infowindow.open(this.map, marker);
-              }
-            });
-          }
-        },
-        mounted() {
-          window.addEventListener('load', () => {
-            this.initMap();
-            this.siteAuto();
-          });
-        }
-      })
+	
+	<script>
+    function initAutocomplete() {
+    	  const map = new google.maps.Map(document.getElementById("map"), {
+    	    center: { lat: 25.042576, lng: 121.535654 },
+    	    zoom: 13,
+    	    mapTypeId: "roadmap",
+    	  });
+    	  // Create the search box and link it to the UI element.
+    	  const input = document.getElementById("pac-input");
+    	  const searchBox = new google.maps.places.SearchBox(input);
+    	  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    	  // Bias the SearchBox results towards current map's viewport.
+    	  map.addListener("bounds_changed", () => {
+    	    searchBox.setBounds(map.getBounds());
+    	  });
+    	  let markers = [];
+    	  // Listen for the event fired when the user selects a prediction and retrieve
+    	  // more details for that place.
+    	  searchBox.addListener("places_changed", () => {
+    	    const places = searchBox.getPlaces();
+
+    	    if (places.length == 0) {
+    	      return;
+    	    }
+    	    // Clear out the old markers.
+    	    markers.forEach((marker) => {
+    	      marker.setMap(null);
+    	    });
+    	    markers = [];
+    	    // For each place, get the icon, name and location.
+    	    const bounds = new google.maps.LatLngBounds();
+    	    places.forEach((place) => {
+    	      if (!place.geometry) {
+    	        console.log("Returned place contains no geometry");
+    	        return;
+    	      }
+    	      const icon = {
+    	        url: place.icon,
+    	        size: new google.maps.Size(71, 71),
+    	        origin: new google.maps.Point(0, 0),
+    	        anchor: new google.maps.Point(17, 34),
+    	        scaledSize: new google.maps.Size(25, 25),
+    	      };
+    	      // Create a marker for each place.
+    	      markers.push(
+    	        new google.maps.Marker({
+    	          map,
+    	          icon,
+    	          title: place.name,
+    	          position: place.geometry.location,
+    	        })
+    	      );
+
+    	      if (place.geometry.viewport) {
+    	        // Only geocodes have viewport.
+    	        bounds.union(place.geometry.viewport);
+    	      } else {
+    	        bounds.extend(place.geometry.location);
+    	      }
+    	    });
+    	    map.fitBounds(bounds);
+    	  });
+    	}
+    	      
     </script>
-<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQYmuo5h9pGY0c83EpRPJKTSUoLsk64FA&callback=initMap"
-		async defer></script>
-					
+	
 
 </body>
 </html>

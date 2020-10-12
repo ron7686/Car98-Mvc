@@ -133,13 +133,16 @@ body {
 				</div>
 
 
-				<div id="map" class="mt-2"></div>
 
+			
+				<div class="mx-auto mt-3">
+					<input id="result" class="text-white bg-dark" type="hidden" disabled="disabled">
+				</div>	
+				<div id="map" class="mt-3"></div>
 
-				<button id="buttontext">12358765432</button>
 			</div>
 		</div>
-		</div>
+		
 	</section>
 	<!-- footer -->
 	<jsp:include page="/fragment/footer.jsp"></jsp:include>
@@ -149,26 +152,6 @@ body {
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQYmuo5h9pGY0c83EpRPJKTSUoLsk64FA&callback=initMap"
 		async defer></script>
-	<script>
-	// $('#buttontext').click(function(e){
-	// 	let city = this.parentNode.parentNode.childNodes[1].innerHTML;;
-	// 	alert(city);
-	// 	$.ajax({
-	// 		method: "GET",
-	// 		url: "/Car98-mvc/getStoreList?isHoliday="+true+"&isWeekday="+true+"&min="+0+"&max="+99999,
-	// 		contentType: "application/json",
-	// 		success: function (res) {
-	// 			alert("Hello");
-	// 			alert(res);
-	// 		},complete: function (res) {
-	// 			alert("Hello");
-	// 			let s= JSON.stringify(res);
-	// 			alert(s);
-	// 		}
-	// 	});
-	// 	alert("Heelo");
-	// });
-	</script>
 </body>
 
 </html>

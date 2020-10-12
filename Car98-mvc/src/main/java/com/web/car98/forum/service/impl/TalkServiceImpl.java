@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.web.car98.forum.dao.CommentDao;
 import com.web.car98.forum.dao.TalkDao;
 import com.web.car98.forum.dao.impl.TalkDaoImpl;
 import com.web.car98.forum.model.CommentBean;
@@ -25,6 +26,8 @@ import _00_init.util.HibernateUtils;
 public class TalkServiceImpl implements TalkService  {
 @Autowired
 	TalkDao dao;
+@Autowired
+	CommentDao comDao;
 	int onepage=6;
 //	SessionFactory factory;
 	
@@ -132,5 +135,13 @@ public class TalkServiceImpl implements TalkService  {
 		TalkBean tb=dao.selectOne(postId);
 		tb.setPostView(tb.getPostView()+1);
 		dao.persist(tb);
+	}
+	@Override
+	public void deletePost(int postId) {
+		List<CommentBean> li=comDao.getComsByFk(postId);
+		for(CommentBean cb:li) {
+			comDao.deleteComByPk(cb.getComId());
+		}
+		dao.deletePost(postId);
 	}
 }
