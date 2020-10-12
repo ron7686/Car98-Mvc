@@ -42,7 +42,7 @@ import com.web.car98.member.model.MemberBean;
 import com.web.car98.member.service.MemberService;
 import com.web.car98.validator.CommentValidator;
 
-@Controller(value ="CommentController")
+@Controller(value = "CommentController")
 @SessionAttributes({ "LoginOK", "CommentBean", "TalkBean", "pageNo" })
 public class CommentController {
 
@@ -67,9 +67,9 @@ public class CommentController {
 			@RequestParam(value = "pageNo", required = false) Integer pageNo,
 			@RequestParam(value = "floorNo", required = false) Integer floorNo) {
 		CommentBean cb = new CommentBean();
-		LikeOrHateBean loh=new LikeOrHateBean();
+		LikeOrHateBean loh = new LikeOrHateBean();
 		ts.setView(postId);
-		TalkBean tb=ts.selectOne(postId);
+		TalkBean tb = ts.selectOne(postId);
 		model.addAttribute("commentBean", cb);
 		model.addAttribute("TalkBean", tb);
 		// ra.addFlashAttribute("TalkBean",ts.selectOne(postId));
@@ -77,40 +77,43 @@ public class CommentController {
 			pageNo = 1;
 		}
 
-		MemberBean memberBean=(MemberBean) model.getAttribute("LoginOK");
-		if(memberBean==null) {
+		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
+		if (memberBean == null) {
 			return "redirect:/login";
 		}
 		List<CommentBean> resultList;
-		//try {
-			resultList = commentservice.getPageCom(pageNo, postId,memberBean.getMemId());
-		//} catch (Exception e1) {
-			
-		//	e1.printStackTrace();
-		//}
+		// try {
+
+		resultList = commentservice.getPageCom(pageNo, postId, memberBean.getMemId());
+		if (resultList.size() == 0 && pageNo != 1) {
+			resultList = commentservice.getPageCom(--pageNo, postId, memberBean.getMemId());
+		}
+		// } catch (Exception e1) {
+
+		// e1.printStackTrace();
+		// }
 		model.addAttribute("CommentBean", resultList);
-	
+
 		try {
-			loh=ts.getOneLoh(postId,memberBean.getMemId());
+			loh = ts.getOneLoh(postId, memberBean.getMemId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		model.addAttribute("loh",loh);
+		model.addAttribute("loh", loh);
 		model.addAttribute("pageNo", pageNo);
-		model.addAttribute("lastPage", commentservice.getLastPage(postId, pageNo));
+		model.addAttribute("lastPage", commentservice.getLastPage(postId));
 		return "/forum/talktalk";
 	}
 
 	// 新增留言
 	@PostMapping("/talktalk")
-	public String insertCom(Model model,
-			@ModelAttribute("TalkBean") TalkBean tb,
+	public String insertCom(Model model, @ModelAttribute("TalkBean") TalkBean tb,
 			@ModelAttribute("commentBean") CommentBean cb) {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {
 			return "redirect:/login";
 		}
-		
+
 		// ------------------------- 檔案上傳處理 ------------------------
 		MultipartFile commentImage = cb.getCommentMultipartFile();
 		String originalFilename = commentImage.getOriginalFilename();
@@ -124,69 +127,62 @@ public class CommentController {
 				e.printStackTrace();
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
-		}		
-		
+		}
+
 		String pID = String.valueOf(tb.getPostID());
 //		cb.setPostId(tb.getPostID());
 		cb.setTalkBean(tb);
 		cb.setMemberBean(memberBean);
-	    SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
-	    String comTime = sdf.format(new Date(System.currentTimeMillis()));
-	    cb.setComTime(comTime);			
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String comTime = sdf.format(new Date(System.currentTimeMillis()));
+		cb.setComTime(comTime);
 		commentservice.insertCom(cb);
 		model.addAttribute("CommentBean", commentservice.getComsByFk(tb.getPostID()));
-	
-		
-		return "redirect:/talktalk?postID=" + pID;
+		String lastPage = String.valueOf(commentservice.getLastPage(tb.getPostID()));
+
+		return "redirect:/talktalk?postID=" + pID + "&pageNo=" + lastPage;
 	}
-	
+
 	@RequestMapping("/like")
-	public String likeOrHate(Model model,
-			@RequestParam(value="tf") Integer tf,
+	public String likeOrHate(Model model, @RequestParam(value = "tf") Integer tf,
 			@RequestParam(value = "postId", required = false) Integer postId,
-			@RequestParam(value = "loh",required = false) Integer lohid
-			) {
-		LikeOrHateBean loh=new LikeOrHateBean();
-		MemberBean memberBean=(MemberBean) model.getAttribute("LoginOK");
-		TalkBean talkBean=ts.selectOne(postId);
+			@RequestParam(value = "loh", required = false) Integer lohid) {
+		LikeOrHateBean loh = new LikeOrHateBean();
+		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
+		TalkBean talkBean = ts.selectOne(postId);
 		loh.setAa(lohid);
 		loh.setLikeOrHate(tf);
 		loh.setMemberBean(memberBean);
 		loh.setTalkBean(talkBean);
 		commentservice.saveLike(loh);
-		
+
 		return "redirect:/talktalk?postID=" + postId;
-		
+
 	}
-	
-	//留言點讚
+
+	// 留言點讚
 	@RequestMapping("/comlike")
-	public String ComLikeOrHate(Model model,
-			@RequestParam(value="tf") Integer tf,
+	public String ComLikeOrHate(Model model, @RequestParam(value = "tf") Integer tf,
 			@RequestParam(value = "postId", required = false) Integer postId,
 			@RequestParam(value = "comId", required = false) Integer comId,
-			@RequestParam(value = "comLohId",required = false) Integer comLohId
-			) {
-		ComLikeOrHateBean cloh=new ComLikeOrHateBean();
-		MemberBean memberBean=(MemberBean) model.getAttribute("LoginOK");
-		CommentBean commentBean=commentservice.selectComByPk(comId);
-		System.out.println(comLohId+"==========================");
+			@RequestParam(value = "comLohId", required = false) Integer comLohId) {
+		ComLikeOrHateBean cloh = new ComLikeOrHateBean();
+		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
+		CommentBean commentBean = commentservice.selectComByPk(comId);
+		System.out.println(comLohId + "==========================");
 		cloh.setComLohId(comLohId);
 		cloh.setComLikeOrHate(tf);
 		cloh.setMemberBean(memberBean);
 		cloh.setCommentBean(commentBean);
 		commentservice.saveComLike(cloh);
-		
-		return "redirect:/talktalk?postID=" + postId;
-		
-	}
 
+		return "redirect:/talktalk?postID=" + postId;
+
+	}
 
 	@PostMapping("/updateCom")
 	@ResponseBody
-	public String updateCom(Model model,
-			@RequestBody CommentAllBean commentAllBean)
-	{
+	public String updateCom(Model model, @RequestBody CommentAllBean commentAllBean) {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {
 			return "redirect:/login";
@@ -274,6 +270,7 @@ public class CommentController {
 		}
 		return responseEntity;
 	}
+
 	// 取出此文章的發文者為哪個會員 進而取出該會員頭像
 	@GetMapping("/getPostMemberImage")
 	public ResponseEntity<byte[]> getPostMemberImage(@RequestParam("postID") Integer postID) {
@@ -399,5 +396,5 @@ public class CommentController {
 			}
 		}
 		return responseEntity;
-	}	
+	}
 }

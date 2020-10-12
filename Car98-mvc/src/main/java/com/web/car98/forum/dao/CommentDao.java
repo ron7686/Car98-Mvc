@@ -29,7 +29,7 @@ public interface CommentDao {
 
 	List<CommentBean> getPageCom(Integer page, List<CommentBean> li);  //得到當頁的留言
 
-	int getLastPage(Integer postId, Integer page);
+	int getLastPage(Integer postId);
 
 	MemberBean queryMemberByComId(Integer comId);  // 查出這則留言是哪個會員留的
 

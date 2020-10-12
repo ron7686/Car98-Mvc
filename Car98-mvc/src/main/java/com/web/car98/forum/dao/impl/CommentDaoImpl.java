@@ -129,7 +129,7 @@ public class CommentDaoImpl implements CommentDao {
 	}
 
 	@Override
-	public int getLastPage(Integer postId, Integer page) {
+	public int getLastPage(Integer postId) {
 		int lastpage = 0;
 		int op = 0;
 		op = onepage - 1;

@@ -167,8 +167,8 @@ public class CommentServiceImpl implements CommentService {
 
 	@Transactional
 	@Override
-	public int getLastPage(Integer postId, Integer page) {
-		return dao.getLastPage(postId, page);
+	public int getLastPage(Integer postId) {
+		return dao.getLastPage(postId);
 	}
 	
 
