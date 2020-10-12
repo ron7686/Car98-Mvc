@@ -157,11 +157,11 @@ function test(list) {
     // 	3. Lat Lng -> add Marker and Info Window
     var address = list[c].city + list[c].district + list[c].street;
     var store = list[c].store;
-    _geocoder(address, getGeoCallback(c, address, name));
+    _geocoder(address, getGeoCallback(c, address, store));
   }
 }
 
-function getGeoCallback(index, address, name) {
+function getGeoCallback(index, address, store) {
   return function (position) {
 	// 標記設定
     const markerOptions = {

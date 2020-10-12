@@ -33,7 +33,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/SearchResource.css">
-
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
 
 <script src="${pageContext.servletContext.contextPath}/javascript/SearchResource.js"></script>
 <style>
@@ -80,75 +80,80 @@ body {
 					<h2>Car好康</h2>
 				</div>
 
-				<div class="col-6">
+				<div class="col-md-12 mb-2">
 					<form action="" class="searchitem">
-						搜尋項目： <select name="" id="" class="subitem">
-							<option value="">選擇項目</option>
-							<option value="">加油站</option>
-							<option value="">自助洗車</option>
-							<option value="">停車場</option>
-						</select>
+						搜尋： <input type="text" class="form-control" ref="site" v-model="site">
+							
 					</form>
 				</div>
-				<div class="col-6">
-					<form>
-						搜尋： <select class="select" name="area" id="searchitem"
-							style="width: 250px">
-							<option value="selectarea">搜尋地區</option>
-							<optgroup label="台北市">
-								<option value="dist1">內湖</option>
-								<option value="dist2">中山</option>
-								<option value="dist3">萬華</option>
-							</optgroup>
-							<optgroup label="新北市">
-								<option value="dist5">樹林</option>
-								<option value="dist6">板橋</option>
-								<option value="dist7">中和</option>
-								<option value="dist8">汐止</option>
-							</optgroup>
-						</select>
-					</form>
-					<!-- <button><i class="fas fa-search-location"></i></button> -->
-				</div>
-				<div class="border" id="gmap">
+				
+				<div class="" id="map" class="mt-2" style="width:100%;height:500px;">
 					
 				</div>
+				
 			</div>
 		</div>
 	</section>
 	<jsp:include page="/fragment/footer.jsp"></jsp:include>
-					
-<script>
-					var map, geocoder;
-
-					function initMap() {
-						geocoder = new google.maps.Geocoder();
-						map = new google.maps.Map(document
-								.getElementById('gmap'), {
-							zoom : 17
-						});
-
-// 						var address = '台北市大安區忠孝東路四段1號';
-// 						geocoder.geocode({
-// 							'address' : address
-// 						},
-// 						function(results, status) {
-// 							if (status == 'OK') {
-// 								map.setCenter(results[0].geometry.location);
-// 								var marker = new google.maps.Marker({
-// 									map : map,
-// 									position : results[0].geometry.location
-// 								});
-// 							} else {
-// 								console.log(status);
-// 							}
-// 						});
-						
-					};
-
-					</script>
-					<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAf6FBj4puvo0abp3Imf0a6FOBrAKUsS0U&callback=initMap"
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQYmuo5h9pGY0c83EpRPJKTSUoLsk64FA&libraries=places"></script>
+   
+    <script>
+      const googleMap = new Vue({
+        el: '#app',
+        data: {
+          map: null,
+          autocomplete: null,
+          site: '', // place API要綁定的搜尋框
+          place: null // 存place確定後回傳的資料
+        },
+        methods: {
+          // init google map
+          initMap() {
+            let location = 
+            		{ lat: 25.042576, lng: 121.535654 };
+            this.map = new google.maps.Map(document.getElementById('map'), {
+              center: location,
+              zoom: 16
+            });
+          },
+          // 地址自動完成 + 地圖的中心移到輸入結果的地址上
+          siteAuto() {
+            let options = {
+              componentRestrictions: { country: 'tw' } // 限制在台灣範圍
+            };
+            this.autocomplete = new google.maps.places.Autocomplete(this.$refs.site, options);
+            this.autocomplete.addListener('place_changed', () => {
+              this.place = this.autocomplete.getPlace();
+              if(this.place.geometry) {
+                let searchCenter = this.place.geometry.location;
+                this.map.panTo(searchCenter); // panTo是平滑移動、setCenter是直接改變地圖中心
+                
+                // 放置標記
+                let marker = new google.maps.Marker({
+                  position: searchCenter,
+                  map: this.map
+                });
+                // info window
+                let infowindow = new google.maps.InfoWindow({
+                  content: this.place.formatted_address
+                });
+                infowindow.open(this.map, marker);
+              }
+            });
+          }
+        },
+        mounted() {
+          window.addEventListener('load', () => {
+            this.initMap();
+            this.siteAuto();
+          });
+        }
+      })
+    </script>
+<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQYmuo5h9pGY0c83EpRPJKTSUoLsk64FA&callback=initMap"
 		async defer></script>
+					
+
 </body>
 </html>

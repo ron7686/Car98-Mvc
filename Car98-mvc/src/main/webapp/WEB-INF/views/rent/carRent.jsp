@@ -81,7 +81,7 @@ body {
 	<!-- RentCar Area -->
 	<section class="my-5">
 		<div class="container-fluid text-white">
-			<div class="mainitem">汽 車</div>
+			<div class="mainitem">Car租車</div>
 			<div class="row">
 				<div class="col-md-4">
 					<form action="">
@@ -133,7 +133,7 @@ body {
 				</div>
 
 
-				<div id="map"></div>
+				<div id="map" class="mt-2"></div>
 
 
 				<button id="buttontext">12358765432</button>
