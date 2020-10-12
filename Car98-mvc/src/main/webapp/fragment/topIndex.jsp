@@ -80,10 +80,9 @@ margin-right:auto;
 	</div>
 
 			<c:if test="${ ! empty LoginOK }">
-				<a class="nav-link logout " style="font-size:25px;color:white;" href="<c:url value='/logout' />">登出<span
-							class="sr-only">(current)</span>
-					</a>
-
+				<a href="<c:url value='#' />" class="m-2 logout" onclick="logout()">
+					<i class="fas fa-sign-in-alt text-white mt-2 mr-2" style="font-size:30px;"></i>
+				</a>
 			</c:if>
 	<c:if test="${! empty LoginOK }">
 		<a class="navbar-brand" href="<c:url value='/management' />"><img
@@ -92,6 +91,53 @@ margin-right:auto;
 		</a>
 
 	</c:if>
+	<!-- 訊息畫面_Modal -->
+<div class="modal fade" id="messages" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel" style="color: #0090d3"><b>訊息提示</b></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+			<div class="text-center">
+				<font color="red">${InsertOK} ${FlashMSG_farewell} ${sessionScope.timeOut}</font>
+			</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+        <a href="<c:url value='/' />"><button type="button" class="btn btn-primary">回首頁</button></a>
+      </div>
+    </div>
+  </div>
+</div>
 
+	<%-- 新增(含註冊、分店與寵物新增)、登入、登出成功與使用逾時時，顯示提示視窗 --%>
+<c:if test="${!empty InsertOK}">
+	<script>
+		$('#messages').modal('show');
+		setTimeout(function() {
+            $('#messages').modal('hide') // 3秒後，modal消失。
+        }, 3000);
+	</script>
+</c:if>
 
+<c:if test="${!empty FlashMSG_farewell}">
+	<script>
+		$('#messages').modal('show');
+		setTimeout(function() {
+            $('#messages').modal('hide') // 3秒後，modal消失。
+        }, 3000);
+	</script>
+</c:if>
+
+<script> 
+	function logout(){ 
+	    if (confirm("您確定要登出嗎？")){ 
+	    	$('.logout').attr('href', '${pageContext.request.contextPath}/logout')
+	    } 
+	} 
+</script>
 </nav>
