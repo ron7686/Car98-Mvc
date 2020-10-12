@@ -199,8 +199,10 @@ body {
 							src="${pageContext.request.contextPath}/getpostPic?postID=${TalkBean.postID}"
 							alt="">
 					</c:if>
-					<a type="submit"
-						href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
+					<c:if test="${TalkBean.memberBean.memId == LoginOK.memId}">
+					<a type="submit" href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
+					<a type="submit" href="<%=path%>/deletePost?postId=${TalkBean.postID}">刪除</a>
+					</c:if>
 				</div>
 
 			</div>
@@ -305,13 +307,8 @@ body {
 						<div id="processUpdateDiv${comment.comId}">${comment.comText}</div>
 						<br>
 
-						<div id="updateDiv${comment.comId}" hidden="true">
-							<textarea id="updateText${comment.comId}" rows="5" cols="68">
-							${comment.comText}
-							<c:if test="${!empty comment.fileName}">
-							<img class="commentPic"
-										src='${pageContext.request.contextPath}/getComImage?id=${LoginOK.memId}&comId=${comment.comId}'>
-							</c:if>
+						<div id="updateDiv${comment.comId}" class="mb-2" hidden="true">
+							<textarea id="updateText${comment.comId}" rows="5" cols="68">${comment.comText}
 							</textarea>
 						</div>
 
@@ -321,21 +318,21 @@ body {
 
 
 						<c:if test="${!empty comment.fileName}">
-							<img class="commentPic"
+							<img class="commentPic mb-3" 
 								src='${pageContext.request.contextPath}/getComImage?id=${LoginOK.memId}&comId=${comment.comId}'>
 						</c:if>
 					</div>
 					<!-- Button trigger modal -->
 
 					<c:if test="${comment.memberBean.memId == LoginOK.memId}">
-						<div class="update  col-2 float-right ">
+						<div class="update  col-3 float-right mb-2 d-flex">
 							<!-- 記得加回編輯的<a> tag	data-toggle="modal" data-target="#staticBackdrop" -->
 							<%-- 						<a id="updateButton" class="updateButton m-2" href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a> --%>
-							<button id="updateButton${comment.comId}"
-								class="updateButton m-2" onclick="openTextarea(this)">編輯</button>
+							<button id="updateButton${comment.comId}" type="button"
+								class="updateButton ml-5 btn btn-light " onclick="openTextarea(this)">編輯</button>
 							<button id="updateFinish${comment.comId}" hidden="true"
-								class="updateButton m-2" onclick="updateConfirm(this)">送出</button>
-							<a id="deleteButton${comment.comId}" class="deleteButton m-2"
+								class="updateButton btn btn-light" onclick="updateConfirm(this)">送出</button>
+							<a id="deleteButton${comment.comId}" class="deleteButton ml-4 btn btn-light " type="button"
 								href="${pageContext.request.contextPath}/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
 
 						</div>
@@ -385,6 +382,7 @@ body {
 
 
 	<!-- 留言輸入 -->
+<%-- 	<c:if test="${!empty CommentBean}"> --%>
 	<div class="container">
 		<div class="row">
 			<div class="col-12 mt-1 message">
@@ -393,10 +391,10 @@ body {
 					<form:textarea id="comments" path="comText" class="mt-2 " cols="120"
 						rows="3" placeholder="請輸入內容...." />
 						
-					<label class='control-label'
+					<label class='control-label '
 						for="commentMultipartFile"> 上傳圖片 </label>
 						
-					<form:input type="file" class="form-control-file float-right"
+					<form:input type="file" class="form-control-file float-right "
 						id="commentMultipartFile" path="commentMultipartFile" />
 					
 						
@@ -404,12 +402,14 @@ body {
 						<img id="image" src="">
 					</p>
 					
-					<button class="float-right" type="submit"  id="confirm">送出</button>
+					<button class="float-right btn btn-light  mb-2" type="submit"  id="confirm">送出</button>
 				</form:form>
 
 			</div>
 		</div>
 	</div>
+<%-- 	</c:if> --%>
+	
 
 	<hr>
 

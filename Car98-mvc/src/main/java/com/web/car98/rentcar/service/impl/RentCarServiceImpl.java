@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.web.car98.rentcar.dao.RentCarDao;
 import com.web.car98.rentcar.model.CarTypeBean;
 import com.web.car98.rentcar.model.RentCarBean;
+import com.web.car98.rentcar.model.RentCarBean2;
 import com.web.car98.rentcar.service.RentCarService;
 
 @Service
@@ -26,19 +27,19 @@ public class RentCarServiceImpl implements RentCarService{
 	
 	@Transactional
 	@Override
-	public Collection<CarTypeBean> queryStoreHoliday(String city, String district, boolean isHoliday, boolean isWeekday, Integer min, Integer max, String carBrand, String carType) {
+	public Collection<RentCarBean2> queryStoreHoliday(String city, String district, boolean isHoliday, boolean isWeekday, Integer min, Integer max, String carBrand, String carType) {
 		return dao.queryStoreHoliday(city, district, isHoliday, isWeekday, min, max, carBrand, carType);
 	}
 	
 	@Transactional
 	@Override
-	public Collection<CarTypeBean> queryStoreWeekday(String city, String district, boolean isHoliday, boolean isWeekday, Integer min, Integer max, String carBrand, String carType) {
+	public Collection<RentCarBean2> queryStoreWeekday(String city, String district, boolean isHoliday, boolean isWeekday, Integer min, Integer max, String carBrand, String carType) {
 		return dao.queryStoreWeekday(city, district, isHoliday, isWeekday, min, max, carBrand, carType);
 	}
 	
 	@Transactional
 	@Override
-	public Collection<CarTypeBean> queryStoreAllday(String city, String district, boolean isHoliday, boolean isWeekday,	Integer min, Integer max, String carBrand, String carType) {
+	public Collection<RentCarBean2> queryStoreAllday(String city, String district, boolean isHoliday, boolean isWeekday,	Integer min, Integer max, String carBrand, String carType) {
 		return dao.queryStoreAllday(city, district, isHoliday, isWeekday, min, max, carBrand, carType);
 	}
 	

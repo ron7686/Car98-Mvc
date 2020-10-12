@@ -28,4 +28,6 @@ public interface TalkService {
 	int getHate(List<LikeOrHateBean> loh);
 	
 	void setView(int postId);
+	
+	void deletePost(int postId);
 }

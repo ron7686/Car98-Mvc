@@ -26,7 +26,7 @@ public interface CommentService {
 
 	List<CommentBean> getPageCom(Integer page, Integer posId,Integer memId);  //得到當頁的留言
 
-	int getLastPage(Integer page, Integer postId );
+	int getLastPage(Integer postId );
 	
 	MemberBean queryMemberByComId(Integer comId);  // 查出這則留言是哪個會員留的
 

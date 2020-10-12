@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.web.car98.forum.dao.TalkDao;
+import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.LikeOrHateBean;
 import com.web.car98.forum.model.TalkBean;
 
@@ -104,6 +105,15 @@ public class TalkDaoImpl implements TalkDao  {
 					setParameter("memId", memId).
 					getSingleResult();
 		return loh;
+	}
+
+	@Override
+	public void deletePost(int postId) {
+		Session session = factory.getCurrentSession();
+		String hql = "Delete FROM LikeOrHateBean where postId=:postId";
+		session.createQuery(hql).setParameter("postId", postId).executeUpdate();
+		TalkBean talkBean = session.get(TalkBean.class, postId);
+		session.delete(talkBean);
 	}
 
 	

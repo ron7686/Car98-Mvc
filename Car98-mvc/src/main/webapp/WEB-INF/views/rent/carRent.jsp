@@ -81,7 +81,7 @@ body {
 	<!-- RentCar Area -->
 	<section class="my-5">
 		<div class="container-fluid text-white">
-			<div class="mainitem">汽 車</div>
+			<div class="mainitem">Car租車</div>
 			<div class="row">
 				<div class="col-md-4">
 					<form action="">
@@ -132,43 +132,14 @@ body {
 					</form>
 				</div>
 
-				<div id="map"></div>
-				<script>
-					var map, geocoder;
-
-					function initMap() {
-						geocoder = new google.maps.Geocoder();
-						map = new google.maps.Map(document
-								.getElementById('map'), {
-							zoom : 17
-						});
-
-						var address = '台北市大安區忠孝東路四段1號';
-						geocoder.geocode({
-							'address' : address
-						},
-
-						// 					  for(var x=0; x<a.length; x++) {
-						// 					      geocoder.geocode({
-						// 					          'address': a[x]
-						// 					      }, 
-
-						function(results, status) {
-							if (status == 'OK') {
-								map.setCenter(results[0].geometry.location);
-								var marker = new google.maps.Marker({
-									map : map,
-									position : results[0].geometry.location
-								});
-							} else {
-								console.log(status);
-							}
-						});
-					}
-				</script>
+				<br>
+				<div class="mx-auto mt-3">
+					<input id="result" class="text-white bg-dark" type="hidden" disabled="disabled">
+				</div>	
+				<div id="map" class="mt-3"></div>
 			</div>
 		</div>
-		</div>
+		
 	</section>
 	<!-- footer -->
 	<jsp:include page="/fragment/footer.jsp"></jsp:include>

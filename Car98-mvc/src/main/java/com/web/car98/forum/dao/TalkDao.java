@@ -8,6 +8,8 @@ import com.web.car98.forum.model.TalkBean;
 public interface TalkDao {
 
 	void persist(TalkBean tb);
+	
+	void deletePost(int postId);
 
 	List<TalkBean> getAll();
 	

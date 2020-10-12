@@ -1,5 +1,4 @@
 $(document).ready(function () {
-	storeData();
 	getAreaDataOptions();
 	getCarDataOptions();
 	$("#areaitem").select2({
@@ -28,9 +27,6 @@ function getAreaDataOptions() {
 		url: "/Car98-mvc/area",
 		contentType: "application/json",
 		success: function (ado) {
-			// console.log(ado);
-			// console.log(ado[0][0]);
-			// console.log(ado[0][1]);
 			var last_city = "";
 		
 			for (i = 0; i < ado.length; i++) {
@@ -41,7 +37,7 @@ function getAreaDataOptions() {
 					);
 				}
 				$("optgroup[label=" + ado[i][0] + "]").append(
-					"<option value="+"city=" +ado[i][0]+"&district="+ ado[i][1] + ">"
+					"<option value="+"city=" +ado[i][0]+"&district="+ ado[i][1] + " >"
 					+ ado[i][1]
 					+ "</option>"
 				);
@@ -57,10 +53,6 @@ function getCarDataOptions() {
 		url: "/Car98-mvc/cartype",
 		contentType: "application/json",
 		success: function (res) {
-		// console.log(res);
-		// console.log(res[0][0]);
-		// console.log(res[0][1]);
-		// console.log(res[0][2]);
 			var last_brand = "";
 			for (i = 0; i < res.length; i++) {
 				if (last_brand != res[i][1]) {
@@ -121,96 +113,98 @@ function queryArea() {
 		method: "GET",
 		url: qUrl,
 		success: function (res) {
-
+			//console.log(res);
+			test(res);
+			rLength(res);
 		}
 	})
 }
-
-function storeData() {
-	$.ajax({
-		method: "GET",
-		url: "/Car98-mvc/getStoreList",
-		contentType: "application/json",
-		success: function (res) {
-		console.log(res);
-		}
-	})
-}
-
-var map;
-var geocoder;
 
 function initMap() {
-  var markers = [];
-  var infoWindows = [];
-  var loaction;
-  geocoder = new google.maps.Geocoder();
-  var info_config = [
-    '<span>租車行：</span>'+
-    '<h3>和運租車</h3>'+
-    '<span>地址：</span>'+
-    '<h3>台北市內湖區成功路三段96號</h3>',
-
-    '<span>租車行：</span>'+
-    '<h3>富豪租車</h3>'+
-    '<span>地址：</span>'+
-    '<h3>台北市內湖區民權東路六段13-9號</h3>',
-
-    '<span>租車行：</span>'+
-    '<h3>格上租車</h3>'+
-    '<span>地址：</span>'+
-    '<h3>台北市內湖區成功路四段188號</h3>'
-  ];
-
-  //建立地圖 marker 的集合
-  var marker_config = [{
-      address: '台北市內湖區成功路三段96號'
-  },{
-      address: '台北市內湖區民權東路六段13-9號'
-  },{
-      address: '台北市內湖區成功路四段188號'
-  }];  
-
-  //geocoder主程式
-  function _geocoder(address, callback){
-    geocoder.geocode({
-      address: address
-    }, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        loaction = results[0].geometry.location;
-        callback(loaction); //用一個 callback 就不用每次多寫上面這段
-      }
-    });
-  }
-
-  //使用地址或名稱標出位置
-  _geocoder('北科大',function(address){
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: address,
-      zoom: 17
-    });
-
-    //設定資訊視窗內容
-    info_config.forEach(function(e,i){
-      infoWindows[i] = new google.maps.InfoWindow({
-        content: e
-      });
-    });
-
-    //標出 marker
-    marker_config.forEach(function(e,i){
-      _geocoder(e.address,function(address){
-        var marker = {
-          position: address,
-          map:map,
-          zIndex:1
-        }
-        markers[i] = new google.maps.Marker(marker);
-        markers[i].setMap(map);
-        markers[i].addListener('click', function() {
-          infoWindows[i].open(map, markers[i]);
-        });
-      });
-    });
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 25.042576, lng: 121.535654 },
+    zoom: 13,
   });
+}
+
+let map, markers;
+
+function test(list) {
+  clearMarkers();
+  markers = [];
+  
+  for (c = 0; c < list.length; c++) {
+    // 	1. get address
+    // 	2. address -> Lat Lng
+    // 	3. Lat Lng -> add Marker and Info Window
+    var address = list[c].city + list[c].district + list[c].street;
+    var store = list[c].store;
+    _geocoder(address, getGeoCallback(c, address, store));
+  }
+}
+
+function rLength(list){
+	$("#result").val("符合條件:共 " + list.length + " 筆資料");
+	$("#result").attr('type','text');
+}
+
+function getGeoCallback(index, address, store) {
+  return function (position) {
+	// 標記設定
+    const markerOptions = {
+      position: position,
+      map: map,
+      zIndex: 1,
+	};
+	
+	// 新建訊息視窗
+    const infoWindow = new google.maps.InfoWindow({
+      content:
+        "<h4>租車行：</h4>" +
+        "<h5>" + store + "</h5><br>" +
+        "<h4>地址：</h4>" +
+        "<h5>" + address + "</h5>",
+	});
+	
+	// 新建標記
+    const marker = new google.maps.Marker(markerOptions);
+    markers[index] = marker;
+    marker.setMap(map);
+    marker.addListener("mouseover", function () {
+    	infoWindow.open(map, marker);
+	});
+	marker.addListener("mouseout", function () {
+		infoWindow.close();
+	});
+
+	//畫面縮放至新建標記
+	var bounds = new google.maps.LatLngBounds();
+	for (var i=0; i<markers.length; i++) {
+		bounds.extend(markers[i].position);
+	}
+	map.fitBounds(bounds);
+  };
+}
+
+// Address -> LanLng
+function _geocoder(address, callback) {
+  var geocoder = new google.maps.Geocoder();
+  geocoder.geocode(
+    {
+      address: address,
+    },
+    function (results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        callback(results[0].geometry.location); //用一個 callback 就不用每次多寫上面這段
+      }
+    }
+  );
+}
+
+// 更新下拉式選單後，之前的標記便清除！
+function clearMarkers() {
+  if (markers && markers.length !== 0) {
+    markers.forEach((marker) => marker.setMap(null));
+    markers.length = 0;
+  }
 }
