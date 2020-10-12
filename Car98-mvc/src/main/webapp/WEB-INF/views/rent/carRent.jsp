@@ -134,7 +134,7 @@ body {
 
 				<br>
 				<div class="mx-auto mt-3">
-					<input id="result" class="text-white bg-dark" type="hidden" disabled="disabled">
+					<span id="result" class="text-white bg-dark" type="hidden" disabled="disabled"></span>
 				</div>	
 				<div id="map" class="mt-3"></div>
 			</div>
