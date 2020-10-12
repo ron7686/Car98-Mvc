@@ -27,6 +27,7 @@ margin-right:auto;
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 		<ul class="navbar-nav ul">
 
+			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='/car98Member' />">成員介紹</a></li>
 			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='searchresource' /> "> Car好康</a>
 				</li>
 			<li class="nav-item dropdown">
@@ -72,9 +73,7 @@ margin-right:auto;
 					</a></li>
 			</c:if>
 			<c:if test="${LoginOK.levels == 1}">
-				<li class="nav-item active"><a class="nav-link" href="<c:url value='/userManager' />">管理員 <span
-							class="sr-only">(current)</span>
-					</a></li>
+					<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='/userManager' />">管理介面</a></li>
 			</c:if>
 		</ul>
 	</div>

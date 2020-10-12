@@ -12,7 +12,6 @@ import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,9 +25,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.web.car98.init.mail.RegisterSmtp;
 import com.web.car98.member.model.MemberBean;
 import com.web.car98.member.service.MemberService;
-import com.web.car98.member.service.RegisterSmtp;
 import com.web.car98.validator.ChangePasswordValidator;
 import com.web.car98.validator.MemberBeanValidator;
 
@@ -146,7 +145,7 @@ public class RegisterController {
 		}
 		new Thread(()->{
 			rs.send("Car98會員註冊成功", "歡迎來到Car98，\n會員"+mb.getName()+"您於"+mb.getMeCreate()+"的時候完成註冊。\n您的註冊帳號為"+mb.getEmail()
-			+"\n如有任何問題，請於上班時間與客服聯繫，謝謝!", mb.getEmail());
+			+"\n如有任何問題，請於上班時間與客服聯繫，謝謝!\n可以開始使用本系統:http://localhost:8080/Car98-mvc/", mb.getEmail());
 		}).start();
 		return "redirect:/";
 	}
@@ -217,7 +216,7 @@ public class RegisterController {
 		new Thread(()->{
 			rs.send("Car98會員修改密碼成功", "您於"+mb.getLoginTime()+"的時候完成密碼修改。"
 					+"\n如有任何問題，請於上班時間與客服聯繫，謝謝!", mb.getEmail());
-		  }).start();
+		}).start();
 		return "redirect:/management";
 	}
 
