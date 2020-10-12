@@ -1,5 +1,4 @@
 $(document).ready(function () {
-	storeData();
 	getAreaDataOptions();
 	getCarDataOptions();
 	$("#areaitem").select2({
@@ -28,9 +27,6 @@ function getAreaDataOptions() {
 		url: "/Car98-mvc/area",
 		contentType: "application/json",
 		success: function (ado) {
-			// console.log(ado);
-			// console.log(ado[0][0]);
-			// console.log(ado[0][1]);
 			var last_city = "";
 		
 			for (i = 0; i < ado.length; i++) {
@@ -57,10 +53,6 @@ function getCarDataOptions() {
 		url: "/Car98-mvc/cartype",
 		contentType: "application/json",
 		success: function (res) {
-		// console.log(res);
-		// console.log(res[0][0]);
-		// console.log(res[[0][1]);
-		// console.log(res[0]2]);
 			var last_brand = "";
 			for (i = 0; i < res.length; i++) {
 				if (last_brand != res[i][1]) {
@@ -123,25 +115,15 @@ function queryArea() {
 		success: function (res) {
 			//console.log(res);
 			test(res);
+			rLength(res);
 		}
 	})
-}
-
-function storeData() {
-  $.ajax({
-    method: "GET",
-    url: "/Car98-mvc/getStoreList",
-    contentType: "application/json",
-    success: function (res) {
-      console.log(res);
-    },
-  });
 }
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 25.042576, lng: 121.535654 },
-    zoom: 14,
+    zoom: 13,
   });
 }
 
@@ -157,11 +139,16 @@ function test(list) {
     // 	3. Lat Lng -> add Marker and Info Window
     var address = list[c].city + list[c].district + list[c].street;
     var store = list[c].store;
-    _geocoder(address, getGeoCallback(c, address, name));
+    _geocoder(address, getGeoCallback(c, address, store));
   }
 }
 
-function getGeoCallback(index, address, name) {
+function rLength(list){
+	$("#result").val("符合條件:共 " + list.length + " 筆資料");
+	$("#result").attr('type','text');
+}
+
+function getGeoCallback(index, address, store) {
   return function (position) {
 	// 標記設定
     const markerOptions = {
@@ -173,19 +160,29 @@ function getGeoCallback(index, address, name) {
 	// 新建訊息視窗
     const infoWindow = new google.maps.InfoWindow({
       content:
-        "<span>租車行：</span>" +
-        "<h3>" + store + "</h3>" +
-        "<span>地址：</span>" +
-        "<h3>" + address + "</h3>",
+        "<h4>租車行：</h4>" +
+        "<h5>" + store + "</h5><br>" +
+        "<h4>地址：</h4>" +
+        "<h5>" + address + "</h5>",
 	});
 	
 	// 新建標記
     const marker = new google.maps.Marker(markerOptions);
     markers[index] = marker;
     marker.setMap(map);
-    marker.addListener("click", function () {
-      infoWindow.open(map, marker);
-    });
+    marker.addListener("mouseover", function () {
+    	infoWindow.open(map, marker);
+	});
+	marker.addListener("mouseout", function () {
+		infoWindow.close();
+	});
+
+	//畫面縮放至新建標記
+	var bounds = new google.maps.LatLngBounds();
+	for (var i=0; i<markers.length; i++) {
+		bounds.extend(markers[i].position);
+	}
+	map.fitBounds(bounds);
   };
 }
 

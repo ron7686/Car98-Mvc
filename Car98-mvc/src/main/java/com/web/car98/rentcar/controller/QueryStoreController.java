@@ -7,14 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.web.car98.member.model.MemberBean;
 import com.web.car98.rentcar.model.CarTypeBean;
 import com.web.car98.rentcar.model.RentCarBean2;
 import com.web.car98.rentcar.service.CarTypeService;
 import com.web.car98.rentcar.service.RentCarService;
 
 @Controller
+@SessionAttributes({"LoginOK"})
 public class QueryStoreController{
 	
 	@Autowired
@@ -25,8 +28,12 @@ public class QueryStoreController{
 	String rentCar = "/rent/carRent";
 	
 	@GetMapping("/carRent")
-	public ModelAndView getStoreList(Model model) {
-		return new ModelAndView("/rent/carRent");
+	public String getStoreList(Model model) {
+		MemberBean memberBean=(MemberBean) model.getAttribute("LoginOK");
+		if(memberBean==null) {
+			return "redirect:/login";
+		}
+		return "/rent/carRent";
 	}
 	
 	@GetMapping("/getStoreList")

@@ -22,9 +22,6 @@ public class RentCarDaoImpl implements RentCarDao {
 	
 	@Override //用價格取得店家資料
 	public Collection<RentCarBean2> queryStoreHoliday(String city, String district, boolean isHoliday, boolean isWeekday, Integer min,Integer max,String carBrand,String carType) {
-
-//		String sql = "SELECT A.*,B.city,B.district,B.store,B.street FROM cartype A LEFT JOIN rentcar B ON A.rentId = B.rentId "
-//				+ "WHERE B.city LIKE :city AND B.district LIKE :district AND (A.holidayDaily BETWEEN :min AND :max) AND (A.carBrand = :carBrand AND A.carType= :carType);";
 		String sql = "SELECT A.*,B.city,B.district,B.store,B.street FROM cartype A LEFT JOIN rentcar B ON A.rentId = B.rentId "
 				+ "WHERE B.city LIKE :city AND B.district LIKE :district AND (A.holidayDaily BETWEEN :min AND :max) AND (A.carBrand LIKE :carBrand AND A.carType LIKE :carType);";
 		Session session = factory.getCurrentSession();

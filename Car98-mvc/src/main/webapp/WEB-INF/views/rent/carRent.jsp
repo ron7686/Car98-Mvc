@@ -81,7 +81,7 @@ body {
 	<!-- RentCar Area -->
 	<section class="my-5">
 		<div class="container-fluid text-white">
-			<div class="mainitem">汽 車</div>
+			<div class="mainitem">Car租車</div>
 			<div class="row">
 				<div class="col-md-4">
 					<form action="">
@@ -132,12 +132,14 @@ body {
 					</form>
 				</div>
 
-				<div id="map"></div>
-
-				<button id="buttontext">12358765432</button>
+				<br>
+				<div class="mx-auto mt-3">
+					<input id="result" class="text-white bg-dark" type="hidden" disabled="disabled">
+				</div>	
+				<div id="map" class="mt-3"></div>
 			</div>
 		</div>
-		</div>
+		
 	</section>
 	<!-- footer -->
 	<jsp:include page="/fragment/footer.jsp"></jsp:include>
@@ -147,26 +149,6 @@ body {
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQYmuo5h9pGY0c83EpRPJKTSUoLsk64FA&callback=initMap"
 		async defer></script>
-	<script>
-	// $('#buttontext').click(function(e){
-	// 	let city = this.parentNode.parentNode.childNodes[1].innerHTML;;
-	// 	alert(city);
-	// 	$.ajax({
-	// 		method: "GET",
-	// 		url: "/Car98-mvc/getStoreList?isHoliday="+true+"&isWeekday="+true+"&min="+0+"&max="+99999,
-	// 		contentType: "application/json",
-	// 		success: function (res) {
-	// 			alert("Hello");
-	// 			alert(res);
-	// 		},complete: function (res) {
-	// 			alert("Hello");
-	// 			let s= JSON.stringify(res);
-	// 			alert(s);
-	// 		}
-	// 	});
-	// 	alert("Heelo");
-	// });
-	</script>
 </body>
 
 </html>
