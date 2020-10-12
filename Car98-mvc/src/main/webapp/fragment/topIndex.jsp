@@ -66,6 +66,7 @@ margin-right:auto;
 			<!-- <li class="nav-item"><a class="nav-link" href="<c:url value='/comm/products' />">Car好買</a></li> -->
 			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='/forum/talktop.do' />">Car論壇</a></li>
 
+			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="http://localhost:8080/Car98-mvc/chatRoom.html">聊天室</a></li>
 			<c:if test="${empty LoginOK}">
 				<li class="nav-item active ml-auto"><a class="nav-link" style="font-size:25px;" href="<c:url value='/login' />"><i class="fas fa-sign-in-alt">登入</i>
 						<span class="sr-only">(current)</span>
