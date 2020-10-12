@@ -199,8 +199,10 @@ body {
 							src="${pageContext.request.contextPath}/getpostPic?postID=${TalkBean.postID}"
 							alt="">
 					</c:if>
-					<a type="submit" 
-						href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
+					<c:if test="${TalkBean.memberBean.memId == LoginOK.memId}">
+					<a type="submit" href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
+					<a type="submit" href="<%=path%>/deletePost?postId=${TalkBean.postID}">刪除</a>
+					</c:if>
 				</div>
 
 			</div>
@@ -380,7 +382,7 @@ body {
 
 
 	<!-- 留言輸入 -->
-	<c:if test="${!empty CommentBean}">
+<%-- 	<c:if test="${!empty CommentBean}"> --%>
 	<div class="container">
 		<div class="row">
 			<div class="col-12 mt-1 message">
@@ -406,7 +408,7 @@ body {
 			</div>
 		</div>
 	</div>
-	</c:if>
+<%-- 	</c:if> --%>
 	
 
 	<hr>

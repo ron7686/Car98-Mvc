@@ -159,6 +159,13 @@ public class CommentController {
 		return "redirect:/talktalk?postID=" + postId;
 
 	}
+	
+	@RequestMapping("/deletePost")
+	public String deletePost(Model model, @RequestParam("postId") Integer postId) {
+		ts.deletePost(postId);
+		return "redirect:/forum/talktop.do";
+
+	}
 
 	// 留言點讚
 	@RequestMapping("/comlike")
