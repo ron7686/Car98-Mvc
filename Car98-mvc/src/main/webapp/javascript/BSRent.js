@@ -146,7 +146,7 @@ function test(list) {
   }
 
   // 由於Google Map API有查詢限制，尤其是地址轉緯經度，
-  // 故設每660毫秒內，顯示一筆資料，防止over_query_limit發生
+  // 故設每670毫秒內，顯示一筆資料，防止over_query_limit發生
   let timer = setInterval(() => {
     while (index < list.length) {
       let address =
@@ -162,7 +162,7 @@ function test(list) {
     }
     console.log("clear");
     clearInterval(timer);
-  }, 660);
+  }, 670);
 }
 
 function rLength(list){
