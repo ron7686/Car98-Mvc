@@ -397,9 +397,6 @@ label{
 					<div class="modal-footer justify-content-center">
 						<button type="submit" class="signin btn btn-secondary"
 							onclick="myFunction()">送出</button>
-						<c:if test="${empty inputError}">
-							<div id="snackbar">修改成功</div>
-						</c:if>
 					</div>
 				</form:form>
 			</div>
@@ -442,17 +439,6 @@ label{
 			});
 		});
 	</script>
-	<c:if test="${empty inputError}">
-		<script>
-			function myFunction() {
-				var x = document.getElementById("snackbar");
-				x.className = "show";
-				setTimeout(function() {
-					x.className = x.className.replace("show", "");
-				}, 3000);
-			}
-		</script>
-	</c:if>
 	<c:if test="${!empty inputError}">
 		<script>
 			$('#staticBackdrop').modal('show')
