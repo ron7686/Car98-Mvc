@@ -19,35 +19,50 @@ public class RentCarServiceImpl implements RentCarService{
 	@Autowired
 	RentCarDao dao;
 	
-//	@Transactional
-//	@Override
-//	public Collection<RentCarBean> queryStoreByArea(String city, String district) {
-//		return dao.queryStoreByArea(city, district);
-//	}
-	
 	@Transactional
 	@Override
-	public Collection<RentCarBean2> queryStoreHoliday(String city, String district, boolean isHoliday, boolean isWeekday, Integer min, Integer max, String carBrand, String carType) {
-		return dao.queryStoreHoliday(city, district, isHoliday, isWeekday, min, max, carBrand, carType);
+	public Collection<RentCarBean2> queryStoreWeekhour(String city, String district, 
+			boolean isHolihour, boolean isWeekhour, boolean isHoliday, boolean isWeekday, 
+			Integer min, Integer max, String carBrand, String carType) {
+		return dao.queryStoreWeekhour(city, district, isHolihour, isWeekhour, 
+				isHoliday, isWeekday, min, max, carBrand, carType);
 	}
 	
 	@Transactional
 	@Override
-	public Collection<RentCarBean2> queryStoreWeekday(String city, String district, boolean isHoliday, boolean isWeekday, Integer min, Integer max, String carBrand, String carType) {
-		return dao.queryStoreWeekday(city, district, isHoliday, isWeekday, min, max, carBrand, carType);
+	public Collection<RentCarBean2> queryStoreHolihour(String city, String district, 
+			boolean isHolihour, boolean isWeekhour, boolean isHoliday, boolean isWeekday, 
+			Integer min, Integer max, String carBrand, String carType) {	
+		return dao.queryStoreHolihour(city, district, isHolihour, isWeekhour, 
+				isHoliday, isWeekday, min, max, carBrand, carType);
 	}
 	
 	@Transactional
 	@Override
-	public Collection<RentCarBean2> queryStoreAllday(String city, String district, boolean isHoliday, boolean isWeekday,	Integer min, Integer max, String carBrand, String carType) {
-		return dao.queryStoreAllday(city, district, isHoliday, isWeekday, min, max, carBrand, carType);
+	public Collection<RentCarBean2> queryStoreHoliday(String city, String district, 
+			boolean isHolihour, boolean isWeekhour, boolean isHoliday, boolean isWeekday, 
+			Integer min, Integer max, String carBrand, String carType) {
+		return dao.queryStoreHoliday(city, district, isHolihour, isWeekhour, 
+				isHoliday, isWeekday, min, max, carBrand, carType);
 	}
 	
-//	@Transactional
-//	@Override
-//	public Collection<CarTypeBean> queryStoreByCar(String carBrand,String carType) {
-//		return dao.queryStoreByCar(carBrand,carType);
-//	}
+	@Transactional
+	@Override
+	public Collection<RentCarBean2> queryStoreWeekday(String city, String district, 
+			boolean isHolihour, boolean isWeekhour, boolean isHoliday, boolean isWeekday, 
+			Integer min, Integer max, String carBrand, String carType) {
+		return dao.queryStoreWeekday(city, district, isHolihour, isWeekhour, 
+				isHoliday, isWeekday, min, max, carBrand, carType);
+	}
+	
+	@Transactional
+	@Override
+	public Collection<RentCarBean2> queryStoreAllday(String city, String district, 
+			boolean isHolihour, boolean isWeekhour, boolean isHoliday, boolean isWeekday, 
+			Integer min, Integer max, String carBrand, String carType) {
+		return dao.queryStoreAllday(city, district, isHolihour, isWeekhour, 
+				isHoliday, isWeekday, min, max, carBrand, carType);
+	}
 	
 	@Transactional
 	@Override
@@ -62,14 +77,4 @@ public class RentCarServiceImpl implements RentCarService{
 		rentCarBean = dao.getAllRentCars();
 		return rentCarBean;
 	}
-	
-	@Transactional
-	@Override
-	public RentCarBean getRentCar() {	
-		RentCarBean rentcarbean = null;
-		rentcarbean = dao.getRentCar();
-		return rentcarbean;
-	}
-
-
 }
