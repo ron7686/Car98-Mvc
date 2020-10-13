@@ -17,7 +17,7 @@
         }
 
         body {
-            background-image: url(${pageContext.request.contextPath}/image/black.jpg);
+            background-image: url(../image/Desktop.png);
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
@@ -38,10 +38,6 @@
             align-items: center;
             justify-content: center;
         }
-        .center{
-    		margin: 0 auto;
-    		float: none;
-		}
     </style>
     <title>Product</title>
 </head>
@@ -59,31 +55,28 @@
                 <div>
                     <h2>產品資料</h2>
                     <h3>${product.bidItemName}</h3>
-                    <p>賣家: ${product.memName}</p>
+                    <p>賣家ID: ${product.memName}</p>
                     <p>單價: ${product.bidPrice}</p>
                     <p>商品分類: ${product.bidItemBean.bidCategory}</p>
                     <p>上架時間: ${product.bidTime}</p>
-                    <p>商品內容:<br> ${product.bidFormat}</p>
+                    <p>商品內容: ${product.bidFormat}</p>
                     <p>
                         <strong>商品編號: </strong> <span class='label label-warning'>
                             ${product.bidId} </span>
                     </p>
                 </div>
-                  		
-                <div class='row'>
-                                    
+                <div>
                     
-                   
+                        <a href="<spring:url value='/comm/products' />" class="btn btn-secondary">
+                            <span class="glyphicon-hand-left glyphicon text-white">返回</span>
+                        </a>
                     <FORM action="<c:url value='BuyBid.do' />" method="POST">
-                    <select name='qty' style='width:50px;'>
-                    	<option value="1">1</option>
-                    	<option value="2">2</option>
-                    	<option value="3">3</option>
-              		</select>
-                        <input name='qty' type="hidden" />
+                        <input name='qty' type="hidden" value='1' />
                         <Input type='hidden' name='bidId' value='${product.bidId}'>
+                     
                         <Input class='btn btn-warning btn-large' type='submit' value='加入購物車'>
                        
+               
                     </FORM>
                     
                 </div>
@@ -93,18 +86,16 @@
         
         
     </div>
-    
      	<c:forEach var='picList' items="${picList}">
-			<div class="col mb-4 center">
-    			<div class="card w-50 center">										
+					<div class="col mb-4">
+    			<div class="card h-100">										
 					<img src="<c:url value='pictures/${picList.picId}'/>" class='pfDetailImage card-img-top'>
 				</div>
 			</div>	
 					
 		</c:forEach>
-		<a href="<spring:url value='/comm/products' />" class="btn btn-secondary">
-             <span class="glyphicon-hand-left glyphicon text-white">返回</span>
-        </a>
+			
+			
     <!-- footer -->
     <jsp:include page="/fragment/footer.jsp" />
 </body>

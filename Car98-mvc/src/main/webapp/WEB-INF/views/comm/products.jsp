@@ -16,13 +16,13 @@
 
 </head>
 
-<body>
+<body class="backg">
 	<!-- navbar -->
 	<jsp:include page="/fragment/topIndex.jsp" />
 
 
 	<!-- shopping product -->
-	<div class="container">
+	<div class="container ">
 		<div class="contorl  my-2 d-flex justify-content-end">
 			<FONT color='red' size='-1' class="mr-3"> 金額小計(OK):
 				<c:out value="${ShoppingCart.subtotal}" default="0" /> 元
@@ -94,7 +94,7 @@
 										<div>
 											<h2>產品資料</h2>
 											<h3>${product.value.bidItemName}</h3>
-											<p>賣家: ${product.value.memName}</p>
+											<p>賣家ID: ${product.value.memName}</p>
 											<p>單價: ${product.value.bidPrice}</p>
 											<p>商品分類: ${product.value.bidItemBean.bidCategory}</p>
 											<p>上架時間: ${product.value.bidTime}</p>
