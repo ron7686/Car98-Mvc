@@ -84,44 +84,44 @@ body {
 			<div class="mainitem">Car租車</div>
 			<div class="row">
 				<div class="col-md-4">
-					<form action="">
+					<form action="">				
 						地區： <select name="area" id="areaitem" style="width: 250px"
 							onchange="queryArea()">
 							<option value="">選擇地區</option>
 						</select>
-					</form>
+					</form>					
 				</div>
 				<div class="col-md-4">
-					<form action="">
+					<form action="">					
 						價格： <select name="price" id="priceitem" style="width: 250px"
 							onchange="queryArea()">
 							<option value="isHoliday=true&isWeekday=true&min=0&max=99999">選擇價格</option>
-							<!--               <optgroup label="平日時租"> -->
-							<%--                 <option value="min<100">100以下</option> --%>
-							<%--                 <option value="min>101&max<300">101~300</option> --%>
-							<!--                 <option value="weekHour3">301~700</option> -->
-							<!--                 <option value="weekHour4">701以上</option> -->
-							<!--               </optgroup> -->
-							<!--               <optgroup label="假日時租"> -->
-							<!--                 <option value="holiHour1">100以下</option> -->
-							<!--                 <option value="holiHour2">101~300</option> -->
-							<!--                 <option value="holiHour3">301~700</option> -->
-							<!--                 <option value="holiHour4">701以上</option> -->
-							<!--               </optgroup> -->
+								<optgroup label="平日時租">
+								<option value="isHolihour=false&isWeekhour=true&isHoliday=false&isWeekday=false&min=0&max=100">100以下</option>
+								<option value="isHolihour=false&isWeekhour=true&isHoliday=false&isWeekday=false&min=101&max=300">101~300</option>
+								<option value="isHolihour=false&isWeekhour=true&isHoliday=false&isWeekday=false&min=301&max=700">301~700</option>
+								<option value="isHolihour=false&isWeekhour=true&isHoliday=false&isWeekday=false&min=701&max=1500">701以上</option>
+							</optgroup>
+								<optgroup label="假日時租">
+								<option value="isHolihour=true&isWeekhour=false&isHoliday=false&isWeekday=false&min=0&max=100">100以下</option>
+								<option value="isHolihour=true&isWeekhour=false&isHoliday=false&isWeekday=false&min=101&max=300">101~300</option>
+								<option value="isHolihour=true&isWeekhour=false&isHoliday=false&isWeekday=false&min=301&max=700">301~700</option>
+								<option value="isHolihour=true&isWeekhour=false&isHoliday=false&isWeekday=false&min=701&max=1500">701以上</option>
+							</optgroup>
 							<optgroup label="平日日租">
-								<option value="isHoliday=false&isWeekday=true&min=0&max=1000">1000以下</option>
-								<option value="isHoliday=false&isWeekday=true&min=1000&max=3000">1001~3000</option>
-								<option value="isHoliday=false&isWeekday=true&min=3000&max=4000">3001~4000</option>
-								<option value="isHoliday=false&isWeekday=true&min=4000&max=6000">4001以上</option>
+								<option value="isHolihour=false&isWeekhour=false&isHoliday=false&isWeekday=true&min=0&max=1000">1000以下</option>
+								<option value="isHolihour=false&isWeekhour=false&isHoliday=false&isWeekday=true&min=1001&max=3000">1001~3000</option>
+								<option value="isHolihour=false&isWeekhour=false&isHoliday=false&isWeekday=true&min=3001&max=4000">3001~4000</option>
+								<option value="isHolihour=false&isWeekhour=false&isHoliday=false&isWeekday=true&min=4001&max=6000">4001以上</option>
 							</optgroup>
 							<optgroup label="假日日租">
-								<option value="isHoliday=true&isWeekday=false&min=0&max=1000">1000以下</option>
-								<option value="isHoliday=true&isWeekday=false&min=1000&max=3000">1001~3000</option>
-								<option value="isHoliday=true&isWeekday=false&min=3000&max=4000">3001~4000</option>
-								<option value="isHoliday=true&isWeekday=false&min=4000&max=6000">4001以上</option>
+								<option value="isHolihour=false&isWeekhour=false&isHoliday=true&isWeekday=false&min=0&max=1000">1000以下</option>
+								<option value="isHolihour=false&isWeekhour=false&isHoliday=true&isWeekday=false&min=1001&max=3000">1001~3000</option>
+								<option value="isHolihour=false&isWeekhour=false&isHoliday=true&isWeekday=false&min=3001&max=4000">3001~4000</option>
+								<option value="isHolihour=false&isWeekhour=false&isHoliday=true&isWeekday=false&min=4001&max=6000">4001以上</option>
 							</optgroup>
 						</select>
-					</form>
+					</form>				
 				</div>
 				<div class="col-md-4">
 					<form action="">
@@ -129,13 +129,12 @@ body {
 							onchange="queryArea()">
 							<option value="">選擇車型</option>
 						</select>
-					</form>
+					</form>					
 				</div>
-
 				<br>
 				<div class="mx-auto mt-3">
 					<span id="result" class="text-white bg-dark" type="hidden" disabled="disabled"></span>
-				</div>	
+				</div>
 				<div id="map" class="mt-3"></div>
 			</div>
 		</div>

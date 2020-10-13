@@ -72,7 +72,6 @@ body {
 		<form:form method='POST' modelAttribute="bid" class='form-horizontal'
 			enctype="multipart/form-data">
 			<fieldset>
-
 				<div class="form-group">
 					<label class="control-label col-lg-4 col-sm-6" for='bidItemName'>
 						品名 </label>
@@ -152,6 +151,7 @@ body {
 				</div>
 			</fieldset>
 		</form:form>
+
 
 		<a href="<spring:url value='/comm/products' />"
 			class="btn btn-info"> <span

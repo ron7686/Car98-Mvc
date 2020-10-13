@@ -86,7 +86,6 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 <body>
 	<!-- navbar -->
 	<jsp:include page="/fragment/topIndex.jsp" />
-
 	<c:set var="funcName" value="CHE" scope="session" />
 	<c:choose>
 		<c:when test="${ShoppingCart.subtotal > 0}">
@@ -103,9 +102,6 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 	<div class="shopping-cart">
 		<!-- Title -->
 		<div class="title">購物清單</div>
-
-
-
 		<table>
 			<c:if test="${ShoppingCart.content == null}">
 				<div class="title">購物車內沒有商品</div>
@@ -207,9 +203,11 @@ response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
 									aria-label="View 3 items in your shopping cart"
 									href="<c:url value='/comm/products' />"><i class="fa fa-shopping-cart fa-lg"
 										aria-hidden="true"></i>繼續購物</a></td>
-							<td width="265" align='center'><a class="btn btn-success" href="<c:url value='checkout' />"
+							<td width="265" align='center'>
+								<a class="btn btn-success" href="<c:url value='checkout' />"
 									onClick="return Checkout(${subtotal});"><i
-										class="fa fa-credit-card fa-lg"></i>再次確認</a></td>
+										class="fa fa-credit-card fa-lg"></i>再次確認</a>
+									</td>
 							<td width="265" align='center'><a class="btn btn-danger" href="<c:url value='abort' />"
 									onClick="return Abort();"><i class="fa fa-trash-alt fa-lg"></i>放棄購物</a></td>
 						</tr>

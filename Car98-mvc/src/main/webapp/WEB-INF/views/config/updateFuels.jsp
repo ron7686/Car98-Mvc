@@ -61,7 +61,7 @@ body {
 					<div class="row justify-content-center ailgn-items-center">
 						<div class="col-12 col-md-6">
 							<div class="h3 mt-5">加油記錄</div>
-							<div class="form-check form-check-inline mb-3">
+							<div class="form-check form-check-inline mb-3 w-100">
 								<form:select path="fuelPriceBean.typeNo" class="custom-select">
 									<form:option value="-1" label="請挑選" />
 									<form:options items="${typeList}" />
@@ -83,8 +83,8 @@ body {
 								<form:errors path="time" />
 							</div>
 							<div class="form-group">
-								<div class='col-lg-offset-2 col-sm-10'>
-									<input id="btnAdd" type='submit' class='btn btn-info'
+								<div class='col-lg-offset-2 col-sm-10 ml-3 mt-3'>
+									<input id="btnAdd" type='submit' class='btn btn-info ml-5'
 										value="送出" />
 								</div>
 							</div>

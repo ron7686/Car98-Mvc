@@ -9,12 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.web.car98.rentcar.dao.CarTypeDao;
 import com.web.car98.rentcar.model.CarTypeBean;
+import com.web.car98.rentcar.model.RentCarBean2;
 import com.web.car98.rentcar.service.CarTypeService;
 
 @Service
 public class CarTypeServiceImpl implements CarTypeService{
 	@Autowired
-	CarTypeDao ctdao ;
+	CarTypeDao ctdao;
 	
 	@Transactional
 	@Override
