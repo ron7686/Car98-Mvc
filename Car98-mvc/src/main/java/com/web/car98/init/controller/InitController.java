@@ -47,9 +47,6 @@ public class InitController {
 		return "index";
 	}
 	
-	
-	
-	
 	@RequestMapping("/privacy")
 	public String privacy(Model model) {
 		return "privacy";
@@ -58,6 +55,11 @@ public class InitController {
 	@RequestMapping("/terms")
 	public String terms(Model model) {
 		return "terms";
+	}
+	
+	@RequestMapping("/car98Member")
+	public String car98Member(Model model) {
+		return "car98Member";
 	}
 	
 	@GetMapping("/init/getMemberImage")

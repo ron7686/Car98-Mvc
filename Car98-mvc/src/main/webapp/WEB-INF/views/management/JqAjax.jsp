@@ -40,6 +40,8 @@
                             </div>
                             <div class="card-body">
 	<div id="createtable" class="table-responsive"></div>
+	</div>
+	</div>
 	
 	<script>
           $(document).ready(function() {

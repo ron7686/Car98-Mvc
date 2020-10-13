@@ -1,4 +1,4 @@
-package com.web.car98.member.service;
+package com.web.car98.init.mail;
 
 import java.util.Properties;
 

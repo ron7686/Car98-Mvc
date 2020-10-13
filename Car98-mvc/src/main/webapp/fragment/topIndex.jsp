@@ -27,7 +27,10 @@ margin-right:auto;
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 		<ul class="navbar-nav ul">
 
+
+			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='/car98Member' />">成員介紹</a></li>
 			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='/searchresource/map' /> "> Car好康</a>
+
 				</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link" style="font-size:25px;" href="<c:url value='/config/fuels'/>"
@@ -65,6 +68,7 @@ margin-right:auto;
 			<!-- <li class="nav-item"><a class="nav-link" href="<c:url value='/comm/products' />">Car好買</a></li> -->
 			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='/forum/talktop.do' />">Car論壇</a></li>
 
+			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="http://localhost:8080/Car98-mvc/chatRoom.html">聊天室</a></li>
 			<c:if test="${empty LoginOK}">
 				<li class="nav-item active ml-auto"><a class="nav-link" style="font-size:25px;" href="<c:url value='/login' />"><i class="fas fa-sign-in-alt">登入</i>
 						<span class="sr-only">(current)</span>
@@ -72,9 +76,7 @@ margin-right:auto;
 					</a></li>
 			</c:if>
 			<c:if test="${LoginOK.levels == 1}">
-				<li class="nav-item active"><a class="nav-link" href="<c:url value='/userManager' />">管理員 <span
-							class="sr-only">(current)</span>
-					</a></li>
+					<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='/userManager' />">管理介面</a></li>
 			</c:if>
 		</ul>
 	</div>

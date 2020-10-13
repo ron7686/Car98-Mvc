@@ -97,8 +97,9 @@
 							consectetur adipisicing elit. Maxime,Lorem ipsum dolor sit, amet
 							consectetur adipisicing elit. Maxime.</p>
 						<div class="information-card-info text-center">
+						<a href="http://localhost:8080/Car98-mvc/comm/products">
 							<img src="./image/empty-shopping-cart.png" alt=""
-								class="information-card-img">
+								class="information-card-img"></a>
 							<h4 class="information-card-name">Car好買</h4>
 							<div class="information-card-position">熱門商品</div>
 						</div>
@@ -110,8 +111,9 @@
 							consectetur adipisicing elit. Maxime,Lorem ipsum dolor sit, amet
 							consectetur adipisicing elit. Maxime.</p>
 						<div class="information-card-info text-center">
+					<a href="http://localhost:8080/Car98-mvc/forum/talktop.do">
 							<img src="./image/speech-bubble-outline.png" alt=""
-								class="information-card-img">
+								class="information-card-img"></a>
 							<h4 class="information-card-name">Car論壇</h4>
 							<div class="information-card-position">熱門話題</div>
 						</div>
