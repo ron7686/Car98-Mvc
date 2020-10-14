@@ -375,30 +375,31 @@ label{
 					</button>
 				</div>
 
-				<form:form action="changePassword" modelAttribute="memberBean"
-					method="POST">
-					<div class="modal-body">
-						<div class="form-group w-50 mx-auto">
-							<p class="text-white">新密碼</p>
-							<form:input path="password" type="password" id="pwdId"
-								class="text form-control" value="" name="password"
-								required="required"
-								pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" />
-							<form:errors class="error" path="password" />
-						</div>
-						<div class="form-group w-50 mx-auto">
-							<p class="text-white">確認密碼</p>
-							<form:input path="password1" type="password" id="pwdId"
-								class="text form-control" name="password1" required="required"
-								pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" />
-							<form:errors class="error" path="password1" />
-						</div>
-					</div>
-					<div class="modal-footer justify-content-center">
-						<button type="submit" class="signin btn btn-secondary"
-							onclick="myFunction()">送出</button>
-					</div>
+				<div class="container">
+		<div class="row">
+			<div class="col-12 mt-1 message">
+				<form:form class="comment" action="updateCom" method="POST"
+					modelAttribute="commentBean" enctype="multipart/form-data">
+					<form:textarea id="comments" path="comText" class="mt-2 " cols="120"
+						rows="3" placeholder="請輸入內容...." />
+						
+					<label class='control-label '
+						for="commentMultipartFile"> 上傳圖片 </label>
+						
+					<form:input type="file" class="form-control-file float-right "
+						id="commentMultipartFile" path="commentMultipartFile" />
+					
+						
+					<p class="mt-3 ">
+						<img id="image" src="">
+					</p>
+					
+					<button class="float-right btn btn-light  mb-3" type="submit"  id="confirm">送出</button>
 				</form:form>
+
+			</div>
+		</div>
+	</div>
 			</div>
 		</div>
 	</div>

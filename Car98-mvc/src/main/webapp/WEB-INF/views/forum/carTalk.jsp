@@ -107,11 +107,12 @@
             
             <div class="col-12 ">
                 <ul class="classification ">
-                    <li class="classification-item"><a class="classification-item-a" href="<%=path%>/forum/talktop.do">全部</a></li>
-                    <li class="classification-item"><a class="classification-item-a" href="<%=path%>/forum/talktop.do?type=1">討論</a></li>
-                    <li class="classification-item"><a class="classification-item-a" href="<%=path%>/forum/talktop.do?type=2">分享＆心得</a></li>
-                    <li class="classification-item"><a class="classification-item-a" href="<%=path%>/forum/talktop.do?type=3">求助＆問題</a></li>
-                    <li class="classification-item"><a class="classification-item-a" href="<%=path%>/forum/talktop.do?type=4">公告</a></li>
+                    <a class="classification-item-a" id="cia" href="<%=path%>/forum/talktop.do"><li class="classification-item">全部</li></a>
+                    <a class="classification-item-a" id="cia1" href="<%=path%>/forum/talktop.do?type=1"><li class="classification-item">討論</li></a>
+                    <a class="classification-item-a" id="cia2" href="<%=path%>/forum/talktop.do?type=2"><li class="classification-item">分享＆心得</li></a>
+                    <a class="classification-item-a" id="cia3" href="<%=path%>/forum/talktop.do?type=3"><li class="classification-item">求助＆問題</li></a>
+                    <a class="classification-item-a" id="cia4" href="<%=path%>/forum/talktop.do?type=4"><li class="classification-item">公告</li></a>
+              <form:form class="ml-auto"><input  type="text" placeholder="關鍵字....."><button><i class="fas fa-search"></i></button></form:form>
                 </ul>
             </div>
 <!--             <div class="col-12 filter"> -->
@@ -147,13 +148,13 @@
                 <table class="maintalk mt-1 talk">
                 <c:forEach var="aBean" items="${abean}">
 				  <tr>
-                        <td class="sort "><a href=""><i class="fab fa-discourse"></i>${aBean.postType}</a></td>
+                        <td class="sort "><a href="<%=path%>/forum/talktop.do?type=${aBean.postType}"><i class="fab fa-discourse"></i>${aBean.postType}</a></td>
 <%--                         <td class="pic "><c:if test="${!empty TalkBean.postFileName}"><img src="<%=path%>/getpostPic?postID=${aBean.postID}" class="contentimage " alt=""></c:if></td> --%>
 						<td class="pic "><img src="<%=path%>/getpostPic?postID=${aBean.postID}" class="contentimage " alt=""></td>
                         <th class="title itemtitle "><a class="subtitle ml-3" href="<%=path%>/talktalk?postID=${aBean.postID}&pageNo=1">${aBean.postTitle}</a></th>
                         <td class="author"><a class="talkname" href="${pageContext.request.contextPath}/management?memId=${aBean.memberBean.id}">${aBean.memberBean.id}</a><br>${aBean.postTime} </td>
                         <td class="respon">${aBean.postCom}/<br>${aBean.postView}</td>
-                        <td class="lastupdate"><a class="talkname" href="">${aBean.commentbean.memberBean.id}</a><br><a  class="time" href="">${aBean.commentbean.comTime}</a></td>
+                        <td class="lastupdate"><a class="talkname" href="<%=path%>/management?memId=${aBean.commentbean.memberBean.id}">${aBean.commentbean.memberBean.id}</a><br><a  class="time" href="">${aBean.commentbean.comTime}</a></td>
                   </tr>
 				 </c:forEach>
                 </table>
@@ -182,7 +183,7 @@
       integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
       crossorigin="anonymous"
     ></script>
-    <script src="http://maps.google.com/maps/api/js"></script>
+    
     <script src="${pageContext.servletContext.contextPath}/javascript/BSTalk.js"></script>
     <script src="${pageContext.servletContext.contextPath}/javascript/textillate.js"></script>
     <script src="${pageContext.servletContext.contextPath}/javascript/lettering.js"></script>

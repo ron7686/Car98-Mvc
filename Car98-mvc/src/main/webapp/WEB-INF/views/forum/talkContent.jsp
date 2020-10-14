@@ -150,23 +150,21 @@ body {
 		
 	</section>
 	<jsp:include page="/fragment/footer.jsp"></jsp:include>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	<script>
 	$(document).ready(function() {
-		$("#btnpublish").on('click', function(e) {
-			if (confirm("確定發佈文章?")) {
-				return true;
-			} else {
-				return false;
-			}
-		});
-
-	})
+			$("#btnpublish").on('click', function(e) {
+				if (confirm("確定刪除此則留言?")) {
+					return true;
+				} else {
+					return false;
+				}
+			});
 
 
 
 
 	</script>
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous"></script>
 	<script src="${pageContext.servletContext.contextPath}/javascript/talkContent2.js"></script>
