@@ -62,8 +62,9 @@ public class RegisterController {
 	}
 
 	@PostMapping("/register")
-	public String processAddNewMemberForm(@ModelAttribute("memberBean") MemberBean mb, BindingResult result,
-			Model model, HttpServletRequest request) {
+	public String processAddNewMemberForm(@ModelAttribute("memberBean") MemberBean mb, 
+			BindingResult result,Model model, 
+			RedirectAttributes redirectAtt,HttpServletRequest request) {
 		memberBeanValidator.validate(mb, result);
 
 		// 有錯誤訊息返回 register.jsp
@@ -119,6 +120,7 @@ public class RegisterController {
 		// ------------------- 驗證沒問題，存進去資料庫 -----------------
 		try {
 			memberService.saveMember(mb);
+			redirectAtt.addFlashAttribute("InsertOK", "<Font color='blue'>註冊成功，請開始使用本系統</Font>");
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ", ErrorMessage =" + e.getMessage());
 			result.rejectValue("email", "", "發生異常，請通知系統人員..." + e.getMessage());

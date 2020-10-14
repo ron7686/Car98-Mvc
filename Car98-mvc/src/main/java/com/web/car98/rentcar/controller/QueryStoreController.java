@@ -41,17 +41,17 @@ public class QueryStoreController{
 	protected Collection<RentCarBean2> getStoreList(String city, String district, 
 			boolean isHolihour, boolean isWeekhour, boolean isHoliday, boolean isWeekday, 
 			Integer min, Integer max, String carBrand, String carType) {
-		System.out.println(city);
-		System.out.println(district);
-		System.out.println(isHolihour);
-		System.out.println(isWeekhour);
-		System.out.println(isHoliday);
-		System.out.println(isWeekday);
-		System.out.println(min);
-		System.out.println(max);
-		System.out.println(carBrand);
-		System.out.println(carType);
-		System.out.println("======================");
+//		System.out.println(city);
+//		System.out.println(district);
+//		System.out.println(isHolihour);
+//		System.out.println(isWeekhour);
+//		System.out.println(isHoliday);
+//		System.out.println(isWeekday);
+//		System.out.println(min);
+//		System.out.println(max);
+//		System.out.println(carBrand);
+//		System.out.println(carType);
+//		System.out.println("======================");
 		
 		if(city==null) {
 			city = "%";
@@ -69,37 +69,37 @@ public class QueryStoreController{
 			carType = "%";
 		}
 		
-		System.out.println(city);
-		System.out.println(district);
-		System.out.println(carBrand);
-		System.out.println(carType);
-		System.out.println("======================");
+//		System.out.println(city);
+//		System.out.println(district);
+//		System.out.println(carBrand);
+//		System.out.println(carType);
+//		System.out.println("======================");
 		
 		
 		if (isHolihour==false && isWeekhour==true) {
 			Collection<RentCarBean2> storeData = rentCarService.queryStoreWeekhour(city, district, isHolihour, isWeekhour, 
 					isHoliday, isWeekday, min, max, carBrand, carType);
-			System.out.println(storeData);
+//			System.out.println(storeData);
 			return storeData;
 		} else if (isHolihour==true && isWeekhour==false) {
 			Collection<RentCarBean2> storeData = rentCarService.queryStoreHolihour(city, district, isHolihour, isWeekhour, 
 					isHoliday, isWeekday, min, max, carBrand, carType);
-			System.out.println(storeData);
+//			System.out.println(storeData);
 			return storeData;
 		} else if (isHoliday==false && isWeekday==true) {
 			Collection<RentCarBean2> storeData = rentCarService.queryStoreWeekday(city, district, isHolihour, isWeekhour, 
 					isHoliday, isWeekday, min, max, carBrand, carType);
-			System.out.println(storeData);
+//			System.out.println(storeData);
 			return storeData;
 		} else if (isHoliday==true && isWeekday==false) {
 			Collection<RentCarBean2> storeData = rentCarService.queryStoreHoliday(city, district, isHolihour, isWeekhour, 
 					isHoliday, isWeekday, min, max, carBrand, carType);
-			System.out.println(storeData);
+//			System.out.println(storeData);
 			return storeData;
 		} else {
 			Collection<RentCarBean2> storeData = rentCarService.queryStoreAllday(city, district, isHolihour, isWeekhour, 
 					isHoliday, isWeekday, min, max, carBrand, carType);
-			System.out.println(storeData);
+//			System.out.println(storeData);
 			return storeData;
 		}
 	}
