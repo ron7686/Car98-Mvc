@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -65,7 +66,7 @@ public class TalkBean implements Serializable {
 	private Blob PostPic;
 	private String PostFileName;
 	
-	@OneToMany(mappedBy = "talkBean")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "talkBean", cascade = CascadeType.ALL)
 	private List<CommentBean> comment = new ArrayList<>();
 	@OneToMany(mappedBy = "talkBean")
 	private List<LikeOrHateBean> likeOrHate = new ArrayList<>();
