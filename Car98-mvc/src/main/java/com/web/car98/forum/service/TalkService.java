@@ -13,9 +13,13 @@ public interface TalkService {
 	
 	List<TalkBean> getPageByType(int page,String type);
 	
+	public List<TalkBean> getSearchList(List<TalkBean> li,String search);
+	
 	String intToType(String type);
 
 	int lastpage(String type);
+	
+	int searchlastpage(String search);
 
 	TalkBean selectOne(int postID);
 
@@ -30,4 +34,6 @@ public interface TalkService {
 	void setView(int postId);
 	
 	void deletePost(int postId);
+	
+	
 }

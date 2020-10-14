@@ -20,11 +20,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.web.car98.forum.model.CommentBean;
 import com.web.car98.forum.model.TalkBean;
 import com.web.car98.forum.service.TalkService;
 
@@ -37,24 +40,30 @@ public class TalkController {
 	ServletContext servletContext;
 	int postID = 1;
 
-	@RequestMapping("/forum/talktop.do")
-	public String list(Model model,
-			@RequestParam(value = "pageNo", required = false) Integer pageNo,
+	@GetMapping("/forum/talktop.do")
+	public String list(Model model, @RequestParam(value = "pageNo", required = false) Integer pageNo,
 			@RequestParam(value = "type", required = false) String type,
-			@ModelAttribute("talkBean") TalkBean talkBean) {
-
+			@ModelAttribute("talkBean") TalkBean talkBean,
+			CommentBean cb) {
+		int lastpage = 0;
 		if (pageNo == null) {
 			pageNo = 1;
 		}
 		List<TalkBean> list = new ArrayList<>();
-		model.addAttribute("type",type);
-		
-		if (type!=null&&type.length()!=0) {
-			type=talkservice.intToType(type);
+		model.addAttribute("type", type);
+		if (type != null && type.length() != 0) {
+			type = talkservice.intToType(type);
 		}
-		int lastpage=talkservice.lastpage(type);
-		list = talkservice.getPageByType(pageNo, type);
-
+		if (cb.getSearch() != null&&cb.getSearch().length()!=0) {
+			String search=cb.getSearch();
+			lastpage = talkservice.searchlastpage(search);
+			list = talkservice.getSearchList(talkservice.getAll(), search);
+			list = talkservice.getPage(list, pageNo);
+		} else {
+			lastpage = talkservice.lastpage(type);
+			list = talkservice.getPageByType(pageNo, type);
+		}
+		model.addAttribute("search", cb.getSearch());
 		model.addAttribute("abean", list);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("lastPage", lastpage);
@@ -62,7 +71,7 @@ public class TalkController {
 		return "/forum/carTalk";
 
 	}
-	
+
 	@GetMapping("/getpostPic")
 	public ResponseEntity<byte[]> getPostPic(@RequestParam("postID") Integer postID) {
 		InputStream is = null;
@@ -124,10 +133,6 @@ public class TalkController {
 			}
 		}
 		return responseEntity;
-	}	
-
-	
-	
-	
+	}
 
 }
