@@ -178,7 +178,7 @@ function rLength(list){
 
 
 
-function getGeoCallback(index, address, store) {
+function getGeoCallback(address, store) {
 
   return function (position) {
 	// 標記設定
