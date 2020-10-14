@@ -46,8 +46,6 @@ body {
 	<c:set var="funcName" value="END" scope="session" />
 	<!-- navbar -->
 	<jsp:include page="/fragment/topIndex.jsp" />
-
-
 	<section class="py-5 container-height">
 		<div class="container">
 			<div class="h1 text-center mb-3 text-white">
@@ -70,9 +68,9 @@ body {
 		</div>
 	</section>
 
+
 	<!-- footer -->
 	<jsp:include page="/fragment/footer.jsp" />
-
 </body>
 
 </html>

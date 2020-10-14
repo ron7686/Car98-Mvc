@@ -155,10 +155,10 @@ public class RegisterController {
 		return "/login/login";
 	}
 
-	@RequestMapping("/logout")
-	public String logout(Model model) {
-		return "/login/logout";
-	}
+//	@RequestMapping("/logout")
+//	public String logout(Model model) {
+//		return "/login/logout";
+//	}
 
 	@GetMapping("/management")
 	public String management(Model model) {
@@ -217,7 +217,7 @@ public class RegisterController {
 			rs.send("Car98會員修改密碼成功", "您於"+mb.getLoginTime()+"的時候完成密碼修改。"
 					+"\n如有任何問題，請於上班時間與客服聯繫，謝謝!", mb.getEmail());
 		}).start();
-		return "redirect:/management";
+		return "redirect:/PasswordUpdateSuccess_Logout";
 	}
 
 	@InitBinder

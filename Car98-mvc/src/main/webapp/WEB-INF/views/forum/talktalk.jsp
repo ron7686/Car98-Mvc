@@ -199,9 +199,12 @@ body {
 							src="${pageContext.request.contextPath}/getpostPic?postID=${TalkBean.postID}"
 							alt="">
 					</c:if>
+					
 					<c:if test="${TalkBean.memberBean.memId == LoginOK.memId}">
-					<a type="submit" href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
-					<a type="submit" href="<%=path%>/deletePost?postId=${TalkBean.postID}">刪除</a>
+					<div class=" float-right mr-4">
+					<a type="submit" class="btn btn-light " href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
+					<a type="submit" class="btn btn-light ml-4" href="<%=path%>/deletePost?postId=${TalkBean.postID}">刪除</a>
+					</div>
 					</c:if>
 				</div>
 

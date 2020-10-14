@@ -119,7 +119,7 @@ body {
 
 				<div class="form-group">
 					<label class='control-label col-lg-4 col-sm-6' for="bidStock">
-						庫存 </label>
+						數量 </label>
 					<div class='col-lg-10'>
 						<form:input id="bidStock" path="bidStock" type='text'
 							class='form:input-large' />
@@ -130,7 +130,7 @@ body {
 					<label class='control-label col-lg-4 col-sm-6' for="bidScore">
 						評價 </label>
 					<div class='col-lg-10'>
-						<form:input id="bidScore" path="bidScore" type='hidden' value='10'
+						<form:input id="bidScore" path="bidScore" type='text'
 							class='form:input-large' />
 						<form:errors path="bidScore" class='error' />
 					</div>
@@ -167,15 +167,20 @@ body {
 				<div class="form-group">
 					<div class='col-lg-offset-2 col-sm-10'>
 						<input id="btnAdd" type='submit' class='btn btn-info' value="送出" />
+						<a href="<spring:url value='/comm/products' />"
+						class="btn btn-info"> <span
+						class="glyphicon-hand-left glyphicon"></span>返回
+				    	</a>
 					</div>
+					
 				</div>
 			</fieldset>
 		</form:form>
 
-		<a href="<spring:url value='/comm/products' />"
+		<!-- <a href="<spring:url value='/comm/products' />"
 			class="btn btn-info"> <span
 			class="glyphicon-hand-left glyphicon"></span>返回
-		</a>
+		</a> -->
 
 	</section>
 	<!-- footer -->

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.web.car98.rentcar.model.CarTypeBean;
+import com.web.car98.rentcar.model.RentCarBean2;
 import com.web.car98.rentcar.dao.CarTypeDao;
 
 @SuppressWarnings("unchecked")
@@ -31,4 +32,5 @@ public class CarTypeDaoImpl implements CarTypeDao {
 		Collection<CarTypeBean> carTypeBean = session.createSQLQuery(sql).list();
 		return carTypeBean;
     }
+
 }

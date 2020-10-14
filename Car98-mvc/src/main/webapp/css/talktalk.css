@@ -17,8 +17,8 @@
   border-top: 2px solid white;
 }
 .photo {
-  width: 140px;
-  height: 140px;
+  max-width: 140px;
+  max-height: 140px;
   
   
 }

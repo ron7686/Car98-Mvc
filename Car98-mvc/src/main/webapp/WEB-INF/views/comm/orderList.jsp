@@ -51,6 +51,8 @@
 				沒有任何商品資料<br>
 			</c:when>
 			<c:otherwise>
+				<div class="container">
+					<div class="row">
 				<div class="table-responsive-lg table-hover">
 					<table class="table table-striped" border=1 cellpadding="3" cellspacing="1">
 						<thead>
@@ -88,6 +90,8 @@
 				<a href="<spring:url value='/comm/products' />" class="btn btn-default"> <span
 						class="glyphicon-hand-left glyphicon"></span>返回
 				</a>
+			</div>
+		</div>
 			</c:otherwise>
 		</c:choose>
 		<hr>

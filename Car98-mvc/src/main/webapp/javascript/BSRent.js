@@ -110,12 +110,12 @@ function queryArea() {
 	}
 	console.log(qUrl);
 	$.ajax({
-		method: "GET",
+		method: "POST",
 		url: qUrl,
 		success: function (res) {
 			//console.log(res);
-			test(res);
 			rLength(res);
+			test(res);
 		}
 	})
 }
@@ -127,30 +127,59 @@ function initMap() {
   });
 }
 
-let map, markers;
+let map, markers, markerStores;
 
 function test(list) {
   clearMarkers();
   markers = [];
-  
-  for (c = 0; c < list.length; c++) {
-    // 	1. get address
-    // 	2. address -> Lat Lng
-    // 	3. Lat Lng -> add Marker and Info Window
-    var address = list[c].city + list[c].district + list[c].street;
-    var store = list[c].store;
-    _geocoder(address, getGeoCallback(c, address, store));
+  markerStores = {};
+  let index = 0;
+
+  // 1. get address
+  // 2. address -> Lat Lng
+  // 3. Lat Lng -> add Marker and Info Window
+
+  function loop(c) {
+    let address = list[c].city + list[c].district + list[c].street;
+    let store = list[c].store;
+    _geocoder(address, getGeoCallback(address, store));
   }
+
+  // 由於Google Map API有查詢限制，尤其是地址轉緯經度，
+  // 故設每660毫秒內，顯示一筆資料，防止over_query_limit發生
+  let timer = setInterval(() => {
+    while (index < list.length) {
+      let address =
+        list[index].city + list[index].district + list[index].street;
+      if (!markerStores[address]) {
+        markerStores[address] = true;
+        loop(index);
+        return;
+      } else {
+        console.log("duplicate");
+      }
+      index++;
+    }
+    console.log("clear");
+    clearInterval(timer);
+  }, 660);
 }
 
 
 function rLength(list){
-	$("#result").val("符合條件:共 " + list.length + " 筆資料");
+	tempMarkerStores = {};
+	for(let i=0;i<list.length;i++){
+		let address = list[i].city + list[i].district + list[i].street;
+		tempMarkerStores[address]=true;
+	}
+	$("#result").text("符合條件：共 " + Object.keys(tempMarkerStores).length + " 筆資料");
 	$("#result").attr('type','text');
 }
 
 
+
 function getGeoCallback(index, address, store) {
+
   return function (position) {
 	// 標記設定
     const markerOptions = {
@@ -163,26 +192,39 @@ function getGeoCallback(index, address, store) {
     const infoWindow = new google.maps.InfoWindow({
       content:
         "<h4>租車行：</h4>" +
-        "<h5>" + store + "</h5><br>" +
+        "<a href='https://www.google.com.tw/maps?q="+address+"' target='_blank'><h5>" + store + "</h5></a><br>" +
         "<h4>地址：</h4>" +
-        "<h5>" + address + "</h5>",
+        "<a href='https://www.google.com.tw/maps?q="+address+"' target='_blank'><h5>" + address + "</h5></a>",
 	});
 	
 	// 新建標記
     const marker = new google.maps.Marker(markerOptions);
-    markers[index] = marker;
+    markers.push(marker);
     marker.setMap(map);
     marker.addListener("mouseover", function () {
+		marker.forceOpen=false;
+    	infoWindow.open(map, marker);
+	});
+	marker.addListener("click", function () {
+		marker.forceOpen=true;
     	infoWindow.open(map, marker);
 	});
 	marker.addListener("mouseout", function () {
+		if (marker.forceOpen==false){
 		infoWindow.close();
+		}
 	});
 
-	//畫面縮放至新建標記
+	// 新建標記後，自動調整畫面的縮放比例
+	console.log("length:"+markers.length);
 	var bounds = new google.maps.LatLngBounds();
 	for (var i=0; i<markers.length; i++) {
-		bounds.extend(markers[i].position);
+		if(markers[i]){
+			bounds.extend(markers[i].position);
+		}else{
+			console.log(i);
+			console.log(markers[i]);
+		}
 	}
 	map.fitBounds(bounds);
   };
@@ -198,7 +240,9 @@ function _geocoder(address, callback) {
     function (results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         callback(results[0].geometry.location); //用一個 callback 就不用每次多寫上面這段
-      }
+      }else{
+		  console.log(status);
+	  }
     }
   );
 }
