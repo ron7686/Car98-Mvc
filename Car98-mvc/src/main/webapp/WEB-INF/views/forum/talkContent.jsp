@@ -121,7 +121,7 @@ body {
 							style="width: 100%" cols="100" rows="20"
 							placeholder="請輸入內容......"></form:textarea>
 						<form:errors class="errormsg" path="PostText" > </form:errors>
-						<button type="button"  class="publish" id="btnpublish">發佈文章</button>
+						<button type="submit"  class="publish" id="btnpublish">發佈文章</button>
 						
 					
 				</div>
