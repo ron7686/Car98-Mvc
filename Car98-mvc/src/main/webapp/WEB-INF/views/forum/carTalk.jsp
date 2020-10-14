@@ -112,6 +112,7 @@
                     <a class="classification-item-a" id="cia2" href="<%=path%>/forum/talktop.do?type=2"><li class="classification-item">分享＆心得</li></a>
                     <a class="classification-item-a" id="cia3" href="<%=path%>/forum/talktop.do?type=3"><li class="classification-item">求助＆問題</li></a>
                     <a class="classification-item-a" id="cia4" href="<%=path%>/forum/talktop.do?type=4"><li class="classification-item">公告</li></a>
+              <form:form class="ml-auto"><input  type="text" placeholder="關鍵字....."><button><i class="fas fa-search"></i></button></form:form>
                 </ul>
             </div>
 <!--             <div class="col-12 filter"> -->
