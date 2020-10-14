@@ -121,7 +121,7 @@ body {
 							style="width: 100%" cols="100" rows="20"
 							placeholder="請輸入內容......"></form:textarea>
 						<form:errors class="errormsg" path="PostText" > </form:errors>
-						<button type="submit"  class="publish" id="btnpublish">發佈文章</button>
+						<button type="button"  class="publish" id="btnpublish">發佈文章</button>
 						
 					
 				</div>
@@ -153,15 +153,13 @@ body {
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 	<script>
 	$(document).ready(function() {
-		$("#btnpublish").on('click', function(e) {
-			if (confirm("確定發佈文章?")) {
-				return true;
-			} else {
-				return false;
-			}
-		});
-
-	})
+			$("#btnpublish").on('click', function(e) {
+				if (confirm("確定刪除此則留言?")) {
+					return true;
+				} else {
+					return false;
+				}
+			});
 
 
 

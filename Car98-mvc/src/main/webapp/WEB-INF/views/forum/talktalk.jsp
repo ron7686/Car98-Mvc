@@ -202,8 +202,8 @@ body {
 					
 					<c:if test="${TalkBean.memberBean.memId == LoginOK.memId}">
 					<div class=" float-right mr-4">
-					<a type="submit" class="btn btn-light " href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
-					<a type="submit" class="btn btn-light ml-4" href="<%=path%>/deletePost?postId=${TalkBean.postID}">刪除</a>
+					<a class="text-secondary btn btn-light " type="submit"  href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
+					<a class="text-secondary btn btn-light ml-4" id="delbtn" type="button" href="<%=path%>/deletePost?postId=${TalkBean.postID}">刪除</a>
 					</div>
 					</c:if>
 				</div>
@@ -468,8 +468,15 @@ body {
 					return false;
 				}
 			});
-				
 			
+				
+			$("#delbtn").on('click', function(e) {
+				if (confirm("確定刪除此則留言?")) {
+					return true;
+				} else {
+					return false;
+				}
+			});
 
 
 
