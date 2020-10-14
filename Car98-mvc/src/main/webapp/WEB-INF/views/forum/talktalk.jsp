@@ -57,7 +57,8 @@
 }
 
 body {
-	background-image: url(${pageContext.servletContext.contextPath}/image/olav-tvedt-yq-efMJMuPg-unsplash.jpg);
+	background-image:
+		url(${pageContext.servletContext.contextPath}/image/olav-tvedt-yq-efMJMuPg-unsplash.jpg);
 	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -120,8 +121,8 @@ body {
 	</div>
 
 	<!-- 文章標題 -->
-	<div class="container publish">
-		<c:if test="${pageNo <2}">
+	<c:if test="${pageNo <2}">
+		<div class="container publish">
 			<div class="row ">
 				<div class="col-12 text-white postitle">${TalkBean.postTitle}</div>
 				<!-- 作者資訊 -->
@@ -135,11 +136,6 @@ body {
 				<!-- 文章內容 -->
 
 				<div class="col-10">
-
-					<!-- 						<li class="gp">讚12</li> -->
-					<!-- 						<li class="bp">噓18</li> -->
-
-
 					<div>樓主</div>
 					<a href="#" style="color: white;">發表於${TalkBean.postTime}</a>
 
@@ -199,10 +195,14 @@ body {
 							src="${pageContext.request.contextPath}/getpostPic?postID=${TalkBean.postID}"
 							alt="">
 					</c:if>
-					<c:if test="${TalkBean.memberBean.memId == LoginOK.memId}">
-					<a type="submit" href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
-					<a type="submit" href="<%=path%>/deletePost?postId=${TalkBean.postID}">刪除</a>
-					</c:if>
+					<div class="update  col-3 float-right mb-3 d-flex  ">
+						<c:if test="${TalkBean.memberBean.memId == LoginOK.memId}">
+							<a type="submit" class="updatePostButton ml-5 btn btn-light"
+								href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
+							<a type="submit" class="deletePostButton ml-4 btn btn-light"
+								href="<%=path%>/deletePost?postId=${TalkBean.postID}">刪除</a>
+						</c:if>
+					</div>
 				</div>
 
 			</div>
@@ -211,8 +211,8 @@ body {
 				<div class="btn-group mr-2" role="group" aria-label="First group">
 				</div>
 			</div>
-		</c:if>
-	</div>
+		</div>
+	</c:if>
 	<!-- 	</div> -->
 
 	<p class="space mt-5"></p>
@@ -231,11 +231,8 @@ body {
 				</div>
 				<!-- 文章內容 -->
 				<div class="col-10">
-
 					<div>${comment.floor}樓</div>
 					<a href="#" style="color: white">發表於 ${comment.comTime}</a>
-
-
 
 					<!-- 按讚功能 -->
 					<c:if
@@ -252,8 +249,6 @@ body {
 									href="<%=path%>/comlike?postId=${TalkBean.postID}&comId=${comment.comId}&comLohId=${comment.comLikeOrHateBean.comLohId}&tf=2"
 									data-toggle="tooltip" data-placement="bottom" title="Hate"><i
 										class="fas fa-thumbs-down fa-2x"></i></a>${comment.comHate}</li>
-
-
 
 							</ul>
 						</div>
@@ -296,43 +291,51 @@ body {
 					</c:if>
 
 
-
-
-
-
-
-
-
 					<div class="col-12 article-content">
 						<div id="processUpdateDiv${comment.comId}">${comment.comText}</div>
 						<br>
 
 						<div id="updateDiv${comment.comId}" class="mb-2" hidden="true">
-							<textarea id="updateText${comment.comId}" rows="5" cols="68">${comment.comText}
+							<textarea id="updateText${comment.comId}" rows="4" cols="68">${comment.comText}
 							</textarea>
 						</div>
 
-						<!-- 						<div id="updateDiv" hidden="true"> -->
-						<%-- 						<textarea rows="20" cols="20">${comment.comText}</textarea>						 --%>
-						<!-- 						</div> -->
+						<div id="oldPicture${comment.comId}">
+							<c:if test="${!empty comment.fileName}">
+								<img class="commentPic mb-3" id="picImg${comment.comId}"
+									src='${pageContext.request.contextPath}/getComImage?id=${LoginOK.memId}&comId=${comment.comId}'>
+							</c:if>
+						</div>
 
 
-						<c:if test="${!empty comment.fileName}">
-							<img class="commentPic mb-3" 
+						<div id="newPicture${comment.comId}" style="display: none;">
+							<label for="exampleFormControlFile1s" class="control-label">
+								<input type="file" class="form-control-file float-right "
+								onclick="updatePic(this)" path="commentMultipartFile"
+								id="comMultipartFile${comment.comId}" /> <img
+								class="commentPic mb-3" id="updatePicImg${comment.comId}"
 								src='${pageContext.request.contextPath}/getComImage?id=${LoginOK.memId}&comId=${comment.comId}'>
-						</c:if>
+
+							</label>
+						</div>
 					</div>
-					<!-- Button trigger modal -->
+
+
 
 					<c:if test="${comment.memberBean.memId == LoginOK.memId}">
-						<div class="update  col-3 float-right mb-2 d-flex">
-							<!-- 記得加回編輯的<a> tag	data-toggle="modal" data-target="#staticBackdrop" -->
-							<%-- 						<a id="updateButton" class="updateButton m-2" href="${pageContext.request.contextPath}/forum/updateCom?postID=${TalkBean.postID}&comId=${comment.comId}">編輯</a> --%>
-							<button id="updateButton${comment.comId}" type="button"
-								class="updateButton ml-5 btn btn-light " onclick="openTextarea(this)">編輯</button>
+						<div class="update  col-3 float-right mb-3 d-flex">
+
+							<!-- Button trigger modal -->
+							<div class="mt-2 mb-2 needs-validation mx-5 text-white">
+								<button type="button" class="btn btn-secondary"
+									data-toggle="modal" data-target="#staticBackdrop">編輯</button>
+							</div>
 							<button id="updateFinish${comment.comId}" hidden="true"
 								class="updateButton btn btn-light" onclick="updateConfirm(this)">送出</button>
-							<a id="deleteButton${comment.comId}" class="deleteButton ml-4 btn btn-light " type="button"
+							<button id="cancel${comment.comId}" hidden="true"
+								class="cancelButton btn btn-light" onclick="cancel(this)">取消</button>
+							<a id="deleteButton${comment.comId}"
+								class="deleteButton ml-4 btn btn-light " type="button"
 								href="${pageContext.request.contextPath}/deleteCom?postID=${TalkBean.postID}&comId=${comment.comId}">刪除</a>
 
 						</div>
@@ -341,75 +344,78 @@ body {
 			</div>
 		</div>
 	</c:forEach>
-
 	<!-- Modal -->
-	<!-- 	<div class="modal fade" id="staticBackdrop" data-backdrop="static" -->
-	<!-- 		data-keyboard="false" tabindex="-1" -->
-	<!-- 		aria-labelledby="staticBackdropLabel" aria-hidden="true"> -->
-	<!-- 		<div class="modal-dialog"> -->
-	<!-- 			<div class="modal-content"> -->
-	<!-- 				<div class="modal-header"> -->
-	<!-- 					<h5 class="modal-title" id="staticBackdropLabel">編輯留言</h5> -->
-	<!-- 					<button type="button" class="close" data-dismiss="modal" -->
-	<!-- 						aria-label="Close"> -->
-	<!-- 						<span aria-hidden="true">&times;</span> -->
-	<!-- 					</button> -->
-	<!-- 				</div> -->
+	<div class="modal fade" id="staticBackdrop" data-backdrop="static"
+		data-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content bg-dark">
+				<div class="modal-header">
+					<h5 class="modal-title text-white" id="staticBackdropLabel">編輯</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
 
-	<%-- 				<form:form action="updateComment" modelAttribute="commentBean" --%>
-	<%-- 					method="POST"> --%>
-	<!-- 					<div class="modal-body"> -->
-	<!-- 						<div class="form-group w-50 mx-auto"> -->
-	<!-- 							<p class="text-secondary"></p> -->
-	<%-- 							<form:input path="comText" type="test" id="commentText" --%>
-	<%-- 								class="form-control" value="" name="comText" required="required" --%>
-	<%-- 								pattern="" /> --%>
-	<%-- 							<form:errors path="comText" /> --%>
-	<!-- 						</div> -->
-	<!-- 						<div class="modal-footer justify-content-center"> -->
-	<!-- 							<button type="submit" class="btn btn-secondary" -->
-	<!-- 								onclick="myFunction()">送出</button> -->
-	<%-- 							<c:if test="${empty errors}"> --%>
-	<!-- 								<div id="snackbar">修改成功</div> -->
-	<%-- 							</c:if> --%>
-	<!-- 						</div> -->
-	<!-- 					</div> -->
-	<%-- 				</form:form> --%>
-	<!-- 			</div> -->
-	<!-- 		</div> -->
-	<!-- 	</div> -->
+				<div class="container">
+					<div class="row">
+						<div class="col-12 mt-1 message">
+							<form:form class="comment" action="updateCom" method="POST"
+								modelAttribute="commentBean" enctype="multipart/form-data">
+								<form:textarea id="comments" path="comText" class="mt-2 "
+									cols="120" rows="3" placeholder="請輸入內容...." />
 
+								<label class='control-label ' for="commentMultipartFile">
+									上傳圖片 </label>
+
+								<form:input type="file" class="form-control-file float-right "
+									id="commentMultipartFile" path="commentMultipartFile" />
+
+
+								<p class="mt-3 ">
+									<img id="image" src="">
+								</p>
+
+								<button class="float-right btn btn-light  mb-3" type="submit"
+									id="confirm">送出</button>
+							</form:form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<!-- 留言輸入 -->
-<%-- 	<c:if test="${!empty CommentBean}"> --%>
 	<div class="container">
 		<div class="row">
 			<div class="col-12 mt-1 message">
 				<form:form class="comment" method="POST"
 					modelAttribute="commentBean" enctype="multipart/form-data">
-					<form:textarea id="comments" path="comText" class="mt-2 " cols="120"
-						rows="3" placeholder="請輸入內容...." />
-						
-					<label class='control-label '
-						for="commentMultipartFile"> 上傳圖片 </label>
-						
+					<form:textarea id="comments" path="comText" class="mt-2 "
+						cols="120" rows="3" placeholder="請輸入內容...." />
+
+					<label class='control-label ' for="commentMultipartFile">
+						上傳圖片 </label>
+
 					<form:input type="file" class="form-control-file float-right "
 						id="commentMultipartFile" path="commentMultipartFile" />
-					
-						
+
+
 					<p class="mt-3 ">
 						<img id="image" src="">
 					</p>
-					
-					<button class="float-right btn btn-light  mb-2" type="submit"  id="confirm">送出</button>
+
+					<button class="float-right btn btn-light  mb-3" type="submit"
+						id="confirm">送出</button>
 				</form:form>
 
 			</div>
 		</div>
 	</div>
-<%-- 	</c:if> --%>
-	
 
 	<hr>
 
@@ -465,18 +471,40 @@ body {
 					return false;
 				}
 			});
-
+			$(".deletePostButton").on('click', function(e) {
+				if (confirm("確定刪除此文章?")) {
+					return true;
+				} else {
+					return false;
+				}
+			});
 		})
 
 		var _baseUrl = 'CommentController/';
 
+		// jquery 的 hide() show() 是針對css 做出display:none 跟 inline   hidden是hidden
 		var openTextarea = function(value) {
 			var idNo = value.id.substring(12);
-			$('#processUpdateDiv' + idNo).hide();
-			document.getElementById('updateDiv' + idNo).hidden = false;
-			$('#updateButton' + idNo).hide();
-			document.getElementById('updateFinish' + idNo).hidden = false;
+			$('#processUpdateDiv' + idNo).hide(); //舊textarea
+			document.getElementById('updateDiv' + idNo).hidden = false; //新textarea
+			$('#updateButton' + idNo).hide(); //編輯按鈕
+			document.getElementById('updateFinish' + idNo).hidden = false; //送出按鈕
+			document.getElementById('cancel' + idNo).hidden = false; //取消按紐
+			$('#oldPicture' + idNo).hide();
+			$('#newPicture' + idNo).show();
 		};
+
+		var cancel = function(value) {
+			var idNo = value.id.substring(6);
+			$('#processUpdateDiv' + idNo).show(); //舊textarea
+			document.getElementById('updateDiv' + idNo).hidden = true; //新textarea
+			$('#updateButton' + idNo).show(); //編輯按鈕
+			document.getElementById('updateFinish' + idNo).hidden = true; //送出按鈕
+			document.getElementById('cancel' + idNo).hidden = true; //取消按紐
+			$('#oldPicture' + idNo).show();
+			$('#newPicture' + idNo).hide();
+
+		}
 
 		var updateConfirm = function(value) {
 			var updateMapping = 'updateCom'
@@ -485,6 +513,8 @@ body {
 			var reqParams = getReqParams(); // 取得網址的參數
 			var postId = reqParams.postID;
 			var pageNo = reqParams.pageNo;
+			var fileName = $('#comMultipartFile' + idNo).val(); //取檔名
+
 			bean = {
 				"comId" : parseInt(idNo),
 				"comText" : textValue,
@@ -515,7 +545,6 @@ body {
 
 				//下迴圈去搜尋每個資料參數
 				for (i = 0; i <= ary.length - 1; i++) {
-					debugger;
 					//如果資料名稱為id的話那就把他取出來
 					if (ary[i].split('=')[0] == 'postID') {
 						reqParams.postID = ary[i].substring(7);
@@ -560,12 +589,38 @@ body {
 			});
 
 		};
+
+		var updatePic = function(value) {
+			var idNo = value.id.substring(16);
+			// document.getElementById("comMultipartFile" + idNo).click();
+
+			$("#comMultipartFile" + idNo).on("change", function(event) {
+				$('#newPicture' + idNo).show();
+				const file = event.target.files[0];
+				let readFile = new FileReader();
+				readFile.readAsDataURL(file);
+				readFile.addEventListener("load", function(e) {
+					let image = document.getElementById("updatePicImg" + idNo);
+
+					image.src = this.result;
+
+					// image.width = 500 ;
+					image.style.maxWidth = "350px"; //css屬性
+					image.style.maxHeight = "350px";
+				});
+			});
+
+		};
+
+		// $("#comPic").click(function (e) {
+		// 	document.getElementById("comMultipartFile").click();
+		// });
 	</script>
 
 	<script src="${pageContext.request.contextPath}/javascript/talktalk.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/javascript/talktalk2.js"></script>
-	
+
 
 </body>
 </html>
