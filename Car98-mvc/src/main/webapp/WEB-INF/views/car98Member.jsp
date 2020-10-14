@@ -10,7 +10,7 @@
 </head>
 <body>
         <a href="/Car98-mvc" class="btn btn-default">
-        	<span class="glyphicon-hand-left glyphicon"></span>回首頁
+        	<span class="glyphicon-hand-left glyphicon">回首頁</span>
         </a>
     <div class="container">
         <div class="box">
@@ -65,7 +65,7 @@
                 <br>
                 <br>
                 <p>組員：許瑋軒</p>
-                <p>學歷：Bournemouth Uiversity Marketing Management</p>
+                <p>學歷：Bournemouth University Marketing Management</p>
                 <p>前端：前端介面架構,Car好買<br>Car方便</p>
                 <!-- <a href="#">Read More</a> -->
             </div>

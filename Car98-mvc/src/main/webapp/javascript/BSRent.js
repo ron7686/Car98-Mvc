@@ -165,6 +165,7 @@ function test(list) {
   }, 670);
 }
 
+
 function rLength(list){
 	tempMarkerStores = {};
 	for(let i=0;i<list.length;i++){
@@ -175,7 +176,10 @@ function rLength(list){
 	$("#result").attr('type','text');
 }
 
-function getGeoCallback( address, store ) {
+
+
+function getGeoCallback(address, store) {
+
   return function (position) {
 	// 標記設定
     const markerOptions = {

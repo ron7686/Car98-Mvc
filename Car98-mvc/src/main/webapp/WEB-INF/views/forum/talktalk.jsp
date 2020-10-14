@@ -127,7 +127,7 @@ body {
 				<div class="col-12 text-white postitle">${TalkBean.postTitle}</div>
 				<!-- 作者資訊 -->
 				<div class="col-2 author">
-					<br> <a href="#"><img class="photo"
+					<br> <a href="<%=path%>/management?memId=${TalkBean.memberBean.memId}"><img class="photo"
 						src='${pageContext.request.contextPath}/getPostMemberImage?postID=${TalkBean.postID}'></a>
 					<div class="">${TalkBean.memberBean.id}</div>
 					<div class="account">${TalkBean.memberBean.email}</div>
@@ -195,14 +195,13 @@ body {
 							src="${pageContext.request.contextPath}/getpostPic?postID=${TalkBean.postID}"
 							alt="">
 					</c:if>
-					<div class="update  col-3 float-right mb-3 d-flex  ">
-						<c:if test="${TalkBean.memberBean.memId == LoginOK.memId}">
-							<a type="submit" class="updatePostButton ml-5 btn btn-light"
-								href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
-							<a type="submit" class="deletePostButton ml-4 btn btn-light"
-								href="<%=path%>/deletePost?postId=${TalkBean.postID}">刪除</a>
-						</c:if>
+					
+					<c:if test="${TalkBean.memberBean.memId == LoginOK.memId}">
+					<div class=" float-right mr-4">
+					<a class="text-secondary btn btn-light " type="submit"  href="<%=path%>/talkContent?postId=${TalkBean.postID}">編輯</a>
+					<a class="text-secondary btn btn-light ml-4" id="delbtn" type="button" href="<%=path%>/deletePost?postId=${TalkBean.postID}">刪除</a>
 					</div>
+					</c:if>
 				</div>
 
 			</div>
@@ -219,7 +218,7 @@ body {
 
 	<!-- 留言內容 -->
 	<c:forEach var="comment" items="${CommentBean}">
-		<div class="container">
+		<div class="container" id="talkcontent">
 			<div class="row">
 				<!-- 作者資訊 -->
 				<div class="col-2 author">
@@ -471,8 +470,10 @@ body {
 					return false;
 				}
 			});
-			$(".deletePostButton").on('click', function(e) {
-				if (confirm("確定刪除此文章?")) {
+			
+				
+			$("#delbtn").on('click', function(e) {
+				if (confirm("確定刪除此文?")) {
 					return true;
 				} else {
 					return false;
