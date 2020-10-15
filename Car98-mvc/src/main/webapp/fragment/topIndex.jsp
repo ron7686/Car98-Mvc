@@ -38,7 +38,6 @@ margin-right:auto;
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					<a class="dropdown-item" style="font-size:20px;" href="<c:url value='/config/fuels'/>">加油紀錄</a>
 					<a class="dropdown-item" style="font-size:20px;" href="<c:url value='/config/fuels/add'/>">新增加油</a>
-					<a class="dropdown-item" style="font-size:20px;" href="#">保養紀錄</a>
 				</div>
 			</li>
 			
