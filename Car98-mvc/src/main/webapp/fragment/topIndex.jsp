@@ -27,8 +27,10 @@ margin-right:auto;
 	<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
 		<ul class="navbar-nav ul">
 
-			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='/car98Member' />">成員介紹</a></li>
-			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='searchresource' /> "> Car好康</a>
+
+			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='/car98Member' />">關於我們</a></li>
+			<li class="nav-item"><a class="nav-link" style="font-size:25px;" href="<c:url value='/searchresource/map' /> "> Car好康</a>
+
 				</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link" style="font-size:25px;" href="<c:url value='/config/fuels'/>"

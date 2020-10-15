@@ -45,7 +45,12 @@ public class TalkServiceImpl implements TalkService  {
 		List<TalkBean> lipage=new ArrayList<>();
 		for(int i=getpage;i<getpage+onepage&&i<li.size();i++) {
 			lipage.add(li.get(i));
-			lipage.get(i-getpage).setPostCom(li.get(i).getComment().size());
+			lipage
+			.get(i-getpage)
+			.setPostCom(li
+					.get(i)
+					.getComment()
+					.size());
 			if(li.get(i).getComment().size()>0)
 			lipage.get(i-getpage).setCommentbean(li.get(i).getComment().get(li.get(i).getComment().size()-1));
 		}
@@ -143,5 +148,33 @@ public class TalkServiceImpl implements TalkService  {
 			comDao.deleteComByPk(cb.getComId());
 		}
 		dao.deletePost(postId);
+	}
+	
+	@Override
+	public List<TalkBean> getSearchList(List<TalkBean> li,String search){
+		List<TalkBean> tb = new ArrayList<>();
+		for(TalkBean tb1:li) {
+			int j=0;
+			for(int i=0;i<tb1.getPostTitle().length();i++) {
+				if(tb1.getPostTitle().charAt(i)==search.charAt(j)) {
+					j++;
+				}else {
+					j=0;
+				}
+				if(j==search.length()) {
+					tb.add(tb1);
+					break;
+				}
+			}
+		}
+		return tb;
+	}
+	
+	@Override
+	public int searchlastpage(String search) {
+		List<TalkBean> li=getSearchList(getAll(),search);
+		int lastpage=li.size()/onepage;
+		if(li.size()%onepage>0)lastpage++;
+		return lastpage;
 	}
 }

@@ -18,6 +18,4 @@ public class CharRoomController {
 //		Thread.sleep(1000);
 		return new ServerResponseModel(responseMessage.getMassage());			
 	}
-	
-	
 }

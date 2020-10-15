@@ -57,10 +57,39 @@ margin-top: 10px;
     text-align: center;
     
 }
+.classification-item:hover{
+	background:black;
+}
+.classification-item:active{
+	baclground:black;
+}
+
+.white{
+	color:white;
+}
+.black{
+	background:black;
+	font-size:18px;
+    margin-right:15px;
+    border:1px solid white;
+    width:100px;
+    text-align: center;
+}
+
 .classification-item-a{
     color:black;
     
 }
+
+.classification-item-a:hover{
+	color:white;
+	
+}
+.classification-item-a:active{
+	color:white;
+}
+
+
 .maintalk{
     
     text-align: center;

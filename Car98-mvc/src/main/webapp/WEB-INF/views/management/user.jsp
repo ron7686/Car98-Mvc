@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
@@ -38,18 +37,15 @@
 input[type="submit"]:disabled {
 	background-color: red;
 }
-
 #carouselExampleFade .carousel-inner .carousel-item img {
 	height: 720px;
 }
-
 .footer-bottom {
 	margin-top: 1em;
 	/* border-top: 1px solid #DDDDDD; */
 	padding-top: 10px;
 	padding-bottom: 5px;
 }
-
 .footer-bottom p.pull-left {
 	padding-top: 6px;
 	font-size: 0.5em;
@@ -57,11 +53,9 @@ input[type="submit"]:disabled {
 	align-items: center;
 	justify-content: center;
 }
-
 .bg-cover {
 	background-size: cover;
 }
-
 #snackbar {
 	visibility: hidden;
 	min-width: 250px;
@@ -77,73 +71,60 @@ input[type="submit"]:disabled {
 	bottom: 30px;
 	font-size: 17px;
 }
-
 #snackbar.show {
 	visibility: visible;
 	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
 	animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
-
 @-webkit-keyframes fadein {
 	from {bottom: 0;
 	opacity: 0;
 }
-
 to {
 	bottom: 30px;
 	opacity: 1;
 }
-
 }
 @keyframes fadein {
 	from {bottom: 0;
 	opacity: 0;
 }
-
 to {
 	bottom: 30px;
 	opacity: 1;
 }
-
 }
 @-webkit-keyframes fadeout {
 	from {bottom: 30px;
 	opacity: 1;
 }
-
 to {
 	bottom: 0;
 	opacity: 0;
 }
-
 }
 @keyframes fadeout {
 	from {bottom: 30px;
 	opacity: 1;
 }
-
 to {
 	bottom: 0;
 	opacity: 0;
 }
-
 }
 .radio-size {
 	width: 25px;
 	height: 25px;
 	vertical-align: middle;
 }
-
 fieldset {
 	border: 1px solid #000000;
 	width: 600px;
 	margin: auto;
 }
-
 .input-w {
 	width: 40%;
 }
-
 .text {
   border: none;
   width: 100%;
@@ -157,40 +138,31 @@ fieldset {
   margin-top: 15px;
   transition: all 0.5s ease-in-out;
 }
-
 .text:focus {
   outline: 0;
   border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 20px;
   background: rgba(0, 0, 0, 0);
 }
-
 .text:focus + span {
   opacity: 0.6;
 }
-
 input[type="text"],
 input[type="tel"],
 input[type="password"] {
   font-family: 'Montserrat', sans-serif;
   color: #fff;
 }
-
-
-
 input {
   display: inline-block;
   padding-top: 20px;
   font-size: 14px;
 }
-
-
    label {
   display: inline-block;
   padding-top: 10px;
   padding-left: 5px;
 }
-
 .signin {
   background-color: #1161ed;
   color: #FFF;
@@ -204,17 +176,14 @@ input {
   border: none;
   text-transform: uppercase;
 }
-
 .signin:hover {
   background: #4082f5;
   box-shadow: 0px 4px 35px -5px #4082f5;
   cursor: pointer;
 }
-
 .signin:focus {
   outline: none;
 }
-
 .login {
 /*   position: relative; */
 /*   height: 560px; */
@@ -225,11 +194,9 @@ input {
   background-size: cover;
   box-shadow: 0px 30px 60px -5px #000;
 }
-
 .animate__animated .animate__fadeInDown {
   --animate-duration: 4s;
 }
-
 label{
 	color: #FFF;
 }
@@ -397,9 +364,6 @@ label{
 					<div class="modal-footer justify-content-center">
 						<button type="submit" class="signin btn btn-secondary"
 							onclick="myFunction()">送出</button>
-						<c:if test="${empty inputError}">
-							<div id="snackbar">修改成功</div>
-						</c:if>
 					</div>
 				</form:form>
 			</div>
@@ -427,7 +391,6 @@ label{
 		$("#show_image").click(function(e) {
 			document.getElementById("image_file").click();
 		});
-
 		$("#image_file").on("change", function(event) {
 			const file = event.target.files[0];
 			let readFile = new FileReader();
@@ -435,24 +398,12 @@ label{
 			readFile.addEventListener("load", function(e) {
 				let image = document.getElementById("show_image");
 				image.src = this.result;
-
 				// image.width = 500 ;
 				image.style.maxWidth = "350px"; //css屬性
 				image.style.maxHeight = "350px";
 			});
 		});
 	</script>
-	<c:if test="${empty inputError}">
-		<script>
-			function myFunction() {
-				var x = document.getElementById("snackbar");
-				x.className = "show";
-				setTimeout(function() {
-					x.className = x.className.replace("show", "");
-				}, 3000);
-			}
-		</script>
-	</c:if>
 	<c:if test="${!empty inputError}">
 		<script>
 			$('#staticBackdrop').modal('show')

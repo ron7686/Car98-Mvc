@@ -188,16 +188,33 @@ public class CommentController {
 	}
 
 	@PostMapping("/updateCom")
-	@ResponseBody
-	public String updateCom(Model model, @RequestBody CommentAllBean commentAllBean) {
+//	@ResponseBody
+	public String updateCom(
+			Model model,
+			@ModelAttribute("commentBean")CommentBean commentBean) {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {
 			return "redirect:/login";
 		}
-		CommentBean commentbean = commentservice.selectComByPk(commentAllBean.getComId());
-		commentbean.setComText(commentAllBean.getComText());
+		CommentBean commentbean = commentservice.selectComByPk(commentBean.getComId());
+		commentbean.setComText(commentBean.getComText());
+
+		//圖片
+		MultipartFile commentImage = commentbean.getCommentMultipartFile();
+		String originalFilename = commentImage.getOriginalFilename();
+		if (commentImage != null && !commentImage.isEmpty()) {
+			try {
+				byte[] b = commentImage.getBytes();
+				Blob blob = new SerialBlob(b);
+				commentbean.setFileName(originalFilename);
+				commentbean.setComPic(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}
 		commentservice.updateComByPk(commentbean);
-		return "redirect:/talktalk?postID=" + commentAllBean.getPostID();
+		return "redirect:/talktalk?postID=" + commentBean.getTalkBean().getPostID();
 
 	}
 
