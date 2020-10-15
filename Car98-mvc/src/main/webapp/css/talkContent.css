@@ -1,4 +1,6 @@
+
 .main{
+	border-radius:10px;
     width:100%;
     border:2px solid white;
     display: flex;

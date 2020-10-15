@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CarTalk</title>
+<title>Car論壇</title>
 <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -114,7 +114,7 @@
                     <a class="classification-item-a" id="cia4" href="<%=path%>/forum/talktop.do?type=4"><li class="classification-item">公告</li></a>
 <%--                 <form:form class="ml-auto" method="POST" modelAttribute="search"> --%>
 					<form class="ml-auto">
-					<input type="text" name="search" placeholder="關鍵字....."/><button onClick="window.location.href='<%=path%>/forum/talktop.do'"><i class="fas fa-search"></i></button>
+					<input type="text" name="search" id="search" placeholder="關鍵字....."/><button onClick="window.location.href='<%=path%>/forum/talktop.do'"><i class="fas fa-search"></i></button>
 					</form>
 <%-- 				</form:form> --%>
                 </ul>
@@ -152,7 +152,7 @@
                 <table class="maintalk mt-1 talk">
                 <c:forEach var="aBean" items="${abean}">
 				  <tr>
-                        <td class="sort "><a href="<%=path%>/forum/talktop.do?type=${aBean.postType}"><i class="fab fa-discourse"></i>${aBean.postType}</a></td>
+                        <td class="sort "><a class="text-light" href="<%=path%>/forum/talktop.do?type=${aBean.postType}"><i class="fab fa-discourse"></i>${aBean.postType}</a></td>
 <%--                         <td class="pic "><c:if test="${!empty TalkBean.postFileName}"><img src="<%=path%>/getpostPic?postID=${aBean.postID}" class="contentimage " alt=""></c:if></td> --%>
 						<td class="pic "><img src="<%=path%>/getpostPic?postID=${aBean.postID}" class="contentimage " alt=""></td>
                         <th class="title itemtitle "><a class="subtitle ml-3" href="<%=path%>/talktalk?postID=${aBean.postID}&pageNo=1">${aBean.postTitle}</a></th>

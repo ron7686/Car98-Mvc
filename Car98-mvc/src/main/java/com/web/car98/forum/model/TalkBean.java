@@ -66,7 +66,7 @@ public class TalkBean implements Serializable {
 	private Blob PostPic;
 	private String PostFileName;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "talkBean", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "talkBean", cascade = CascadeType.PERSIST)
 	private List<CommentBean> comment = new ArrayList<>();
 	@OneToMany(mappedBy = "talkBean")
 	private List<LikeOrHateBean> likeOrHate = new ArrayList<>();

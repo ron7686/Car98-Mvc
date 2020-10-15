@@ -1,15 +1,24 @@
 package com.web.car98.forum.controller;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +50,8 @@ import com.web.car98.forum.service.TalkService;
 import com.web.car98.member.model.MemberBean;
 import com.web.car98.member.service.MemberService;
 import com.web.car98.validator.CommentValidator;
+
+import _00_init.util.GlobalService;
 
 @Controller(value = "CommentController")
 @SessionAttributes({ "LoginOK", "CommentBean", "TalkBean", "pageNo" })
@@ -159,7 +170,7 @@ public class CommentController {
 		return "redirect:/talktalk?postID=" + postId;
 
 	}
-	
+
 	@RequestMapping("/deletePost")
 	public String deletePost(Model model, @RequestParam("postId") Integer postId) {
 		ts.deletePost(postId);
@@ -187,36 +198,150 @@ public class CommentController {
 
 	}
 
+//	@PostMapping("/updateCom")
+////	@ResponseBody
+//	public String updateCom(
+//			Model model,
+//			@ModelAttribute("commentBean")CommentBean commentBean) {
+//		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
+//		if (memberBean == null) {
+//			return "redirect:/login";
+//		}
+//		CommentBean commentbean = commentservice.selectComByPk(commentBean.getComId());
+//		commentbean.setComText(commentBean.getComText());
+//
+//		//圖片
+//		MultipartFile commentImage = commentbean.getCommentMultipartFile();
+//		String originalFilename = commentImage.getOriginalFilename();
+//		if (commentImage != null && !commentImage.isEmpty()) {
+//			try {
+//				byte[] b = commentImage.getBytes();
+//				Blob blob = new SerialBlob(b);
+//				commentbean.setFileName(originalFilename);
+//				commentbean.setComPic(blob);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+//			}
+//		}
+//		commentservice.updateComByPk(commentbean);
+//		return "redirect:/talktalk?postID=" + commentBean.getTalkBean().getPostID();
+//
+//	}
+
 	@PostMapping("/updateCom")
-//	@ResponseBody
-	public String updateCom(
-			Model model,
-			@ModelAttribute("commentBean")CommentBean commentBean) {
+	@ResponseBody
+	public String updateCom(Model model, @RequestBody CommentAllBean commentAllBean) {
 		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
 		if (memberBean == null) {
 			return "redirect:/login";
 		}
-		CommentBean commentbean = commentservice.selectComByPk(commentBean.getComId());
-		commentbean.setComText(commentBean.getComText());
+		CommentBean commentbean = commentservice.selectComByPk(commentAllBean.getComId());
+		commentbean.setComText(commentAllBean.getComText());
 
-		//圖片
-		MultipartFile commentImage = commentbean.getCommentMultipartFile();
-		String originalFilename = commentImage.getOriginalFilename();
-		if (commentImage != null && !commentImage.isEmpty()) {
-			try {
-				byte[] b = commentImage.getBytes();
-				Blob blob = new SerialBlob(b);
-				commentbean.setFileName(originalFilename);
-				commentbean.setComPic(blob);
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
-			}
-		}
 		commentservice.updateComByPk(commentbean);
-		return "redirect:/talktalk?postID=" + commentBean.getTalkBean().getPostID();
+		return "redirect:/talktalk?postID=" + commentAllBean.getPostID();
 
 	}
+
+//	@PostMapping("/updateCom")
+//	@ResponseBody
+//	public String updateCom(Model model, HttpServletRequest request)
+//			throws IOException, ServletException {
+//
+//		MemberBean memberBean = (MemberBean) model.getAttribute("LoginOK");
+//		TalkBean talkBean = (TalkBean) model.getAttribute("TalkBean");
+//
+//		if (memberBean == null) {
+//			return "redirect:/login";
+//		}
+//
+//		Collection<Part> parts = request.getParts();
+//		GlobalService.exploreParts(parts, request);
+//		String comText = "";// 留言內容
+//		String comPicName = ""; // 圖片檔名
+//
+//		String comIdStr = request.getParameter("comId");
+//		Integer comId = null;
+//		
+//		if (comIdStr != null) {
+//			comId = Integer.parseInt(comIdStr);
+//		}
+//		
+//		comText = request.getParameter("updateText"+comId);
+//		
+//
+//		if (parts != null) { // 如果這是一個上傳資料的表單
+//			for (Part p : parts) {
+//				String fldName = p.getName();
+//				System.out.println("fldName = " + fldName);
+//				String value = null;
+//				value = request.getParameter(fldName);
+//				// 1. 讀取使用者輸入資料
+//				if (p.getContentType() == null) {
+//					if (fldName.equalsIgnoreCase("updateText" + comId)) {
+//						comText = value;
+//					}
+//				}
+//			}
+//		}
+//		
+//		// 圖檔
+//		if (parts != null) { // 如果這是一個上傳資料的表單
+//			if (!new File("d:\\comPic").exists()) {
+//				new File("d:\\comPic").mkdirs();
+//			}
+//			for (Part p : parts) {
+//				if (p.getContentType() != null) {
+//					String fileName = GlobalService.getFileName(p);
+//					long sizeInBytes = 0;
+//					InputStream is = null;
+//					if (fileName != null && fileName.trim().length() > 0) {
+//						fileName = System.currentTimeMillis()
+//								+ GlobalService.getFileName(p).substring(GlobalService.getFileName(p).indexOf("."));
+//						comPicName += fileName + ",";
+//						sizeInBytes = p.getSize();
+//						is = p.getInputStream();
+//						int len = 0;
+//						byte[] byteArray = new byte[(int) sizeInBytes];
+//						File uploadFile = new File("d:\\comPic", fileName);
+//						try (FileOutputStream fos = new FileOutputStream(uploadFile);) {
+//							while ((len = is.read(byteArray)) != -1) {
+//								fos.write(byteArray, 0, len);
+//							}
+//						} catch (Exception e) {
+//							e.printStackTrace();
+//						}
+//
+//					} else {
+//						comPicName = null;
+//					}
+//				}
+//			}
+//			if (comPicName != null && comPicName.trim().length() != 0) {
+//				comPicName = comPicName.substring(0, comPicName.length() - 1);
+//			}
+//		}
+//		
+//		CommentBean bean = commentservice.selectComByPk(comId);
+//
+//		if (!comText.equalsIgnoreCase("")) {
+//			bean.setComText(comText);
+//		}
+//
+//		if (!comPicName.equalsIgnoreCase("")) {
+//			bean.setFileName(comPicName);
+//		}
+//
+//		Integer n = commentservice.updateComByPk(bean);
+////
+////		if (n == 1) {
+////			return "redirect:/talktalk?postID=" + talkBean.getPostID();
+////		} else {
+////			return "redirect:/";
+////		}
+//		return "redirect:/talktalk?postID=" + talkBean.getPostID();
+//	}
 
 	// 刪除留言
 	@RequestMapping("/deleteCom")
@@ -421,4 +546,5 @@ public class CommentController {
 		}
 		return responseEntity;
 	}
+
 }

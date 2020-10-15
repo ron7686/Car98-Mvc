@@ -53,6 +53,7 @@ body {
 	align-items: center;
 	justify-content: center;
 }
+
 </style>
 <title>Products</title>
 </head>
@@ -116,12 +117,12 @@ body {
 					</div>
 				</div>
 				<div class="form-group">
-					<label class='control-label col-lg-4 col-sm-6' for="bidScore">
-						評價 </label>
+<!-- 					<label class='control-label col-lg-4 col-sm-6' for="bidScore"> -->
+<!-- 						評價 </label> -->
 					<div class='col-lg-10'>
-						<form:input id="bidScore" path="bidScore" type='text'
+						<form:input id="bidScore" path="bidScore" type='hidden' value='10'
 							class='form:input-large' />
-						<form:errors path="bidScore" />
+<%-- 						<form:errors path="bidScore" /> --%>
 					</div>
 				</div>
 
@@ -129,7 +130,7 @@ body {
 					<label class='control-label col-lg-4 col-sm-6' for="bidFormat">
 						商品描述 </label>
 					<div class='col-lg-10'>
-						<form:textarea id="bidFormat" path="bidFormat" cols="45"
+						<form:textarea id="bidFormat" path="bidFormat" cols="40"
 							class='form:input-large' rows="5" placeholder="請輸入內容...." />
 						<form:errors path="bidFormat" />
 					</div>
@@ -147,16 +148,17 @@ body {
 				<div class="form-group">
 					<div class='col-lg-offset-2 col-lg-10'>
 						<input id="btnAdd" type='submit' class='btn btn-info' value="送出" />
+
+						<a href="<spring:url value='/comm/products' />"
+							class="btn btn-info"> <span
+							class="glyphicon-hand-left glyphicon"></span>返回
+						</a>
 					</div>
 				</div>
 			</fieldset>
 		</form:form>
 
 
-		<a href="<spring:url value='/comm/products' />"
-			class="btn btn-info"> <span
-			class="glyphicon-hand-left glyphicon"></span>返回
-		</a>
 
 
 
