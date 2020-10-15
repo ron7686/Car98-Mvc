@@ -9,6 +9,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<script type='text/javascript' src='${pageContext.request.contextPath}/javascript/jquery-3.5.1.min.js'></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+	integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
+	crossorigin="anonymous" />
 	<style>
 		body {
 			background-color: rgba(236, 234, 234, 0.5);
