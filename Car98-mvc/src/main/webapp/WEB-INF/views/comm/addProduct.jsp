@@ -46,7 +46,7 @@ body {
 	align-items: center;
 	justify-content: center;
 }
-.error{
+.err{
 	color:red;
 }
 </style>
@@ -89,7 +89,7 @@ body {
 					<div class="col-lg-10">
 						<form:input id="bidItemName" path="bidItemName" type='text'
 							class='form:input-large' />
-						<form:errors path="bidItemName" class='error' />
+						<form:errors path="bidItemName" class='err' />
 					</div>
 				</div>
 
@@ -113,7 +113,7 @@ body {
 					<div class="col-lg-10">
 						<form:input id="bidPrice" path="bidPrice" type='text'
 							class='form:input-large' />
-						<form:errors path="bidPrice" class='error'  />
+						<form:errors path="bidPrice" class='err'  />
 					</div>
 				</div>
 
@@ -123,16 +123,16 @@ body {
 					<div class='col-lg-10'>
 						<form:input id="bidStock" path="bidStock" type='text'
 							class='form:input-large' />
-						<form:errors path="bidStock" class='error' />
+						<form:errors path="bidStock" class='err' />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class='control-label col-lg-4 col-sm-6' for="bidScore">
 						評價 </label>
 					<div class='col-lg-10'>
-						<form:input id="bidScore" path="bidScore" type='text'
+						<form:input id="bidScore" path="bidScore" type='hidden' value='10'
 							class='form:input-large' />
-						<form:errors path="bidScore" class='error' />
+<%-- 						<form:errors path="bidScore" class='err' /> --%>
 					</div>
 				</div>
 
@@ -140,7 +140,7 @@ body {
 					<label class='control-label col-lg-4 col-sm-6' for="bidFormat">
 						商品描述 </label>
 					<div class='col-lg-10'>
-						<form:textarea id="bidFormat" path="bidFormat" cols="45"
+						<form:textarea id="bidFormat" path="bidFormat" cols="40"
 							class='form:input-large' rows="5" placeholder="請輸入內容...." />
 						<form:errors path="bidFormat" class='error' />
 					</div>
@@ -159,8 +159,7 @@ body {
 					<label class="control-label col-lg-6 col-sm-8 "  for='portfolioImage'>
 						上傳多張圖片 </label>
 					<div class="col-lg-10">
-						<form:input path="bidPicBean.picImages" id="pfdPic" type='file' multiple="multiple" class='form:input-large ' /> 
-				
+						<form:input path="bidPicBean.picImages" id="pfdPic" type='file' multiple="multiple" class='form:input-large ' /> 				
 					</div>
 				</div>
 
