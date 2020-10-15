@@ -58,6 +58,9 @@ public class CommentBean implements Serializable {
 	private Integer floor;   //留言樓層
 	
 	@Transient
+	private String search;
+	
+	@Transient
 	private ComLikeOrHateBean ComLikeOrHateBean;  //留言的讚或噓
 	
 	@OneToMany(mappedBy = "commentBean")
@@ -98,6 +101,14 @@ public class CommentBean implements Serializable {
 
 	
 	
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
 	public ComLikeOrHateBean getComLikeOrHateBean() {
 		return ComLikeOrHateBean;
 	}

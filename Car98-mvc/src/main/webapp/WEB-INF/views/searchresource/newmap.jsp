@@ -111,27 +111,27 @@ body {
 		<hr>
 
 		
-<!-- 		      <div class="row text-light" v-if="place != null"> -->
-<!-- 		        <div class="col" v-if="place.reviews != null"> -->
-<!-- 		          <h5>評論：</h5> -->
-<!-- 		          <div class="row" v-for="p in place.reviews"> -->
-<!-- 		            <div class="col"> -->
-<!-- 		              <ul class="list-unstyled"> -->
-<!-- 		                <li class="media"> -->
-<!-- 		                  <img :src="p.profile_photo_url" class="mr-3"> -->
-<!-- 		                  <div class="media-body"> -->
-<!-- 		                    <h5 class="mt-0 mb-1"> -->
-<!-- 		                      <a target="_blank" :href="p.author_url">{{ p.author_name }}</a> -->
-<!-- 		                    </h5> -->
-<!-- 		                    <p>{{ p.text }}</p> -->
-<!-- 		                    <h6>{{ p.relative_time_description }}</h6> -->
-<!-- 		                  </div> -->
-<!-- 		                </li> -->
-<!-- 		              </ul> -->
-<!-- 		            </div> -->
-<!-- 		          </div> -->
-<!-- 		        </div> -->
-<!-- 		      </div> -->
+		      <div class="row text-light" v-if="place != null">
+		        <div class="col" v-if="place.reviews != null">
+		          <h5>評論：</h5>
+		          <div class="row" v-for="p in place.reviews">
+		            <div class="col">
+		              <ul class="list-unstyled">
+		                <li class="media">
+		                  <img :src="p.profile_photo_url" class="mr-3">
+		                  <div class="media-body">
+		                    <h5 class="mt-0 mb-1">
+		                      <a target="_blank" :href="p.author_url">{{ p.author_name }}</a>
+		                    </h5>
+		                    <p>{{ p.text }}</p>
+		                    <h6>{{ p.relative_time_description }}</h6>
+		                  </div>
+		                </li>
+		              </ul>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
 
 	</div>
 	
@@ -190,7 +190,7 @@ body {
                 // 放置標記
                 let marker = new google.maps.Marker({
                   position: searchCenter,
-//                   icon:'../../image/car98logo.png'
+//                   icon:'../image/car98logo.png'
                   map: this.map
                 });
 
