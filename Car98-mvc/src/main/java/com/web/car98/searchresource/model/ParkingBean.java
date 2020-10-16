@@ -15,6 +15,7 @@ public class ParkingBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int parkingNo;
 	private String parking;
 	private String city; // 城市
 	private String district; // 區

@@ -13,6 +13,7 @@ import javax.persistence.Table;
 public class GasStation implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int gasNo;
 	private String gasstation; // 加油站
 	private String city; // 城市
 	private String district; // 區

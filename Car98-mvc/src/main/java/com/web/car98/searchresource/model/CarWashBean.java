@@ -15,13 +15,18 @@ public class CarWashBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int washNo;
 	private String carwash; // 洗車
 	private String city; // 城市
 	private String district; // 區
 	private String street; // 街道
 
+	
 	public CarWashBean() {
+		super();
 	}
+
+
 
 	public CarWashBean(String carwash, String city, String district, String street) {
 		super();
