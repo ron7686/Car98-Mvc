@@ -106,7 +106,7 @@
                             <div class="form-group col col-sm-12">
                                 <label for="Address" class="text-white">地址</label>
                                 <input type="text" class="form-control" id="ShippingAddress" name="ShippingAddress"
-                                    placeholder="ShippingAddress" required>
+                                    placeholder="ShoppingAddress" required>
                             </div>
                         </div>
                         <div class="text-right">
